@@ -1,0 +1,172 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles{
+
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/jquery.tagsinput.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/custom.css")" />
+
+}
+<!-- /section:basics/sidebar -->
+<div class="main-content">
+    <div class="main-content-inner">
+        <!-- #section:basics/content.breadcrumbs -->
+        <div class="breadcrumbs" id="breadcrumbs">
+            <script type="text/javascript">
+                            try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+            </script>
+
+            <ul class="breadcrumb">
+                <li>
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <a href="@Url.Action("Index", "Home")">INICIO</a>
+                </li>
+
+                <li>
+                    <a href="javascript:void(0)">ADMINISTRACI&Oacute;N</a>
+                </li>
+                <li class="active">REGISTRO</li>
+                <li class="active">PARAMETROS</li>
+            </ul><!-- /.breadcrumb -->
+            <!-- /section:basics/content.searchbox -->
+        </div>
+
+        <!-- /section:basics/content.breadcrumbs -->
+        <div class="page-content">
+            <!-- #section:settings.box -->
+            <!-- /section:settings.box -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- PAGE CONTENT BEGINS -->
+                    <div class="page-header">
+                        <h1>
+                            Configuraci&oacute;n de Parametros
+                            <small>
+                                <i class="ace-icon fa fa-angle-double-right"></i>
+                                Realice el mantenimiento de parametros para el sistema
+                            </small>
+                        </h1>
+                    </div><!-- /.page-header -->
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <!-- PAGE CONTENT BEGINS -->
+                            <form class="form-horizontal" role="form" id="parametroForm">
+                                <!-- #section:elements.form -->
+
+                                <div class="profile-user-info profile-user-info-striped">
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name"> <i class="ace-icon fa fa-building-o bigger-110"></i> Empresa </div>
+
+                                        <div class="profile-info-value">
+                                            <div class="col-sm-9">
+                                                <input type="text" id="Empresa" name="Empresa" placeholder="Empresa" maxlength="1000" class="col-xs-10 col-sm-5" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name"> <i class="ace-icon fa fa-map-marker bigger-110"></i> Direci&oacute;n </div>
+
+                                        <div class="profile-info-value">
+                                            <div class="col-sm-12">
+                                                <input type="text" id="Direccion" name="Direccion" placeholder="Dirección" maxlength="1000" class="col-xs-12 col-sm-12" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name"> R&uacute;c </div>
+
+                                        <div class="profile-info-value">
+                                            <div class="col-sm-9">
+                                                <input type="text" id="ruc" name="ruc" onblur="return webApp.validarDecimal(event, this);" onkeypress="return webApp.validarDecimal(event, this);" maxlength="11" class="col-xs-10 col-sm-2" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="profile-info-row">
+                                        <div class="profile-info-name"> <i class="ace-icon fa fa-usd bigger-110"></i> IGV % </div>
+
+                                        <div class="profile-info-value">
+                                            <div class="col-sm-9">
+                                                <input type="text" id="igv" name="igv" placeholder="0.00" maxlength="9" class="col-xs-10 col-sm-2" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="clearfix form-actions">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <button class="btn btn-success" type="button" id="btnGuardarParametros">
+                                            <i class="ace-icon fa fa-check bigger-110"></i>
+                                            Guardar
+                                        </button>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="ParametroId" id="ParametroId" value="0" />
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- PAGE CONTENT ENDS -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.page-content -->
+    </div>
+</div><!-- /.main-content -->
+
+@section scripts{
+    <!-- page specific plugin scripts -->
+    <script src="@Url.Content("~/Content/js/jquery.validate.js")"></script>
+    <script src="@Url.Content("~/Content/js/additional-methods.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.gritter.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.blockUI.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.tagsinput.js")"></script>
+    <script src="@Url.Content("~/Content/js/inputmask.js")"></script>
+
+    <!-- inline scripts related to this page -->
+    <script src="@Url.Content("~/Content/js/viewsJs/Parametro.js")"></script>
+
+    <!-- Ajax BlockUi scripts -->
+    <script type="text/javascript">
+	        var pageBlocked = false;
+	        var handlerActivo = false;
+
+	        $(document).ready(function () {
+	            $.blockUI.defaults.baseZ = 100000;
+	            $.blockUI.defaults.overlayCSS.opacity = 0.4;
+	            $.blockUI.defaults.css.backgroundColor = "transparent";
+	            $.blockUI.defaults.css.border = '0px none';
+	            $.blockUI.defaults.fadeIn = 100,
+	            $.blockUI.defaults.fadeOut = 100,
+
+	            $(document).ajaxSend(function () {
+	                if (!pageBlocked) {
+	                    $.blockUI({
+	                        message: "Espere un momento por favor",
+	                        css: {
+	                            border: 'none',
+	                            padding: '15px',
+	                            backgroundColor: '#000',
+	                            '-webkit-border-radius': '10px',
+	                            '-moz-border-radius': '10px',
+	                            opacity: 1,
+	                            color: '#fff'
+	                        },
+	                        onBlock: function () {
+	                            pageBlocked = true;
+	                        }
+	                    });
+	                }
+	            }).ajaxStop(function () {
+	                jQuery.unblockUI();
+	                pageBlocked = false;
+	            });
+
+           });
+    </script>
+}

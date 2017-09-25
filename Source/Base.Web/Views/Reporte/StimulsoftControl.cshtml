@@ -1,0 +1,63 @@
+﻿@using Stimulsoft.Report.Export
+    @using Stimulsoft.Report.Mvc
+    @Html.Stimulsoft().StiMvcViewer("StiReporte", new StiMvcViewerOptions
+    {
+        Actions = {
+            GetReport  = "GetReportSnapshot",
+            ViewerEvent = "ViewerEvent",
+            PrintReport = "PrintReport",
+            ExportReport = "ExportReport",
+            Interaction = "Interaction"
+        },
+        Toolbar =  {
+            PrintDestination=Stimulsoft.Report.Web.StiPrintDestination.Pdf,
+            //PrintDestination = StiPrintDestination.Pdf,
+            MenuAnimation = false,
+            //ShowMenuMode = StiShowMenuMode.Click
+            ShowMenuMode=Stimulsoft.Report.Web.StiShowMenuMode.Click
+        },
+       // Theme = StiTheme.Office2013,
+       Theme=Stimulsoft.Report.Web.StiViewerTheme.Office2003,
+        Appearance =  {
+            ShowPageShadow = false,
+            ScrollbarsMode = true
+        },
+        Exports = {
+            ShowExportDialog = true,
+            ShowExportToCsv = false,
+            ShowExportToDbf = false,
+            ShowExportToDif = false,
+            ShowExportToHtml = false,
+            ShowExportToHtml5 = false,
+            ShowExportToImageBmp = false,
+            ShowExportToImageGif = false,
+            ShowExportToImageJpeg = false,
+            ShowExportToImagePcx = false,
+            ShowExportToImagePng = false,
+            ShowExportToImageSvg = false,
+            ShowExportToImageMetafile = false,
+            ShowExportToImageSvgz = false,
+            ShowExportToImageTiff = false,
+            ShowExportToMht = false,
+            ShowExportToPowerPoint = false,
+            ShowExportToRtf = false,
+            ShowExportToSylk = false,
+            ShowExportToText = false,
+            ShowExportToXml = false,
+            ShowExportToXps = false,
+            ShowExportToOpenDocumentWriter = false,
+            ShowExportToExcelXml = false,
+            ShowExportToOpenDocumentCalc = false,
+            ShowExportToDocument = false
+        },
+        Server = {
+
+            Controller = ViewData["ControllerGetSnapshot"].ToString(),
+            CacheTimeout = 10,
+            RequestTimeout = 2400
+
+        },
+
+        Localization = string.Format("~/Content/js/languages/stimulsoft/es.xml")
+    })
+

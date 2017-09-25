@@ -1,0 +1,94 @@
+﻿<body class="no-skin">
+    <!-- #section:basics/navbar.layout -->
+    <div id="navbar" class="navbar navbar-default          ace-save-state">
+        <script type="text/javascript">
+            try { ace.settings.check('navbar', 'fixed') } catch (e) { }
+        </script>
+
+        <div class="navbar-container" id="navbar-container">
+            <!-- #section:basics/sidebar.mobile.toggle -->
+            <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+                <span class="sr-only">Toggle sidebar</span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- /section:basics/sidebar.mobile.toggle -->
+            <div class="navbar-header pull-left">
+                <!-- #section:basics/navbar.layout.brand -->
+                <a href="@Url.Action("Index", "Home")" class="navbar-brand">
+                    <small>
+                        <i class="fa fa-clock-o"></i>
+                        QUOSPORT S.A.C
+                    </small>
+                    @*<img src="@Url.Content("~/Content/images/Logo.jpg")" alt="" width="40">*@
+                </a>
+
+                <!-- /section:basics/navbar.layout.brand -->
+                <!-- #section:basics/navbar.toggle -->
+                <!-- /section:basics/navbar.toggle -->
+            </div>
+
+            <!-- #section:basics/navbar.dropdown -->
+            <div class="navbar-buttons navbar-header pull-right" role="navigation">
+                <ul id="listaAlerta" class="nav ace-nav">
+                    <li class="green dropdown-modal">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="false">
+                            <i class="ace-icon fa fa-bell"></i>
+                            <span class="badge badge-success">0</span>
+                        </a>
+
+                        <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                            <li class="dropdown-header">
+                                <i class="ace-icon fa fa-exclamation-triangle"></i>
+                                0 Producto(s) con bajo stock
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="light-blue">
+                        <a data-toggle="dropdown" href="javascript:void(0)" class="dropdown-toggle">
+                            <img class="nav-user-photo" src="@Url.Content("~/Content/images/avatar2.png")" alt="User's Photo" />
+                            <span class="user-info">
+                                <small>Bienvenido,</small>
+                                @if (WebSession.Usuario != null)
+                                {
+                                    @Html.Raw(string.Format("<span id='usernameLogOn'><strong>{0}</strong></span>", WebSession.Usuario.Username.ToUpper()))
+                                }
+                            </span>
+                            <i class="ace-icon fa fa-caret-down"></i>
+                        </a>
+
+                        <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                            <li class="divider"></li>
+
+                            <li>
+                                @*<a id="Logout" href="@Url.Action("Logout", "Account", new { area ="" })"><i class="ace-icon fa fa-power-off"></i>Cerrar Sesi&oacute;n</a>*@
+                                <a id="Logout" href="#"><i class="ace-icon fa fa-power-off"></i>Cerrar Sesi&oacute;n</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- /section:basics/navbar.user_menu -->
+                </ul>
+            </div>
+
+            <!-- /section:basics/navbar.dropdown -->
+        </div><!-- /.navbar-container -->
+    </div>
+    <!-- /section:basics/navbar.layout -->
+    <!--[if gte IE 8]>
+      <div style="width:100%; height:60px;"></div>
+      <div style="clear:both"></div>
+    <![endif]-->
+
+
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+                try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+        </script>
+        </div>
+   

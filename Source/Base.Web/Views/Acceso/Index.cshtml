@@ -1,0 +1,201 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles{
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/jquery.dataTables.css")" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+
+}
+
+<!-- /section:basics/sidebar -->
+<div class="main-content">
+    <div class="main-content-inner">
+        <!-- #section:basics/content.breadcrumbs -->
+        <div class="breadcrumbs" id="breadcrumbs">
+            <script type="text/javascript">
+                try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+            </script>
+
+            <ul class="breadcrumb">
+                <li>
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <a href="@Url.Action("Index", "Home")">INICIO</a>
+                </li>
+
+                <li>
+                    <a href="javascript:void(0)">ADMINISTRACI&Oacute;N</a>
+                </li>
+                <li class="active">REGISTRO</li>
+                <li class="active">ACCESO</li>
+            </ul><!-- /.breadcrumb -->
+            <!-- /section:basics/content.searchbox -->
+        </div>
+
+        <!-- /section:basics/content.breadcrumbs -->
+        <div class="page-content">
+            <!-- #section:settings.box -->
+            <!-- /section:settings.box -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- PAGE CONTENT BEGINS -->
+
+                    <div class="col-sm-5">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Opciones del Sistema</h4>
+                            </div><!-- Cabecera de panel -->
+                            <div class="panel-body">
+                                <div class="col-sm-6">
+                                    <div class="widget-box widget-color-blue2">
+                                        <div class="widget-header">
+                                            <h4 class="widget-title lighter smaller">Formularios</h4>
+                                        </div>
+
+                                        <div class="widget-body">
+                                            <div class="widget-main padding-8">
+
+                                                <div id="mainTree" overflow-y scroll;">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- Cuerpo del panel -->
+                        </div><!-- end panel -->
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Roles</h4>
+                            </div><!-- Cabecera de panel -->
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table id="RolDataTable" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="hidden-1200">Id</th>
+                                                <th class="hidden-992">Nombre</th>
+                                                <th class="hidden-768">Permisos</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div><!-- Cuerpo del panel -->
+                        </div><!-- end panel -->
+                    </div>
+
+
+
+                    <div style="margin-right:90px;">
+                        <div class="col-sm-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"> <button type="button" class="btn btn-primary "> Asignar</button> &nbsp; Permisos</h4>
+                                </div><!-- Cabecera de panel -->
+                                <div class="panel-body">
+                                    <h5 class="page-header-sub"><b>Formulario : </b><span id="NombreFormulario"></span></h5>
+                                    <h5 class="page-header-sub"><b>Rol : <span id="idrol"></span> </b><span id="NombreRol"></span></h5>
+                                    <div id="PermisoListDiv" class="controls" style="display:block">
+                                        <div class="ckbox ckbox-success col-sm-4">
+                                            <input type="checkbox" id="TipoPermiso1" class="ace ace-checkbox-2" data-permiso="1">
+                                            <span class="lbl"> Mostrar</span>
+                                        </div>
+                                        <div class="ckbox ckbox-success col-sm-4">
+                                            <input type="checkbox" id="TipoPermiso2" class="ace ace-checkbox-2" data-permiso="2">
+                                            <span class="lbl"> Crear</span>
+                                        </div>
+                                        <div class="ckbox ckbox-success col-sm-4">
+                                            <input type="checkbox" id="TipoPermiso3" class="ace ace-checkbox-2" data-permiso="3">
+                                            <span class="lbl"> Editar</span>
+                                        </div>
+                                        <div class="ckbox ckbox-success col-sm-4">
+                                            <input type="checkbox" id="TipoPermiso4" class="ace ace-checkbox-2" data-permiso="4">
+                                            <span class="lbl"> Eliminar</span>
+                                        </div>
+                                        <div class="ckbox ckbox-success col-sm-4">
+
+                                            <input id="TipoPermiso5" data-permiso="5" type="checkbox" class="ace ace-checkbox-2">
+                                            <span class="lbl"> Imprimir</span>
+                                        </div>
+                                    </div>
+
+                                </div><!-- Cuerpo del panel -->
+                            </div><!-- end panel -->
+                        </div>
+                    </div>
+
+
+                    <!-- PAGE CONTENT ENDS -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+
+
+
+        </div><!-- /.page-content -->
+    </div>
+</div><!-- /.main-content -->
+
+@section scripts{
+    <!-- page specific plugin scripts -->
+    <script src="@Url.Content("~/Content/js/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.dataTables.fnReloadAjax.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.inputlimiter.1.3.1.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.validate.js")"></script>
+    <script src="@Url.Content("~/Content/js/additional-methods.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.gritter.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.blockUI.js")"></script>
+    <script src="@Url.Content("~/Content/js/jstree.min.js")"></script>
+
+    <!-- inline scripts related to this page -->
+    <script src="@Url.Content("~/Content/js/viewsJs/Acceso.js")"></script>
+    <!-- Ajax BlockUi scripts -->
+    <script type="text/javascript">
+        var pageBlocked = false;
+        var handlerActivo = false;
+
+        $(document).ready(function () {
+            $.blockUI.defaults.baseZ = 100000;
+            $.blockUI.defaults.overlayCSS.opacity = 0.4;
+            $.blockUI.defaults.css.backgroundColor = "transparent";
+            $.blockUI.defaults.css.border = '0px none';
+            $.blockUI.defaults.fadeIn = 100,
+            $.blockUI.defaults.fadeOut = 100,
+
+            $(document).ajaxSend(function () {
+                if (!pageBlocked) {
+                    $.blockUI({
+                        message: "Espere un momento por favor",
+                        css: {
+                            border: 'none',
+                            padding: '15px',
+                            backgroundColor: '#000',
+                            '-webkit-border-radius': '10px',
+                            '-moz-border-radius': '10px',
+                            opacity: 1,
+                            color: '#fff'
+                        },
+                        onBlock: function () {
+                            pageBlocked = true;
+                        }
+                    });
+                }
+            }).ajaxStop(function () {
+                jQuery.unblockUI();
+                pageBlocked = false;
+            });
+
+        });
+    </script>
+
+
+
+}
+
+
+
+
+
+
