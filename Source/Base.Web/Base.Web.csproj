@@ -425,8 +425,10 @@
     <Content Include="Content\js\viewsJs\Acceso.js" />
     <Content Include="Content\js\viewsJs\account.js" />
     <Content Include="Content\js\viewsJs\alerta.js" />
+    <Content Include="Content\js\viewsJs\Almacen.js" />
     <Content Include="Content\js\viewsJs\canje.js" />
     <Content Include="Content\js\viewsJs\carga.js" />
+    <Content Include="Content\js\viewsJs\CategoriaLineaSublinea.js" />
     <Content Include="Content\js\viewsJs\configuracion.js" />
     <Content Include="Content\js\viewsJs\Curso.js" />
     <Content Include="Content\js\viewsJs\envio.js" />
@@ -462,6 +464,8 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AccesoController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AlmacenController.cs" />
+    <Compile Include="Controllers\CategoriaLineaSublineaController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ParametroController.cs" />
@@ -593,6 +597,8 @@
     <Content Include="Views\UnidadMedida\Index.cshtml" />
     <Content Include="Views\Reporte\StimulsoftControl.cshtml" />
     <Content Include="Views\Producto\Index.cshtml" />
+    <Content Include="Views\Almacen\Index.cshtml" />
+    <Content Include="Views\CategoriaLineaSublinea\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
