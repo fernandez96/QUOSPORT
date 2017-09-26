@@ -434,6 +434,7 @@
     <Content Include="Content\js\viewsJs\envio.js" />
     <Content Include="Content\js\viewsJs\EnvioEmail.js" />
     <Content Include="Content\js\viewsJs\Parametro.js" />
+    <Content Include="Content\js\viewsJs\Producto.js" />
     <Content Include="Content\js\viewsJs\reporte.js" />
     <Content Include="Content\js\viewsJs\TablaRegistro.js" />
     <Content Include="Content\js\viewsJs\TipoDocumento.js" />
@@ -485,6 +486,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\AlmacenFilterModel.cs" />
     <Compile Include="Models\FormularioModel.cs" />
     <Compile Include="Models\JsTreeModel.cs" />
     <Compile Include="Models\ModuloFilterModel.cs" />

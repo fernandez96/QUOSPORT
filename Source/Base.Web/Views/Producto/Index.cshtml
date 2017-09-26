@@ -61,7 +61,7 @@
                                 <div class="clearfix">
                                     <div class="pull-right tableTools-container">
                                         <div class="dt-buttons btn-overlap btn-group">
-                                            <a id="btnAgregarTipodocumento" data-toggle="tooltip" class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="Nuevo" title="Nuevo">
+                                            <a id="btnAgregarProducto" data-toggle="tooltip" class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="Nuevo" title="Nuevo">
                                                 <span><i class="fa fa-plus-circle bigger-110 blue"></i> </span>
                                             </a>
 
@@ -113,7 +113,7 @@
                     <div class='modal-content'>
                         <div class='modal-header'>
                             <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class='modal-title'><span id='accionTitle'></span> Tipo documento</h4>
+                            <h4 class='modal-title'><span id='accionTitle_'></span> Tipo documento</h4>
                         </div>
                         <div class='modal-body'>
                             <div class="row">
@@ -155,45 +155,69 @@
                 </div>
             </div>
 
-            <div id='Nuevoacceso' tabindex='-1' role='dialog' aria-hidden='true' class='modal fade' data-backdrop='static' style='z-index:100000;'>
-                <div class='modal-dialog'>
-                    <div class='modal-content'>
+            <div id="NuevoProducto" tabindex='-1' role='dialog' aria-hidden='true' class='modal fade' data-backdrop='static' style='z-index:100000;'>
+                <div class="modal-dialog">
+                    <div class="modal-content">
                         <div class='modal-header'>
                             <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class='modal-title'><span id='accionTitleacceso'></span> Acceso de REC - <span id="iddescripcion"></span></h4>
+                            <h4 class='modal-title'><span id='accionTitle'></span> producto</h4>
                         </div>
-                        <div class='modal-body'>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="page-header">
-                                        <h4>
-                                            Modulos
-                                            <small>
-                                                <i class="ace-icon fa fa-angle-double-right"></i>
-                                                Seleccione modulos
-                                            </small>
-                                        </h4>
-                                    </div>
-                                    <div class="search-area well no-margin-bottom">
-                                        <form id="ModuloForm" role="form">
-                                            <div class="row" id="idContentModulos">
 
-                                            </div>
-                                        </form>
-                                        <div class="space space-6"></div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-5">
+                                    <div class="space"></div>
+
+                                    <label class="ace-file-input ace-file-multiple"><input type="file"><span class="ace-file-container" data-title="Drop files here or click to choose"><span class="ace-file-name" data-title="No File ..."><i class=" ace-icon ace-icon fa fa-cloud-upload"></i></span></span><a class="remove" href="#"><i class=" ace-icon fa fa-times"></i></a></label>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-7">
+                                    <div class="form-group">
+                                        <label for="form-field-select-3">Location</label>
+
+                                        <div>
+                                        </div>
                                     </div>
-                                    <br />
+
+                                    <div class="space-4"></div>
+
+                                    <div class="form-group">
+                                        <label for="form-field-username">Username</label>
+
+                                        <div>
+                                            <input type="text" id="form-field-username" placeholder="Username" value="alexdoe">
+                                        </div>
+                                    </div>
+
+                                    <div class="space-4"></div>
+
+                                    <div class="form-group">
+                                        <label for="form-field-first">Name</label>
+
+                                        <div>
+                                            <input type="text" id="form-field-first" placeholder="First Name" value="Alex">
+                                            <input type="text" id="form-field-last" placeholder="Last Name" value="Doe">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="ModuloId" id="ModuloId" value="0" />
                         </div>
-                        <div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>
-                            <button class='btn btn-danger' data-dismiss='modal'><i class='fa fa-remove'></i> Cancelar</button>
-                            <button class='btn btn-success' id="btnGuardarAccesoModulo"><i class='fa fa-floppy-o'></i> Guardar</button>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-sm" data-dismiss="modal">
+                                <i class="ace-icon fa fa-times"></i>
+                                Cancel
+                            </button>
+
+                            <button class="btn btn-sm btn-primary">
+                                <i class="ace-icon fa fa-check"></i>
+                                Save
+                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>   
+
         </div><!-- /.page-content -->
     </div>
 </div><!-- /.main-content -->

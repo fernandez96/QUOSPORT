@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Almacen.cs" />
     <Compile Include="Cargo.cs" />
     <Compile Include="Core\EntityAuditable.cs" />
     <Compile Include="Core\EntityBase.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Rol.cs" />
     <Compile Include="TablaRegistro.cs" />
     <Compile Include="TipoDocumento.cs" />
+    <Compile Include="UnidadMedida.cs" />
     <Compile Include="Usuario.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

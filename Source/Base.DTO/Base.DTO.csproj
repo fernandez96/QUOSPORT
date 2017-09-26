@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlmacenDTO.cs" />
     <Compile Include="AutoMapper\AutoMapperConfiguration.cs" />
     <Compile Include="AutoMapper\DomainToDtoMappingProfile.cs" />
     <Compile Include="AutoMapper\DtoToDomainMappingProfile.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="RolDTO.cs" />
     <Compile Include="TablaRegistroDTO.cs" />
     <Compile Include="TipoDocumentoDTO.cs" />
+    <Compile Include="UnidadMedida.cs" />
     <Compile Include="UsuarioDTO.cs" />
     <Compile Include="UsuarioLoginDTO.cs" />
   </ItemGroup>

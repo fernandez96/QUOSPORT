@@ -5,7 +5,7 @@ var delRowID = 0;
 var urlListar = baseUrl + 'Almacen/Listar';
 var urlMantenimiento = baseUrl + 'Almacen/';
 var rowAlmacen = null;
-
+var urlcargarEstado = baseUrl + 'Usuario/GetAll';
 
 $(document).ready(function () {
     $.extend($.fn.dataTable.defaults, {
@@ -17,7 +17,7 @@ $(document).ready(function () {
     });
 
     checkSession(function () {
-        VisualizarDataTableAlmacen();
+       VisualizarDataTableAlmacen();
     });
 
     $('#Almacen tbody').on('click', 'tr', function () {
@@ -25,7 +25,7 @@ $(document).ready(function () {
             $(this).removeClass('selected');
         }
         else {
-            dataTableUsuario.$('tr.selected').removeClass('selected');
+            dataTableAlmacen.$('tr.selected').removeClass('selected');
             $(this).addClass('selected');
         }
     });
@@ -36,74 +36,58 @@ $(document).ready(function () {
         $("#AlmacenId").val(0);
         $("#accionTitle").text('Nuevo');
         $("#NuevoAlmacen ").modal("show");
-        $("#Username").prop("disabled", false);
+        $("#codigo").prop("disabled", false);
+        $("#tipo").prop("disabled", false);
     });
 
     $('#btnEditarAlmacen').on('click', function () {
-        rowUsuario = dataTableUsuario.row('.selected').data();
-        if (typeof rowUsuario === "undefined") {
+        rowAlmacen = dataTableAlmacen.row('.selected').data();
+        if (typeof rowAlmacen === "undefined") {
             webApp.showMessageDialog("Por favor seleccione un registro.");
         }
         else {
             checkSession(function () {
-                GetUsuarioById();
+                GetAlmacenById();
             });
         }
 
     });
 
     $('#btnEliminarAlmacen').on('click', function () {
-        rowUsuario = dataTableUsuario.row('.selected').data();
-        if (typeof rowUsuario === "undefined") {
+        rowAlmacen = dataTableAlmacen.row('.selected').data();
+        if (typeof rowAlmacen === "undefined") {
             webApp.showMessageDialog("Por favor seleccione un registro.");
         }
         else {
             webApp.showDeleteConfirmDialog(function () {
                 checkSession(function () {
-                    EliminarUsuario();
+                    EliminarAlmacen();
                 });
             }, 'Se eliminará el registro. ¿Está seguro que desea continuar?');
         }
 
     });
 
-    $("#mostarPass").on('click', function () {
-        var allInputs = $("#Contrasena").get(0).type;
-        if (allInputs === 'text') {
-            $("#Contrasena").prop("type", "password");
-        }
-        if (allInputs === 'password') {
-            $("#Contrasena").prop("type", "text");
-        }
-    });
+  
 
-    $("#mostarPassConf").on('click', function () {
-        var allInputs = $("#ContrasenaConf").get(0).type;
-        if (allInputs === 'text') {
-            $("#ContrasenaConf").prop("type", "password");
-        }
-        if (allInputs === 'password') {
-            $("#ContrasenaConf").prop("type", "text");
-        }
-    });
-
-
-    $("#btnSearchUsuario").on("click", function (e) {
-        if ($('#UsuarioSearchForm').valid()) {
+    $("#btnSearchAlmacen").on("click", function (e) {
+        if ($('#AlmacenSearchForm').valid()) {
             checkSession(function () {
-                dataTableUsuario.ajax.reload();
+                dataTableAlmacen.ajax.reload();
             });
         }
         e.preventDefault();
     });
 
-    $("#btnGuardarUsuario").on("click", function (e) {
+    $("#btnGuardarAlmacen").on("click", function (e) {
 
         if ($('#' + formularioMantenimiento).valid()) {
 
             ////webApp.showConfirmDialog(function () {
             checkSession(function () {
-                GuardarUsuario();
+                GuardarAlmacen();
+                
+             
             });
             //});
         }
@@ -111,66 +95,54 @@ $(document).ready(function () {
         e.preventDefault();
     });
 
-    webApp.validarLetrasEspacio(['Nombre', 'Apellido']);
+    // webApp.validarLetrasEspacio(['Nombre', '']);
+    webApp.validarNumerico(['telefono']);
     $('#correo').validCampoFranz('@abcdefghijklmnÃ±opqrstuvwxyz_1234567890.');
 
     webApp.InicializarValidacion(formularioMantenimiento,
         {
-            Username: {
+            codigo: {
                 required: true
 
             },
-            Contrasena: {
+            descripcion: {
                 required: true
             },
-            ContrasenaConf: {
+            tipo: {
                 required: true
             },
-            Nombre: {
-                required: true,
-                noPasteAllowLetterAndSpace: true,
-                firstCharacterBeLetter: true
-            },
-            Apellido: {
-                required: true,
-                noPasteAllowLetterAndSpace: true,
-                firstCharacterBeLetter: true
-            },
-            CargoId: {
+            ubicacion: {
                 required: true
             },
-            RolId: {
-                required: true
-            }
+            telefono:{
+                strippedminlength: {
+                    param: 6
+                },
+               }
+          
         },
         {
-            Username: {
-                required: "Por favor ingrese Usuario.",
+            codigo: {
+                required: "Por favor ingrese Codigo.",
 
             },
-            Contrasena: {
-                required: "Por favor ingrese Contraseña.",
+            descripcion: {
+                required: "Por favor ingrese Descripción.",
 
             },
-            ContrasenaConf: {
-                required: "Por favor confirme Contraseña.",
+            tipo: {
+                required: "Por favor seleccione Tipo.",
 
             },
-            Nombre: {
-                required: "Por favor ingrese Nombre."
+            ubicacion: {
+                required: "Por favor ingrese Ubicación."
             },
-            Apellido: {
-                required: "Por favor ingrese Apellido."
-            },
-
-            CargoId: {
-                required: "Por favor seleccione Cargo."
-            },
-            RolId: {
-                required: "Por favor seleccione Rol."
+            telefono:{
+                strippedminlength: "Por favor ingrese al menos 6 caracteres."
             }
+          
         });
-    CargarEstado();
+   // CargarEstado();
     $('[data-toggle="tooltip"]').tooltip();
 });
 
@@ -187,8 +159,8 @@ function VisualizarDataTableAlmacen() {
                 request.filter = new Object();
 
                 request.filter = {
-                    UsernameSearch: $("#UsuarioSearch").val(),
-                    RolIdSearch: $("#RolIdSearch").val()
+                    CodigoSearch: $("#Codigosearch").val(),
+                    DescripcionSearch: $("#Descripcionsearch").val()
                 }
             },
             dataFilter: function (data) {
@@ -204,14 +176,16 @@ function VisualizarDataTableAlmacen() {
         "bAutoWidth": false,
         "columns": [
             { "data": "Id" },
-            { "data": "Username" },
-            { "data": "Nombre" },
-            { "data": "Apellido" },
-            { "data": "Correo" },
-            { "data": "RolNombre" },
+            { "data": "almac_vcod_almacen" },
+            { "data": "almac_vdescripcion" },
+            { "data": "almac_vtipo" },
+            { "data": "almac_vubicacion" },
+            { "data": "almac_vresponsable" },
+            { "data": "almac_vtelefono" },
+            { "data": "almac_vcorreo" },
             {
                 "data": function (obj) {
-                    if (obj.Estado == "1")
+                    if (obj.Estado == 1)
                         return '<span class="label label-info label-sm arrowed-in arrowed-in-right">Activo</span>';
                     else
                         return '<span class="label label-sm arrowed-in arrowed-in-right">Inactivo</span>';
@@ -219,17 +193,18 @@ function VisualizarDataTableAlmacen() {
             }
         ],
         "aoColumnDefs": [
-
             { "bVisible": false, "aTargets": [0] },
             { "className": "hidden-120", "aTargets": [1], "width": "10%" },
             { "className": "hidden-120", "aTargets": [2], "width": "18%" },
-            { "className": "hidden-992", "aTargets": [3], "width": "18%" },
-            { "className": "hidden-768", "aTargets": [4], "width": "20%" },
-            { "className": "hidden-600", "aTargets": [5], "width": "10%" },
-            { "bSortable": false, "className": "hidden-480", "aTargets": [6], "width": "10%" }
+            { "className": "hidden-992", "aTargets": [3], "width": "10%" },
+            { "className": "hidden-120", "aTargets": [4], "width": "18%" },
+            { "className": "hidden-600", "aTargets": [5], "width": "18%" },
+            { "className": "hidden-600", "aTargets": [6], "width": "10%" },
+            { "className": "hidden-600", "aTargets": [7], "width": "10%" },
+            { "bSortable": false, "className": "hidden-480", "aTargets": [8], "width": "7%" }
 
         ],
-        "order": [[1, "desc"]],
+        "order": [[1, "asc"]],
         "initComplete": function (settings, json) {
             // AddSearchFilter();
         },
@@ -239,9 +214,9 @@ function VisualizarDataTableAlmacen() {
     });
 }
 
-function GetUsuarioById() {
+function GetAlmacenById() {
     var modelView = {
-        Id: rowUsuario.Id
+        Id: rowAlmacen.Id
     };
 
     webApp.Ajax({
@@ -257,20 +232,20 @@ function GetUsuarioById() {
                 });
             } else {
                 LimpiarFormulario();
-                var usuario = response.Data;
-                $("#Username").val(usuario.Username);
-                $("#Nombre").val(usuario.Nombre);
-                $("#Apellido").val(usuario.Apellido);
-                $("#Correo").val(usuario.Correo);
-                $("#CargoId").val(usuario.CargoId);
-                $("#RolId").val(usuario.RolId);
-                $("#Estado").val(usuario.Estado);
-                $("#UsuarioId").val(usuario.Id);
-                $("#Contrasena").val(usuario.Password);
+                var almacen = response.Data;
+                $("#codigo").val(almacen.almac_vcod_almacen);
+                $("#descripcion").val(almacen.almac_vdescripcion);
+                $("#tipo").val(almacen.almac_itipo);
+                $("#ubicacion").val(almacen.almac_vubicacion);
+                $("#responsable").val(almacen.almac_vresponsable);
+                $("#telefono").val(almacen.almac_vtelefono);
+                $("#correo").val(almacen.almac_vcorreo);
+                //$("#Estado").val(almacen.Estado);
+                $("#AlmacenId").val(almacen.Id);
                 $("#accionTitle").text('Editar');
-                $("#NuevoUsuario").modal("show");
-                $("#ContrasenaConf").val(usuario.ConfirmarPassword);
-                $("#Username").prop("disabled", true);
+                $("#NuevoAlmacen").modal("show");
+                $("#codigo").prop("disabled", true);
+                $("#tipo").prop("disabled", true);
             }
 
         } else {
@@ -295,9 +270,9 @@ function GetUsuarioById() {
     });
 }
 
-function EliminarUsuario() {
+function EliminarAlmacen() {
     var modelView = {
-        Id: rowUsuario.Id,
+        Id: rowAlmacen.Id,
         UsuarioRegistro: $("#usernameLogOn strong").text()
     };
 
@@ -314,8 +289,8 @@ function EliminarUsuario() {
                     class_name: 'gritter-warning gritter'
                 });
             } else {
-                $("#NuevoUsuario").modal("hide");
-                dataTableUsuario.row('.selected').remove().draw();
+                $("#NuevoAlmacen").modal("hide");
+                dataTableAlmacen.row('.selected').remove().draw();
                 $.gritter.add({
                     title: response.Title,
                     text: response.Message,
@@ -346,19 +321,17 @@ function EliminarUsuario() {
     delRowID = 0;
 }
 
-function GuardarUsuario() {
+function GuardarAlmacen() {
 
     var modelView = {
-        Id: $("#UsuarioId").val(),
-        Username: $("#Username").val(),
-        Password: $("#Contrasena").val(),
-        ConfirmarPassword: $("#ContrasenaConf").val(),
-        Nombre: $("#Nombre").val(),
-        Apellido: $("#Apellido").val(),
-        Correo: $("#Correo").val(),
-        CargoId: $("#CargoId").val(),
-        RolId: $("#RolId").val(),
-        Estado: $("#Estado").val(),
+        Id: $("#AlmacenId").val(),
+        almac_vcod_almacen: $("#codigo").val(),
+        almac_vdescripcion: $("#descripcion").val(),
+        almac_vubicacion: $("#ubicacion").val(),
+        almac_vresponsable: $("#responsable").val(),
+        almac_vtelefono: $("#telefono").val(),
+        almac_vcorreo: $("#correo").val(),
+        almac_itipo: $("#tipo").val(),
         UsuarioRegistro: $("#usernameLogOn strong").text()
     };
 
@@ -379,8 +352,8 @@ function GuardarUsuario() {
                     class_name: 'gritter-warning gritter'
                 });
             } else {
-                $("#NuevoUsuario").modal("hide");
-                dataTableUsuario.ajax.reload();
+                $("#NuevoAlmacen").modal("hide");
+                dataTableAlmacen.ajax.reload();
                 $.gritter.add({
                     title: response.Title,
                     text: response.Message,
@@ -414,7 +387,7 @@ function CargarEstado() {
         idtabla: 1
     };
     webApp.Ajax({
-        url: urlMantenimiento + 'GetAll',
+        url: urlcargarEstado,
         async: false,
         parametros: modelView
     }, function (response) {

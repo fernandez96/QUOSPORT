@@ -40,11 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlmacenBL.cs" />
     <Compile Include="CargoBL.cs" />
     <Compile Include="Core\ILogic.cs" />
     <Compile Include="Core\IReadOnlyLogic.cs" />
     <Compile Include="Core\IWriteOnlyLogic.cs" />
     <Compile Include="EnvioEmailBL.cs" />
+    <Compile Include="Interfaces\IAlmacenBL.cs" />
     <Compile Include="Interfaces\ICargoBL.cs" />
     <Compile Include="Interfaces\IEnvioEmailBL.cs" />
     <Compile Include="Interfaces\ILogBL.cs" />
@@ -55,6 +57,7 @@
     <Compile Include="Interfaces\ISeguridadBL.cs" />
     <Compile Include="Interfaces\ITablaRegistroBL.cs" />
     <Compile Include="Interfaces\ITipoDocumentoBL.cs" />
+    <Compile Include="Interfaces\IUnidadMedidaBL.cs" />
     <Compile Include="Interfaces\IUsuarioBL.cs" />
     <Compile Include="LogBL.cs" />
     <Compile Include="ModeloBL.cs" />
@@ -65,6 +68,7 @@
     <Compile Include="SeguridadBL.cs" />
     <Compile Include="TablaRegistroBL.cs" />
     <Compile Include="TipoDocumentoBL.cs" />
+    <Compile Include="UnidadMedidaBL.cs" />
     <Compile Include="UsuarioBL.cs" />
   </ItemGroup>
   <ItemGroup>

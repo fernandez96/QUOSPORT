@@ -30,7 +30,7 @@ var webApp = function () {
         dialogMessage += "</div>";
         dialogMessage += "<div class='modal-body paddingTop15'></div>";
         dialogMessage += "<div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>";
-        dialogMessage += "<button class='btn btn-success btn-aceptar' data-dismiss='modal'><i class='fa fa-thumbs-o-up'></i> " + _btnAceptar + "</button>";
+        dialogMessage += "<button class='btn btn-primary btn-aceptar btn-sm' data-dismiss='modal'><i class='fa fa-thumbs-o-up'></i> " + _btnAceptar + "</button>";
         dialogMessage += "</div>";
         dialogMessage += "</div>";
         dialogMessage += "</div>";
@@ -45,8 +45,8 @@ var webApp = function () {
         dialogConfirm += "<div class='modal-header'><h4 class='modal-title'>" + _tituloPopupComfirmacion + "</h4></div>";
         dialogConfirm += "<div class='modal-body paddingTop15'><p></p></div>";
         dialogConfirm += "<div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>";
-        dialogConfirm += "<button class='btn btn-danger' data-dismiss='modal'><i class='fa fa-remove'></i> " + _btnCancelar + "</button> ";
-        dialogConfirm += "<button class='btn btn-success' data-dismiss='modal'><i class='fa fa-thumbs-o-up'></i> " + _btnAceptar + "</button>";
+        dialogConfirm += "<button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-remove'></i> " + _btnCancelar + "</button> ";
+        dialogConfirm += "<button class='btn btn-primary btn-sm' data-dismiss='modal'><i class='fa fa-thumbs-o-up'></i> " + _btnAceptar + "</button>";
         dialogConfirm += "</div>";
         dialogConfirm += "</div>";
         dialogConfirm += "</div>";
@@ -61,8 +61,8 @@ var webApp = function () {
         dialogConfirm += "<div class='modal-header'><h4 class='modal-title'>" + _tituloPopupComfirmacion + "</h4></div>";
         dialogConfirm += "<div class='modal-body paddingTop15'><p></p></div>";
         dialogConfirm += "<div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>";
-        dialogConfirm += "<button class='btn btn-danger' data-dismiss='modal'><i class='fa fa-remove'></i> " + _btnCancelar + "</button> ";
-        dialogConfirm += "<button class='btn btn-success' data-dismiss='modal'><i class='fa fa-thumbs-o-up'></i> " + _btnAceptar + "</button>";
+        dialogConfirm += "<button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-remove'></i> " + _btnCancelar + "</button> ";
+        dialogConfirm += "<button class='btn btn-primary btn-sm' data-dismiss='modal'><i class='fa fa-thumbs-o-up'></i> " + _btnAceptar + "</button>";
         dialogConfirm += "</div>";
         dialogConfirm += "</div>";
         dialogConfirm += "</div>";
@@ -81,8 +81,8 @@ var webApp = function () {
         dialogMessage += "</div>";
         dialogMessage += "<div class='modal-body paddingTop15'><p></p></div>";
         dialogMessage += "<div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>";
-        dialogMessage += "<button class='btn btn-danger' data-dismiss='modal'><i class='fa fa-remove'></i> " + _btnCancelar + "</button> ";
-        dialogMessage += "<button class='btn btn-success' data-dismiss='modal'><i class='fa fa-thumbs-o-up'></i> " + _btnAceptar + "</button>";
+        dialogMessage += "<button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-remove'></i> " + _btnCancelar + "</button> ";
+        dialogMessage += "<button class='btn btn-primary btn-sm' data-dismiss='modal'><i class='fa fa-thumbs-o-up'></i> " + _btnAceptar + "</button>";
         dialogMessage += "</div>";
         dialogMessage += "</div>";
         dialogMessage += "</div>";
@@ -957,8 +957,8 @@ var webApp = function () {
         	
             var popup = $('#' + _popupConfirmacion);
             popup.modal('show');
-            var btnSuccess = $(popup).find('.btn-success');
-            var btnCancel = $(popup).find('.btn-primary');
+            var btnSuccess = $(popup).find('.btn-primary');
+            var btnCancel = $(popup).find('.btn-danger');
 
             btnSuccess.off('click');
             if ($.isFunction(fnSuccess)) {
@@ -980,8 +980,8 @@ var webApp = function () {
         },
         showReConfirmDialog: function (fnSuccess, message, fnCancel) {
             var popup = $('#' + _popupReConfirmacion);
-            var btnSuccess = $(popup).find('.btn-success');
-            var btnCancel = $(popup).find('.btn-primary');
+            var btnSuccess = $(popup).find('.btn-primary');
+            var btnCancel = $(popup).find('.btn-danger');
 
             btnSuccess.off('click');
             if ($.isFunction(fnSuccess)) {
@@ -1003,8 +1003,8 @@ var webApp = function () {
         },
         showReDeleteConfirmDialog: function (fnSuccess, message, fnCancel) {
             var popup = $('#' + _popupReConfirmacion);
-            var btnSuccess = $(popup).find('.btn-success');
-            var btnCancel = $(popup).find('.btn-primary');
+            var btnSuccess = $(popup).find('.btn-primary');
+            var btnCancel = $(popup).find('.btn-danger');
 
             btnSuccess.off('click');
             if ($.isFunction(fnSuccess)) {
@@ -1028,8 +1028,8 @@ var webApp = function () {
             
             var popup = $('#' + _popupConfirmacion);
             popup.modal('show');
-            var btnSuccess = $(popup).find('.btn-success');
-            var btnCancel = $(popup).find('.btn-primary');
+            var btnSuccess = $(popup).find('.btn-primary');
+            var btnCancel = $(popup).find('.btn-danger');
 
             btnSuccess.off('click');
             if ($.isFunction(fnSuccess)) {
@@ -1050,8 +1050,8 @@ var webApp = function () {
         },          
         showDeleteConfirmDialog: function (fnSuccess, message, fnCancel) {
             var popup = $('#' + _popupEliminacionMensaje);
-            var btnSuccess = $(popup).find('.btn-success');
-            var btnCancel = $(popup).find('.btn-primary');
+            var btnSuccess = $(popup).find('.btn-primary');
+            var btnCancel = $(popup).find('.btn-danger');
 
             btnSuccess.off('click');
             if ($.isFunction(fnSuccess)) {

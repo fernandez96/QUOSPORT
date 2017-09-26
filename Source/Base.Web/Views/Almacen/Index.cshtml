@@ -41,7 +41,7 @@
                     <!-- PAGE CONTENT BEGINS -->
                     <!-- PAGE CONTENT BEGINS -->
                     <div class="search-area well no-margin-bottom">
-                        <form id="TipoDocumentoSearchForm" role="form">
+                        <form id="AlmacenSearchForm" role="form">
                             <div class="row">
                                 <div class="col-md-7">
                                     <div class="input-group">
@@ -52,7 +52,7 @@
                                         </div>
                                         <input type="text" class="col-xs-12" name="Descripcionsearch" id="Descripcionsearch" placeholder="Descripción">
                                         <div class="input-group-btn">
-                                            <button type="button" id="btnSearchAlmacen" class="btn btn-success btn-sm">
+                                            <button type="button" id="btnSearchAlmacen" class="btn btn-primary btn-sm">
                                                 <i class="ace-icon fa fa-search icon-on-right bigger-110 right"></i>Buscar
                                             </button>
                                         </div>
@@ -96,9 +96,9 @@
                                             <th class="hidden-120 center">Codigo</th>
                                             <th class="hidden-120">Descripci&oacute;n</th>
                                             <td class="hidden-120">Tipo</td>
-                                            <td class="hidden-480">Ubicación</td>
-                                            <td class="hidden-480">Reponsable</td>
-                                            <td class="hidden-480">Telefono</td>
+                                            <td class="hidden-120">Ubicación</td>
+                                            <td class="hidden-1200">Reponsable</td>
+                                            <td class="hidden-1200">Telefono</td>
                                             <td class="hidden-120">Correo</td>
                                             <th class="hidden-480">Estado</th>
                                         </tr>
@@ -137,16 +137,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="form-group">
-                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="descripcion">Descripci&oacute;n </label>
-
-                                            <div class="col-xs-12 col-sm-9">
-                                                <div class="clearfix">
-                                                    <input type="text" id="descripcion" autocomplete="off" name="descripcion" placeholder="Descripción" maxlength="100" class="col-xs-12 col-sm-12" />
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div class="form-group">
                                             <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="tipo">Tipo</label>
 
@@ -156,6 +146,16 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="descripcion">Descripci&oacute;n </label>
+
+                                            <div class="col-xs-12 col-sm-9">
+                                                <div class="clearfix">
+                                                    <input type="text" id="descripcion" autocomplete="off" name="descripcion" placeholder="Descripción" maxlength="100" class="col-xs-12 col-sm-12" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
                                         <div class="form-group">
                                             <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="ubicacion">Ubicaci&oacute;n </label>
 
@@ -192,7 +192,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        @*<div class="form-group">
                                             <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="Estado">Estado </label>
 
                                             <div class="col-xs-12 col-sm-9">
@@ -200,15 +200,15 @@
                                                     <select id="Estado" name="Estado" class="col-xs-12 col-sm-12"></select>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div>*@
                                         <input type="hidden" name="AlmacenId" id="AlmacenId" value="0" />
                                     </form>
                                 </div>
                             </div>
                         </div>
                         <div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>
-                            <button class='btn btn-danger' data-dismiss='modal'><i class='fa fa-remove'></i> Cancelar</button>
-                            <button class='btn btn-success' id="btnGuardarAlmacen"><i class='fa fa-floppy-o'></i> Guardar</button>
+                            <button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-remove'></i> Cancelar</button>
+                            <button class='btn btn-primary btn-sm' id="btnGuardarAlmacen"><i class='fa fa-floppy-o'></i> Guardar</button>
                         </div>
                     </div>
                 </div>
