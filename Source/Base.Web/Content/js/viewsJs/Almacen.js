@@ -199,9 +199,9 @@ function VisualizarDataTableAlmacen() {
             { "className": "hidden-992", "aTargets": [3], "width": "10%" },
             { "className": "hidden-120", "aTargets": [4], "width": "18%" },
             { "className": "hidden-600", "aTargets": [5], "width": "18%" },
-            { "className": "hidden-600", "aTargets": [6], "width": "10%" },
-            { "className": "hidden-600", "aTargets": [7], "width": "10%" },
-            { "bSortable": false, "className": "hidden-480", "aTargets": [8], "width": "7%" }
+            { "className": "hidden-1200", "aTargets": [6], "width": "10%" },
+            { "className": "hidden-1200", "aTargets": [7], "width": "10%" },
+            { "bSortable": false, "className": "hidden-1200", "aTargets": [8], "width": "7%" }
 
         ],
         "order": [[1, "asc"]],
