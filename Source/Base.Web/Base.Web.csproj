@@ -495,6 +495,7 @@
     <Compile Include="Models\RolFilterModel.cs" />
     <Compile Include="Models\TablaRegistroFilterModel.cs" />
     <Compile Include="Models\TipoDocumentoFilterModel.cs" />
+    <Compile Include="Models\UnidadMedidaFilterModel.cs" />
     <Compile Include="Models\UsuarioFilterModel.cs" />
     <Compile Include="Models\UsuarioModel.cs" />
     <Compile Include="Models\UsuarioPaginationModel.cs" />

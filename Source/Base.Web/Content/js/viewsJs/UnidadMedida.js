@@ -36,11 +36,11 @@ $(document).ready(function () {
         $("#UnidadMedidaId").val(0);
         $("#accionTitle").text('Nuevo');
         $("#NuevoUnidadMedida").modal("show");
-        $("#Username").prop("disabled", false);
+        $("#codigo").prop("disabled", false);
     });
 
     $('#btnEditarUnidadMedida').on('click', function () {
-        rowUnidadMedida = dataTableUsuario.row('.selected').data();
+        rowUnidadMedida = dataTableUnidadMedida.row('.selected').data();
         if (typeof rowUnidadMedida === "undefined") {
             webApp.showMessageDialog("Por favor seleccione un registro.");
         }
@@ -155,7 +155,7 @@ function VisualizarDataTableUnidadMedida() {
             { "bVisible": false, "aTargets": [0] },
             { "className": "hidden-120", "aTargets": [1], "width": "10%" },
             { "className": "hidden-120", "aTargets": [2], "width": "18%" },         
-            { "bSortable": false, "className": "hidden-480", "aTargets": [4], "width": "10%" }
+            { "bSortable": false, "className": "hidden-480", "aTargets": [3], "width": "5%" }
 
         ],
         "order": [[1, "desc"]],
@@ -186,19 +186,12 @@ function GetUnidadMedidaById() {
                 });
             } else {
                 LimpiarFormulario();
-                var usuario = response.Data;
-                $("#Username").val(usuario.Username);
-                $("#Nombre").val(usuario.Nombre);
-                $("#Apellido").val(usuario.Apellido);
-                $("#Correo").val(usuario.Correo);
-                $("#CargoId").val(usuario.CargoId);
-                $("#RolId").val(usuario.RolId);
-                $("#Estado").val(usuario.Estado);
-                $("#UnidadMedidaId").val(usuario.Id);
-                $("#Contrasena").val(usuario.Password);
+                var unidad = response.Data;
+                $("#codigo").val(unidad.umec_vcod_unidad_medida);
+                $("#UnidadMedidaId").val(unidad.Id);
+                $("#descripcion").val(unidad.umec_vdescripcion);
                 $("#accionTitle").text('Editar');
                 $("#NuevoUnidadMedida").modal("show");
-                $("#ContrasenaConf").val(usuario.ConfirmarPassword);
                 $("#codigo").prop("disabled", true);
             }
 
@@ -244,7 +237,7 @@ function EliminarUnidadMedida() {
                 });
             } else {
                 $("#NuevoUnidadMedida").modal("hide");
-                dataTableUnidadMedidad.row('.selected').remove().draw();
+                dataTableUnidadMedida.row('.selected').remove().draw();
                 $.gritter.add({
                     title: response.Title,
                     text: response.Message,
@@ -279,15 +272,8 @@ function GuardarUnidadMedida() {
 
     var modelView = {
         Id: $("#UsuarioId").val(),
-        Username: $("#Username").val(),
-        Password: $("#Contrasena").val(),
-        ConfirmarPassword: $("#ContrasenaConf").val(),
-        Nombre: $("#Nombre").val(),
-        Apellido: $("#Apellido").val(),
-        Correo: $("#Correo").val(),
-        CargoId: $("#CargoId").val(),
-        RolId: $("#RolId").val(),
-        Estado: $("#Estado").val(),
+        umec_vcod_unidad_medida: $("#codigo").val(),
+        umec_vdescripcion: $("#descripcion").val(),
         UsuarioRegistro: $("#usernameLogOn strong").text()
     };
 
