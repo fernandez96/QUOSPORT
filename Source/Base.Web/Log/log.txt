@@ -3975,3 +3975,9 @@ Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMM
    en Base.DataAccess.LogRepository.Add(Log entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\LogRepository.cs:línea 35
    en Base.BusinessLogic.LogBL.Add(Log entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\LogBL.cs:línea 17
    en Base.Web.Controllers.AlmacenController.Update(AlmacenDTO almacenDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\AlmacenController.cs:línea 227
+2017-09-27 09:49:00,163 ERROR  - Controlador:CategoriaLineaSublinea  Action:Index  Mensaje:Se encontró un espacio o salto de línea después del carácter "@". Solamente se pueden usar identificadores, palabras clave, comentarios, "(" y "{" válidos al inicio de un bloque de código y estos deben aparecer inmediatamente después de "@" sin espacio intermedio.
+
+2017-09-27 09:49:15,050 ERROR  - Controlador:CategoriaLineaSublinea  Action:Index  Mensaje:Se encontró un espacio o salto de línea después del carácter "@". Solamente se pueden usar identificadores, palabras clave, comentarios, "(" y "{" válidos al inicio de un bloque de código y estos deben aparecer inmediatamente después de "@" sin espacio intermedio.
+
+2017-09-27 12:53:27,163 ERROR  - Controlador:CategoriaLineaSublinea  Action:Index  Mensaje:Se encontró un espacio o salto de línea después del carácter "@". Solamente se pueden usar identificadores, palabras clave, comentarios, "(" y "{" válidos al inicio de un bloque de código y estos deben aparecer inmediatamente después de "@" sin espacio intermedio.
+

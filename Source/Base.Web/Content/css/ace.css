@@ -20003,7 +20003,7 @@ input.typeahead.scrollable ~ .tt-dropdown-menu {
 .steps li.complete:before,
 .steps li.active .step,
 .steps li.complete .step {
-  border-color: #007835;
+  border-color: #22475d;
 }
 input[type=checkbox].ace.ace-checkbox-2:checked + .lbl::before,
 input[type=radio].ace.ace-checkbox-2:checked + .lbl::before {

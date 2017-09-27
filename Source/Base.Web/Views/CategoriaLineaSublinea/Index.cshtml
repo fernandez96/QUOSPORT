@@ -41,7 +41,7 @@
                     <!-- PAGE CONTENT BEGINS -->
                     <!-- PAGE CONTENT BEGINS -->
                     <div class="search-area well no-margin-bottom">
-                        <form id="TipoDocumentoSearchForm" role="form">
+                        <form id="CategoriaLineaSearchForm" role="form">
                             <div class="row">
                                 <div class="col-md-7">
                                     <div class="input-group">
@@ -52,7 +52,7 @@
                                         </div>
                                         <input type="text" class="col-xs-12" name="Descripcionsearch" id="Descripcionsearch" placeholder="Descripción">
                                         <div class="input-group-btn">
-                                            <button type="button" id="btnSearchTipoDocumento" class="btn btn-success btn-sm">
+                                            <button type="button" id="btnSearchCategoriaLinea" class="btn btn-success btn-sm">
                                                 <i class="ace-icon fa fa-search icon-on-right bigger-110 right"></i>Buscar
                                             </button>
                                         </div>
@@ -61,20 +61,19 @@
                                 <div class="clearfix">
                                     <div class="pull-right tableTools-container">
                                         <div class="dt-buttons btn-overlap btn-group">
-                                            <a id="btnAgregarTipodocumento" data-toggle="tooltip" class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="Nuevo" title="Nuevo">
+                                            <a id="btnAgregarCategoria" data-toggle="tooltip" class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="Nuevo" title="Nuevo">
                                                 <span><i class="fa fa-plus-circle bigger-110 blue"></i> </span>
                                             </a>
 
-                                            <a id="btnEditar" data-toggle="tooltip" class="dt-button buttons-copy buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Editar">
+                                            <a id="btnEditarCategoria" data-toggle="tooltip" class="dt-button buttons-copy buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Editar">
                                                 <span><i class="fa fa-pencil bigger-110 pink"></i> </span>
                                             </a>
-                                            <a id="btnEliminar" data-toggle="tooltip" class="dt-button buttons-csv buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Eliminar">
+                                            <a id="btnEliminarCategoria" data-toggle="tooltip" class="dt-button buttons-csv buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Eliminar">
                                                 <span><i class="fa fa-trash-o bigger-110 orange"> </i></span>
                                             </a>
-                                            <a id="btnacceso" data-toggle="tooltip" class="dt-button buttons-print btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Asignar accesos a Modulos">
+                                            <a id="btnsituacionCategoria" data-toggle="tooltip" class="dt-button buttons-print btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Asignar accesos a Modulos">
                                                 <span><i class="fa fa-wrench bigger-110 grey"></i> </span>
                                             </a>
-
                                         </div>
                                     </div>
                                 </div>
@@ -85,11 +84,11 @@
 
                     <div class="col-xs-12">
                         <div class="table-header">
-                            Resultado "Tipo documento"
+                            Resultado "Categoria producto"
                         </div>
                         <div class="dataTables_wrapper form-inline no-footer">
                             <div class="table-responsive">
-                                <table id="TipoDocumentoDataTable" class="table table-bordered dataTable no-footer" cellspacing="0" role="grid" aria-describedby="dynamic-table_info">
+                                <table id="CategoriaDataTable" class="table table-bordered dataTable no-footer" cellspacing="0" role="grid" aria-describedby="dynamic-table_info">
                                     <thead>
                                         <tr>
                                             <th>Id</th>
@@ -107,38 +106,365 @@
             </div><!-- /.row -->
             <!-- FILTER BEGINS-->
             <!-- FILTER ENDS-->
+            <div id='NuevoTipoCategoriaLinea' style="overflow-y:scroll;" tabindex='-1' role='dialog' aria-hidden='true' class='modal fade' data-backdrop='static' style='z-index:100000;'>
+                <div class='modal-dialog pasos'>
+                    <div class='modal-content'>
+                        <div id="modal-wizard-container" class="no-steps-container">
+                        <div class='modal-header'>
+                            @*<button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>*@
 
-            <div id='NuevoTipoDocumento' tabindex='-1' role='dialog' aria-hidden='true' class='modal fade' data-backdrop='static' style='z-index:100000;'>
+                            <ul class="steps" style="margin-left: 0">
+                                <li data-step="1" class="active">
+                                    <span class="step">1</span>
+                                    <span class="title white">Categoria de producto</span>
+                                </li>
+
+                                <li data-step="2" class="">
+                                    <span class="step">2</span>
+                                    <span class="title white">Lineas de producto</span>
+                                </li>
+
+                                <li data-step="3" class="">
+                                    <span class="step">3</span>
+                                    <span class="title white">Sub-Linea de producto</span>
+                                </li>
+
+                                <li data-step="4" class="">
+                                    <span class="step">4</span>
+                                    <span class="title white">Resumen de registro</span>
+                                </li>
+                            </ul>
+
+                        </div>
+
+
+                        <div class='modal-body step-content'>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <!-- PAGE CONTENT BEGINS -->
+                                    <div class="col-xs-11-97">
+
+                                        <div class="step-pane active" data-step="1">
+                                            <form class="form-horizontal" id="frmCategoriaProducto" method="post">
+                                                <div class="page-header">
+                                                    <h4>
+                                                        Categoria
+                                                        <small>
+                                                            <i class="ace-icon fa fa-angle-double-right"></i>
+                                                            Registre categoria de Producto
+                                                        </small>
+                                                    </h4>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-xs-12">
+                                                        <div class="col-xs-3">
+                                                            <label for="codigoCP">Codigo </label>
+                                                            <div class="clearfix">
+                                                                <input type="text" id="codigoCP" autocomplete="off" name="codigoCP" placeholder="Codigo" maxlength="3" />
+                                                            </div>
+                                                            </div>
+                                                        <div class="col-xs-7">
+                                                            <label for="descripcionCP">Descripci&oacute;n </label>
+                                                            <div class="clearfix">
+                                                                <input type="text" name="descripcionCP" id="descripcionCP" placeholder="Descripción" class="col-xs-12">
+                                                            </div>
+                                                             </div>
+                                                    </div>
+                                                </div>
+                                            </form>                                         
+                                        </div>
+                                        
+                                        <div class="step-pane" data-step="2">
+                                                <div class="page-header">
+                                                    <h4>
+                                                        Categoria
+                                                        <small>
+                                                            <i class="ace-icon fa fa-angle-double-right"></i>
+                                                            Registre categoria de Producto - Linea
+                                                        </small>
+                                                    </h4>
+                                                </div>
+                                                <div class="search-area well no-margin-bottom">
+                                                    <form id="CategoriaSubLineaSearchForm" role="form">
+                                                        <div class="row">
+                                                            <div class="col-md-7">
+                                                                <div class="input-group">
+
+                                                                    <input type="text" class="form-control" name="CodigoCPLsearch" id="Codigosearch" placeholder="Codigo">
+                                                                    <div class="input-group-btn">
+                                                                    </div>
+                                                                    <input type="text" class="col-xs-12" name="DescripcionCPLsearch" id="Descripcionsearch" placeholder="Descripción">
+                                                                    <div class="input-group-btn">
+                                                                        <button type="button" id="btnSearchCategorialinea" class="btn btn-success btn-sm">
+                                                                            <i class="ace-icon fa fa-search icon-on-right bigger-110 right"></i>Buscar
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix">
+                                                                <div class="pull-right tableTools-container">
+                                                                    <div class="dt-buttons btn-overlap btn-group">
+                                                                        <a id="btnAgregarCategoriaLinea" data-toggle="tooltip" class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="Nuevo" title="Nuevo">
+                                                                            <span><i class="fa fa-plus-circle bigger-110 blue"></i> </span>
+                                                                        </a>
+
+                                                                        <a id="btnEditarCategoriaLinea" data-toggle="tooltip" class="dt-button buttons-copy buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Editar">
+                                                                            <span><i class="fa fa-pencil bigger-110 pink"></i> </span>
+                                                                        </a>
+                                                                        <a id="btnEliminarCategoriaLinea" data-toggle="tooltip" class="dt-button buttons-csv buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Eliminar">
+                                                                            <span><i class="fa fa-trash-o bigger-110 orange"> </i></span>
+                                                                        </a>
+                                                                       
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            <div class="table-header">
+                                                Resultado "Categoria producto - Linea"
+                                            </div>
+                                            <div class="dataTables_wrapper form-inline no-footer">
+                                                <div class="table-responsive">
+                                                    <table id="CategoriaLineaDataTable" class="table table-bordered dataTable no-footer" cellspacing="0" role="grid" aria-describedby="dynamic-table_info">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Id</th>
+                                                                <th class="hidden-120 center">Codigo</th>
+                                                                <th class="hidden-120">Descripci&oacute;n</th>
+                                                                <th class="hidden-480">Estado</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="CategoriaLineaId" id="CategoriaLineaId" value="0" />
+                                        </div>
+
+                                        <div class="step-pane" data-step="3">
+                                                <div class="page-header">
+                                                    <h4>
+                                                        Categoria
+                                                        <small>
+                                                            <i class="ace-icon fa fa-angle-double-right"></i>
+                                                            Registre categoria de Producto - Linea - Sub-Linea
+                                                        </small>
+                                                    </h4>
+                                                </div>
+                                                <div class="search-area well no-margin-bottom">
+                                                    <form id="CategoriaSubLineaSearchForm" role="form">
+                                                        <div class="row">
+                                                            <div class="col-md-7">
+                                                                <div class="input-group">
+
+                                                                    <input type="text" class="form-control" name="CodigoCPLSsearch" id="Codigosearch" placeholder="Codigo">
+                                                                    <div class="input-group-btn">
+                                                                    </div>
+                                                                    <input type="text" class="col-xs-12" name="DescripcionCPLSsearch" id="Descripcionsearch" placeholder="Descripción">
+                                                                    <div class="input-group-btn">
+                                                                        <button type="button" id="btnSearchCategoriaSubLinea" class="btn btn-success btn-sm">
+                                                                            <i class="ace-icon fa fa-search icon-on-right bigger-110 right"></i>Buscar
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix">
+                                                                <div class="pull-right tableTools-container">
+                                                                    <div class="dt-buttons btn-overlap btn-group">
+                                                                        <a id="btnAgregarCategoriaSubLinea" data-toggle="tooltip" class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="Nuevo" title="Nuevo">
+                                                                            <span><i class="fa fa-plus-circle bigger-110 blue"></i> </span>
+                                                                        </a>
+
+                                                                        <a id="btnEditarCategoriaSubLinea" data-toggle="tooltip" class="dt-button buttons-copy buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Editar">
+                                                                            <span><i class="fa fa-pencil bigger-110 pink"></i> </span>
+                                                                        </a>
+                                                                        <a id="btnEliminarCategoriaSubLinea" data-toggle="tooltip" class="dt-button buttons-csv buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Eliminar">
+                                                                            <span><i class="fa fa-trash-o bigger-110 orange"> </i></span>
+                                                                        </a>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                           
+                                            <div class="table-header">
+                                                Resultado "Categoria de producto - Sub-Linea"
+                                            </div>
+                                            <div class="dataTables_wrapper form-inline no-footer">
+                                                <div class="table-responsive">
+                                                    <table id="CategoriaSubLineaDataTable" class="table table-bordered dataTable no-footer" cellspacing="0" role="grid" aria-describedby="dynamic-table_info">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Id</th>
+                                                                <th class="hidden-120 center">Codigo</th>
+                                                                <th class="hidden-120">Descripci&oacute;n</th>
+                                                                <th class="hidden-480">Estado</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="CategoriaSubLineaId" id="CategoriaSubLineaId" value="0" />
+
+                                        </div>
+
+                                        <div class="step-pane" data-step="4">
+                                            <div class="page-header">
+                                                <h4>
+                                                    Categoria
+                                                    <small>
+                                                        <i class="ace-icon fa fa-angle-double-right"></i>
+                                                        Registre categoria de Producto - Linea - Sub-Linea - Resumen
+                                                    </small>
+                                                </h4>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="row">
+                                                    <div class="col-xs-11 label label-lg label-info arrowed-in arrowed-right">
+                                                        <b>Resumen de Categoria de producto</b>
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    <ul class="list-unstyled spaced">
+                                                        <li>
+                                                            <i class="ace-icon fa fa-caret-right blue"></i>Street, City
+                                                        </li>
+
+                                                        <li>
+                                                            <i class="ace-icon fa fa-caret-right blue"></i>Zip Code
+                                                        </li>
+
+                                                        <li>
+                                                            <i class="ace-icon fa fa-caret-right blue"></i>State, Country
+                                                        </li>
+
+                                                        <li>
+                                                            <i class="ace-icon fa fa-caret-right blue"></i>
+                                                            Phone:
+                                                            <b class="red">111-111-111</b>
+                                                        </li>
+
+                                                        <li class="divider"></li>
+
+                                                        <li>
+                                                            <i class="ace-icon fa fa-caret-right blue"></i>
+                                                            Paymant Info
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                  
+                        <div class="modal-footer wizard-actions">
+                            <button class="btn btn-sm btn-prev" disabled="disabled">
+                                <i class="ace-icon fa fa-arrow-left"></i>
+                                Anterior
+                            </button>
+
+                            <button class="btn btn-primary btn-sm btn-next" data-last="Guardar">
+                                Siguiente
+                                <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+                            </button>
+
+                            <button class="btn btn-danger btn-sm pull-left" data-dismiss="modal">
+                                <i class="ace-icon fa fa-times"></i>
+                                Cancelar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div id='NuevoCategoriaLinea'  tabindex='-1' role='dialog' aria-hidden='true' class='modal fade' data-backdrop='static' style='z-index:100000;' >
                 <div class='modal-dialog'>
                     <div class='modal-content'>
                         <div class='modal-header'>
                             <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class='modal-title'><span id='accionTitle'></span> Tipo documento</h4>
+                            <h4 class='modal-title'><span id='accionTitleLinea'></span> Categoria - Linea</h4>
                         </div>
                         <div class='modal-body'>
                             <div class="row">
                                 <div class="col-xs-12">
                                     <!-- PAGE CONTENT BEGINS -->
-                                    <form class="form-horizontal" role="form" id="tipodocumentoForm">
+                                    <form class="form-horizontal" role="form" id="LineaForm">
                                         <div class="form-group"></div>
                                         <!-- #section:elements.form -->
 
                                         <div class="form-group">
-                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="Usuario">Codigo </label>
+                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="codigoL">Codigo </label>
 
                                             <div class="col-xs-12 col-sm-9">
                                                 <div class="clearfix">
-                                                    <input type="text" id="codigo" autocomplete="off" name="codigo" placeholder="Codigo" maxlength="3" class="col-xs-12 col-sm-12" />
+                                                    <input type="text" id="codigoL" autocomplete="off" name="codigoL" placeholder="Codigo" maxlength="3" class="col-xs-12 col-sm-12" />
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="Nombre">Descripci&oacute;n </label>
+                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="descripcionL">Descripci&oacute;n </label>
 
                                             <div class="col-xs-12 col-sm-9">
                                                 <div class="clearfix">
-                                                    <input type="text" id="descripcion" autocomplete="off" name="descripcion" placeholder="Descripción" maxlength="100" class="col-xs-12 col-sm-12" />
+                                                    <input type="text" id="descripcionL" autocomplete="off" name="descripcionL" placeholder="Descripción" maxlength="100" class="col-xs-12 col-sm-12" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="LineaId" id="LineaId" value="0" />
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>
+                            <button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-remove'></i> Cancelar</button>
+                            <button class='btn btn-primary btn-sm' id="btnGuardarLinea"><i class='fa fa-floppy-o'></i> Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id='NuevoCategoriaSubLinea' tabindex='-1' role='dialog' aria-hidden='true' class='modal fade' data-backdrop='static' style='z-index:100000;'>
+                <div class='modal-dialog'>
+                    <div class='modal-content'>
+                        <div class='modal-header'>
+                            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class='modal-title'><span id='accionTitleSubLinea'></span> </h4>Categoria Sub-Linea
+                        </div>
+                        <div class='modal-body'>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <!-- PAGE CONTENT BEGINS -->
+                                    <form class="form-horizontal" role="form" id="SubLineaForm">
+                                        <div class="form-group"></div>
+                                        <!-- #section:elements.form -->
+
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="codigoSL">Codigo </label>
+
+                                            <div class="col-xs-12 col-sm-9">
+                                                <div class="clearfix">
+                                                    <input type="text" id="codigoSL" autocomplete="off" name="codigoSL" placeholder="Codigo" maxlength="3" class="col-xs-12 col-sm-12" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="descripcionSL">Descripci&oacute;n </label>
+
+                                            <div class="col-xs-12 col-sm-9">
+                                                <div class="clearfix">
+                                                    <input type="text" id="descripcionSL" autocomplete="off" name="descripcionSL" placeholder="Descripción" maxlength="100" class="col-xs-12 col-sm-12" />
                                                 </div>
                                             </div>
                                         </div>
@@ -148,52 +474,13 @@
                             </div>
                         </div>
                         <div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>
-                            <button class='btn btn-danger' data-dismiss='modal'><i class='fa fa-remove'></i> Cancelar</button>
-                            <button class='btn btn-success' id="btnGuardarTipodocumento"><i class='fa fa-floppy-o'></i> Guardar</button>
+                            <button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-remove'></i> Cancelar</button>
+                            <button class='btn btn-primary btn-sm' id="btnGuardarsubLinea"><i class='fa fa-floppy-o'></i> Guardar</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div id='Nuevoacceso' tabindex='-1' role='dialog' aria-hidden='true' class='modal fade' data-backdrop='static' style='z-index:100000;'>
-                <div class='modal-dialog'>
-                    <div class='modal-content'>
-                        <div class='modal-header'>
-                            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class='modal-title'><span id='accionTitleacceso'></span> Acceso de REC - <span id="iddescripcion"></span></h4>
-                        </div>
-                        <div class='modal-body'>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="page-header">
-                                        <h4>
-                                            Modulos
-                                            <small>
-                                                <i class="ace-icon fa fa-angle-double-right"></i>
-                                                Seleccione modulos
-                                            </small>
-                                        </h4>
-                                    </div>
-                                    <div class="search-area well no-margin-bottom">
-                                        <form id="ModuloForm" role="form">
-                                            <div class="row" id="idContentModulos">
-
-                                            </div>
-                                        </form>
-                                        <div class="space space-6"></div>
-                                    </div>
-                                    <br />
-                                </div>
-                            </div>
-                            <input type="hidden" name="ModuloId" id="ModuloId" value="0" />
-                        </div>
-                        <div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>
-                            <button class='btn btn-danger' data-dismiss='modal'><i class='fa fa-remove'></i> Cancelar</button>
-                            <button class='btn btn-success' id="btnGuardarAccesoModulo"><i class='fa fa-floppy-o'></i> Guardar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div><!-- /.page-content -->
     </div>
 </div><!-- /.main-content -->
@@ -204,6 +491,7 @@
     <script src="@Url.Content("~/Content/js/jquery.inputlimiter.1.3.1.js")"></script>
     <script src="@Url.Content("~/Content/js/jquery.validate.js")"></script>
     <script src="@Url.Content("~/Content/js/additional-methods.js")"></script>
+    <script src="@Url.Content("~/Content/js/fuelux/fuelux.wizard.js")"></script>
     <script src="@Url.Content("~/Content/js/jquery.gritter.js")"></script>
     <script src="@Url.Content("~/Content/js/jquery.blockUI.js")"></script>
 

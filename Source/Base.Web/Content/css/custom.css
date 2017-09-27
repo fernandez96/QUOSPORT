@@ -407,3 +407,9 @@ span.input-icon_ {
     left: auto;
     right: 3px;
 }
+
+#descripcionCP-error,#codigoCP-error{
+ border-color: #f2a696;
+    color: #d68273
+}
+
