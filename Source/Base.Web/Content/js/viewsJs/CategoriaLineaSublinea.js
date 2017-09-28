@@ -17,7 +17,7 @@ $(document).ready(function () {
     $.extend($.fn.dataTable.defaults, {
         language: { url: baseUrl + 'Content/js/dataTables/Internationalisation/es.txt' },
         responsive: true,
-        "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+        "lengthMenu": [[5], [5]],
         "bProcessing": true,
         "dom": 'fltip'
     });
@@ -129,6 +129,8 @@ $(document).ready(function () {
         else {
             dataTableLinea.$('tr.selected').removeClass('selected');
             $(this).addClass('selected');
+            rowLinea = $(this).closest("tr.selected").get(0);
+            console.log(rowLinea);
         }
     });
 
@@ -169,7 +171,7 @@ $(document).ready(function () {
     //acciones de Categoria Linea
     $('#btnAgregarCategoriaLinea').on('click', function () {
         LimpiarFormulario();
-        $("#CategoriaLineaId").val(-1);
+        $("#CategoriaLineaId").val(0);
         $("#accionTitleLinea").text('Nuevo');
         $("#NuevoCategoriaLinea").modal("show");
         $("#codigoL").prop("disabled", false);
@@ -250,7 +252,7 @@ $(document).ready(function () {
 
 
 function VisualizarDataTableLinea() {
-    dataTableLinea = $('#CategoriaLineaDataTable').DataTable({
+    dataTableLinea = $('#CategoriaLineaDataTable').dataTable({
         "bFilter": false,
         "bProcessing": true,
         "serverSide": false,
@@ -302,7 +304,7 @@ function VisualizarDataTableSubLinea() {
     dataTableSubLinea = $('#CategoriaSubLineaDataTable').DataTable({
         "bFilter": false,
         "bProcessing": true,
-        "serverSide": false,
+        //"serverSide": true,
         //"scrollY": "350px",  
 
         "data": [],
@@ -354,72 +356,87 @@ function DrawAddLinea() {
     var descripcionL = $("#descripcionL").val();
     var Estado = 1;
     var categoriaLinea = null;
-  
-    if (Id==-1) {
+    var exito = true;
+    if (Id==0) {
         if (categoriaProductoLinea.length > 0) {
             $.each(categoriaProductoLinea, function (index, value) {
-                debugger;
-                if (codigoL === value[index].codigoL || descripcionL === value[index].descripcionL) {
+               
+                if (codigoL === value.codigoL || descripcionL === value.descripcionL) {
                     $.gritter.add({
                         title: 'Alerta',
                         text: 'Registro ya existe.',
                         class_name: 'gritter-warning gritter'
                     });
-                }
-                else {
-                    categoriaLinea = [{ "Id": index + 1, "codigoL": codigoL, "descripcionL": descripcionL, "Estado": Estado }];
-                    dataTableLinea.rows.add(categoriaLinea).draw();
-                    $("#NuevoCategoriaLinea").modal("hide");
-                    categoriaProductoLinea.push(categoriaLinea);
-                    $.gritter.add({
-                        title: 'Registro Satisfactorio',
-                        text: 'Se realizo el registro satifactoriamente.',
-                        class_name: 'gritter-success gritter'
-                    });
-                }
+                    exito = false;
+                    debugger;
+                }               
+
             });
+            if (exito) {
+                debugger;
+                categoriaLinea = { "Id": categoriaProductoLinea.length + 1, "codigoL": codigoL, "descripcionL": descripcionL, "Estado": Estado };
+                $("#NuevoCategoriaLinea").modal("hide");
+                $.gritter.add({
+                    title: 'Registro Satisfactorio',
+                    text: 'Se realizo el registro satifactoriamente.',
+                    class_name: 'gritter-success gritter'
+                });
+                categoriaProductoLinea.push(categoriaLinea);
+                dataTableLinea.fnClearTable();
+                dataTableLinea.fnAddData(categoriaProductoLinea);
+            }
         }
         else {
-            categoriaLinea = [{ "Id": 0, "codigoL": codigoL, "descripcionL": descripcionL, "Estado": Estado }];
-            dataTableLinea.rows.add(categoriaLinea).draw();
+            categoriaLinea = { "Id": 1, "codigoL": codigoL, "descripcionL": descripcionL, "Estado": Estado };
+      
             $("#NuevoCategoriaLinea").modal("hide");
-            categoriaProductoLinea.push(categoriaLinea);
             $.gritter.add({
                 title: 'Registro Satisfactorio',
                 text: 'Se realizo el registro satifactoriamente.',
                 class_name: 'gritter-success gritter'
             });
+            categoriaProductoLinea.push(categoriaLinea);
+            dataTableLinea.fnClearTable();
+            dataTableLinea.fnAddData(categoriaProductoLinea);
         }
+ 
     }
     else {
-        $.each(categoriaProductoLinea, function (index,value) {
-            if (value[index].Id === Id) {
-                value[index].descripcionL = descripcionL;
+        $.each(categoriaProductoLinea, function (index, value) {
+            if (value.Id == parseInt(Id)) {
+                debugger;
+                value.descripcionL = descripcionL;
             }
         });
-     
+
+        dataTableLinea.draw();
         $.gritter.add({
             title: 'Actualización Satisfactorio',
             text: 'Se realizo la actualización satifactoriamente.',
             class_name: 'gritter-success gritter'
         });
         $("#NuevoCategoriaLinea").modal("hide");
-        dataTableLinea.ajax.reload();
+     
+     
     }
 }
 
 function DrawEditLinea() {
-    rowLinea = dataTableLinea.row('.selected').data();
-    if (typeof rowLinea === "undefined") {
+    //rowLinea = dataTableLinea.row('.selected').data();
+  
+    var aPos = dataTableLinea.fnGetPosition(rowLinea);
+    var aData = dataTableLinea.fnGetData(aPos[0]);
+    console.log(aData);
+    if (aData.Id === "undefined") {
         webApp.showMessageDialog("Por favor seleccione un registro.");
     }
     else {
         $("#accionTitleLinea").text('Editar');
         $("#NuevoCategoriaLinea").modal("show");
-        $("#codigoL").val(rowLinea.codigoL);
-        $("#descripcionL").val(rowLinea.descripcionL);
+        $("#codigoL").val(aData[0].codigoL);
+        $("#descripcionL").val(aData[0].descripcionL);
         $("#codigoL").prop("disabled", true);
-        $("#CategoriaLineaId").val(rowLinea.Id);
+        $("#CategoriaLineaId").val(aData[0].Id);
        
     }
 }
