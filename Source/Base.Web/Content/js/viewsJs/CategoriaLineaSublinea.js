@@ -129,7 +129,7 @@ $(document).ready(function () {
         else {
             dataTableLinea.$('tr.selected').removeClass('selected');
             $(this).addClass('selected');
-            rowLinea = $(this).closest("tr.selected").get(0);
+            rowLinea = this;
             console.log(rowLinea);
         }
     });
