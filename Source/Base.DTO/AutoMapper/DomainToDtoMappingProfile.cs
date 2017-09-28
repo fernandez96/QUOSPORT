@@ -27,6 +27,7 @@ namespace Base.DTO.AutoMapper
             Mapper.CreateMap<Parametro, ParametroDTO>();
             Mapper.CreateMap<Almacen, AlmacenDTO>();
             Mapper.CreateMap<UnidadMedida, UnidadMedidaDTO>();
+            Mapper.CreateMap<Categoria, CategoriaDTO>();
 
         }
     }

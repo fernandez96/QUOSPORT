@@ -328,32 +328,38 @@
                                                 </div>
 
                                                 <div>
-                                                    <ul class="list-unstyled spaced">
-                                                        <li>
-                                                            <i class="ace-icon fa fa-caret-right blue"></i>Street, City
-                                                        </li>
+                                                    <form id="ResumenForm">
+                                                        <ul class="list-unstyled spaced">
+                                                            <li>
+                                                                <i class="ace-icon fa fa-caret-right blue"></i>Categoria Prodcuto :
+                                                                <b class="black"><span id="categoriaProductoRsm"></span></b>
+                                                            </li>
 
-                                                        <li>
-                                                            <i class="ace-icon fa fa-caret-right blue"></i>Zip Code
-                                                        </li>
+                                                            <li>
+                                                                <i class="ace-icon fa fa-caret-right blue"></i>Categoria Producto - Linea
+                                                                <b class="black"><span id="categoriaProductoLineaRsm"></span></b>
+                                                                <ul class="list-unstyled subTitlePasos">
+                                                                    <li>
+                                                                        <i class="ace-icon fa fa-caret-right black"></i>Cantidad de Registros :
+                                                                        <b class="black"><span id="countLineaRsm"></span></b>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
 
-                                                        <li>
-                                                            <i class="ace-icon fa fa-caret-right blue"></i>State, Country
-                                                        </li>
+                                                            <li>
+                                                                <i class="ace-icon fa fa-caret-right blue"></i>Categoria Producto - Sub - Linea
+                                                                <b class="black"><span id="categoriaProductoLineaRsm"></span></b>
+                                                                <ul class="list-unstyled subTitlePasos">
+                                                                    <li>
+                                                                        <i class="ace-icon fa fa-caret-right black"></i>Cantidad de Registros :
+                                                                        <b class="black"><span id="countSubLineaRsm"></span></b>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
 
-                                                        <li>
-                                                            <i class="ace-icon fa fa-caret-right blue"></i>
-                                                            Phone:
-                                                            <b class="red">111-111-111</b>
-                                                        </li>
-
-                                                        <li class="divider"></li>
-
-                                                        <li>
-                                                            <i class="ace-icon fa fa-caret-right blue"></i>
-                                                            Paymant Info
-                                                        </li>
-                                                    </ul>
+                                                    </form>
+                                              
                                                 </div>
                                             </div>
                                         </div>
@@ -376,7 +382,7 @@
                                 <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
                             </button>
 
-                            <button class="btn btn-danger btn-sm pull-left" data-dismiss="modal">
+                            <button id="btnCancelar" class="btn btn-danger btn-sm pull-left">
                                 <i class="ace-icon fa fa-times"></i>
                                 Cancelar
                             </button>
@@ -392,7 +398,7 @@
                     <div class='modal-content'>
                         <div class='modal-header'>
                             <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class='modal-title'><span id='accionTitleLinea'></span> Categoria - Linea</h4>
+                            <h4 class='modal-title'><span id='accionTitleLinea'></span> categoria - Linea</h4>
                         </div>
                         <div class='modal-body'>
                             <div class="row">
@@ -439,7 +445,7 @@
                     <div class='modal-content'>
                         <div class='modal-header'>
                             <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class='modal-title'><span id='accionTitleSubLinea'></span> </h4>Categoria Sub-Linea
+                            <h4 class='modal-title'><span id='accionTitleSubLinea'></span> Categoria Sub-Linea </h4>
                         </div>
                         <div class='modal-body'>
                             <div class="row">
@@ -450,32 +456,32 @@
                                         <!-- #section:elements.form -->
 
                                         <div class="form-group">
-                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="codigoSL">Codigo </label>
+                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="codigoLS">Codigo </label>
 
                                             <div class="col-xs-12 col-sm-9">
                                                 <div class="clearfix">
-                                                    <input type="text" id="codigoSL" autocomplete="off" name="codigoSL" placeholder="Codigo" maxlength="3" class="col-xs-12 col-sm-12" />
+                                                    <input type="text" id="codigoLS" autocomplete="off" name="codigoLS" placeholder="Codigo" maxlength="3" class="col-xs-12 col-sm-12" />
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="descripcionSL">Descripci&oacute;n </label>
+                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="descripcionLS">Descripci&oacute;n </label>
 
                                             <div class="col-xs-12 col-sm-9">
                                                 <div class="clearfix">
-                                                    <input type="text" id="descripcionSL" autocomplete="off" name="descripcionSL" placeholder="Descripción" maxlength="100" class="col-xs-12 col-sm-12" />
+                                                    <input type="text" id="descripcionLS" autocomplete="off" name="descripcionLS" placeholder="Descripción" maxlength="100" class="col-xs-12 col-sm-12" />
                                                 </div>
                                             </div>
                                         </div>
-                                        <input type="hidden" name="UsuarioId" id="UsuarioId" value="0" />
+                                        <input type="hidden" name="SubLineaId" id="SubLineaId" value="0" />
                                     </form>
                                 </div>
                             </div>
                         </div>
                         <div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>
                             <button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-remove'></i> Cancelar</button>
-                            <button class='btn btn-primary btn-sm' id="btnGuardarsubLinea"><i class='fa fa-floppy-o'></i> Guardar</button>
+                            <button class='btn btn-primary btn-sm' id="btnGuardarSubLinea"><i class='fa fa-floppy-o'></i> Guardar</button>
                         </div>
                     </div>
                 </div>

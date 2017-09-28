@@ -1,25 +1,42 @@
 ﻿var dataTableLinea = null;
 var dataTableSubLinea = null;
+var dataTableCategoria = null;
 var formularioMantenimientoLinea = "LineaForm";
 var formularioMantenimientoSubLinea = "SubLineaForm";
-
+var formularioResumen = "ResumenForm";
 var delRowPos = null;
 var delRowID = 0;
-var urlListar = baseUrl + 'Usuario/Listar';
+var urlListar = baseUrl + 'TipoDocumento/Listar';
 var urlMantenimiento = baseUrl + 'Usuario/';
 var urlListaCargo = baseUrl + 'Usuario/';
 var rowLinea = null;
 var rowSubLinea = null;
 var categoriaProductoLinea = new Array();
 var categoriaProductoSubLinea = new Array();
+var agregar = 1;
+var actualizar = 2;
+var eliminar = 3;
+var ActualizacionFallida = "No se pudo realizar la actualización.";
+var ActualizacionSatisfactoria = "Se realizó la actualización satisfactoriamente.";
+var RegistroSatisfactorio = "Se realizó el registro satisfactoriamente.";
+var RegistroFallido = "No se pudo realizar el registro.";
+var EliminacionSatisfactoria = "Se realizó la eliminación satisfactoriamente.";
+var EliminacionFallida = "No se pudo realizar la eliminación.";
+var YaExisteRegistro = "El registro ya existe.";
+var IntenteloMasTarde = "Hubo un error, inténtelo más tarde.";
+var TitleRegistro = "Registro Satisfactorio";
+var TitleActualizar = "Actualización Satisfactoria";
+var TitleEliminar = "Eliminación Satisfactoria";
+var TitleAlerta = "Alerta";
 
 $(document).ready(function () {
+    $.extend($.gritter.options, {
+        time: '1000'
+    });
+
     $.extend($.fn.dataTable.defaults, {
         language: { url: baseUrl + 'Content/js/dataTables/Internationalisation/es.txt' },
-        responsive: true,
-        "lengthMenu": [[5], [5]],
-        "bProcessing": true,
-        "dom": 'fltip'
+   
     });
 
     var $validation = true;
@@ -50,7 +67,7 @@ $(document).ready(function () {
 
 	    if (info.step == 2) {
 	        if (info.direction == "next") {
-	            if (categoriaProductoLinea.length == 0) {
+	            if (categoriaProductoLinea.length > 0) {
 	                var wizard = $('#modal-wizard-container').data('fu.wizard')
 	                wizard.currentStep = 3;
 	                wizard.setState();
@@ -59,10 +76,10 @@ $(document).ready(function () {
 	            else {
 	                if (categoriaProductoLinea<=0) {
 	                    webApp.showMessageDialog("Por favor debe ingresar una categoria de producto - Linea.");
-	                    wizard.currentStep = 2;
-	                    wizard.setState();
-	                
-	                }	               
+	                    //wizard.currentStep = 2;
+	                    //wizard.setState();
+	                    e.preventDefault();
+                    }
 	            }
 	        }
 	        if (info.direction == "previous") {
@@ -72,18 +89,17 @@ $(document).ready(function () {
 
 	    if (info.step == 3) {
 	        if (info.direction == "next") {
-	            if (categoriaProductoSubLinea.length == 0) {
+	            if (categoriaProductoSubLinea.length > 0) {
 	                var wizard = $('#modal-wizard-container').data('fu.wizard')
 	                wizard.currentStep = 4;
 	                wizard.setState();
 	                e.preventDefault();
+	                getResumen();
 	            }
 	            else {
 	                if (categoriaProductoSubLinea.length <= 0) {
 	                    webApp.showMessageDialog("Por favor debe ingresar una categoria de producto - Sub-Linea.");
-	                    var wizard = $('#modal-wizard-container').data('fu.wizard')
-	                    wizard.currentStep = 3;
-	                    wizard.setState();
+	                    e.preventDefault();
 	                }
 	            }
 	        }
@@ -117,11 +133,13 @@ $(document).ready(function () {
 	    //e.preventDefault();//this will prevent clicking and selecting steps
 	});
 
-    //carga de Linea 
+    //carga de Linea y sub-linea
     checkSession(function () {
+        VisualizarDataTableCategoria();
         VisualizarDataTableLinea();
         VisualizarDataTableSubLinea()
     });
+
     $('#CategoriaLineaDataTable  tbody').on('click', 'tr', function () {
         if ($(this).hasClass('selected')) {
             $(this).removeClass('selected');
@@ -129,12 +147,26 @@ $(document).ready(function () {
         else {
             dataTableLinea.$('tr.selected').removeClass('selected');
             $(this).addClass('selected');
-            rowLinea = this;
-            console.log(rowLinea);
         }
     });
-
- 
+    $('#CategoriaSubLineaDataTable  tbody').on('click', 'tr', function () {
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+        }
+        else {
+            dataTableSubLinea.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    });
+    $('#CategoriaDataTable  tbody').on('click', 'tr', function () {
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+        }
+        else {
+            dataTableCategoria.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    });
     //acciones de Categoria
     $('#btnAgregarCategoria').on('click', function () {
         $("#NuevoTipoCategoriaLinea").modal("show");
@@ -168,18 +200,33 @@ $(document).ready(function () {
 
     });
 
-    //acciones de Categoria Linea
+    //#region acciones de Categoria Linea
     $('#btnAgregarCategoriaLinea').on('click', function () {
-        LimpiarFormulario();
-        $("#CategoriaLineaId").val(0);
+        LimpiarFormularioLinea();
+        $("#LineaId").val(0);
         $("#accionTitleLinea").text('Nuevo');
         $("#NuevoCategoriaLinea").modal("show");
         $("#codigoL").prop("disabled", false);
     });
+
     $('#btnEditarCategoriaLinea').on('click', function () {
         DrawEditLinea();
     });
  
+    $('#btnEliminarCategoriaLinea').on('click', function () {
+        rowLinea = dataTableLinea.row('.selected').data();
+        if (typeof rowLinea === "undefined") {
+            webApp.showMessageDialog("Por favor seleccione un registro.");
+        }
+        else {
+            webApp.showDeleteConfirmDialog(function () {
+                checkSession(function () {
+ 
+                    DrawEliminarLinea(rowLinea.Id);
+                });
+            }, 'Se eliminará el registro. ¿Está seguro que desea continuar?');
+        }
+    });
 
     $("#btnGuardarLinea").on("click", function (e) {
         if ($('#' + formularioMantenimientoLinea).valid()) { 
@@ -189,6 +236,52 @@ $(document).ready(function () {
         }
         e.preventDefault();
     });
+    //#endregion acciones de Categoria Linea
+
+    //#region acciones de Categoria SubLinea
+    $('#btnAgregarCategoriaSubLinea').on('click', function () {
+        LimpiarFormularioSubLinea();
+        $("#SubLineaId").val(0);
+        $("#accionTitleSubLinea").text('Nuevo');
+        $("#NuevoCategoriaSubLinea").modal("show");
+        $("#codigoLS").prop("disabled", false);
+    });
+
+    $('#btnEditarCategoriaSubLinea').on('click', function () {
+        DrawEditSubLinea();
+    });
+
+    $('#btnEliminarCategoriaSubLinea').on('click', function () {
+        rowSubLinea = dataTableSubLinea.row('.selected').data();
+        if (typeof rowSubLinea === "undefined") {
+            webApp.showMessageDialog("Por favor seleccione un registro.");
+        }
+        else {
+            webApp.showDeleteConfirmDialog(function () {
+                checkSession(function () {
+
+                    DrawEliminarSubLinea(rowSubLinea.Id);
+                });
+            }, 'Se eliminará el registro. ¿Está seguro que desea continuar?');
+        }
+    });
+
+    $("#btnGuardarSubLinea").on("click", function (e) {
+        if ($('#' + formularioMantenimientoSubLinea).valid()) {
+            checkSession(function () {
+                DrawAddSubLinea();
+            });
+        }
+        e.preventDefault();
+    });
+    //#endregion acciones de Categoria SubLinea
+    $("#btnCancelar").on("click", function () {
+        webApp.showConfirmResumeDialog(function () {
+            $("#NuevoTipoCategoriaLinea").modal('hide');
+        }, '¿Está seguro de salir?');
+
+    });
+
     webApp.validarNumerico(['DniTitular']);
     webApp.InicializarValidacion(formularioMantenimientoLinea,
         {
@@ -214,18 +307,18 @@ $(document).ready(function () {
   
     webApp.InicializarValidacion(formularioMantenimientoSubLinea,
         {
-            codigoSL: {
+            codigoLS: {
                 required: true
             },
-            descripcionSL: {
+            descripcionLS: {
                 required: true
             }
         },
         {
-            codigoSL: {
+            codigoLS: {
                 required: "Por favor ingrese Codigo"
             },
-            descripcionSL: {
+            descripcionLS: {
                 required: "Por favor ingrese Descripción"
             }
         });
@@ -249,13 +342,80 @@ $(document).ready(function () {
 });
 
 
+function VisualizarDataTableCategoria() {
+    dataTableCategoria = $('#CategoriaDataTable').DataTable({
+        "bFilter": false,
+        "bProcessing": true,
+        "serverSide": true,
+        responsive: true,
+        "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+        "bProcessing": true,
+        "dom": 'fltip',
+        //"scrollY": "350px",              
+        "ajax": {
+            "url": urlListar,
+            "type": "POST",
+            "data": function (request) {
+                request.filter = new Object();
 
+                request.filter = {
+                    codigoSearch: $("#Codigosearch").val(),
+                    descripcionSearch: $("#Descripcionsearch").val()
+                }
+            },
+            dataFilter: function (data) {
+                if (data.substring(0, 9) == "<!DOCTYPE") {
+                    redireccionarLogin("Sesión Terminada", "Se terminó la sesión");
+                } else {
+                    return data;
+                    //var json = jQuery.parseJSON(data);
+                    //return JSON.stringify(json); // return JSON string
+                }
+            }
+        },
+        "bAutoWidth": false,
+        "columns": [
+            { "data": "Id" },
+            { "data": "tdocc_vabreviatura_tipo_doc" },
+            { "data": "tdocc_vdescripcion" },
+            {
+                "data": function (obj) {
+                    if (obj.Estado == "1")
+                        return '<span class="label label-info label-sm arrowed-in arrowed-in-right">Activo</span>';
+                    else
+                        return '<span class="label label-sm arrowed-in arrowed-in-right">Inactivo</span>';
+                }
+            }
+        ],
+        "aoColumnDefs": [
+            //{ "bSortable": false, "sClass": "center", "aTargets": [0], "width": "10%" },
+            { "bVisible": false, "aTargets": [0] },
+            { "className": "hidden-120 center", "aTargets": [1], "width": "6%" },
+            { "className": "hidden-120", "aTargets": [2], "width": "18%" },
+            { "className": "hidden-1200", "aTargets": [3], "width": "4%" },
+            { "bSortable": false, "className": "hidden-1200", "aTargets": [3], "width": "4%" }
+
+
+        ],
+        "order": [[1, "desc"]],
+        "initComplete": function (settings, json) {
+            //AddSearchFilter();
+        },
+        "fnDrawCallback": function (oSettings) {
+
+        }
+    });
+}
 
 function VisualizarDataTableLinea() {
-    dataTableLinea = $('#CategoriaLineaDataTable').dataTable({
+    dataTableLinea = $('#CategoriaLineaDataTable').DataTable({
         "bFilter": false,
         "bProcessing": true,
         "serverSide": false,
+        responsive: true,
+        "lengthMenu": [[5], [5]],
+        "bProcessing": true,
+        "dom": 'fltip',
         //"scrollY": "350px",  
 
         "data": [],
@@ -306,7 +466,10 @@ function VisualizarDataTableSubLinea() {
         "bProcessing": true,
         //"serverSide": true,
         //"scrollY": "350px",  
-
+        responsive: true,
+        "lengthMenu": [[5], [5]],
+        "bProcessing": true,
+        "dom": 'fltip',
         "data": [],
         //"scrollY": "350px",  
         dataFilter: function (data) {
@@ -321,8 +484,8 @@ function VisualizarDataTableSubLinea() {
         "bAutoWidth": false,
         "columns": [
             { "data": "Id" },
-            { "data": "Codigo" },
-            { "data": "descripcion" },
+            { "data": "codigoLS" },
+            { "data": "descripcionLS" },
             {
                 "data": function (obj) {
                     if (obj.Estado == 1)
@@ -333,14 +496,13 @@ function VisualizarDataTableSubLinea() {
             }
         ],
         "aoColumnDefs": [
-            { "bVisible": false, "aTargets": [0] },
-            { "className": "hidden-120", "aTargets": [1], "width": "10%" },
-            { "className": "hidden-120", "aTargets": [2], "width": "18%" },
-            { "className": "hidden-992", "aTargets": [3], "width": "18%" },
-            { "bSortable": false, "className": "hidden-480", "aTargets": [6], "width": "10%" }
+                { "bVisible": false, "aTargets": [0] },
+                { "className": "center hidden-120", "aTargets": [1], "width": "10%" },
+                { "className": "hidden-120", "aTargets": [2], "width": "18%" },
+                { "bSortable": false, "className": "hidden-480", "aTargets": [3], "width": "10%" }
 
         ],
-        "order": [[1, "desc"]],
+        "order": [[1, "asc"]],
         "initComplete": function (settings, json) {
             // AddSearchFilter();
         },
@@ -350,22 +512,25 @@ function VisualizarDataTableSubLinea() {
     });
 }
 
+//#region operaciones Linea
 function DrawAddLinea() {
-    var Id = $("#CategoriaLineaId").val();
+    var Id = $("#LineaId").val();
     var codigoL = $("#codigoL").val();
     var descripcionL = $("#descripcionL").val();
     var Estado = 1;
     var categoriaLinea = null;
     var exito = true;
+    var exitoedit = true;
     if (Id==0) {
         if (categoriaProductoLinea.length > 0) {
             $.each(categoriaProductoLinea, function (index, value) {
                
                 if (codigoL === value.codigoL || descripcionL === value.descripcionL) {
                     $.gritter.add({
-                        title: 'Alerta',
-                        text: 'Registro ya existe.',
-                        class_name: 'gritter-warning gritter'
+                        title: TitleAlerta,
+                        text: YaExisteRegistro,
+                        class_name: 'gritter-warning gritter',
+                        
                     });
                     exito = false;
                     debugger;
@@ -374,72 +539,270 @@ function DrawAddLinea() {
             });
             if (exito) {
                 debugger;
-                categoriaLinea = { "Id": categoriaProductoLinea.length + 1, "codigoL": codigoL, "descripcionL": descripcionL, "Estado": Estado };
+                categoriaLinea = { "Id": categoriaProductoLinea.length + 1, "codigoL": codigoL, "descripcionL": descripcionL, "Estado": Estado,'status':agregar };
                 $("#NuevoCategoriaLinea").modal("hide");
                 $.gritter.add({
-                    title: 'Registro Satisfactorio',
-                    text: 'Se realizo el registro satifactoriamente.',
-                    class_name: 'gritter-success gritter'
+                    title: TitleRegistro,
+                    text: RegistroSatisfactorio,
+                    class_name: 'gritter-success gritter',
+               
                 });
                 categoriaProductoLinea.push(categoriaLinea);
-                dataTableLinea.fnClearTable();
-                dataTableLinea.fnAddData(categoriaProductoLinea);
+                dataTableLinea.clear();
+                dataTableLinea.rows.add(categoriaProductoLinea).draw();
             }
         }
         else {
-            categoriaLinea = { "Id": 1, "codigoL": codigoL, "descripcionL": descripcionL, "Estado": Estado };
+            categoriaLinea = { "Id": 1, "codigoL": codigoL, "descripcionL": descripcionL, "Estado": Estado, 'status': agregar };
       
             $("#NuevoCategoriaLinea").modal("hide");
             $.gritter.add({
-                title: 'Registro Satisfactorio',
-                text: 'Se realizo el registro satifactoriamente.',
-                class_name: 'gritter-success gritter'
+                title: TitleRegistro,
+                text: RegistroSatisfactorio,
+                class_name: 'gritter-success gritter',
             });
             categoriaProductoLinea.push(categoriaLinea);
-            dataTableLinea.fnClearTable();
-            dataTableLinea.fnAddData(categoriaProductoLinea);
+            dataTableLinea.clear();
+            dataTableLinea.rows.add(categoriaProductoLinea).draw();
         }
  
     }
     else {
         $.each(categoriaProductoLinea, function (index, value) {
-            if (value.Id == parseInt(Id)) {
-                debugger;
-                value.descripcionL = descripcionL;
+            if (value.descripcionL == descripcionL) {
+                if (value.Id != parseInt(Id)) {
+                    $.gritter.add({
+                        title: TitleAlerta,
+                        text: YaExisteRegistro,
+                        class_name: 'gritter-warning gritter',
+                    });
+                    exitoedit = false;
+                }
+            }
+            else {
+                if (value.Id == parseInt(Id)) {
+                    if (value.descripcionL == descripcionL) {
+                        value.descripcionL = descripcionL;
+                        value.status = actualizar;
+                    } else {
+                        value.descripcionL = descripcionL;
+                        value.status = actualizar;
+                    }
+                }
             }
         });
 
-        dataTableLinea.draw();
-        $.gritter.add({
-            title: 'Actualización Satisfactorio',
-            text: 'Se realizo la actualización satifactoriamente.',
-            class_name: 'gritter-success gritter'
-        });
-        $("#NuevoCategoriaLinea").modal("hide");
-     
-     
+        if (exitoedit) {
+            dataTableLinea.clear();
+            dataTableLinea.rows.add(categoriaProductoLinea).draw();
+            $.gritter.add({
+                title: TitleActualizar,
+                text: ActualizacionSatisfactoria,
+                class_name: 'gritter-success gritter',
+
+            });
+            $("#NuevoCategoriaLinea").modal("hide");
+        }
+  
+
     }
 }
 
 function DrawEditLinea() {
-    //rowLinea = dataTableLinea.row('.selected').data();
-  
-    var aPos = dataTableLinea.fnGetPosition(rowLinea);
-    var aData = dataTableLinea.fnGetData(aPos[0]);
-    console.log(aData);
-    if (aData.Id === "undefined") {
+    rowLinea = dataTableLinea.row('.selected').data();
+    if (typeof rowLinea === "undefined") {
         webApp.showMessageDialog("Por favor seleccione un registro.");
     }
     else {
         $("#accionTitleLinea").text('Editar');
         $("#NuevoCategoriaLinea").modal("show");
-        $("#codigoL").val(aData[0].codigoL);
-        $("#descripcionL").val(aData[0].descripcionL);
+        $("#codigoL").val(rowLinea.codigoL);
+        $("#descripcionL").val(rowLinea.descripcionL);
         $("#codigoL").prop("disabled", true);
-        $("#CategoriaLineaId").val(aData[0].Id);
+        $("#LineaId").val(rowLinea.Id);
        
     }
 }
+
+function DrawEliminarLinea(id) {
+
+    var idEliminacion = -1;
+    $.each(categoriaProductoLinea, function (index, value) {
+        debugger;
+        if (value.Id == id) {
+            idEliminacion = index;   
+            }
+    });
+    if (idEliminacion > -1) {
+        categoriaProductoLinea.splice(idEliminacion, 1);
+        dataTableLinea.clear();
+        dataTableLinea.rows.add(categoriaProductoLinea).draw();
+        $.gritter.add({
+            title: TitleEliminar,
+            text: EliminacionSatisfactoria,
+            class_name: 'gritter-success gritter'
+        });
+    }
+    else {
+        $.gritter.add({
+            title: TitleAlerta,
+            text: IntenteloMasTarde,
+            class_name: 'gritter-success gritter'
+        });
+    }
+}
+// #endregion operaciones linea
+
+//#region operaciones sub-linea
+function DrawAddSubLinea() {
+    var Id = $("#SubLineaId").val();
+    var codigoLS = $("#codigoLS").val();
+    var descripcionLS = $("#descripcionLS").val();
+    var Estado = 1;
+    var categoriaSubLinea = null;
+    var exito = true;
+    var exitoedit = true;
+    if (Id == 0) {
+        if (categoriaProductoSubLinea.length > 0) {
+            $.each(categoriaProductoSubLinea, function (index, value) {
+
+                if (codigoLS === value.codigoLS || descripcionLS === value.descripcionLS) {
+                    $.gritter.add({
+                        title: TitleAlerta,
+                        text: YaExisteRegistro,
+                        class_name: 'gritter-warning gritter',
+                    });
+                    exito = false;
+                    debugger;
+                }
+            });
+            if (exito) {
+                debugger;
+                categoriaSubLinea = { "Id": categoriaProductoSubLinea.length + 1, "codigoLS": codigoLS, "descripcionLS": descripcionLS, "Estado": Estado, 'status': agregar };
+                $("#NuevoCategoriaSubLinea").modal("hide");
+                $.gritter.add({
+                    title: TitleRegistro,
+                    text: RegistroSatisfactorio,
+                    class_name: 'gritter-success gritter',
+
+                });
+                categoriaProductoSubLinea.push(categoriaSubLinea);
+                dataTableSubLinea.clear();
+                dataTableSubLinea.rows.add(categoriaProductoSubLinea).draw();
+            }
+        }
+        else {
+            categoriaSubLinea = { "Id": 1, "codigoLS": codigoLS, "descripcionLS": descripcionLS, "Estado": Estado, 'status': agregar };
+
+            $("#NuevoCategoriaSubLinea").modal("hide");
+            $.gritter.add({
+                title: TitleRegistro,
+                text: RegistroSatisfactorio,
+                class_name: 'gritter-success gritter',
+            });
+            categoriaProductoSubLinea.push(categoriaSubLinea);
+            dataTableSubLinea.clear();
+            dataTableSubLinea.rows.add(categoriaProductoSubLinea).draw();
+        }
+
+    }
+    else {
+        $.each(categoriaProductoSubLinea, function (index, value) {
+            if (value.descripcionLS == descripcionLS) {
+                if (value.Id != parseInt(Id)) {
+                    $.gritter.add({
+                        title: TitleAlerta,
+                        text: YaExisteRegistro,
+                        class_name: 'gritter-warning gritter',
+                    });
+                    exitoedit = false;
+                }
+            }
+            else {
+                if (value.Id == parseInt(Id)) {
+                    if (value.descripcionLS == descripcionLS) {
+                        value.descripcionLS = descripcionLS;
+                        value.status = actualizar;
+                    }
+                    else {
+                        value.descripcionLS = descripcionLS;
+                        value.status = actualizar;
+                    }
+                }
+            }
+        });
+
+        if (exitoedit) {
+            dataTableSubLinea.clear();
+            dataTableSubLinea.rows.add(categoriaProductoSubLinea).draw();
+            $.gritter.add({
+                title: TitleActualizar,
+                text: ActualizacionSatisfactoria,
+                class_name: 'gritter-success gritter',
+
+            });
+            $("#NuevoCategoriaSubLinea").modal("hide");
+        }
+
+
+    }
+}
+
+function DrawEditSubLinea() {
+    rowSubLinea = dataTableSubLinea.row('.selected').data();
+    if (typeof rowSubLinea === "undefined") {
+        webApp.showMessageDialog("Por favor seleccione un registro.");
+    }
+    else {
+        $("#accionTitleSubLinea").text('Editar');
+        $("#NuevoCategoriaSubLinea").modal("show");
+        $("#codigoLS").val(rowSubLinea.codigoLS);
+        $("#descripcionLS").val(rowSubLinea.descripcionLS);
+        $("#codigoLS").prop("disabled", true);
+        $("#SubLineaId").val(rowSubLinea.Id);
+
+    }
+}
+
+function DrawEliminarSubLinea(id) {
+
+    var idEliminacion = -1;
+    $.each(categoriaProductoSubLinea, function (index, value) {
+        debugger;
+        if (value.Id == id) {
+            idEliminacion = index;
+        }
+    });
+    if (idEliminacion > -1) {
+        categoriaProductoSubLinea.splice(idEliminacion, 1);
+        dataTableSubLinea.clear();
+        dataTableSubLinea.rows.add(categoriaProductoSubLinea).draw();
+        $.gritter.add({
+            title: TitleEliminar,
+            text: EliminacionSatisfactoria,
+            class_name: 'gritter-success gritter'
+        });
+    }
+    else {
+        $.gritter.add({
+            title: TitleAlerta,
+            text: IntenteloMasTarde,
+            class_name: 'gritter-success gritter'
+        });
+    }
+}
+
+//#endregion operaciones sub-linea
+
+function getResumen() {
+    LimpiarFormularioResumen();
+    $("#categoriaProductoRsm").text($("#descripcionCP").val());
+    $("#countLineaRsm").text(categoriaProductoLinea.length);
+    $("#countSubLineaRsm").text(categoriaProductoSubLinea.length);
+
+};
+
+
 
 
 function GetUsuarioById() {
@@ -459,7 +822,7 @@ function GetUsuarioById() {
                     class_name: 'gritter-warning gritter'
                 });
             } else {
-                LimpiarFormulario();
+                LimpiarFormularioLinea();
                 var usuario = response.Data;
                 $("#Username").val(usuario.Username);
                 $("#Nombre").val(usuario.Nombre);
@@ -612,11 +975,16 @@ function GuardarUsuario() {
     });
 }
 
-function LimpiarFormulario() {
+
+
+function LimpiarFormularioLinea() {
     webApp.clearForm(formularioMantenimientoLinea);
-    $("#CargoId").val(1);
-    $("#RolId").val(1);
-    $("#Estado").val(1);
-    $("#Username").focus();
-    $("#Contrasena").prop("type", "password");
+    $("#codigoL").focus();
+}
+function LimpiarFormularioSubLinea() {
+    webApp.clearForm(formularioMantenimientoSubLinea);
+    $("#codigoLS").focus();
+}
+function LimpiarFormularioResumen() {
+    webApp.clearForm(formularioResumen);
 }

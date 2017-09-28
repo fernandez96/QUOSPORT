@@ -61,8 +61,14 @@ namespace Base.Web.Utilities
         public const int Rolcontabilidad = 2;
         public const int RolAlmacen = 2;
         public const int RolOperador = 3;
-        
 
+
+        #endregion
+
+        #region acciones
+        public const int add = 1;
+        public const int update = 2;
+        public const int delete = 3;
         #endregion
     }
 }
