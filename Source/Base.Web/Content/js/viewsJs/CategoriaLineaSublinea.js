@@ -30,6 +30,11 @@ var TitleEliminar = "Eliminación Satisfactoria";
 var TitleAlerta = "Alerta";
 
 $(document).ready(function () {
+    Array.prototype.unique = function (a) {
+        return function () { return this.filter(a) }
+    }(function (a, b, c) {
+        return c.indexOf(a, b + 1) < 0
+    });
     $.extend($.gritter.options, {
         time: '1000'
     });
@@ -68,17 +73,25 @@ $(document).ready(function () {
 	    if (info.step == 2) {
 	        if (info.direction == "next") {
 	            if (categoriaProductoLinea.length > 0) {
-	                var wizard = $('#modal-wizard-container').data('fu.wizard')
-	                wizard.currentStep = 3;
-	                wizard.setState();
-	                e.preventDefault();
+	                rowLinea = dataTableLinea.row('.selected').data();
+	                if (typeof rowLinea === "undefined") {
+	                    webApp.showMessageDialog("Por favor seleccione un registro.");
+	                    e.preventDefault();
+	                }
+	                else {
+	                    var wizard = $('#modal-wizard-container').data('fu.wizard')
+	                    wizard.currentStep = 3;
+	                    wizard.setState();
+	                    e.preventDefault();
+	                    $("#linea").text(rowLinea.linc_vdescripcion);
+	                    cargarDatatableSubLinea(rowLinea.Id)
+	                }
 	            }
 	            else {
 	                if (categoriaProductoLinea<=0) {
 	                    webApp.showMessageDialog("Por favor debe ingresar una categoria de producto - Linea.");
-	                    //wizard.currentStep = 2;
-	                    //wizard.setState();
 	                    e.preventDefault();
+	                   
                     }
 	            }
 	        }
@@ -284,7 +297,7 @@ $(document).ready(function () {
 
     });
 
-    webApp.validarNumerico(['DniTitular']);
+    webApp.validarNumerico(['codigoL', 'codigoLS', 'codigoCP']);
     webApp.InicializarValidacion(formularioMantenimientoLinea,
         {
             codigoL: {
@@ -664,23 +677,25 @@ function DrawAddSubLinea() {
     var categoriaSubLinea = null;
     var exito = true;
     var exitoedit = true;
+    var idLinea = rowLinea.Id;
     if (Id == 0) {
         if (categoriaProductoSubLinea.length > 0) {
             $.each(categoriaProductoSubLinea, function (index, value) {
-
-                if (codigoLS === value.lind_vcod_sublinea || descripcionLS === value.lind_vdescripcion) {
-                    $.gritter.add({
-                        title: TitleAlerta,
-                        text: YaExisteRegistro,
-                        class_name: 'gritter-warning gritter',
-                    });
-                    exito = false;
-                    debugger;
+                if (value.idLinea===idLinea) {
+                    if (codigoLS === value.lind_vcod_sublinea || descripcionLS === value.lind_vdescripcion) {
+                        $.gritter.add({
+                            title: TitleAlerta,
+                            text: YaExisteRegistro,
+                            class_name: 'gritter-warning gritter',
+                        });
+                        exito = false;
+                    }
+                    idLineaExiste=value.idLinea;
                 }
+               
             });
             if (exito) {
-                debugger;
-                categoriaSubLinea = { "Id": categoriaProductoSubLinea.length + 1, "lind_vcod_sublinea": codigoLS, "lind_vdescripcion": descripcionLS, "Estado": Estado, 'status': agregar };
+                categoriaSubLinea = { "Id": categoriaProductoSubLinea.length + 1,"idLinea":idLinea, "lind_vcod_sublinea": codigoLS, "lind_vdescripcion": descripcionLS, "Estado": Estado, 'status': agregar };
                 $("#NuevoCategoriaSubLinea").modal("hide");
                 $.gritter.add({
                     title: TitleRegistro,
@@ -690,11 +705,18 @@ function DrawAddSubLinea() {
                 });
                 categoriaProductoSubLinea.push(categoriaSubLinea);
                 dataTableSubLinea.clear();
-                dataTableSubLinea.rows.add(categoriaProductoSubLinea).draw();
+                dataTableSubLinea.rows.add(categoriaProductoSubLinea.filter(function (obj)
+                {
+                    if (obj.idLinea === idLinea) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                })).draw();
             }
         }
         else {
-            categoriaSubLinea = { "Id": 1, "lind_vcod_sublinea": codigoLS, "lind_vdescripcion": descripcionLS, "Estado": Estado, 'status': agregar };
+            categoriaSubLinea = { "Id": 1,"idLinea":idLinea, "lind_vcod_sublinea": codigoLS, "lind_vdescripcion": descripcionLS, "Estado": Estado, 'status': agregar };
 
             $("#NuevoCategoriaSubLinea").modal("hide");
             $.gritter.add({
@@ -706,7 +728,6 @@ function DrawAddSubLinea() {
             dataTableSubLinea.clear();
             dataTableSubLinea.rows.add(categoriaProductoSubLinea).draw();
         }
-
     }
     else {
         $.each(categoriaProductoSubLinea, function (index, value) {
@@ -721,7 +742,7 @@ function DrawAddSubLinea() {
                 }
             }
             else {
-                if (value.Id == parseInt(Id)) {
+                if (value.Id == parseInt(Id) && value.idLinea===idLinea) {
                     if (value.lind_vdescripcion == descripcionLS) {
                         value.lind_vdescripcion = descripcionLS;
                         value.status = actualizar;
@@ -736,7 +757,13 @@ function DrawAddSubLinea() {
 
         if (exitoedit) {
             dataTableSubLinea.clear();
-            dataTableSubLinea.rows.add(categoriaProductoSubLinea).draw();
+            dataTableSubLinea.rows.add(categoriaProductoSubLinea.filter(function (obj) {
+                if (obj.idLinea === idLinea) {
+                    return true;
+                } else {
+                    return false;
+                }
+            })).draw();
             $.gritter.add({
                 title: TitleActualizar,
                 text: ActualizacionSatisfactoria,
@@ -771,14 +798,20 @@ function DrawEliminarSubLinea(id) {
     var idEliminacion = -1;
     $.each(categoriaProductoSubLinea, function (index, value) {
         debugger;
-        if (value.Id == id) {
+        if (value.Id == id && value.idLinea===rowLinea.Id) {
             idEliminacion = index;
         }
     });
     if (idEliminacion > -1) {
         categoriaProductoSubLinea.splice(idEliminacion, 1);
-        dataTableSubLinea.clear();
-        dataTableSubLinea.rows.add(categoriaProductoSubLinea).draw();
+        dataTableSubLinea.clear().draw();
+        dataTableSubLinea.rows.add(categoriaProductoSubLinea.filter(function (obj) {
+            if (obj.idLinea === rowLinea.Id) {
+                return true;
+            } else {
+                return false;
+            }
+        })).draw();
         $.gritter.add({
             title: TitleEliminar,
             text: EliminacionSatisfactoria,
@@ -798,13 +831,58 @@ function DrawEliminarSubLinea(id) {
 
 function getResumen() {
     LimpiarFormularioResumen();
-    $("#categoriaProductoRsm").text($("#descripcionCP").val());
-    $("#countLineaRsm").text(categoriaProductoLinea.length);
-    $("#countSubLineaRsm").text(categoriaProductoSubLinea.length);
+    var contedetalle = null;
+    var contentLinea = null;
+    $("#Resumen").empty();
+    $.each(categoriaProductoLinea, function (index, value) {
+         contentLinea ='<li id="li'+value.Id+'">'
+          + '<i class="ace-icon fa fa-caret-right blue"></i>Categoria Producto - Linea : '
+          + '<b class="black"><span id="categoriaProductoLineaRsm">' + value.linc_vdescripcion + '</span></b>'  
+      + '</li>'
+         $("#Resumen").append(contentLinea);
+    });
+
+    $.each(categoriaProductoSubLinea, function (index, value) {
+        categoriaProductoSubLinea.filter(function (obj) {
+
+        });
+
+        
+        if ($("#li" + value.idLinea).length) {           
+               contedetalle = '<ul class="list-unstyled subTitlePasos">'
+                            + '<li>'
+               + '<i class="ace-icon fa fa-caret-right black"></i>Cantidad de Sub - Linea :'
+               + '<b class="black"><span id="countLineaRsm">' + categoriaProductoSubLinea + '</span></b>'
+               + '</li>'
+               + '</ul>'
+            }
+        $("#li" + value.idLinea).append(contedetalle);
+    });
+
+    //$("#countLineaRsm").text(categoriaProductoLinea.length);
+    //$("#countSubLineaRsm").text(categoriaProductoSubLinea.length);
 
 };
 
-
+//#region
+function cargarDatatableSubLinea(id) {
+    var dataSubLinea = [];
+    var SubLinea = null;
+    $.each(categoriaProductoSubLinea, function (index, value) {
+        if (value.idLinea === id) {
+            SubLinea = { "Id": value.Id, "idLinea": value.idLinea, "lind_vcod_sublinea": value.lind_vcod_sublinea, "lind_vdescripcion": value.lind_vdescripcion, "Estado": value.Estado, 'status': value.status };
+           dataSubLinea.push(SubLinea);
+        }
+    });
+    if (dataSubLinea.length > 0) {
+        dataTableSubLinea.clear();
+        dataTableSubLinea.rows.add(dataSubLinea).draw();
+     
+    } else {
+        dataTableSubLinea.clear().draw();
+    }
+}
+//#endregion
 
 
 function GetUsuarioById() {
@@ -916,6 +994,7 @@ function EliminarUsuario() {
 
 function GuardarCategoria() {
 
+
     var modelView = {
         Id: $("#IdCategoria").val(),
         ctgcc_vcod_categoria: $("#codigoCP").val(),
@@ -992,4 +1071,6 @@ function rest() {
     LimpiarFormularioResumen();
     categoriaProductoLinea.length = 0;
     categoriaProductoSubLinea.length = 0;
+    dataTableLinea.clear().draw();
+    dataTableSubLinea.clear().draw();
 }

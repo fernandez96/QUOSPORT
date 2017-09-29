@@ -111,8 +111,6 @@
                     <div class='modal-content'>
                         <div id="modal-wizard-container" class="no-steps-container">
                         <div class='modal-header'>
-                            @*<button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>*@
-
                             <ul class="steps" style="margin-left: 0">
                                 <li data-step="1" class="active">
                                     <span class="step">1</span>
@@ -134,9 +132,9 @@
                                     <span class="title white">Resumen de registro</span>
                                 </li>
                             </ul>
-
+                            
                         </div>
-
+                   
 
                         <div class='modal-body step-content'>
                             <div class="row">
@@ -247,10 +245,11 @@
                                                         Categoria
                                                         <small>
                                                             <i class="ace-icon fa fa-angle-double-right"></i>
-                                                            Registre categoria de Producto - Linea - Sub-Linea
+                                                            Registre categoria de Producto - Linea <span class="label label-sm label-primary arrowed arrowed-right" id="linea"></span> - Sub-Linea 
                                                         </small>
                                                     </h4>
                                                 </div>
+                                            
                                                 <div class="search-area well no-margin-bottom">
                                                     <form id="CategoriaSubLineaSearchForm" role="form">
                                                         <div class="row">
@@ -329,13 +328,13 @@
 
                                                 <div>
                                                     <form id="ResumenForm">
-                                                        <ul class="list-unstyled spaced">
-                                                            <li>
+                                                        <ul class="list-unstyled spaced" id="Resumen">
+                                                            <li id="categoria">
                                                                 <i class="ace-icon fa fa-caret-right blue"></i>Categoria Prodcuto :
                                                                 <b class="black"><span id="categoriaProductoRsm"></span></b>
                                                             </li>
 
-                                                            <li>
+                                                            @*<li>
                                                                 <i class="ace-icon fa fa-caret-right blue"></i>Categoria Producto - Linea
                                                                 <b class="black"><span id="categoriaProductoLineaRsm"></span></b>
                                                                 <ul class="list-unstyled subTitlePasos">
@@ -355,7 +354,7 @@
                                                                         <b class="black"><span id="countSubLineaRsm"></span></b>
                                                                     </li>
                                                                 </ul>
-                                                            </li>
+                                                            </li>*@
                                                         </ul>
                                                         <input type="hidden" name="IdCategoria" id="IdCategoria" value="0" />
                                                     </form>
@@ -391,14 +390,31 @@
                 </div>
             </div>
 
+            @*<div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-dialog-buttons ui-draggable" tabindex="-1" role="dialog" aria-describedby="dialog-confirm" aria-labelledby="ui-id-32" style="height: 251px; width: 320px; top: 136px; left: 498px; display: block; right: auto; bottom: auto;">
+                <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle"><span id="ui-id-32" class="ui-dialog-title"><div class="widget-header"><h4 class="smaller"><i class="ace-icon fa fa-exclamation-triangle red"></i> Empty the recycle bin?</h4></div></span><button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close" role="button" title="Close"><span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span><span class="ui-button-text">Close</span></button></div><div id="dialog-confirm" class="ui-dialog-content ui-widget-content" style="width: auto; min-height: 30px; max-height: none; height: auto;">
+                    <div class="alert alert-info bigger-110">
+                        These items will be permanently deleted and cannot be recovered.
+                    </div>
 
+                    <div class="space-6"></div>
+
+                    <p class="bigger-110 bolder center grey">
+                        <i class="ace-icon fa fa-hand-o-right blue bigger-120"></i>
+                        Are you sure?
+                    </p>
+                </div>
+                <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                <div class="ui-dialog-buttonset">
+                    <button type="button" class="btn btn-danger btn-minier ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button"><span class="ui-button-text"><i class="ace-icon fa fa-trash-o bigger-110"></i>&nbsp; Delete all items</span></button>
+                    <button type="button" class="btn btn-minier ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button"><span class="ui-button-text"><i class="ace-icon fa fa-times bigger-110"></i>&nbsp; Cancel</span></button></div></div>
+            </div>*@
 
             <div id='NuevoCategoriaLinea'  tabindex='-1' role='dialog' aria-hidden='true' class='modal fade' data-backdrop='static' style='z-index:100000;' >
                 <div class='modal-dialog'>
                     <div class='modal-content'>
                         <div class='modal-header'>
                             <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class='modal-title'><span id='accionTitleLinea'></span> categoria - Linea</h4>
+                            <h4 class='modal-title'><i class="fa fa-sitemap" aria-hidden="true"></i> <span id='accionTitleLinea'></span> categoria - Linea</h4>
                         </div>
                         <div class='modal-body'>
                             <div class="row">
@@ -445,7 +461,7 @@
                     <div class='modal-content'>
                         <div class='modal-header'>
                             <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class='modal-title'><span id='accionTitleSubLinea'></span> Categoria Sub-Linea </h4>
+                            <h4 class='modal-title'><i class="fa fa-sitemap" aria-hidden="true"></i>  <span id='accionTitleSubLinea'></span> Categoria Sub-Linea </h4>
                         </div>
                         <div class='modal-body'>
                             <div class="row">

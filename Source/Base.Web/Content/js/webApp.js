@@ -26,7 +26,7 @@ var webApp = function () {
         dialogMessage += "<div class='modal-content'>";
         dialogMessage += "<div class='modal-header'>";
         dialogMessage += '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
-        dialogMessage += "<h4 class='modal-title'>" + _tituloPopupMensaje + "</h4>";
+        dialogMessage += "<h4 class='modal-title'> <i class='ace-icon fa fa-exclamation-triangle yellow'></i> " + _tituloPopupMensaje + "</h4>";
         dialogMessage += "</div>";
         dialogMessage += "<div class='modal-body paddingTop15'></div>";
         dialogMessage += "<div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>";
@@ -42,7 +42,7 @@ var webApp = function () {
         var dialogConfirm = "<div id='" + _popupConfirmacion + "' tabindex='-1' role='dialog' aria-hidden='true' class='modal fade' data-backdrop='static' style='z-index:100000;'>";
         dialogConfirm += "<div class='modal-dialog'>";
         dialogConfirm += "<div class='modal-content'>";
-        dialogConfirm += "<div class='modal-header'><h4 class='modal-title'>" + _tituloPopupComfirmacion + "</h4></div>";
+        dialogConfirm += "<div class='modal-header'><h4 class='modal-title'> <i class='ace-icon fa fa-check'></i> " + _tituloPopupComfirmacion + "</h4></div>";
         dialogConfirm += "<div class='modal-body paddingTop15'><p></p></div>";
         dialogConfirm += "<div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>";
         dialogConfirm += "<button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-remove'></i> " + _btnCancelar + "</button> ";
@@ -58,7 +58,7 @@ var webApp = function () {
         var dialogConfirm = "<div id='" + _popupReConfirmacion + "' tabindex='-1' role='dialog' aria-hidden='true' class='modal fade' data-backdrop='static' style='z-index:100000;'>";
         dialogConfirm += "<div class='modal-dialog'>";
         dialogConfirm += "<div class='modal-content'>";
-        dialogConfirm += "<div class='modal-header'><h4 class='modal-title'>" + _tituloPopupComfirmacion + "</h4></div>";
+        dialogConfirm += "<div class='modal-header'><h4 class='modal-title'><i class='ace-icon fa fa-check'></i> " + _tituloPopupComfirmacion + "</h4></div>";
         dialogConfirm += "<div class='modal-body paddingTop15'><p></p></div>";
         dialogConfirm += "<div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>";
         dialogConfirm += "<button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-remove'></i> " + _btnCancelar + "</button> ";
@@ -77,7 +77,7 @@ var webApp = function () {
         dialogMessage += "<div class='modal-content'>";
         dialogMessage += "<div class='modal-header'>";
         dialogMessage += '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
-        dialogMessage += "<h4 id='lblTituloConfirmarEliminar' class='modal-title'>" + _tituloEliminacionPopupMensaje + "</h4>";
+        dialogMessage += "<h4 id='lblTituloConfirmarEliminar' class='modal-title'> <i class='ace-icon fa fa-exclamation-triangle red'></i> " + _tituloEliminacionPopupMensaje + "</h4>";
         dialogMessage += "</div>";
         dialogMessage += "<div class='modal-body paddingTop15'><p></p></div>";
         dialogMessage += "<div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>";

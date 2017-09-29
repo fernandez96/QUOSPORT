@@ -146,8 +146,8 @@ input[type=radio].ace + .lbl:hover::before {
     color: #d0d0d0!important;    
     border: 1px solid #d3d3d3;
 }
-::selection{background: #007936;color:white;}
-::-moz-selection{background: #007936;color:white;}
+::selection{background: #438eb9;color:white;}
+::-moz-selection{background: #438eb9;color:white;}
 
 .dataTable > thead > tr > th[class*=sort]:hover {
     color: #007936;
@@ -161,7 +161,7 @@ input[type=radio].ace + .lbl:hover::before {
 }
 
 input:focus {
-    border: 1px solid #007936 !important;
+    border: 1px solid #438eb9 !important;
 }
 .login-layout input:focus {border: 0px solid #007936 !important;}
 
