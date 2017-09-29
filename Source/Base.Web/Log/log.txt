@@ -3981,3 +3981,99 @@ Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMM
 
 2017-09-27 12:53:27,163 ERROR  - Controlador:CategoriaLineaSublinea  Action:Index  Mensaje:Se encontró un espacio o salto de línea después del carácter "@". Solamente se pueden usar identificadores, palabras clave, comentarios, "(" y "{" válidos al inicio de un bloque de código y estos deben aparecer inmediatamente después de "@" sin espacio intermedio.
 
+2017-09-28 22:32:01,118 ERROR  - Mensaje: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+LineaDTO -> Linea
+Base.DTO.LineaDTO -> Base.BusinessEntity.Linea
+
+Destination path:
+Categoria.detalleLinea.detalleLinea.detalleLinea0[0]
+
+Source value:
+Base.DTO.LineaDTO Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.Mappers.EnumerableMapperBase`1.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\EnumerableMapperBase.cs:línea 44
+   en AutoMapper.Mappers.CollectionMapper.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\CollectionMapper.cs:línea 20
+   en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.MapPropertyValue(ResolutionContext context, IMappingEngineRunner mapper, Object mappedObject, PropertyMap propertyMap) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapObjectMapperRegistry.cs:línea 163
+   en AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapObjectMapperRegistry.cs:línea 89
+   en AutoMapper.Mappers.TypeMapMapper.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapMapper.cs:línea 22
+   en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.MappingEngine.MapCore(Object source, Type sourceType, Type destinationType, MappingOperationOptions options) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 131
+   en AutoMapper.MappingEngine.Map(Object source, Type sourceType, Type destinationType, Action`1 opts) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 120
+   en AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 78
+   en AutoMapper.Mapper.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\Mapper.cs:línea 73
+   en Base.DTO.AutoMapper.MapperHelper.Map[TSource,TDest](TSource source) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DTO\AutoMapper\MapperHelper.cs:línea 9
+   en Base.Web.Controllers.CategoriaLineaSublineaController.Add(CategoriaDTO categoriaDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 30
+2017-09-28 22:43:34,210 ERROR  - Mensaje: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+LineaDTO -> Linea
+Base.DTO.LineaDTO -> Base.BusinessEntity.Linea
+
+Destination path:
+Categoria.detalleLinea.detalleLinea.detalleLinea0[0]
+
+Source value:
+Base.DTO.LineaDTO Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.Mappers.EnumerableMapperBase`1.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\EnumerableMapperBase.cs:línea 44
+   en AutoMapper.Mappers.CollectionMapper.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\CollectionMapper.cs:línea 20
+   en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.MapPropertyValue(ResolutionContext context, IMappingEngineRunner mapper, Object mappedObject, PropertyMap propertyMap) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapObjectMapperRegistry.cs:línea 163
+   en AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapObjectMapperRegistry.cs:línea 89
+   en AutoMapper.Mappers.TypeMapMapper.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapMapper.cs:línea 22
+   en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.MappingEngine.MapCore(Object source, Type sourceType, Type destinationType, MappingOperationOptions options) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 131
+   en AutoMapper.MappingEngine.Map(Object source, Type sourceType, Type destinationType, Action`1 opts) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 120
+   en AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 78
+   en AutoMapper.Mapper.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\Mapper.cs:línea 73
+   en Base.DTO.AutoMapper.MapperHelper.Map[TSource,TDest](TSource source)
+   en Base.Web.Controllers.CategoriaLineaSublineaController.Add(CategoriaDTO categoriaDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 30
+2017-09-28 23:04:53,185 ERROR  - Mensaje: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+LineaDTO -> Linea
+Base.DTO.LineaDTO -> Base.BusinessEntity.Linea
+
+Destination path:
+Categoria.detalleLinea.detalleLinea.detalleLinea0[0]
+
+Source value:
+Base.DTO.LineaDTO Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.Mappers.EnumerableMapperBase`1.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\EnumerableMapperBase.cs:línea 44
+   en AutoMapper.Mappers.CollectionMapper.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\CollectionMapper.cs:línea 20
+   en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.MapPropertyValue(ResolutionContext context, IMappingEngineRunner mapper, Object mappedObject, PropertyMap propertyMap) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapObjectMapperRegistry.cs:línea 163
+   en AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapObjectMapperRegistry.cs:línea 89
+   en AutoMapper.Mappers.TypeMapMapper.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapMapper.cs:línea 22
+   en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.MappingEngine.MapCore(Object source, Type sourceType, Type destinationType, MappingOperationOptions options) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 131
+   en AutoMapper.MappingEngine.Map(Object source, Type sourceType, Type destinationType, Action`1 opts) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 120
+   en AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 78
+   en AutoMapper.Mapper.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\Mapper.cs:línea 73
+   en Base.DTO.AutoMapper.MapperHelper.Map[TSource,TDest](TSource source)
+   en Base.Web.Controllers.CategoriaLineaSublineaController.Add(CategoriaDTO categoriaDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 30
+2017-09-28 23:05:09,761 ERROR  - Mensaje: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+LineaDTO -> Linea
+Base.DTO.LineaDTO -> Base.BusinessEntity.Linea
+
+Destination path:
+Categoria.detalleLinea.detalleLinea.detalleLinea0[0]
+
+Source value:
+Base.DTO.LineaDTO Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.Mappers.EnumerableMapperBase`1.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\EnumerableMapperBase.cs:línea 44
+   en AutoMapper.Mappers.CollectionMapper.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\CollectionMapper.cs:línea 20
+   en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.MapPropertyValue(ResolutionContext context, IMappingEngineRunner mapper, Object mappedObject, PropertyMap propertyMap) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapObjectMapperRegistry.cs:línea 163
+   en AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapObjectMapperRegistry.cs:línea 89
+   en AutoMapper.Mappers.TypeMapMapper.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapMapper.cs:línea 22
+   en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.MappingEngine.MapCore(Object source, Type sourceType, Type destinationType, MappingOperationOptions options) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 131
+   en AutoMapper.MappingEngine.Map(Object source, Type sourceType, Type destinationType, Action`1 opts) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 120
+   en AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 78
+   en AutoMapper.Mapper.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\Mapper.cs:línea 73
+   en Base.DTO.AutoMapper.MapperHelper.Map[TSource,TDest](TSource source)
+   en Base.Web.Controllers.CategoriaLineaSublineaController.Add(CategoriaDTO categoriaDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 30
