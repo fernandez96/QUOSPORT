@@ -7,7 +7,7 @@ var formularioResumen = "ResumenForm";
 var delRowPos = null;
 var delRowID = 0;
 var urlListar = baseUrl + 'TipoDocumento/Listar';
-var urlMantenimiento = baseUrl + 'Usuario/';
+var urlMantenimiento = baseUrl + 'CategoriaLineaSublinea/';
 var urlListaCargo = baseUrl + 'Usuario/';
 var rowLinea = null;
 var rowSubLinea = null;
@@ -86,7 +86,6 @@ $(document).ready(function () {
 	        }
 	    }
 
-
 	    if (info.step == 3) {
 	        if (info.direction == "next") {
 	            if (categoriaProductoSubLinea.length > 0) {
@@ -118,13 +117,12 @@ $(document).ready(function () {
 	    }
 	})
 	.on('finished.fu.wizard', function (e) {
-	    if ($('#frmCanje').valid()) {
+	    if ($('#ResumenForm').valid()) {
 	        webApp.showConfirmResumeDialog(function () {
 	            checkSession(function () {
-	                GuardarCanje();
+	                GuardarCategoria();
 	            });
-	        },
-			GetResumen());
+	        },'Esta seguro de realizar la operación.');
 	    } else {
 	        webApp.showMessageDialog("Debe ingresar los datos correctamente");
 	    }
@@ -169,7 +167,10 @@ $(document).ready(function () {
     });
     //acciones de Categoria
     $('#btnAgregarCategoria').on('click', function () {
+        rest();
         $("#NuevoTipoCategoriaLinea").modal("show");
+        $("#IdCategoria").val(0);
+       
     });
 
     $('#btnEditarCategoria').on('click', function () {
@@ -278,6 +279,7 @@ $(document).ready(function () {
     $("#btnCancelar").on("click", function () {
         webApp.showConfirmResumeDialog(function () {
             $("#NuevoTipoCategoriaLinea").modal('hide');
+            rest();
         }, '¿Está seguro de salir?');
 
     });
@@ -432,8 +434,8 @@ function VisualizarDataTableLinea() {
         "bAutoWidth": false,
         "columns": [
             { "data": "Id" },
-            { "data": "codigoL" },
-            { "data": "descripcionL" },
+            { "data": "linc_vcod_linea" },
+            { "data": "linc_vdescripcion" },
             {
                 "data": function (obj) {
                     if (obj.Estado == 1)
@@ -484,8 +486,8 @@ function VisualizarDataTableSubLinea() {
         "bAutoWidth": false,
         "columns": [
             { "data": "Id" },
-            { "data": "codigoLS" },
-            { "data": "descripcionLS" },
+            { "data": "lind_vcod_sublinea" },
+            { "data": "lind_vdescripcion" },
             {
                 "data": function (obj) {
                     if (obj.Estado == 1)
@@ -525,7 +527,7 @@ function DrawAddLinea() {
         if (categoriaProductoLinea.length > 0) {
             $.each(categoriaProductoLinea, function (index, value) {
                
-                if (codigoL === value.codigoL || descripcionL === value.descripcionL) {
+                if (codigoL === value.linc_vcod_linea || descripcionL === value.linc_vdescripcion) {
                     $.gritter.add({
                         title: TitleAlerta,
                         text: YaExisteRegistro,
@@ -539,7 +541,7 @@ function DrawAddLinea() {
             });
             if (exito) {
                 debugger;
-                categoriaLinea = { "Id": categoriaProductoLinea.length + 1, "codigoL": codigoL, "descripcionL": descripcionL, "Estado": Estado,'status':agregar };
+                categoriaLinea = { "Id": categoriaProductoLinea.length + 1, "linc_vcod_linea": codigoL, "linc_vdescripcion": descripcionL, "Estado": Estado, 'status': agregar };
                 $("#NuevoCategoriaLinea").modal("hide");
                 $.gritter.add({
                     title: TitleRegistro,
@@ -553,7 +555,7 @@ function DrawAddLinea() {
             }
         }
         else {
-            categoriaLinea = { "Id": 1, "codigoL": codigoL, "descripcionL": descripcionL, "Estado": Estado, 'status': agregar };
+            categoriaLinea = { "Id": 1, "linc_vcod_linea": codigoL, "linc_vdescripcion": descripcionL, "Estado": Estado, 'status': agregar };
       
             $("#NuevoCategoriaLinea").modal("hide");
             $.gritter.add({
@@ -569,7 +571,7 @@ function DrawAddLinea() {
     }
     else {
         $.each(categoriaProductoLinea, function (index, value) {
-            if (value.descripcionL == descripcionL) {
+            if (value.linc_vdescripcion == descripcionL) {
                 if (value.Id != parseInt(Id)) {
                     $.gritter.add({
                         title: TitleAlerta,
@@ -581,11 +583,11 @@ function DrawAddLinea() {
             }
             else {
                 if (value.Id == parseInt(Id)) {
-                    if (value.descripcionL == descripcionL) {
-                        value.descripcionL = descripcionL;
+                    if (value.linc_vdescripcion == descripcionL) {
+                        value.linc_vdescripcion = descripcionL;
                         value.status = actualizar;
                     } else {
-                        value.descripcionL = descripcionL;
+                        value.linc_vdescripcion = descripcionL;
                         value.status = actualizar;
                     }
                 }
@@ -616,8 +618,8 @@ function DrawEditLinea() {
     else {
         $("#accionTitleLinea").text('Editar');
         $("#NuevoCategoriaLinea").modal("show");
-        $("#codigoL").val(rowLinea.codigoL);
-        $("#descripcionL").val(rowLinea.descripcionL);
+        $("#codigoL").val(rowLinea.linc_vcod_linea);
+        $("#descripcionL").val(rowLinea.linc_vdescripcion);
         $("#codigoL").prop("disabled", true);
         $("#LineaId").val(rowLinea.Id);
        
@@ -666,7 +668,7 @@ function DrawAddSubLinea() {
         if (categoriaProductoSubLinea.length > 0) {
             $.each(categoriaProductoSubLinea, function (index, value) {
 
-                if (codigoLS === value.codigoLS || descripcionLS === value.descripcionLS) {
+                if (codigoLS === value.lind_vcod_sublinea || descripcionLS === value.lind_vdescripcion) {
                     $.gritter.add({
                         title: TitleAlerta,
                         text: YaExisteRegistro,
@@ -678,7 +680,7 @@ function DrawAddSubLinea() {
             });
             if (exito) {
                 debugger;
-                categoriaSubLinea = { "Id": categoriaProductoSubLinea.length + 1, "codigoLS": codigoLS, "descripcionLS": descripcionLS, "Estado": Estado, 'status': agregar };
+                categoriaSubLinea = { "Id": categoriaProductoSubLinea.length + 1, "lind_vcod_sublinea": codigoLS, "lind_vdescripcion": descripcionLS, "Estado": Estado, 'status': agregar };
                 $("#NuevoCategoriaSubLinea").modal("hide");
                 $.gritter.add({
                     title: TitleRegistro,
@@ -692,7 +694,7 @@ function DrawAddSubLinea() {
             }
         }
         else {
-            categoriaSubLinea = { "Id": 1, "codigoLS": codigoLS, "descripcionLS": descripcionLS, "Estado": Estado, 'status': agregar };
+            categoriaSubLinea = { "Id": 1, "lind_vcod_sublinea": codigoLS, "lind_vdescripcion": descripcionLS, "Estado": Estado, 'status': agregar };
 
             $("#NuevoCategoriaSubLinea").modal("hide");
             $.gritter.add({
@@ -708,7 +710,7 @@ function DrawAddSubLinea() {
     }
     else {
         $.each(categoriaProductoSubLinea, function (index, value) {
-            if (value.descripcionLS == descripcionLS) {
+            if (value.lind_vdescripcion == descripcionLS) {
                 if (value.Id != parseInt(Id)) {
                     $.gritter.add({
                         title: TitleAlerta,
@@ -720,12 +722,12 @@ function DrawAddSubLinea() {
             }
             else {
                 if (value.Id == parseInt(Id)) {
-                    if (value.descripcionLS == descripcionLS) {
-                        value.descripcionLS = descripcionLS;
+                    if (value.lind_vdescripcion == descripcionLS) {
+                        value.lind_vdescripcion = descripcionLS;
                         value.status = actualizar;
                     }
                     else {
-                        value.descripcionLS = descripcionLS;
+                        value.lind_vdescripcion = descripcionLS;
                         value.status = actualizar;
                     }
                 }
@@ -756,8 +758,8 @@ function DrawEditSubLinea() {
     else {
         $("#accionTitleSubLinea").text('Editar');
         $("#NuevoCategoriaSubLinea").modal("show");
-        $("#codigoLS").val(rowSubLinea.codigoLS);
-        $("#descripcionLS").val(rowSubLinea.descripcionLS);
+        $("#codigoLS").val(rowSubLinea.lind_vcod_sublinea);
+        $("#descripcionLS").val(rowSubLinea.lind_vdescripcion);
         $("#codigoLS").prop("disabled", true);
         $("#SubLineaId").val(rowSubLinea.Id);
 
@@ -912,19 +914,14 @@ function EliminarUsuario() {
     delRowID = 0;
 }
 
-function GuardarUsuario() {
+function GuardarCategoria() {
 
     var modelView = {
-        Id: $("#UsuarioId").val(),
-        Username: $("#Username").val(),
-        Password: $("#Contrasena").val(),
-        ConfirmarPassword: $("#ContrasenaConf").val(),
-        Nombre: $("#Nombre").val(),
-        Apellido: $("#Apellido").val(),
-        Correo: $("#Correo").val(),
-        CargoId: $("#CargoId").val(),
-        RolId: $("#RolId").val(),
-        Estado: $("#Estado").val(),
+        Id: $("#IdCategoria").val(),
+        ctgcc_vcod_categoria: $("#codigoCP").val(),
+        ctgcc_vdescripcion: $("#descripcionCP").val(),
+        detalleLinea: categoriaProductoLinea,
+        detalleSubLinea:categoriaProductoSubLinea,
         UsuarioRegistro: $("#usernameLogOn strong").text()
     };
 
@@ -945,8 +942,11 @@ function GuardarUsuario() {
                     class_name: 'gritter-warning gritter'
                 });
             } else {
-                $("#NuevoUsuario").modal("hide");
-                dataTableUsuario.ajax.reload();
+                $("#NuevoTipoCategoriaLinea").modal("hide");
+                dataTableCategoria.ajax.reload();
+                categoriaProductoLinea.length = 0;
+                categoriaProductoSubLinea.length = 0;
+                
                 $.gritter.add({
                     title: response.Title,
                     text: response.Message,
@@ -975,8 +975,6 @@ function GuardarUsuario() {
     });
 }
 
-
-
 function LimpiarFormularioLinea() {
     webApp.clearForm(formularioMantenimientoLinea);
     $("#codigoL").focus();
@@ -987,4 +985,11 @@ function LimpiarFormularioSubLinea() {
 }
 function LimpiarFormularioResumen() {
     webApp.clearForm(formularioResumen);
+}
+function rest() {
+    LimpiarFormularioLinea();
+    LimpiarFormularioSubLinea();
+    LimpiarFormularioResumen();
+    categoriaProductoLinea.length = 0;
+    categoriaProductoSubLinea.length = 0;
 }

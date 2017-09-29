@@ -42,12 +42,14 @@
   <ItemGroup>
     <Compile Include="AlmacenBL.cs" />
     <Compile Include="CargoBL.cs" />
+    <Compile Include="CategoriaBL.cs" />
     <Compile Include="Core\ILogic.cs" />
     <Compile Include="Core\IReadOnlyLogic.cs" />
     <Compile Include="Core\IWriteOnlyLogic.cs" />
     <Compile Include="EnvioEmailBL.cs" />
     <Compile Include="Interfaces\IAlmacenBL.cs" />
     <Compile Include="Interfaces\ICargoBL.cs" />
+    <Compile Include="Interfaces\ICategoriaBL.cs" />
     <Compile Include="Interfaces\IEnvioEmailBL.cs" />
     <Compile Include="Interfaces\ILogBL.cs" />
     <Compile Include="Interfaces\IModeloBL.cs" />
