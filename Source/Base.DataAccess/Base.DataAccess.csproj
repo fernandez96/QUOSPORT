@@ -51,6 +51,7 @@
     <Compile Include="AccesoRepository.cs" />
     <Compile Include="AlmacenRepository.cs" />
     <Compile Include="CargoRepository.cs" />
+    <Compile Include="CategoriaRepository.cs" />
     <Compile Include="Core\ConectionStringRepository.cs" />
     <Compile Include="Core\IReadOnlyRepository.cs" />
     <Compile Include="Core\IRepository.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Interfaces\IAccesoRepository.cs" />
     <Compile Include="Interfaces\IAlmacenRepository.cs" />
     <Compile Include="Interfaces\ICargoRepository.cs" />
+    <Compile Include="Interfaces\ICategoriaRepository.cs" />
     <Compile Include="Interfaces\IEnvioEmailRepository.cs" />
     <Compile Include="Interfaces\ILogRepository.cs" />
     <Compile Include="Interfaces\IModuloRepository.cs" />
