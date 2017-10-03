@@ -487,6 +487,7 @@
     </Compile>
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\AlmacenFilterModel.cs" />
+    <Compile Include="Models\CategoriaFilterModel.cs" />
     <Compile Include="Models\FormularioModel.cs" />
     <Compile Include="Models\JsTreeModel.cs" />
     <Compile Include="Models\ModuloFilterModel.cs" />

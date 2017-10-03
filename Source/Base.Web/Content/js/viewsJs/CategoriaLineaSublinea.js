@@ -1,14 +1,18 @@
 ﻿var dataTableLinea = null;
 var dataTableSubLinea = null;
 var dataTableCategoria = null;
+var formularioMantenimientoCategoria = "frmCategoriaProducto";
 var formularioMantenimientoLinea = "LineaForm";
 var formularioMantenimientoSubLinea = "SubLineaForm";
 var formularioResumen = "ResumenForm";
 var delRowPos = null;
 var delRowID = 0;
-var urlListar = baseUrl + 'TipoDocumento/Listar';
+var urlListar = baseUrl + 'CategoriaLineaSublinea/Listar';
+var urlListarLinea = baseUrl + 'CategoriaLineaSublinea/ListarLinea';
+var urlListarSubLinea = baseUrl + 'CategoriaLineaSublinea/ListarSubLinea';
 var urlMantenimiento = baseUrl + 'CategoriaLineaSublinea/';
 var urlListaCargo = baseUrl + 'Usuario/';
+var rowCategoria = null;
 var rowLinea = null;
 var rowSubLinea = null;
 var categoriaProductoLinea = new Array();
@@ -131,11 +135,34 @@ $(document).ready(function () {
 	})
 	.on('finished.fu.wizard', function (e) {
 	    if ($('#ResumenForm').valid()) {
-	        webApp.showConfirmResumeDialog(function () {
-	            checkSession(function () {
-	                GuardarCategoria();
+	        var exito = true;
+	        var lineasErrores = [];
+	        lineasErrores.length = 0;
+	        $.each(categoriaProductoLinea, function (index, value) {
+	            categoriaProductoSubLinea.filter(function (obj) {
+	                if (obj.idLinea===value.Id) {
+                        return true
+	                }
+	                else
+	                {
+	                    lineasErrores.push(value.linc_vdescripcion);
+                        return false;
+	                }
 	            });
-	        },'Esta seguro de realizar la operación.');
+	        });
+	       
+	        //if (lineasErrores.length==0) {
+	            webApp.showConfirmResumeDialog(function () {
+	                checkSession(function () {
+	                    GuardarCategoria();
+	                });
+	            }, 'Esta seguro de realizar la operación.');
+	        //} else {
+	        //    webApp.showMessageDialog("Por favor debe registrar una sub-linea de la linea(s) : " + '<span>' + lineasErrores.toString() + '</span>' + ".");
+	        //    lineasErrores.toString('');
+	        //}
+
+	       
 	    } else {
 	        webApp.showMessageDialog("Debe ingresar los datos correctamente");
 	    }
@@ -181,19 +208,24 @@ $(document).ready(function () {
     //acciones de Categoria
     $('#btnAgregarCategoria').on('click', function () {
         rest();
+        LimpiarFormularioCategoria();
         $("#NuevoTipoCategoriaLinea").modal("show");
         $("#IdCategoria").val(0);
+        $("#codigoCP").prop("disabled", false);
+
        
     });
 
     $('#btnEditarCategoria').on('click', function () {
-        rowUsuario = dataTableUsuario.row('.selected').data();
-        if (typeof rowUsuario === "undefined") {
+        rowCategoria = dataTableCategoria.row('.selected').data();
+        if (typeof rowCategoria === "undefined") {
             webApp.showMessageDialog("Por favor seleccione un registro.");
         }
         else {
             checkSession(function () {
-                GetUsuarioById();
+               
+                GetCategoriaById();
+                GetAllLinea(rowCategoria.Id);
             });
         }
 
@@ -337,7 +369,7 @@ $(document).ready(function () {
                 required: "Por favor ingrese Descripción"
             }
         });
-    webApp.InicializarValidacion('frmCategoriaProducto',
+    webApp.InicializarValidacion(formularioMantenimientoCategoria,
        {
            codigoCP: {
                required: true
@@ -391,8 +423,8 @@ function VisualizarDataTableCategoria() {
         "bAutoWidth": false,
         "columns": [
             { "data": "Id" },
-            { "data": "tdocc_vabreviatura_tipo_doc" },
-            { "data": "tdocc_vdescripcion" },
+            { "data": "ctgcc_vcod_categoria" },
+            { "data": "ctgcc_vdescripcion" },
             {
                 "data": function (obj) {
                     if (obj.Estado == "1")
@@ -433,7 +465,7 @@ function VisualizarDataTableLinea() {
         "dom": 'fltip',
         //"scrollY": "350px",  
 
-        "data": [],
+        "data": categoriaProductoLinea,
         //"scrollY": "350px",  
          dataFilter: function (data) {
             if (data.substring(0, 9) == "<!DOCTYPE") {
@@ -485,7 +517,7 @@ function VisualizarDataTableSubLinea() {
         "lengthMenu": [[5], [5]],
         "bProcessing": true,
         "dom": 'fltip',
-        "data": [],
+        "data": categoriaProductoSubLinea,
         //"scrollY": "350px",  
         dataFilter: function (data) {
             if (data.substring(0, 9) == "<!DOCTYPE") {
@@ -619,8 +651,9 @@ function DrawAddLinea() {
             $("#NuevoCategoriaLinea").modal("hide");
         }
   
-
+  
     }
+    console.log(categoriaProductoLinea);
 }
 
 function DrawEditLinea() {
@@ -773,8 +806,9 @@ function DrawAddSubLinea() {
             $("#NuevoCategoriaSubLinea").modal("hide");
         }
 
-
     }
+    console.log(categoriaProductoSubLinea);
+
 }
 
 function DrawEditSubLinea() {
@@ -836,25 +870,23 @@ function getResumen() {
     $("#Resumen").empty();
     $.each(categoriaProductoLinea, function (index, value) {
          contentLinea ='<li id="li'+value.Id+'">'
-          + '<i class="ace-icon fa fa-caret-right blue"></i>Categoria Producto - Linea : '
+          + '<i class="ace-icon fa fa-caret-right blue"></i>Linea : '
           + '<b class="black"><span id="categoriaProductoLineaRsm">' + value.linc_vdescripcion + '</span></b>'  
       + '</li>'
          $("#Resumen").append(contentLinea);
     });
 
     $.each(categoriaProductoSubLinea, function (index, value) {
-        categoriaProductoSubLinea.filter(function (obj) {
-
-        });
-
-        
         if ($("#li" + value.idLinea).length) {           
-               contedetalle = '<ul class="list-unstyled subTitlePasos">'
+            contedetalle = '<li style="margin-left:30px;margin-top:-15px; ">'
+                + '<ul class="list-unstyled">'
                             + '<li>'
-               + '<i class="ace-icon fa fa-caret-right black"></i>Cantidad de Sub - Linea :'
-               + '<b class="black"><span id="countLineaRsm">' + categoriaProductoSubLinea + '</span></b>'
+               + '<i class="ace-icon fa fa-caret-right black"></i>Sub - Linea :'
+               + '<b class="black"><span id="countLineaRsm">' + value.lind_vdescripcion + '</span></b>'
                + '</li>'
                + '</ul>'
+            + '</li>';
+         
             }
         $("#li" + value.idLinea).append(contedetalle);
     });
@@ -868,6 +900,10 @@ function getResumen() {
 function cargarDatatableSubLinea(id) {
     var dataSubLinea = [];
     var SubLinea = null;
+ 
+    if ($("#IdCategoria").val()!= 0) {
+        GetAllSubLinea(id);
+    }
     $.each(categoriaProductoSubLinea, function (index, value) {
         if (value.idLinea === id) {
             SubLinea = { "Id": value.Id, "idLinea": value.idLinea, "lind_vcod_sublinea": value.lind_vcod_sublinea, "lind_vdescripcion": value.lind_vdescripcion, "Estado": value.Estado, 'status': value.status };
@@ -885,9 +921,10 @@ function cargarDatatableSubLinea(id) {
 //#endregion
 
 
-function GetUsuarioById() {
+
+function GetCategoriaById() {
     var modelView = {
-        Id: rowUsuario.Id
+        Id: rowCategoria.Id
     };
 
     webApp.Ajax({
@@ -902,21 +939,14 @@ function GetUsuarioById() {
                     class_name: 'gritter-warning gritter'
                 });
             } else {
-                LimpiarFormularioLinea();
-                var usuario = response.Data;
-                $("#Username").val(usuario.Username);
-                $("#Nombre").val(usuario.Nombre);
-                $("#Apellido").val(usuario.Apellido);
-                $("#Correo").val(usuario.Correo);
-                $("#CargoId").val(usuario.CargoId);
-                $("#RolId").val(usuario.RolId);
-                $("#Estado").val(usuario.Estado);
-                $("#UsuarioId").val(usuario.Id);
-                $("#Contrasena").val(usuario.Password);
-                $("#accionTitle").text('Editar');
-                $("#NuevoUsuario").modal("show");
-                $("#ContrasenaConf").val(usuario.ConfirmarPassword);
-                $("#Username").prop("disabled", true);
+               
+                LimpiarFormularioCategoria();
+                var categoria = response.Data;
+                $("#codigoCP").val(categoria.ctgcc_vcod_categoria);
+                $("#descripcionCP").val(categoria.ctgcc_vdescripcion);
+                $("#IdCategoria").val(categoria.Id);
+                $("#codigoCP").prop("disabled", true);
+                $("#NuevoTipoCategoriaLinea").modal("show");
             }
 
         } else {
@@ -941,14 +971,12 @@ function GetUsuarioById() {
     });
 }
 
-function EliminarUsuario() {
+function GetAllLinea(id) {
     var modelView = {
-        Id: rowUsuario.Id,
-        UsuarioRegistro: $("#usernameLogOn strong").text()
+        Id:id
     };
-
     webApp.Ajax({
-        url: urlMantenimiento + 'Delete',
+        url: urlListarLinea,
         async: false,
         parametros: modelView
     }, function (response) {
@@ -960,13 +988,10 @@ function EliminarUsuario() {
                     class_name: 'gritter-warning gritter'
                 });
             } else {
-                $("#NuevoUsuario").modal("hide");
-                dataTableUsuario.row('.selected').remove().draw();
-                $.gritter.add({
-                    title: response.Title,
-                    text: response.Message,
-                    class_name: 'gritter-success gritter'
-                });
+                dataTableLinea.clear().draw();
+                categoriaProductoLinea = response.Data;
+                dataTableLinea.rows.add(categoriaProductoLinea).draw();
+            
             }
         } else {
             $.gritter.add({
@@ -988,49 +1013,26 @@ function EliminarUsuario() {
             class_name: 'gritter-error gritter'
         });
     });
-    delRowPos = null;
-    delRowID = 0;
 }
 
-function GuardarCategoria() {
-
-
+function GetAllSubLinea(id) {
     var modelView = {
-        Id: $("#IdCategoria").val(),
-        ctgcc_vcod_categoria: $("#codigoCP").val(),
-        ctgcc_vdescripcion: $("#descripcionCP").val(),
-        detalleLinea: categoriaProductoLinea,
-        detalleSubLinea:categoriaProductoSubLinea,
-        UsuarioRegistro: $("#usernameLogOn strong").text()
+        Id: id
     };
-
-    if (modelView.Id == 0)
-        action = 'Add';
-    else
-        action = 'Update';
-
     webApp.Ajax({
-        url: urlMantenimiento + action,
+        url: urlListarSubLinea,
+        async: false,
         parametros: modelView
     }, function (response) {
         if (response.Success) {
             if (response.Warning) {
                 $.gritter.add({
-                    title: response.Title,
+                    title: 'Alerta',
                     text: response.Message,
                     class_name: 'gritter-warning gritter'
                 });
             } else {
-                $("#NuevoTipoCategoriaLinea").modal("hide");
-                dataTableCategoria.ajax.reload();
-                categoriaProductoLinea.length = 0;
-                categoriaProductoSubLinea.length = 0;
-                
-                $.gritter.add({
-                    title: response.Title,
-                    text: response.Message,
-                    class_name: 'gritter-success gritter'
-                });
+                categoriaProductoSubLinea = response.Data;
             }
         } else {
             $.gritter.add({
@@ -1054,6 +1056,74 @@ function GuardarCategoria() {
     });
 }
 
+function GuardarCategoria() {
+
+  
+        var modelView = {
+            Id: $("#IdCategoria").val(),
+            ctgcc_vcod_categoria: $("#codigoCP").val(),
+            ctgcc_vdescripcion: $("#descripcionCP").val(),
+            detalleLinea: categoriaProductoLinea,
+            detalleSubLinea: categoriaProductoSubLinea,
+            UsuarioRegistro: $("#usernameLogOn strong").text()
+        };
+
+        if (modelView.Id == 0)
+            action = 'Add';
+        else
+            action = 'Update';
+
+        webApp.Ajax({
+            url: urlMantenimiento + action,
+            parametros: modelView
+        }, function (response) {
+            if (response.Success) {
+                if (response.Warning) {
+                    $.gritter.add({
+                        title: response.Title,
+                        text: response.Message,
+                        class_name: 'gritter-warning gritter'
+                    });
+                } else {
+                    $("#NuevoTipoCategoriaLinea").modal("hide");
+                    dataTableCategoria.ajax.reload();
+                    categoriaProductoLinea.length = 0;
+                    categoriaProductoSubLinea.length = 0;
+
+                    $.gritter.add({
+                        title: response.Title,
+                        text: response.Message,
+                        class_name: 'gritter-success gritter'
+                    });
+                }
+            } else {
+                $.gritter.add({
+                    title: 'Error',
+                    text: response.Message,
+                    class_name: 'gritter-warning gritter'
+                });
+            }
+        }, function (response) {
+            $.gritter.add({
+                title: 'Error',
+                text: response,
+                class_name: 'gritter-error gritter'
+            });
+        }, function (XMLHttpRequest, textStatus, errorThrown) {
+            $.gritter.add({
+                title: 'Error',
+                text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
+                class_name: 'gritter-error gritter'
+            });
+        });
+ 
+ 
+}
+
+function LimpiarFormularioCategoria() {
+    webApp.clearForm(formularioMantenimientoCategoria);
+    $("#codigoCP").focus();
+}
 function LimpiarFormularioLinea() {
     webApp.clearForm(formularioMantenimientoLinea);
     $("#codigoL").focus();

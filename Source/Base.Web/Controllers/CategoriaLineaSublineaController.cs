@@ -10,6 +10,8 @@ using Base.DTO;
 using Base.Common;
 using Newtonsoft.Json;
 using Base.DTO.AutoMapper;
+using Base.Web.Models;
+using Base.Common.DataTable;
 
 namespace Base.Web.Controllers
 {
@@ -19,6 +21,87 @@ namespace Base.Web.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+        [HttpPost]
+        public JsonResult Listar(DataTableModel<CategoriaFilterModel, int> dataTableModel)
+        {
+            try
+            {
+                FormatDataTable(dataTableModel);
+                var jsonResponse = new JsonResponse { Success = false };
+                var CategoriaList = CategoriaBL.Instancia.GetAllPaging(new PaginationParameter<int>
+                {
+                    AmountRows = dataTableModel.length,
+                    WhereFilter = dataTableModel.whereFilter,
+                    Start = dataTableModel.start,
+                    OrderBy = dataTableModel.orderBy
+                });
+                var categoriaDTOList = MapperHelper.Map<IEnumerable<Categoria>, IEnumerable<CategoriaDTO>>(CategoriaList);
+                dataTableModel.data = categoriaDTOList;
+                if (categoriaDTOList.Count() > 0)
+                {
+                    dataTableModel.recordsTotal = CategoriaList[0].Cantidad;
+                    dataTableModel.recordsFiltered = dataTableModel.recordsTotal;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+
+                ViewBag.MessageError = ex.Message;
+                dataTableModel.data = new List<UsuarioPaginationModel>();
+            }
+            return Json(dataTableModel);
+        }
+
+        [HttpPost]
+        public JsonResult ListarLinea(LineaDTO lineaDTO)
+        {
+            var jsonResponse = new JsonResponse { Success = true };
+            try
+            {
+                var linea = MapperHelper.Map<LineaDTO, Linea>(lineaDTO);
+                var lineaList = CategoriaBL.Instancia.GetAllLinea(linea);
+                var lineaDTOList = MapperHelper.Map<IEnumerable<Linea>, IEnumerable<LineaDTO>>(lineaList);
+
+                if (lineaDTOList.Count() > 0)
+                {
+                    jsonResponse.Data = lineaDTOList;
+                    jsonResponse.Message = "datos encontrados";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+
+                ViewBag.MessageError = ex.Message;
+                jsonResponse.Data = new List<UsuarioPaginationModel>();
+            }
+            return Json(jsonResponse);
+        }
+
+        [HttpPost]
+        public JsonResult ListarSubLinea(SubLineaDTO sublineaDTO)
+        {
+            var jsonResponse = new JsonResponse { Success = true };
+            try
+            {
+                var sublinea = MapperHelper.Map<SubLineaDTO, SubLinea>(sublineaDTO);
+                var sublineaList = CategoriaBL.Instancia.GetAllSubLinea(sublinea);
+                var sublineaDTOList = MapperHelper.Map<IEnumerable<SubLinea>, IEnumerable<SubLineaDTO>>(sublineaList);
+                if (sublineaDTOList.Count() > 0)
+                {
+                    jsonResponse.Data = sublineaDTOList;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+
+                ViewBag.MessageError = ex.Message;
+                jsonResponse.Data = new List<UsuarioPaginationModel>();
+            }
+            return Json(jsonResponse);
         }
         [HttpPost]
         public JsonResult Add(CategoriaDTO categoriaDTO)
@@ -56,7 +139,7 @@ namespace Base.Web.Controllers
                 LogError(ex);
                 jsonResponse.Success = false;
                 jsonResponse.Title = Title.TitleAlerta;
-                jsonResponse.Message = Mensajes.IntenteloMasTarde;
+                jsonResponse.Message = ex.Message;
 
                 LogBL.Instancia.Add(new Log
                 {
@@ -71,5 +154,62 @@ namespace Base.Web.Controllers
 
             return Json(jsonResponse);
         }
+
+        [HttpPost]
+        public JsonResult GetById(CategoriaDTO categoriaDTO)
+        {
+            var jsonResponse = new JsonResponse { Success = true };
+
+            try
+            {
+                var categoria = MapperHelper.Map<CategoriaDTO, Categoria>(categoriaDTO);
+                var categoriaI = CategoriaBL.Instancia.GetById(categoria);
+                if (categoriaI != null)
+                {
+                    categoriaDTO = MapperHelper.Map<Categoria, CategoriaDTO>(categoriaI);
+                    jsonResponse.Data = categoriaDTO;
+                }
+                else
+                {
+                    jsonResponse.Warning = true;
+                    jsonResponse.Message = Mensajes.UsuarioNoExiste;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                jsonResponse.Success = false;
+                jsonResponse.Message = Mensajes.IntenteloMasTarde;
+            }
+
+            return Json(jsonResponse);
+        }
+
+        #region Métodos Privados
+
+        public void FormatDataTable(DataTableModel<CategoriaFilterModel, int> dataTableModel)
+        {
+            for (int i = 0; i < dataTableModel.order.Count; i++)
+            {
+                var columnIndex = dataTableModel.order[0].column;
+                var columnDir = dataTableModel.order[0].dir.ToUpper();
+                var column = dataTableModel.columns[columnIndex].data;
+                dataTableModel.orderBy = (" [" + column + "] " + columnDir + " ");
+            }
+            string WhereModel = "WHERE ctgcc_iflag_estado=1";
+
+
+            if (dataTableModel.filter.codigoSearch != null)
+            {
+                WhereModel += "  AND ctgcc_vcod_categoria = '" + dataTableModel.filter.codigoSearch + "' ";
+            }
+            if (dataTableModel.filter.descripcionSearch != null)
+            {
+                WhereModel += "  AND ctgcc_vdescripcion LIKE '%" + dataTableModel.filter.descripcionSearch + "%'";
+            }
+            dataTableModel.whereFilter = WhereModel;
+        }
+
+        #endregion
     }
 }

@@ -8749,7 +8749,7 @@ fieldset[disabled] .btn-white.btn-grey.active {
 }
 label {
   font-weight: normal;
-  font-size: 14px;
+  font-size: 12px;
 }
 .form-group > label[class*="col-"] {
   margin-bottom: 4px;
@@ -8782,8 +8782,8 @@ input[type="color"] {
   color: #858585;
   background-color: #ffffff;
   border: 1px solid #d5d5d5;
-  padding: 5px 4px 6px;
-  font-size: 14px;
+  padding: 3px 5px 3px;
+  font-size: 12px;
   font-family: inherit;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
@@ -8867,11 +8867,11 @@ textarea.form-control {
   padding: 5px 9px;
 }
 select {
-  padding: 3px 4px;
+  padding: 3px 3px;
   height: 30px;
 }
 select.form-control {
-  padding: 4px 6px;
+  padding: 2px 2px;
 }
 select[multiple],
 select.form-control[multiple] {

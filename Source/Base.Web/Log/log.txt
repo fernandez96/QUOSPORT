@@ -4077,3 +4077,60 @@ Base.DTO.LineaDTO Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngin
    en AutoMapper.Mapper.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\Mapper.cs:línea 73
    en Base.DTO.AutoMapper.MapperHelper.Map[TSource,TDest](TSource source)
    en Base.Web.Controllers.CategoriaLineaSublineaController.Add(CategoriaDTO categoriaDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 30
+2017-09-30 14:19:15,002 ERROR  - Mensaje: Error al Agregar Categoria producto. Trace:    en Base.DataAccess.CategoriaRepository.Add(Categoria entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\CategoriaRepository.cs:línea 40
+   en Base.BusinessLogic.CategoriaBL.Add(Categoria entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\CategoriaBL.cs:línea 17
+   en Base.Web.Controllers.CategoriaLineaSublineaController.Add(CategoriaDTO categoriaDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 31
+2017-09-30 14:19:40,211 ERROR  - Mensaje: Error al Agregar Categoria producto. Trace:    en Base.DataAccess.CategoriaRepository.Add(Categoria entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\CategoriaRepository.cs:línea 40
+   en Base.BusinessLogic.CategoriaBL.Add(Categoria entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\CategoriaBL.cs:línea 17
+   en Base.Web.Controllers.CategoriaLineaSublineaController.Add(CategoriaDTO categoriaDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 31
+2017-09-30 14:23:06,176 ERROR  - Mensaje: Error al Agregar Categoria producto. Trace:    en Base.DataAccess.CategoriaRepository.Add(Categoria entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\CategoriaRepository.cs:línea 40
+   en Base.BusinessLogic.CategoriaBL.Add(Categoria entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\CategoriaBL.cs:línea 17
+   en Base.Web.Controllers.CategoriaLineaSublineaController.Add(CategoriaDTO categoriaDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 31
+2017-09-30 14:42:48,968 ERROR  - Mensaje: Ya existe la Categoria de producto ejemplos Trace:    en Base.DataAccess.CategoriaRepository.Add(Categoria entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\CategoriaRepository.cs:línea 104
+   en Base.BusinessLogic.CategoriaBL.Add(Categoria entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\CategoriaBL.cs:línea 17
+   en Base.Web.Controllers.CategoriaLineaSublineaController.Add(CategoriaDTO categoriaDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 31
+2017-09-30 14:42:59,917 ERROR  - Mensaje: Ya existe la Categoria de producto ejemplos Trace:    en Base.DataAccess.CategoriaRepository.Add(Categoria entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\CategoriaRepository.cs:línea 104
+   en Base.BusinessLogic.CategoriaBL.Add(Categoria entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\CategoriaBL.cs:línea 17
+   en Base.Web.Controllers.CategoriaLineaSublineaController.Add(CategoriaDTO categoriaDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 31
+2017-09-30 14:45:04,239 ERROR  - Mensaje: Ya existe la Categoria de producto ejemplo Trace:    en Base.DataAccess.CategoriaRepository.Add(Categoria entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\CategoriaRepository.cs:línea 104
+   en Base.BusinessLogic.CategoriaBL.Add(Categoria entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\CategoriaBL.cs:línea 17
+   en Base.Web.Controllers.CategoriaLineaSublineaController.Add(CategoriaDTO categoriaDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 31
+2017-09-30 14:54:23,202 ERROR  - Mensaje: Ya existe la Categoria de producto ejemplo Trace:    en Base.DataAccess.CategoriaRepository.Add(Categoria entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\CategoriaRepository.cs:línea 104
+   en Base.BusinessLogic.CategoriaBL.Add(Categoria entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\CategoriaBL.cs:línea 17
+   en Base.Web.Controllers.CategoriaLineaSublineaController.Add(CategoriaDTO categoriaDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 31
+2017-09-30 16:05:48,687 ERROR  - Mensaje: ctgcc_iid_categoria Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Microsoft.Practices.EnterpriseLibrary.Data.DataReaderWrapper.GetOrdinal(String name)
+   en Base.DataAccess.CategoriaRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\CategoriaRepository.cs:línea 282
+   en Base.BusinessLogic.CategoriaBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\CategoriaBL.cs:línea 26
+   en Base.Web.Controllers.CategoriaLineaSublineaController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 32
+2017-09-30 16:06:48,262 ERROR  - Mensaje: ctgcc_iid_categoria Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Microsoft.Practices.EnterpriseLibrary.Data.DataReaderWrapper.GetOrdinal(String name)
+   en Base.DataAccess.CategoriaRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\CategoriaRepository.cs:línea 282
+   en Base.BusinessLogic.CategoriaBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\CategoriaBL.cs:línea 26
+   en Base.Web.Controllers.CategoriaLineaSublineaController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 32
+2017-09-30 16:07:50,331 ERROR  - Mensaje: ctgcc_iid_categoria Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Microsoft.Practices.EnterpriseLibrary.Data.DataReaderWrapper.GetOrdinal(String name)
+   en Base.DataAccess.CategoriaRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\CategoriaRepository.cs:línea 282
+   en Base.BusinessLogic.CategoriaBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\CategoriaBL.cs:línea 26
+   en Base.Web.Controllers.CategoriaLineaSublineaController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 32
+2017-09-30 16:08:30,381 ERROR  - Mensaje: ctgcc_iid_categoria Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Microsoft.Practices.EnterpriseLibrary.Data.DataReaderWrapper.GetOrdinal(String name)
+   en Base.DataAccess.CategoriaRepository.GetAllPaging(PaginationParameter`1 paginationParameters)
+   en Base.BusinessLogic.CategoriaBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\CategoriaBL.cs:línea 26
+   en Base.Web.Controllers.CategoriaLineaSublineaController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 32
+2017-09-30 16:12:31,950 ERROR  - Mensaje: Ya existe la Categoria de producto ejemplo Trace:    en Base.DataAccess.CategoriaRepository.Add(Categoria entity)
+   en Base.BusinessLogic.CategoriaBL.Add(Categoria entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\CategoriaBL.cs:línea 18
+   en Base.Web.Controllers.CategoriaLineaSublineaController.Add(CategoriaDTO categoriaDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 64
+2017-09-30 16:12:38,788 ERROR  - Mensaje: Ya existe la Categoria de producto ejemplo Trace:    en Base.DataAccess.CategoriaRepository.Add(Categoria entity)
+   en Base.BusinessLogic.CategoriaBL.Add(Categoria entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\CategoriaBL.cs:línea 18
+   en Base.Web.Controllers.CategoriaLineaSublineaController.Add(CategoriaDTO categoriaDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 64
+2017-09-30 16:12:47,102 ERROR  - Mensaje: Ya existe la Categoria de producto ejemplo Trace:    en Base.DataAccess.CategoriaRepository.Add(Categoria entity)
+   en Base.BusinessLogic.CategoriaBL.Add(Categoria entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\CategoriaBL.cs:línea 18
+   en Base.Web.Controllers.CategoriaLineaSublineaController.Add(CategoriaDTO categoriaDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 64
+2017-10-03 00:05:34,265 ERROR  - Mensaje: Ya existe la Categoria de producto SUUNTO SPARTAN TRAINER WRIST HR STEEL Trace:    en Base.DataAccess.CategoriaRepository.Add(Categoria entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\CategoriaRepository.cs:línea 105
+   en Base.BusinessLogic.CategoriaBL.Add(Categoria entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\CategoriaBL.cs:línea 18
+   en Base.Web.Controllers.CategoriaLineaSublineaController.Add(CategoriaDTO categoriaDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 114

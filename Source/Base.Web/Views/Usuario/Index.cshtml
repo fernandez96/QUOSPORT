@@ -6,6 +6,7 @@
 
 @section styles{
     <link rel="stylesheet" href="@Url.Content("~/Content/css/jquery.dataTables.css")" />
+
 }
 
 <!-- /section:basics/sidebar -->
@@ -88,7 +89,7 @@
                         </div>
                         <div class="dataTables_wrapper form-inline no-footer">
                             <div class="table-responsive">
-                                <table id="UsuarioDataTable" class="table table-bordered table-hover">
+                                <table id="UsuarioDataTable" class="table table-striped table-bordered dataTable no-footer">
                                     <thead>
                                         <tr>
                                             <th class="hidden">Id</th>
@@ -158,7 +159,7 @@
                                             <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="Contrasena">Constraseña </label>
                                             <div class="col-xs-12 col-sm-9">
                                                 <span class="input-icon_ input-icon-right_">
-                                                    <input type="password" id="Contrasena" autocomplete="off" name="Contrasena" placeholder="Contraseña" maxlength="100" class="form-control" />
+                                                    <input type="password" id="Contrasena" autocomplete="off" name="Contrasena" placeholder="Contraseña" maxlength="100" class="col-xs-12 col-sm-12" />
                                                     <i class="ace-icon fa fa-eye bigger-110" id="mostarPass" style="cursor:pointer"></i>
                                                 </span>
                                             </div>
@@ -167,7 +168,7 @@
                                             <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="Contrasena">Confirma constraseña </label>
                                             <div class="col-xs-12 col-sm-9">
                                                 <span class="input-icon_ input-icon-right_">
-                                                    <input type="password" id="ContrasenaConf" autocomplete="off" name="ContrasenaConf" placeholder="Confirma contraseña" maxlength="100" class="form-control" />
+                                                    <input type="password" id="ContrasenaConf" autocomplete="off" name="ContrasenaConf" placeholder="Confirma contraseña" maxlength="100" class="col-xs-12 col-sm-12" />
                                                     <i class="ace-icon fa fa-eye bigger-110" id="mostarPassConf" style="cursor:pointer"></i>
                                                 </span>
                                             </div>
@@ -238,8 +239,13 @@
 
     <!-- inline scripts related to this page -->
     <script src="@Url.Content("~/Content/js/viewsJs/usuario.js")"></script>
+	// For demo to fit into DataTables site builder...
+
+
     <!-- Ajax BlockUi scripts -->
+
     <script type="text/javascript">
+  
         var pageBlocked = false;
         var handlerActivo = false;
 

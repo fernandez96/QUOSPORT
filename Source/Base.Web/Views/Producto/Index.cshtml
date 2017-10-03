@@ -50,7 +50,7 @@
                                         <div class="input-group-btn">
 
                                         </div>
-                                        <input type="text" class="col-xs-12" name="Descripcionsearch" id="Descripcionsearch" placeholder="Descripción">
+                                        <input type="text" class="form-control" name="Descripcionsearch" id="Descripcionsearch" placeholder="Descripción">
                                         <div class="input-group-btn">
                                             <button type="button" id="btnSearchTipoDocumento" class="btn btn-success btn-sm">
                                                 <i class="ace-icon fa fa-search icon-on-right bigger-110 right"></i>Buscar
@@ -65,13 +65,13 @@
                                                 <span><i class="fa fa-plus-circle bigger-110 blue"></i> </span>
                                             </a>
 
-                                            <a id="btnEditar" data-toggle="tooltip" class="dt-button buttons-copy buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Editar">
+                                            <a id="btnEditarProducto" data-toggle="tooltip" class="dt-button buttons-copy buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Editar">
                                                 <span><i class="fa fa-pencil bigger-110 pink"></i> </span>
                                             </a>
-                                            <a id="btnEliminar" data-toggle="tooltip" class="dt-button buttons-csv buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Eliminar">
+                                            <a id="btnEliminarProducto" data-toggle="tooltip" class="dt-button buttons-csv buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Eliminar">
                                                 <span><i class="fa fa-trash-o bigger-110 orange"> </i></span>
                                             </a>
-                                            <a id="btnacceso" data-toggle="tooltip" class="dt-button buttons-print btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Asignar accesos a Modulos">
+                                            <a id="btnestadoProducto" data-toggle="tooltip" class="dt-button buttons-print btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Asignar accesos a Modulos">
                                                 <span><i class="fa fa-wrench bigger-110 grey"></i> </span>
                                             </a>
 
@@ -85,16 +85,22 @@
 
                     <div class="col-xs-12">
                         <div class="table-header">
-                            Resultado "Tipo documento"
+                            Resultado "Producto"
                         </div>
                         <div class="dataTables_wrapper form-inline no-footer">
                             <div class="table-responsive">
-                                <table id="TipoDocumentoDataTable" class="table table-bordered dataTable no-footer" cellspacing="0" role="grid" aria-describedby="dynamic-table_info">
+                                <table id="ProductoDataTable" class="table table-bordered dataTable no-footer" cellspacing="0" role="grid" aria-describedby="dynamic-table_info">
                                     <thead>
                                         <tr>
                                             <th>Id</th>
                                             <th class="hidden-120 center">Codigo</th>
                                             <th class="hidden-120">Descripci&oacute;n</th>
+                                            <th class="hidden-480">Categoria</th>
+                                            <th class="hidden-480">Linea</th>
+                                            <th class="hidden-600">Su-Linea</th>
+                                            <th class="hidden-600">Clasificaci&oacute;n</th>
+                                            <th class="hidden-768">Orden code</th>
+                                            <th class="hidden-992">Medida</th>
                                             <th class="hidden-480">Estado</th>
                                         </tr>
                                     </thead>
@@ -155,128 +161,204 @@
                 </div>
             </div>
 
-            <div id="NuevoProducto" tabindex='-1' role='dialog' aria-hidden='true' class='modal fade' data-backdrop='static' style='z-index:100000;'>
-                <div class="modal-dialog">
-                    <div class="modal-content">
+
+            <div id='NuevoProducto' tabindex='-1' role='dialog' aria-hidden='true' class='modal fade' data-backdrop='static' style='z-index:100000;'>
+                <div class='modal-dialog pasos'>
+                    <div class='modal-content'>
                         <div class='modal-header'>
                             <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class='modal-title'><span id='accionTitle'></span> producto</h4>
+                            <h4 class='modal-title'><span id="accionTitle"></span> Producto <span id="idtable"></span></h4>
                         </div>
-
-                        <div class="modal-body">
+                        <div class='modal-body'>
                             <div class="row">
-                                <div class="col-xs-12 col-sm-5">
-                                    <div class="space"></div>
+                                <div class="col-xs-12">
+                                    <!-- PAGE CONTENT BEGINS -->
+                                    <br />
+                                    <div class="col-xs-11-97">
 
-                                    <label class="ace-file-input ace-file-multiple">
-                                    <input type="file"><span class="ace-file-container" data-title="Soltar archivos aquí o haga clic para elegir">
-                                        <span class="ace-file-name" data-title="No File ...">
-                                        <i class="ace-icon ace-icon fa fa-cloud-upload">
-                                            </i></span></span><a class="remove" href="#">
-                                        <i class="ace-icon fa fa-times"></i>
-                                        </a></label>
-                                </div>
+                                        <div class="search-area well no-margin-bottom" style="margin-left:10px;">
+                                            <form id="TablaDetalleSearchForm" role="form">
+                                                <div class="row">
+                                                    <div class="clearfix">
 
-                                <div class="col-xs-12 col-sm-7">
-                                    <div class="form-group">
-                                        <label for="form-field-select-3">Location</label>
+                                                        <a id="btnAgregarTablaDetalle" data-toggle="tooltip" class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Nuevo">
+                                                            <span><i class="fa fa-plus-circle bigger-110 blue"></i> </span>
+                                                        </a>
 
-                                        <div>
+                                                        <a id="btnEditarTablaDetalle" data-toggle="tooltip" class="dt-button buttons-copy buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Editar">
+                                                            <span><i class="fa fa-pencil bigger-110 pink"> </i> </span>
+                                                        </a>
+                                                        <a id="btnEliminarTablaDetalle" data-toggle="tooltip" class="dt-button buttons-csv buttons-html5 btn btn-white btn-primary btn-bold " tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Eliminar">
+                                                            <span><i class="fa fa-trash-o bigger-110 orange"></i></span>
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                            </form>
                                         </div>
-                                    </div>
+                                        <!-- PAGE CONTENT BEGINS -->
+                                   
+                                        <div class="col-xs-12 col-sm-4">
+                                            <div class="space"></div>
 
-                                    <div class="space-4"></div>
-
-                                    <div class="form-group">
-                                        <label for="form-field-username">Username</label>
-
-                                        <div>
-                                            <input type="text" id="form-field-username" placeholder="Username" value="alexdoe">
+                                            <label class="ace-file-input ace-file-multiple">
+                                                <input type="file"><span class="ace-file-container"
+                                                                         data-title="Soltar archivos aquí o haga clic para elegir">
+                                                    <span class="ace-file-name" data-title="No File ...">
+                                                        <i class="ace-icon ace-icon fa fa-cloud-upload">
+                                                        </i>
+                                                    </span>
+                                                </span><a class="remove" href="#">
+                                                    <i class="ace-icon fa fa-times"></i>
+                                                </a>
+                                            </label>
                                         </div>
-                                    </div>
+                                        <div class="col-xs-12 col-sm-7">
+                                            <form class="form-horizontal" role="form" id="UsuarioForm">
+                                                <div class="form-group"></div>
+                                                <!-- #section:elements.form -->
+                                                <div class="form-group">
+                                                    <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="Categoria">Categoria </label>
 
-                                    <div class="space-4"></div>
+                                                    <div class="col-xs-12 col-sm-9">
+                                                        <div class="clearfix">
+                                                            <select id="Categoria" name="Categoria" class="col-xs-12 col-sm-12"></select>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                                    <div class="form-group">
-                                        <label for="form-field-first">Name</label>
+                                                <div class="form-group">
+                                                    <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="Linea">Linea </label>
 
-                                        <div>
-                                            <input type="text" id="form-field-first" placeholder="First Name" value="Alex">
-                                            <input type="text" id="form-field-last" placeholder="Last Name" value="Doe">
+                                                    <div class="col-xs-12 col-sm-9">
+                                                        <div class="clearfix">
+                                                            <select id="Linea" name="Linea" class="col-xs-12 col-sm-12"></select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="SubLinea">Sub-Linea </label>
+
+                                                    <div class="col-xs-12 col-sm-9">
+                                                        <div class="clearfix">
+                                                            <select id="SubLinea" name="SubLinea" class="col-xs-12 col-sm-12"></select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="descripcion">Descripci&oacute;n </label>
+
+                                                    <div class="col-xs-12 col-sm-9">
+                                                        <div class="clearfix">
+                                                            <input type="text" id="descripcion" autocomplete="off" name="descripcion" placeholder="Descripción" maxlength="100" class="col-xs-12 col-sm-12" />
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        
+                                                <input type="hidden" name="UsuarioId" id="UsuarioId" value="0" />
+
+                                            </form>
+
                                         </div>
+                                        <div class="col-xs-12 col-sm-7">
+                                            <div class="form-group">
+                                                <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="descripcion">Stock minimo </label>
+
+                                                <div class="col-xs-4">
+                                                    <div class="clearfix">
+                                                        <input type="text" id="descripcion" autocomplete="off" name="descripcion" placeholder="Descripción" maxlength="100" class="col-xs-4 col-sm-6" />
+
+                                                    </div>
+                                                </div>
+                                                <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="descripcion">Precio Unitarion </label>
+                                                <div class="col-xs-4">
+                                                    <div class="clearfix">
+                                                        <input type="text" id="descripcion" autocomplete="off" name="descripcion" placeholder="Descripción" maxlength="100" class="col-xs-4 col-sm-6" />
+
+                                                    </div>
+                                                </div>
+                                                <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="descripcion">Unidad </label>
+                                                <div class="col-xs-4">
+                                                    <div class="clearfix">
+                                                        <input type="text" id="descripcion" autocomplete="off" name="descripcion" placeholder="Descripción" maxlength="100" class="col-xs-4 col-sm-4" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                  
+                                           </div>
+                                        </div>
+
+
+
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>
+                                <button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-close'></i> Salir</button>
+                                <button class='btn btn-primary btn-sm' id="btnGuardarTipodocumento"><i class='fa fa-floppy-o'></i> Guardar</button>
 
-                        <div class="modal-footer">
-                            <button class="btn btn-sm" data-dismiss="modal">
-                                <i class="ace-icon fa fa-times"></i>
-                                Cancel
-                            </button>
-
-                            <button class="btn btn-sm btn-primary">
-                                <i class="ace-icon fa fa-check"></i>
-                                Save
-                            </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>   
 
-        </div><!-- /.page-content -->
-    </div>
-</div><!-- /.main-content -->
-@section scripts{
-    <!-- page specific plugin scripts -->
-    <script src="@Url.Content("~/Content/js/jquery.dataTables.min.js")"></script>
-    <script src="@Url.Content("~/Content/js/jquery.dataTables.fnReloadAjax.js")"></script>
-    <script src="@Url.Content("~/Content/js/jquery.inputlimiter.1.3.1.js")"></script>
-    <script src="@Url.Content("~/Content/js/jquery.validate.js")"></script>
-    <script src="@Url.Content("~/Content/js/additional-methods.js")"></script>
-    <script src="@Url.Content("~/Content/js/jquery.gritter.js")"></script>
-    <script src="@Url.Content("~/Content/js/jquery.blockUI.js")"></script>
+            </div><!-- /.page-content -->
+        </div>
+    </div><!-- /.main-content -->
+    @section scripts{
+        <!-- page specific plugin scripts -->
+        <script src="@Url.Content("~/Content/js/jquery.dataTables.min.js")"></script>
+        <script src="@Url.Content("~/Content/js/jquery.dataTables.fnReloadAjax.js")"></script>
+        <script src="@Url.Content("~/Content/js/jquery.inputlimiter.1.3.1.js")"></script>
+        <script src="@Url.Content("~/Content/js/jquery.validate.js")"></script>
+        <script src="@Url.Content("~/Content/js/additional-methods.js")"></script>
+        <script src="@Url.Content("~/Content/js/jquery.gritter.js")"></script>
+        <script src="@Url.Content("~/Content/js/jquery.blockUI.js")"></script>
 
-    <!-- inline scripts related to this page -->
-    <script src="@Url.Content("~/Content/js/viewsJs/Producto.js")"></script>
-    <!-- Ajax BlockUi scripts -->
-    <script type="text/javascript">
-        var pageBlocked = false;
-        var handlerActivo = false;
+        <!-- inline scripts related to this page -->
+        <script src="@Url.Content("~/Content/js/viewsJs/Producto.js")"></script>
+        <!-- Ajax BlockUi scripts -->
+        <script type="text/javascript">
+            var pageBlocked = false;
+            var handlerActivo = false;
 
-        $(document).ready(function () {
-            $.blockUI.defaults.baseZ = 100000;
-            $.blockUI.defaults.overlayCSS.opacity = 0.4;
-            $.blockUI.defaults.css.backgroundColor = "transparent";
-            $.blockUI.defaults.css.border = '0px none';
-            $.blockUI.defaults.fadeIn = 100,
-            $.blockUI.defaults.fadeOut = 100,
+            $(document).ready(function () {
+                $.blockUI.defaults.baseZ = 100000;
+                $.blockUI.defaults.overlayCSS.opacity = 0.4;
+                $.blockUI.defaults.css.backgroundColor = "transparent";
+                $.blockUI.defaults.css.border = '0px none';
+                $.blockUI.defaults.fadeIn = 100,
+                $.blockUI.defaults.fadeOut = 100,
 
-            $(document).ajaxSend(function () {
-                if (!pageBlocked) {
-                    $.blockUI({
-                        message: "Espere un momento por favor",
-                        css: {
-                            border: 'none',
-                            padding: '15px',
-                            backgroundColor: '#000',
-                            '-webkit-border-radius': '10px',
-                            '-moz-border-radius': '10px',
-                            opacity: 1,
-                            color: '#fff'
-                        },
-                        onBlock: function () {
-                            pageBlocked = true;
-                        }
-                    });
-                }
-            }).ajaxStop(function () {
-                jQuery.unblockUI();
-                pageBlocked = false;
+                $(document).ajaxSend(function () {
+                    if (!pageBlocked) {
+                        $.blockUI({
+                            message: "Espere un momento por favor",
+                            css: {
+                                border: 'none',
+                                padding: '15px',
+                                backgroundColor: '#000',
+                                '-webkit-border-radius': '10px',
+                                '-moz-border-radius': '10px',
+                                opacity: 1,
+                                color: '#fff'
+                            },
+                            onBlock: function () {
+                                pageBlocked = true;
+                            }
+                        });
+                    }
+                }).ajaxStop(function () {
+                    jQuery.unblockUI();
+                    pageBlocked = false;
+                });
+
             });
+        </script>
 
-        });
-    </script>
-
-}
+    }
 
