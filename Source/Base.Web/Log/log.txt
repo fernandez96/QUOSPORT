@@ -4134,3 +4134,145 @@ Base.DTO.LineaDTO Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngin
 2017-10-03 00:05:34,265 ERROR  - Mensaje: Ya existe la Categoria de producto SUUNTO SPARTAN TRAINER WRIST HR STEEL Trace:    en Base.DataAccess.CategoriaRepository.Add(Categoria entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\CategoriaRepository.cs:línea 105
    en Base.BusinessLogic.CategoriaBL.Add(Categoria entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\CategoriaBL.cs:línea 18
    en Base.Web.Controllers.CategoriaLineaSublineaController.Add(CategoriaDTO categoriaDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 114
+2017-10-03 16:44:30,386 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 294
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-03 16:45:26,275 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 294
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-03 16:45:49,558 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 294
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-03 16:47:03,678 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 294
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-03 16:49:37,497 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 294
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-03 16:49:38,002 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 294
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-03 16:49:38,488 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 294
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-03 16:49:38,868 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 294
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-03 16:49:39,354 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 294
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-03 16:50:13,244 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 294
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-03 17:15:17,721 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 369
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-03 17:15:49,917 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 369
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-03 17:16:10,551 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 369
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-03 17:16:27,875 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 369
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-03 17:17:41,137 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 369
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-03 17:18:58,679 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 369
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-03 17:19:29,765 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 369
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-03 17:22:02,404 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 369
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-03 17:23:51,403 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 369
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-03 17:25:15,977 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 369
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-03 17:25:16,664 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 369
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-03 17:25:29,217 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 369
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-03 17:25:31,614 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 369
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-03 17:26:57,519 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 369
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-03 17:36:56,310 ERROR  - Mensaje: Incorrect syntax near 'P'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProductoRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProductoRepository.cs:línea 81
+   en Base.BusinessLogic.ProductoBL.GetAllPaging(PaginationParameter`1 paginationParameters) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProductoBL.cs:línea 23
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 32
+2017-10-03 17:38:09,752 ERROR  - Mensaje: Incorrect syntax near 'P'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProductoRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProductoRepository.cs:línea 81
+   en Base.BusinessLogic.ProductoBL.GetAllPaging(PaginationParameter`1 paginationParameters) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProductoBL.cs:línea 23
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 32
+2017-10-03 17:38:27,429 ERROR  - Mensaje: Incorrect syntax near 'prdc_bflag_estado'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProductoRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProductoRepository.cs:línea 81
+   en Base.BusinessLogic.ProductoBL.GetAllPaging(PaginationParameter`1 paginationParameters) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProductoBL.cs:línea 23
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel)
+2017-10-03 17:38:40,253 ERROR  - Mensaje: Incorrect syntax near 'prdc_bflag_estado'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProductoRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProductoRepository.cs:línea 81
+   en Base.BusinessLogic.ProductoBL.GetAllPaging(PaginationParameter`1 paginationParameters) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProductoBL.cs:línea 23
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel)
+2017-10-03 17:39:08,643 ERROR  - Mensaje: Incorrect syntax near 'P'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProductoRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProductoRepository.cs:línea 81
+   en Base.BusinessLogic.ProductoBL.GetAllPaging(PaginationParameter`1 paginationParameters) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProductoBL.cs:línea 23
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel)
+2017-10-03 17:41:26,539 ERROR  - Mensaje: Incorrect syntax near 'P'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProductoRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProductoRepository.cs:línea 81
+   en Base.BusinessLogic.ProductoBL.GetAllPaging(PaginationParameter`1 paginationParameters) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProductoBL.cs:línea 23
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel)
+2017-10-03 18:10:42,754 ERROR  - Mensaje: prdc_dpeso_unitario Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Base.DataAccess.ProductoRepository.GetById(Producto entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProductoRepository.cs:línea 118
+   en Base.BusinessLogic.ProductoBL.GetById(Producto entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProductoBL.cs:línea 27
+   en Base.Web.Controllers.ProductoController.GetById(ProductoDTO productoDTO)
+2017-10-03 18:14:00,782 ERROR  - Mensaje: prdc_dpeso_unitario Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Base.DataAccess.ProductoRepository.GetById(Producto entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProductoRepository.cs:línea 118
+   en Base.BusinessLogic.ProductoBL.GetById(Producto entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProductoBL.cs:línea 27
+   en Base.Web.Controllers.ProductoController.GetById(ProductoDTO productoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 237

@@ -38,10 +38,10 @@ namespace Base.DTO.AutoMapper
                .ForMember(p => p.UsuarioCreacion, x => x.MapFrom(p => p.UsuarioRegistro));
 
             Mapper.CreateMap<ParametroDTO, Parametro>()
-             .ForMember(p => p.UsuarioModificacion, x => x.Condition(p => p.Id != 0))
-             .ForMember(p => p.UsuarioModificacion, x => x.MapFrom(p => p.UsuarioRegistro))
-             .ForMember(p => p.UsuarioCreacion, x => x.Condition(p => p.Id == 0))
-             .ForMember(p => p.UsuarioCreacion, x => x.MapFrom(p => p.UsuarioRegistro));
+                     .ForMember(p => p.UsuarioModificacion, x => x.Condition(p => p.Id != 0))
+                     .ForMember(p => p.UsuarioModificacion, x => x.MapFrom(p => p.UsuarioRegistro))
+                     .ForMember(p => p.UsuarioCreacion, x => x.Condition(p => p.Id == 0))
+                     .ForMember(p => p.UsuarioCreacion, x => x.MapFrom(p => p.UsuarioRegistro));
 
             Mapper.CreateMap<AlmacenDTO, Almacen>()
                   .ForMember(p => p.UsuarioModificacion, x => x.Condition(p => p.Id != 0))
@@ -56,16 +56,16 @@ namespace Base.DTO.AutoMapper
                   .ForMember(p => p.UsuarioCreacion, x => x.MapFrom(p => p.UsuarioRegistro));
 
             Mapper.CreateMap<LineaDTO, Linea>()
-       .ForMember(p => p.UsuarioModificacion, x => x.Condition(p => p.Id != 0))
-       .ForMember(p => p.UsuarioModificacion, x => x.MapFrom(p => p.UsuarioRegistro))
-       .ForMember(p => p.UsuarioCreacion, x => x.Condition(p => p.Id == 0))
-       .ForMember(p => p.UsuarioCreacion, x => x.MapFrom(p => p.UsuarioRegistro));
+                   .ForMember(p => p.UsuarioModificacion, x => x.Condition(p => p.Id != 0))
+                   .ForMember(p => p.UsuarioModificacion, x => x.MapFrom(p => p.UsuarioRegistro))
+                   .ForMember(p => p.UsuarioCreacion, x => x.Condition(p => p.Id == 0))
+                   .ForMember(p => p.UsuarioCreacion, x => x.MapFrom(p => p.UsuarioRegistro));
 
             Mapper.CreateMap<SubLineaDTO, SubLinea>()
-       .ForMember(p => p.UsuarioModificacion, x => x.Condition(p => p.Id != 0))
-       .ForMember(p => p.UsuarioModificacion, x => x.MapFrom(p => p.UsuarioRegistro))
-       .ForMember(p => p.UsuarioCreacion, x => x.Condition(p => p.Id == 0))
-       .ForMember(p => p.UsuarioCreacion, x => x.MapFrom(p => p.UsuarioRegistro));
+                   .ForMember(p => p.UsuarioModificacion, x => x.Condition(p => p.Id != 0))
+                   .ForMember(p => p.UsuarioModificacion, x => x.MapFrom(p => p.UsuarioRegistro))
+                   .ForMember(p => p.UsuarioCreacion, x => x.Condition(p => p.Id == 0))
+                   .ForMember(p => p.UsuarioCreacion, x => x.MapFrom(p => p.UsuarioRegistro));
 
             Mapper.CreateMap<CategoriaDTO, Categoria>()
                   .ForMember(p => p.UsuarioModificacion, x => x.Condition(p => p.Id != 0))
@@ -73,8 +73,13 @@ namespace Base.DTO.AutoMapper
                   .ForMember(p => p.UsuarioCreacion, x => x.Condition(p => p.Id == 0))
                   .ForMember(p => p.UsuarioCreacion, x => x.MapFrom(p => p.UsuarioRegistro));
 
+            Mapper.CreateMap<ProductoDTO, Producto>()
+                  .ForMember(p => p.UsuarioModificacion, x => x.Condition(p => p.Id != 0))
+                  .ForMember(p => p.UsuarioModificacion, x => x.MapFrom(p => p.UsuarioRegistro))
+                  .ForMember(p => p.UsuarioCreacion, x => x.Condition(p => p.Id == 0))
+                  .ForMember(p => p.UsuarioCreacion, x => x.MapFrom(p => p.UsuarioRegistro));
 
-          
+
         }
     }
 }

@@ -287,6 +287,27 @@ namespace Base.DataAccess
 
             return categoria;
         }
+        public IList<Categoria> GetAll()
+        {
+            List<Categoria> categoria = new List<Categoria>();
+            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_CATEGORIAS_PRODUCTO_GetAll")))
+            {
+                using (var lector = _database.ExecuteReader(comando))
+                {
+                    while (lector.Read())
+                    {
+                        categoria.Add(new Categoria
+                        {
+                            Id = lector.IsDBNull(lector.GetOrdinal("Id")) ? default(int) : lector.GetInt32(lector.GetOrdinal("Id")),
+                            ctgcc_vcod_categoria = lector.IsDBNull(lector.GetOrdinal("ctgcc_vcod_categoria")) ? default(string) : lector.GetString(lector.GetOrdinal("ctgcc_vcod_categoria")),
+                            ctgcc_vdescripcion = lector.IsDBNull(lector.GetOrdinal("ctgcc_vdescripcion")) ? default(string) : lector.GetString(lector.GetOrdinal("ctgcc_vdescripcion")),
+                        });
+                    }
+                }
+            }
+
+            return categoria;
+        }
         public IList<Linea> GetAllLinea(Linea entity)
         {
             List<Linea> linea = new List<Linea>();

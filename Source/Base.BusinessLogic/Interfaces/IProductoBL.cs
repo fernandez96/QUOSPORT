@@ -1,9 +1,9 @@
 ﻿using Base.Common;
 using System.Collections.Generic;
 
-namespace Base.DataAccess.Interfaces
+namespace Base.BusinessLogic.Interfaces
 {
-    public interface IProductoRepository<T,Q> where T:class
+    public interface IProductoBL<T,Q> where T:class
     {
         Q Add(T entity);
         Q Update(T entity);
