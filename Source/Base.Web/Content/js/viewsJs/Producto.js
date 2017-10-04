@@ -35,7 +35,8 @@ $(document).ready(function () {
 
     $('#btnAgregarProducto').on('click', function () {
         LimpiarFormulario();
-
+        $("#Linea").empty();
+        $("#SubLinea").empty();
         $("#UsuarioId").val(0);
         $("#accionTitle").text('Nuevo');
         $("#NuevoProducto").modal("show");
@@ -146,6 +147,7 @@ $(document).ready(function () {
     CargarMedidas();
     CargarClasificaciones();
     CargarCategoria();
+    CargarEstado();
     $('[data-toggle="tooltip"]').tooltip();
 });
 
@@ -189,10 +191,13 @@ function VisualizarDataTableProducto() {
             { "data": "umec_v_unidad_medida" },
             {
                 "data": function (obj) {
-                    if (obj.Estado == 1)
+                    if (obj.Estado == 1){
                         return '<span class="label label-info label-sm arrowed-in arrowed-in-right">Activo</span>';
-                    else
-                        return '<span class="label label-sm arrowed-in arrowed-in-right">Inactivo</span>';
+                    }
+                    else if(obj.Estado==2){
+                        return '<span class="label label-warning arrowed-in arrowed-in-right">Inactivo</span>';
+                    }
+                       
                 }
             }
         ],
@@ -256,6 +261,7 @@ function GetProductoById() {
                 $("#serie").val(producto.prdc_vnumero_serie);
                 $("#ProductoId").val(producto.Id);
                 $("#textDescripcion").val(producto.prdc_vcaracteristicas);
+                $("#Estado").val(producto.Estado);
                 $("#accionTitle").text('Editar');
                 $("#NuevoProducto").modal("show");
                 
@@ -356,7 +362,7 @@ function GuardarProducto() {
         prdc_vnumero_serie: $("#serie").val(),
         prdc_vcaracteristicas: $("#textDescripcion").val(),
         UsuarioRegistro: $("#usernameLogOn strong").text(),
-        Estado:1
+        Estado:$("#Estado").val()
     };
 
     if (modelView.Id == 0)
@@ -632,15 +638,59 @@ function CargarClasificaciones() {
 }
 
 
+function CargarEstado() {
+    var modelView = {
+        idtabla: 1
+    };
+    webApp.Ajax({
+        url: urlMantenimiento + 'GetAll',
+        async: false,
+        parametros: modelView
+    }, function (response) {
+        if (response.Success) {
+
+            if (response.Warning) {
+                $.gritter.add({
+                    title: 'Alerta',
+                    text: response.Message,
+                    class_name: 'gritter-warning gritter'
+                });
+            } else {
+                $.each(response.Data, function (index, item) {
+                    $("#Estado").append('<option value="' + item.Id + '">' + item.tbpd_vdescripcion_detalle + '</option>');
+                });
+            }
+        } else {
+            $.gritter.add({
+                title: 'Error',
+                text: response.Message,
+                class_name: 'gritter-error gritter'
+            });
+        }
+    }, function (response) {
+        $.gritter.add({
+            title: 'Error',
+            text: response,
+            class_name: 'gritter-error gritter'
+        });
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        $.gritter.add({
+            title: 'Error',
+            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
+            class_name: 'gritter-error gritter'
+        });
+    });
+}
 function AddSearchFilter() {
     $("#UsuarioDataTable_wrapper").prepend($("#searchFilterDiv").html());
 }
 
 function LimpiarFormulario() {
     webApp.clearForm(formularioMantenimiento);
-    $("#CargoId").val(1);
-    $("#RolId").val(1);
+    $("#clasificacion").val(8);
+    $("#textDescripcion").val('');
+    $("#unidad").val(7);
+    $("#descripcion").focus();
     $("#Estado").val(1);
-    $("#Username").focus();
-    $("#Contrasena").prop("type", "password");
+
 }

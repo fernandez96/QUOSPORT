@@ -363,7 +363,7 @@ namespace Base.Web.Controllers
                 var column = dataTableModel.columns[columnIndex].data;
                 dataTableModel.orderBy = (" [" + column + "] " + columnDir + " ");
             }
-            string WhereModel = "WHERE  P.prdc_bflag_estado=1";
+            string WhereModel = "WHERE  P.prdc_bflag_estado IN(1,2)";
 
 
             if (dataTableModel.filter.codigoSearch != null)

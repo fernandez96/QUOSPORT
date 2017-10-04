@@ -4276,3 +4276,24 @@ Base.DTO.LineaDTO Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngin
    en Base.DataAccess.ProductoRepository.GetById(Producto entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProductoRepository.cs:línea 118
    en Base.BusinessLogic.ProductoBL.GetById(Producto entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProductoBL.cs:línea 27
    en Base.Web.Controllers.ProductoController.GetById(ProductoDTO productoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 237
+2017-10-03 21:33:58,428 ERROR  - Mensaje: prdc_dpeso_unitario Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Microsoft.Practices.EnterpriseLibrary.Data.DataReaderWrapper.GetOrdinal(String name)
+   en Base.DataAccess.ProductoRepository.GetById(Producto entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProductoRepository.cs:línea 118
+   en Base.BusinessLogic.ProductoBL.GetById(Producto entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProductoBL.cs:línea 27
+   en Base.Web.Controllers.ProductoController.GetById(ProductoDTO productoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 237
+2017-10-03 21:36:56,195 ERROR  - Mensaje: prdc_dpeso_unitario Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Microsoft.Practices.EnterpriseLibrary.Data.DataReaderWrapper.GetOrdinal(String name)
+   en Base.DataAccess.ProductoRepository.GetById(Producto entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProductoRepository.cs:línea 118
+   en Base.BusinessLogic.ProductoBL.GetById(Producto entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProductoBL.cs:línea 27
+   en Base.Web.Controllers.ProductoController.GetById(ProductoDTO productoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 237
+2017-10-03 21:50:32,360 ERROR  - Mensaje: prdc_dpeso_unitario Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Microsoft.Practices.EnterpriseLibrary.Data.DataReaderWrapper.GetOrdinal(String name)
+   en Base.DataAccess.ProductoRepository.GetById(Producto entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProductoRepository.cs:línea 118
+   en Base.BusinessLogic.ProductoBL.GetById(Producto entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProductoBL.cs:línea 27
+   en Base.Web.Controllers.ProductoController.GetById(ProductoDTO productoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 237
+2017-10-03 23:25:11,984 ERROR  - Mensaje: Ya existe la Categoria de producto SUUNTO SPARTAN TRAINER WRIST HR STEEL Trace:    en Base.DataAccess.CategoriaRepository.Add(Categoria entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\CategoriaRepository.cs:línea 105
+   en Base.BusinessLogic.CategoriaBL.Add(Categoria entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\CategoriaBL.cs:línea 18
+   en Base.Web.Controllers.CategoriaLineaSublineaController.Add(CategoriaDTO categoriaDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 114
