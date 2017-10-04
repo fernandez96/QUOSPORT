@@ -1,11 +1,13 @@
-﻿var dataTableUsuario = null;
-var formularioMantenimiento = "UsuarioForm";
+﻿var dataTableProducto = null;
+var formularioMantenimiento = "ProductoForm";
+var formularioMantenimientoDatosGenerales = "datosProductoForm";
 var delRowPos = null;
 var delRowID = 0;
-var urlListar = baseUrl + 'Usuario/Listar';
-var urlMantenimiento = baseUrl + 'Usuario/';
-var urlListaCargo = baseUrl + 'Usuario/';
-var rowUsuario = null;
+var urlListar = baseUrl + 'Producto/Listar';
+var urlMantenimiento = baseUrl + 'Producto/';
+var rowProducto = null;
+var tablaUnidad = 5;
+var tablaClasificacion = 6;
 
 
 $(document).ready(function () {
@@ -18,15 +20,15 @@ $(document).ready(function () {
     });
 
     checkSession(function () {
-        VisualizarDataTableUsuario();
+        VisualizarDataTableProducto();
     });
 
-    $('#UsuarioDataTable  tbody').on('click', 'tr', function () {
+    $('#ProductoDataTable  tbody').on('click', 'tr', function () {
         if ($(this).hasClass('selected')) {
             $(this).removeClass('selected');
         }
         else {
-            dataTableUsuario.$('tr.selected').removeClass('selected');
+            dataTableProducto.$('tr.selected').removeClass('selected');
             $(this).addClass('selected');
         }
     });
@@ -40,145 +42,115 @@ $(document).ready(function () {
         $("#Username").prop("disabled", false);
     });
 
-    $('#editarUsuario').on('click', function () {
-        rowUsuario = dataTableUsuario.row('.selected').data();
-        if (typeof rowUsuario === "undefined") {
+    $('#btnEditarProducto').on('click', function () {
+        rowProducto = dataTableProducto.row('.selected').data();
+        if (typeof rowProducto === "undefined") {
             webApp.showMessageDialog("Por favor seleccione un registro.");
         }
         else {
             checkSession(function () {
-                GetUsuarioById();
+                GetProductoById();
             });
         }
 
     });
 
     $('#eliminarUsuario').on('click', function () {
-        rowUsuario = dataTableUsuario.row('.selected').data();
-        if (typeof rowUsuario === "undefined") {
+        rowProducto = dataTableProducto.row('.selected').data();
+        if (typeof rowProducto === "undefined") {
             webApp.showMessageDialog("Por favor seleccione un registro.");
         }
         else {
             webApp.showDeleteConfirmDialog(function () {
                 checkSession(function () {
-                    EliminarUsuario();
+                    EliminarProducto();
                 });
             }, 'Se eliminará el registro. ¿Está seguro que desea continuar?');
         }
 
     });
 
-    $("#mostarPass").on('click', function () {
-        var allInputs = $("#Contrasena").get(0).type;
-        if (allInputs === 'text') {
-            $("#Contrasena").prop("type", "password");
-        }
-        if (allInputs === 'password') {
-            $("#Contrasena").prop("type", "text");
-        }
-    });
-
-    $("#mostarPassConf").on('click', function () {
-        var allInputs = $("#ContrasenaConf").get(0).type;
-        if (allInputs === 'text') {
-            $("#ContrasenaConf").prop("type", "password");
-        }
-        if (allInputs === 'password') {
-            $("#ContrasenaConf").prop("type", "text");
-        }
-    });
 
 
-    $("#btnSearchUsuario").on("click", function (e) {
-        if ($('#UsuarioSearchForm').valid()) {
+    $("#btnSearchProducto").on("click", function (e) {
+        if ($('#ProductoSearchForm').valid()) {
             checkSession(function () {
-                dataTableUsuario.ajax.reload();
+                dataTableProducto.ajax.reload();
             });
         }
         e.preventDefault();
     });
 
-    $("#btnGuardarUsuario").on("click", function (e) {
-
+    $("#btnGuardarProducto").on("click", function (e) {
         if ($('#' + formularioMantenimiento).valid()) {
-
-            ////webApp.showConfirmDialog(function () {
             checkSession(function () {
-                GuardarUsuario();
+                GuardarProducto();
             });
-            //});
         }
 
         e.preventDefault();
     });
 
-    webApp.validarLetrasEspacio(['Nombre', 'Apellido']);
-    $('#Correo').validCampoFranz('@abcdefghijklmnÃ±opqrstuvwxyz_1234567890.');
+    $("#Categoria").on("change", function (e) {
+        CargarLinea($(this).val().split(',')[0]);
+    
+    });
+    $("#Linea").on("change", function (e) {
+        CargarSubLineas($(this).val().split(',')[0]);
+    });
+
+    webApp.validarLetrasEspacio(['descripcion']);
 
     webApp.InicializarValidacion(formularioMantenimiento,
         {
-            Username: {
+            Categoria: {
                 required: true
 
             },
-            Contrasena: {
+            Linea: {
                 required: true
             },
-            ContrasenaConf: {
+            SubLinea: {
                 required: true
             },
-            Nombre: {
-                required: true,
-                noPasteAllowLetterAndSpace: true,
-                firstCharacterBeLetter: true
-            },
-            Apellido: {
-                required: true,
-                noPasteAllowLetterAndSpace: true,
-                firstCharacterBeLetter: true
-            },
-            CargoId: {
+            descripcion:{
                 required: true
             },
-            RolId: {
+            unidad: {
                 required: true
             }
         },
         {
-            Username: {
-                required: "Por favor ingrese Usuario.",
+            Categoria: {
+                required: "Por favor seleccione Categoria.",
 
             },
-            Contrasena: {
-                required: "Por favor ingrese Contraseña.",
+            Linea: {
+                required: "Por favor seleccione Linea.",
 
             },
-            ContrasenaConf: {
-                required: "Por favor confirme Contraseña.",
+            SubLinea: {
+                required: "Por favor seleccione Sub-Linea.",
 
             },
-            Nombre: {
-                required: "Por favor ingrese Nombre."
-            },
-            Apellido: {
-                required: "Por favor ingrese Apellido."
-            },
+            descripcion: {
+                required: "Por favor seleccione Descripción.",
 
-            CargoId: {
-                required: "Por favor seleccione Cargo."
             },
-            RolId: {
-                required: "Por favor seleccione Rol."
+            unidad: {
+                required: "Por favor seleccione Unidad medida.",
+
             }
         });
-    CargarCargo();
-    CargarRol();
-    CargarEstado();
+
+    CargarMedidas();
+    CargarClasificaciones();
+    CargarCategoria();
     $('[data-toggle="tooltip"]').tooltip();
 });
 
-function VisualizarDataTableUsuario() {
-    dataTableUsuario = $('#UsuarioDataTable').DataTable({
+function VisualizarDataTableProducto() {
+    dataTableProducto = $('#ProductoDataTable').DataTable({
         "bFilter": false,
         "bProcessing": true,
         "serverSide": true,
@@ -190,8 +162,8 @@ function VisualizarDataTableUsuario() {
                 request.filter = new Object();
 
                 request.filter = {
-                    UsernameSearch: $("#UsuarioSearch").val(),
-                    RolIdSearch: $("#RolIdSearch").val()
+                    codigoSearch: $("#Codigosearch").val(),
+                    descripcionSearch: $("#Descripcionsearch").val()
                 }
             },
             dataFilter: function (data) {
@@ -207,14 +179,17 @@ function VisualizarDataTableUsuario() {
         "bAutoWidth": false,
         "columns": [
             { "data": "Id" },
-            { "data": "Username" },
-            { "data": "Nombre" },
-            { "data": "Apellido" },
-            { "data": "Correo" },
-            { "data": "RolNombre" },
+            { "data": "prdc_vcod_producto" },
+            { "data": "prdc_vdescripcion" },
+            { "data": "ctgc_v_categoria" },
+            { "data": "linc_v_linea" },
+             { "data": "lind_v_sublinea" },
+            { "data": "tablc_v_iclasif_prod" },
+            { "data": "prdc_vorder_code" },
+            { "data": "umec_v_unidad_medida" },
             {
                 "data": function (obj) {
-                    if (obj.Estado == "1")
+                    if (obj.Estado == 1)
                         return '<span class="label label-info label-sm arrowed-in arrowed-in-right">Activo</span>';
                     else
                         return '<span class="label label-sm arrowed-in arrowed-in-right">Inactivo</span>';
@@ -229,7 +204,9 @@ function VisualizarDataTableUsuario() {
             { "className": "hidden-992", "aTargets": [3], "width": "18%" },
             { "className": "hidden-768", "aTargets": [4], "width": "20%" },
             { "className": "hidden-600", "aTargets": [5], "width": "10%" },
-            { "bSortable": false, "className": "hidden-480", "aTargets": [6], "width": "10%" }
+            { "className": "hidden-600", "aTargets": [6], "width": "10%" },
+            { "className": "hidden-1200", "aTargets": [7], "width": "10%" },
+            { "bSortable": false, "className": "hidden-480", "aTargets": [8], "width": "10%" }
 
         ],
         "order": [[1, "desc"]],
@@ -242,9 +219,9 @@ function VisualizarDataTableUsuario() {
     });
 }
 
-function GetUsuarioById() {
+function GetProductoById() {
     var modelView = {
-        Id: rowUsuario.Id
+        Id: rowProducto.Id
     };
 
     webApp.Ajax({
@@ -260,20 +237,28 @@ function GetUsuarioById() {
                 });
             } else {
                 LimpiarFormulario();
-                var usuario = response.Data;
-                $("#Username").val(usuario.Username);
-                $("#Nombre").val(usuario.Nombre);
-                $("#Apellido").val(usuario.Apellido);
-                $("#Correo").val(usuario.Correo);
-                $("#CargoId").val(usuario.CargoId);
-                $("#RolId").val(usuario.RolId);
-                $("#Estado").val(usuario.Estado);
-                $("#UsuarioId").val(usuario.Id);
-                $("#Contrasena").val(usuario.Password);
+                var producto = response.Data;
+                $("#Categoria").val(producto.ctgc_iid_categoria);
+                $("#Linea").val(producto.linc_iid_linea);
+                $("#SubLinea").val(producto.lind_iid_sublinea);
+                $("#correlativo").val(producto.prdc_vcod_producto.toString().substring(3,producto.prdc_vcod_producto.length));
+                $("#descripcion").val(producto.prdc_vdescripcion);
+                $("#clasificacion").val(producto.tablc_iid_iclasif_prod);
+                $("#stock").val(producto.prdc_dstock_minimo);
+                $("#precio").val(producto.prdc_dpeso_unitario);
+                $("#unidad").val(producto.umec_iid_unidad_medida);
+                $("#material").val(producto.prdc_vmaterial1);
+                $("#material2").val(producto.prdc_vmaterial2);
+                $("#EAN").val(producto.prdc_vcodigo_ean);
+                $("#UPC").val(producto.prdc_vcodigo_upc);
+                $("#orden").val(producto.prdc_vorder_code);
+                $("#color").val(producto.prdc_vcolor);
+                $("#serie").val(producto.prdc_vnumero_serie);
+                $("#ProductoId").val(producto.Id);
+                $("#textDescripcion").val(producto.prdc_vcaracteristicas);
                 $("#accionTitle").text('Editar');
-                $("#NuevoUsuario").modal("show");
-                $("#ContrasenaConf").val(usuario.ConfirmarPassword);
-                $("#Username").prop("disabled", true);
+                $("#NuevoProducto").modal("show");
+                
             }
 
         } else {
@@ -298,7 +283,7 @@ function GetUsuarioById() {
     });
 }
 
-function EliminarUsuario() {
+function EliminarProducto() {
     var modelView = {
         Id: rowUsuario.Id,
         UsuarioRegistro: $("#usernameLogOn strong").text()
@@ -317,8 +302,8 @@ function EliminarUsuario() {
                     class_name: 'gritter-warning gritter'
                 });
             } else {
-                $("#NuevoUsuario").modal("hide");
-                dataTableUsuario.row('.selected').remove().draw();
+                $("#NuevoProducto").modal("hide");
+                dataTableProducto.row('.selected').remove().draw();
                 $.gritter.add({
                     title: response.Title,
                     text: response.Message,
@@ -349,20 +334,29 @@ function EliminarUsuario() {
     delRowID = 0;
 }
 
-function GuardarUsuario() {
+function GuardarProducto() {
 
     var modelView = {
-        Id: $("#UsuarioId").val(),
-        Username: $("#Username").val(),
-        Password: $("#Contrasena").val(),
-        ConfirmarPassword: $("#ContrasenaConf").val(),
-        Nombre: $("#Nombre").val(),
-        Apellido: $("#Apellido").val(),
-        Correo: $("#Correo").val(),
-        CargoId: $("#CargoId").val(),
-        RolId: $("#RolId").val(),
-        Estado: $("#Estado").val(),
-        UsuarioRegistro: $("#usernameLogOn strong").text()
+        Id: $("#ProductoId").val(),
+        ctgc_iid_categoria: $("#Categoria").val().split(',')[0],
+        linc_iid_linea: $("#Linea").val().split(',')[0],
+        lind_iid_sublinea: $("#SubLinea").val().split(',')[0],
+        prdc_vcod_producto: $("#Categoria").val().split(',')[1] + '-' + $("#Linea").val().split(',')[1] + '-' + $("#SubLinea").val().split(',')[1],
+        prdc_vdescripcion: $("#descripcion").val(),
+        tablc_iid_iclasif_prod: $("#clasificacion").val(),
+        prdc_dstock_minimo: $("#stock").val(),
+        prdc_dpeso_unitario: $("#precio").val(),
+        umec_iid_unidad_medida: $("#unidad").val(),
+        prdc_vmaterial1: $("#material").val(),
+        prdc_vmaterial2: $("#material2").val(),
+        prdc_vcodigo_ean: $("#EAN").val(),
+        prdc_vcodigo_upc: $("#UPC").val(),
+        prdc_vorder_code: $("#orden").val(),
+        prdc_vcolor: $("#color").val(),
+        prdc_vnumero_serie: $("#serie").val(),
+        prdc_vcaracteristicas: $("#textDescripcion").val(),
+        UsuarioRegistro: $("#usernameLogOn strong").text(),
+        Estado:1
     };
 
     if (modelView.Id == 0)
@@ -382,8 +376,8 @@ function GuardarUsuario() {
                     class_name: 'gritter-warning gritter'
                 });
             } else {
-                $("#NuevoUsuario").modal("hide");
-                dataTableUsuario.ajax.reload();
+                $("#NuevoProducto").modal("hide");
+                dataTableProducto.ajax.reload();
                 $.gritter.add({
                     title: response.Title,
                     text: response.Message,
@@ -412,14 +406,12 @@ function GuardarUsuario() {
     });
 }
 
-function CargarCargo() {
-    var WhereFilter = {
-        idtabla: 2
-    };
+
+function CargarCategoria() {
+    $("#Categoria").empty();
     webApp.Ajax({
-        url: urlListaCargo + 'GetAll',
+        url: urlMantenimiento + 'ListarCategoria',
         async: false,
-        parametros: WhereFilter,
     }, function (response) {
         if (response.Success) {
 
@@ -431,7 +423,7 @@ function CargarCargo() {
                 });
             } else {
                 $.each(response.Data, function (index, item) {
-                    $("#CargoId").append('<option value="' + item.Id + '">' + item.tbpd_vdescripcion_detalle + '</option>');
+                    $("#Categoria").append('<option value="' + item.Id+','+item.ctgcc_vcod_categoria + '">' + item.ctgcc_vdescripcion + '</option>');
                 });
             }
         } else {
@@ -456,14 +448,108 @@ function CargarCargo() {
     });
 }
 
-function CargarRol() {
+
+function CargarLinea(Id) {
+    $("#Linea").empty();
     var WhereFilter = {
-        idtabla: 3
+        Id: Id
+    };
+    webApp.Ajax({
+        url: urlMantenimiento + 'ListarLinea',
+        async: false,
+        parametros: WhereFilter,
+    }, function (response) {
+        if (response.Success) {
+
+            if (response.Warning) {
+                $.gritter.add({
+                    title: 'Alerta',
+                    text: response.Message,
+                    class_name: 'gritter-warning gritter'
+                });
+            } else {
+                $.each(response.Data, function (index, item) {
+                    $("#Linea").append('<option value="' + item.Id+','+item.linc_vcod_linea  + '">' + item.linc_vdescripcion + '</option>');
+                });
+            }
+        } else {
+            $.gritter.add({
+                title: 'Error',
+                text: response.Message,
+                class_name: 'gritter-error gritter'
+            });
+        }
+    }, function (response) {
+        $.gritter.add({
+            title: 'Error',
+            text: response,
+            class_name: 'gritter-error gritter'
+        });
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        $.gritter.add({
+            title: 'Error',
+            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
+            class_name: 'gritter-error gritter'
+        });
+    });
+}
+
+
+function CargarSubLineas(Id) {
+    $("#SubLinea").empty();
+    var WhereFilter = {
+        Id: Id
+    };
+    webApp.Ajax({
+        url: urlMantenimiento + 'ListarSubLinea',
+        async: false,
+        parametros: WhereFilter,
+    }, function (response) {
+        if (response.Success) {
+
+            if (response.Warning) {
+                $.gritter.add({
+                    title: 'Alerta',
+                    text: response.Message,
+                    class_name: 'gritter-warning gritter'
+                });
+            } else {
+             
+                $.each(response.Data, function (index, item) {
+                    $("#SubLinea").append('<option value="' + item.Id + ',' + item.lind_vcod_sublinea + '">' + item.lind_vdescripcion + '</option>');
+                });
+            }
+        } else {
+            $.gritter.add({
+                title: 'Error',
+                text: response.Message,
+                class_name: 'gritter-error gritter'
+            });
+        }
+    }, function (response) {
+        $.gritter.add({
+            title: 'Error',
+            text: response,
+            class_name: 'gritter-error gritter'
+        });
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        $.gritter.add({
+            title: 'Error',
+            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
+            class_name: 'gritter-error gritter'
+        });
+    });
+}
+
+
+function CargarMedidas() {
+    var WhereFilter = {
+        idtabla: tablaUnidad
     };
     webApp.Ajax({
         url: urlMantenimiento + 'GetAll',
-        parametros: WhereFilter,
         async: false,
+        parametros: WhereFilter,
     }, function (response) {
         if (response.Success) {
 
@@ -474,12 +560,9 @@ function CargarRol() {
                     class_name: 'gritter-warning gritter'
                 });
             } else {
-                $("#RolIdSearch").append('<option value=""> - TODOS - </option>');
                 $.each(response.Data, function (index, item) {
-                    $("#RolId,#RolIdSearch").append('<option value="' + item.Id + '">' + item.tbpd_vdescripcion_detalle + '</option>');
+                    $("#unidad").append('<option value="' + item.Id + '">' + item.tbpd_vdescripcion_detalle + '</option>');
                 });
-                console.log(response.Data);
-                webApp.clearForm('UsuarioSearchForm');
             }
         } else {
             $.gritter.add({
@@ -503,9 +586,9 @@ function CargarRol() {
     });
 }
 
-function CargarEstado() {
+function CargarClasificaciones() {
     var modelView = {
-        idtabla: 1
+        idtabla: tablaClasificacion
     };
     webApp.Ajax({
         url: urlMantenimiento + 'GetAll',
@@ -522,7 +605,7 @@ function CargarEstado() {
                 });
             } else {
                 $.each(response.Data, function (index, item) {
-                    $("#Estado").append('<option value="' + item.Id + '">' + item.tbpd_vdescripcion_detalle + '</option>');
+                    $("#clasificacion").append('<option value="' + item.Id + '">' + item.tbpd_vdescripcion_detalle + '</option>');
                 });
                 webApp.clearForm('UsuarioSearchForm');
             }

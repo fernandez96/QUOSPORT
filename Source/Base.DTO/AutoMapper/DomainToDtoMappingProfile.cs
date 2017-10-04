@@ -32,6 +32,7 @@ namespace Base.DTO.AutoMapper
                              .ForMember(d => d.detalleSubLinea, x => x.MapFrom(p => p.detalleSubLinea));
             Mapper.CreateMap<Linea, LineaDTO>();
             Mapper.CreateMap<SubLinea, SubLineaDTO>();
+            Mapper.CreateMap<Producto, ProductoDTO>();
 
         }
     }

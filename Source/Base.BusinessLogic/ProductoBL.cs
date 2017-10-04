@@ -1,12 +1,34 @@
-﻿using System;
+﻿using Base.BusinessEntity;
+using Base.BusinessLogic.Interfaces;
+using Base.Common;
+using Base.Common.Generics;
+using Base.DataAccess;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Base.BusinessLogic
 {
-    public class ProductoBL
+    public class ProductoBL : Singleton<ProductoBL>,IProductoBL<Producto, int>
     {
+        public int Add(Producto entity)
+        {
+            return ProductoRepository.Instancia.Add(entity);
+        }
+        public int Delete(Producto entity)
+        {
+            return ProductoRepository.Instancia.Delete(entity);
+        }
+        public IList<Producto> GetAllPaging(PaginationParameter<int> paginationParameters)
+        {
+            return ProductoRepository.Instancia.GetAllPaging(paginationParameters);
+        }
+        public Producto GetById(Producto entity)
+        {
+            return ProductoRepository.Instancia.GetById(entity);
+        }
+        public int Update(Producto entity)
+        {
+            return ProductoRepository.Instancia.Update(entity);
+        }
     }
 }

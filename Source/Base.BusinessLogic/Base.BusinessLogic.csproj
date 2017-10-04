@@ -54,6 +54,7 @@
     <Compile Include="Interfaces\ILogBL.cs" />
     <Compile Include="Interfaces\IModeloBL.cs" />
     <Compile Include="Interfaces\IParametroBL.cs" />
+    <Compile Include="Interfaces\IProductoBL.cs" />
     <Compile Include="Interfaces\IReporteBL.cs" />
     <Compile Include="Interfaces\IRolBL.cs" />
     <Compile Include="Interfaces\ISeguridadBL.cs" />

@@ -491,6 +491,7 @@
     <Compile Include="Models\FormularioModel.cs" />
     <Compile Include="Models\JsTreeModel.cs" />
     <Compile Include="Models\ModuloFilterModel.cs" />
+    <Compile Include="Models\ProductoFilterModel.cs" />
     <Compile Include="Models\ReporteFilterModel.cs" />
     <Compile Include="Models\ReportePaginationModel.cs" />
     <Compile Include="Models\RolFilterModel.cs" />

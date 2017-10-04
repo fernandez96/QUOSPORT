@@ -380,6 +380,7 @@ namespace Base.Web.Controllers
             return Json(jsonResponse);
         }
 
+        [HttpPost]
         public JsonResult GetAll(int idtabla)
         {
             var jsonResponse = new JsonResponse { Success = true };

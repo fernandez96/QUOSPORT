@@ -11,10 +11,8 @@ namespace Base.DataAccess.Interfaces
     {
         Q Add(T entity);
         Q Update(T entity);
-        //Q Delete(T entity);
-        //T GetByIdLinea(T entity);
-        //T GetByIdSubLinea(T entity);
         T GetById(T entity);
+        IList<T> GetAll();
         IList<L> GetAllLinea(L entity);
         IList<S> GetAllSubLinea(S entity);
         IList<T> GetAllPaging(PaginationParameter<Q> paginationParameters);
