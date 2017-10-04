@@ -41,7 +41,7 @@
                     <!-- PAGE CONTENT BEGINS -->
                     <!-- PAGE CONTENT BEGINS -->
                     <div class="search-area well no-margin-bottom">
-                        <form id="TipoDocumentoSearchForm" role="form">
+                        <form id="ProductoSearchForm" role="form">
                             <div class="row">
                                 <div class="col-md-7">
                                     <div class="input-group">
@@ -52,7 +52,7 @@
                                         </div>
                                         <input type="text" class="form-control" name="Descripcionsearch" id="Descripcionsearch" placeholder="Descripción">
                                         <div class="input-group-btn">
-                                            <button type="button" id="btnSearchTipoDocumento" class="btn btn-success btn-sm">
+                                            <button type="button" id="btnSearchProducto" class="btn btn-success btn-sm">
                                                 <i class="ace-icon fa fa-search icon-on-right bigger-110 right"></i>Buscar
                                             </button>
                                         </div>
@@ -114,52 +114,7 @@
             <!-- FILTER BEGINS-->
             <!-- FILTER ENDS-->
 
-            <div id='NuevoTipoDocumento' tabindex='-1' role='dialog' aria-hidden='true' class='modal fade' data-backdrop='static' style='z-index:100000;'>
-                <div class='modal-dialog'>
-                    <div class='modal-content'>
-                        <div class='modal-header'>
-                            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class='modal-title'><span id='accionTitle_'></span> Tipo documento</h4>
-                        </div>
-                        <div class='modal-body'>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <!-- PAGE CONTENT BEGINS -->
-                                    <form class="form-horizontal" role="form" id="tipodocumentoForm">
-                                        <div class="form-group"></div>
-                                        <!-- #section:elements.form -->
-
-                                        <div class="form-group">
-                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="Usuario">Codigo </label>
-
-                                            <div class="col-xs-12 col-sm-9">
-                                                <div class="clearfix">
-                                                    <input type="text" id="codigo" autocomplete="off" name="codigo" placeholder="Codigo" maxlength="3" class="col-xs-12 col-sm-12" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="Nombre">Descripci&oacute;n </label>
-
-                                            <div class="col-xs-12 col-sm-9">
-                                                <div class="clearfix">
-                                                    <input type="text" id="descripcion" autocomplete="off" name="descripcion" placeholder="Descripción" maxlength="100" class="col-xs-12 col-sm-12" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <input type="hidden" name="UsuarioId" id="UsuarioId" value="0" />
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>
-                            <button class='btn btn-danger' data-dismiss='modal'><i class='fa fa-remove'></i> Cancelar</button>
-                            <button class='btn btn-success' id="btnGuardarTipodocumento"><i class='fa fa-floppy-o'></i> Guardar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+       
 
 
             <div id='NuevoProducto' tabindex='-1' role='dialog' aria-hidden='true' class='modal fade' data-backdrop='static' style='z-index:100000;'>
@@ -167,139 +122,195 @@
                     <div class='modal-content'>
                         <div class='modal-header'>
                             <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class='modal-title'><span id="accionTitle"></span> Producto <span id="idtable"></span></h4>
+                            <h4 class='modal-title'><i class="fa fa-sitemap" aria-hidden="true"></i> <span id="accionTitle"></span> Producto <span id="idtable"></span></h4>
                         </div>
                         <div class='modal-body'>
                             <div class="row">
                                 <div class="col-xs-12">
                                     <!-- PAGE CONTENT BEGINS -->
-                                    <br />
+                                   
                                     <div class="col-xs-11-97">
 
-                                        <div class="search-area well no-margin-bottom" style="margin-left:10px;">
-                                            <form id="TablaDetalleSearchForm" role="form">
-                                                <div class="row">
-                                                    <div class="clearfix">
-
-                                                        <a id="btnAgregarTablaDetalle" data-toggle="tooltip" class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Nuevo">
-                                                            <span><i class="fa fa-plus-circle bigger-110 blue"></i> </span>
-                                                        </a>
-
-                                                        <a id="btnEditarTablaDetalle" data-toggle="tooltip" class="dt-button buttons-copy buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Editar">
-                                                            <span><i class="fa fa-pencil bigger-110 pink"> </i> </span>
-                                                        </a>
-                                                        <a id="btnEliminarTablaDetalle" data-toggle="tooltip" class="dt-button buttons-csv buttons-html5 btn btn-white btn-primary btn-bold " tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Eliminar">
-                                                            <span><i class="fa fa-trash-o bigger-110 orange"></i></span>
-                                                        </a>
-                                                    </div>
-
-                                                </div>
-                                            </form>
-                                        </div>
+                                      
                                         <!-- PAGE CONTENT BEGINS -->
-                                   
-                                        <div class="col-xs-12 col-sm-4">
-                                            <div class="space"></div>
+                                        <div class="page-header">
+                                            <h4>
+                                                Producto
+                                                <small>
+                                                    <i class="ace-icon fa fa-angle-double-right"></i>
+                                                   Registra los datos generales
+                                                    @*<a style="right:0px;" id="btnAgregarTablaDetalle" data-toggle="tooltip" class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Nuevo">
+                                                        <span><i class="fa fa-plus-circle bigger-110 blue"></i> </span>
+                                                    </a>*@
+                                                </small>
 
-                                            <label class="ace-file-input ace-file-multiple">
-                                                <input type="file"><span class="ace-file-container"
-                                                                         data-title="Soltar archivos aquí o haga clic para elegir">
-                                                    <span class="ace-file-name" data-title="No File ...">
-                                                        <i class="ace-icon ace-icon fa fa-cloud-upload">
-                                                        </i>
-                                                    </span>
-                                                </span><a class="remove" href="#">
-                                                    <i class="ace-icon fa fa-times"></i>
-                                                </a>
-                                            </label>
+                                            </h4>
+                                        
                                         </div>
-                                        <div class="col-xs-12 col-sm-7">
-                                            <form class="form-horizontal" role="form" id="UsuarioForm">
+
+                                        <div class="col-xs-12">
+                                            <form class="form-horizontal" role="form" id="ProductoForm">
                                                 <div class="form-group"></div>
-                                                <!-- #section:elements.form -->
                                                 <div class="form-group">
-                                                    <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="Categoria">Categoria </label>
+                                                    <div class="col-xs-12">
+                                                        <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="Categoria">Categoria </label>
 
-                                                    <div class="col-xs-12 col-sm-9">
-                                                        <div class="clearfix">
-                                                            <select id="Categoria" name="Categoria" class="col-xs-12 col-sm-12"></select>
+                                                        <div class="col-xs-3">
+                                                            <div class="clearfix">
+                                                                <select id="Categoria" name="Categoria" class="col-xs-12 col-sm-12"></select>
+                                                            </div>
                                                         </div>
+                                                        <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="Linea">Linea </label>
+                                                        <div class="col-xs-3">
+                                                            <div class="clearfix">
+                                                                <select id="Linea" name="Linea" class="col-xs-12 col-sm-12"></select>
+                                                            </div>
+                                                        </div>
+                                                        <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="SubLinea">Sub-Linea </label>
+                                                        <div class="col-xs-3">
+                                                            <div class="clearfix">
+                                                                <select id="SubLinea" name="SubLinea" class="col-xs-12 col-sm-12"></select>
+                                                            </div>
+                                                        </div>
+                                                        @*<label class="col-xs-2 col-sm-1 no-padding-left" for="correlativo">N° Item </label>
+                                                        <div class="col-xs-3">
+                                                            <div class="clearfix">
+                                                                <input type="text" id="correlativo"  autocomplete="off" name="correlativo" placeholder="000" disabled="disabled" maxlength="100" class="col-xs-12 col-sm-12"  />
+                                                            </div>
+                                                        </div>*@
                                                     </div>
                                                 </div>
-
                                                 <div class="form-group">
-                                                    <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="Linea">Linea </label>
-
-                                                    <div class="col-xs-12 col-sm-9">
-                                                        <div class="clearfix">
-                                                            <select id="Linea" name="Linea" class="col-xs-12 col-sm-12"></select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="SubLinea">Sub-Linea </label>
-
-                                                    <div class="col-xs-12 col-sm-9">
-                                                        <div class="clearfix">
-                                                            <select id="SubLinea" name="SubLinea" class="col-xs-12 col-sm-12"></select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="descripcion">Descripci&oacute;n </label>
-
-                                                    <div class="col-xs-12 col-sm-9">
+                                                    <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="descripcion">Descripci&oacute;n </label>
+                                                    <div class="col-xs-10">
                                                         <div class="clearfix">
                                                             <input type="text" id="descripcion" autocomplete="off" name="descripcion" placeholder="Descripción" maxlength="100" class="col-xs-12 col-sm-12" />
+                                                        </div>
+                                                    </div>
+                                              
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-xs-2 col-sm-1 no-padding-right" for="clasificacion">Clasificaci&oacute;n</label>
+
+                                                    <div class="col-xs-10">
+                                                        <div class="clearfix">
+                                                            <select id="clasificacion" name="clasificacion" class="col-xs-12 col-sm-12"></select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-xs-12">
+                                                        <label class="col-xs-2 col-sm-1 no-padding-left" for="stock">Stock minimo </label>
+
+                                                        <div class="col-xs-3">
+                                                            <div class="clearfix">
+                                                                <input type="text" id="stock" autocomplete="off" name="stock" placeholder="00.00" maxlength="100" class="col-xs-12 col-sm-12" />
+
+                                                            </div>
+                                                        </div>
+                                                        <label class="col-xs-2 col-sm-1 no-padding-left" for="precio">P Unitario</label>
+                                                        <div class="col-xs-3">
+
+                                                            <div class="clearfix">
+                                                                <span class="input-icon">
+                                                                    <input type="text" id="precio" autocomplete="off" name="precio" placeholder="00.00" maxlength="100" class="col-xs-12 col-sm-12" />
+
+                                                                    <i class="ace-icon fa fa-usd" aria-hidden="true"></i>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="unidad">Unidad </label>
+                                                        <div class="col-xs-3">
+                                                            <div class="clearfix">
+                                                                <select id="unidad" name="unidad" class="col-xs-12 col-sm-12"></select>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-xs-12">
+                                                        <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="material">Material </label>
+                                                        <div class="col-xs-5">
+                                                            <div class="clearfix">
+                                                                <input type="text" id="material" autocomplete="off" name="material" placeholder="Material" maxlength="100" class="col-xs-1 col-sm-12" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-6">
+                                                            <div class="clearfix">
+                                                                <input type="text" id="material2" autocomplete="off" name="material2" placeholder="Material" maxlength="100" class="col-xs-12 col-sm-12" />
+                                                            </div>
 
                                                         </div>
                                                     </div>
                                                 </div>
-                                        
-                                                <input type="hidden" name="UsuarioId" id="UsuarioId" value="0" />
+                                                <div class="form-group">
+                                                    <div class="col-xs-12">
+                                                        <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="descripcion">EAN </label>
 
+                                                        <div class="col-xs-3">
+                                                            <div class="clearfix">
+                                                                <input type="text" id="EAN" autocomplete="off" name="EAN" placeholder="EAN" maxlength="100" class="col-xs-12 col-sm-12" />
+
+                                                            </div>
+                                                        </div>
+                                                        <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="descripcion">UPC </label>
+                                                        <div class="col-xs-3">
+                                                            <div class="clearfix">
+                                                                <input type="text" id="UPC" autocomplete="off" name="UPC" placeholder="UPC" maxlength="100" class="col-xs-12 col-sm-12" />
+
+                                                            </div>
+                                                        </div>
+                                                        <label class="control-label col-xs-3 col-sm-1 no-padding-left" for="orden">Orden code </label>
+                                                        <div class="col-xs-3">
+                                                            <div class="clearfix">
+                                                                <input type="text" id="orden" autocomplete="off" name="orden" placeholder="Orden code" maxlength="100" class="col-xs-12 col-sm-12" />
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-xs-12">
+                                                        <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="color">Color </label>
+
+                                                        <div class="col-xs-5">
+                                                            <div class="clearfix">
+                                                                <input type="text" id="color" autocomplete="off" name="color" placeholder="Color" maxlength="100" class="col-xs-12 col-sm-12" />
+
+                                                            </div>
+                                                        </div>
+                                                        <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="serie">N° serie </label>
+                                                        <div class="col-xs-5">
+                                                            <div class="clearfix">
+                                                                <input type="text" id="serie" autocomplete="off" name="serie" placeholder="Numero serie" maxlength="100" class="col-xs-12 col-sm-12" />
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-xs-1 col-sm-2 no-padding-left" for="textDescripcion">Caracteristicas</label>
+
+                                                    <div class="col-xs-12">
+                                                        <div class="clearfix">
+                                                            <textarea class="col-xs-12 limited" id="textDescripcion" maxlength="300"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="ProductoId" id="ProductoId" value="0" />
+                                                <div class="form-group"></div>
+                                                <!-- #section:elements.form -->                    
                                             </form>
-
                                         </div>
-                                        <div class="col-xs-12 col-sm-7">
-                                            <div class="form-group">
-                                                <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="descripcion">Stock minimo </label>
-
-                                                <div class="col-xs-4">
-                                                    <div class="clearfix">
-                                                        <input type="text" id="descripcion" autocomplete="off" name="descripcion" placeholder="Descripción" maxlength="100" class="col-xs-4 col-sm-6" />
-
-                                                    </div>
-                                                </div>
-                                                <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="descripcion">Precio Unitarion </label>
-                                                <div class="col-xs-4">
-                                                    <div class="clearfix">
-                                                        <input type="text" id="descripcion" autocomplete="off" name="descripcion" placeholder="Descripción" maxlength="100" class="col-xs-4 col-sm-6" />
-
-                                                    </div>
-                                                </div>
-                                                <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="descripcion">Unidad </label>
-                                                <div class="col-xs-4">
-                                                    <div class="clearfix">
-                                                        <input type="text" id="descripcion" autocomplete="off" name="descripcion" placeholder="Descripción" maxlength="100" class="col-xs-4 col-sm-4" />
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                  
-                                           </div>
                                         </div>
-
-
-
                                     </div>
                                 </div>
                             </div>
                             <div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>
                                 <button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-close'></i> Salir</button>
-                                <button class='btn btn-primary btn-sm' id="btnGuardarTipodocumento"><i class='fa fa-floppy-o'></i> Guardar</button>
+                                <button class='btn btn-primary btn-sm' id="btnGuardarProducto"><i class='fa fa-floppy-o'></i> Guardar</button>
 
                             </div>
                         </div>
