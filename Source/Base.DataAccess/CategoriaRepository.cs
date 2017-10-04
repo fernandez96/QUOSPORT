@@ -331,6 +331,30 @@ namespace Base.DataAccess
 
             return linea;
         }
+
+        public IList<Linea> AllLinea()
+        {
+            List<Linea> linea = new List<Linea>();
+            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_LINEA_PRODUCTO_CAB_All")))
+            {
+                using (var lector = _database.ExecuteReader(comando))
+                {
+                    while (lector.Read())
+                    {
+                        linea.Add(new Linea
+                        {
+                            Id = lector.IsDBNull(lector.GetOrdinal("linc_iid_linea")) ? default(int) : lector.GetInt32(lector.GetOrdinal("linc_iid_linea")),
+                            ctgcc_iid_categoria = lector.IsDBNull(lector.GetOrdinal("ctgcc_iid_categoria")) ? default(int) : lector.GetInt32(lector.GetOrdinal("ctgcc_iid_categoria")),
+                            linc_vcod_linea = lector.IsDBNull(lector.GetOrdinal("linc_vcod_linea")) ? default(string) : lector.GetString(lector.GetOrdinal("linc_vcod_linea")),
+                            linc_vdescripcion = lector.IsDBNull(lector.GetOrdinal("linc_vdescripcion")) ? default(string) : lector.GetString(lector.GetOrdinal("linc_vdescripcion")),
+                            Estado = lector.IsDBNull(lector.GetOrdinal("linc_iflag_estado")) ? default(int) : lector.GetInt32(lector.GetOrdinal("linc_iflag_estado")),
+                        });
+                    }
+                }
+            }
+
+            return linea;
+        }
         public IList<SubLinea> GetAllSubLinea(SubLinea entity)
         {
             List<SubLinea> subLinea = new List<SubLinea>();
@@ -356,7 +380,31 @@ namespace Base.DataAccess
 
             return subLinea;
         }
+        public IList<SubLinea> AllSubLinea()
+        {
+            List<SubLinea> subLinea = new List<SubLinea>();
+            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_LINEA_PRODUCTO_DET_All")))
+            {
 
+                using (var lector = _database.ExecuteReader(comando))
+                {
+                    while (lector.Read())
+                    {
+                        subLinea.Add(new SubLinea
+                        {
+                            Id = lector.IsDBNull(lector.GetOrdinal("lind_iid_sublinea")) ? default(int) : lector.GetInt32(lector.GetOrdinal("lind_iid_sublinea")),
+                            linc_iid_linea = lector.IsDBNull(lector.GetOrdinal("linc_iid_linea")) ? default(int) : lector.GetInt32(lector.GetOrdinal("linc_iid_linea")),
+                            idLinea = lector.IsDBNull(lector.GetOrdinal("linc_iid_linea")) ? default(int) : lector.GetInt32(lector.GetOrdinal("linc_iid_linea")),
+                            lind_vcod_sublinea = lector.IsDBNull(lector.GetOrdinal("lind_vcod_sublinea")) ? default(string) : lector.GetString(lector.GetOrdinal("lind_vcod_sublinea")),
+                            lind_vdescripcion = lector.IsDBNull(lector.GetOrdinal("lind_vdescripcion")) ? default(string) : lector.GetString(lector.GetOrdinal("lind_vdescripcion")),
+                            Estado = lector.IsDBNull(lector.GetOrdinal("lind_iflag_estado")) ? default(int) : lector.GetInt32(lector.GetOrdinal("lind_iflag_estado")),
+                        });
+                    }
+                }
+            }
+
+            return subLinea;
+        }
         public Categoria GetById(Categoria entity)
         {
             Categoria categoria = null;

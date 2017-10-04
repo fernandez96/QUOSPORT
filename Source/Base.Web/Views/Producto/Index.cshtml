@@ -43,14 +43,14 @@
                     <div class="search-area well no-margin-bottom">
                         <form id="ProductoSearchForm" role="form">
                             <div class="row">
-                                <div class="col-md-7">
+                                <div class="col-md-10">
                                     <div class="input-group">
-
-                                        <input type="text" class="form-control" name="Codigosearch" id="Codigosearch" placeholder="Codigo">
+                                       
+                                        @*<input type="text" class="form-control" name="Codigosearch" id="Codigosearch" placeholder="Codigo">*@
                                         <div class="input-group-btn">
 
                                         </div>
-                                        <input type="text" class="form-control" name="Descripcionsearch" id="Descripcionsearch" placeholder="Descripción">
+                                        <input type="text" class="form-control" name="Descripcionsearch" id="Descripcionsearch" placeholder="Nombre">
                                         <div class="input-group-btn">
                                             <button type="button" id="btnSearchProducto" class="btn btn-success btn-sm">
                                                 <i class="ace-icon fa fa-search icon-on-right bigger-110 right"></i>Buscar
@@ -93,8 +93,8 @@
                                     <thead>
                                         <tr>
                                             <th>Id</th>
-                                            <th class="hidden-120 center">Codigo</th>
-                                            <th class="hidden-120">Descripci&oacute;n</th>
+                                            @*<th class="hidden-120 center">Codigo</th>*@
+                                            <th class="hidden-120">Nombre</th>
                                             <th class="hidden-480">Categoria</th>
                                             <th class="hidden-480">Linea</th>
                                             <th class="hidden-600">Su-Linea</th>
@@ -212,11 +212,7 @@
                                                         <div class="col-xs-3">
 
                                                             <div class="clearfix">
-                                                                <span class="input-icon">
                                                                     <input type="text" id="precio" autocomplete="off" name="precio" placeholder="00.00" maxlength="100" class="col-xs-12 col-sm-12" />
-
-                                                                    <i class="ace-icon fa fa-usd" aria-hidden="true"></i>
-                                                                </span>
                                                             </div>
                                                         </div>
                                                         <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="unidad">Unidad </label>

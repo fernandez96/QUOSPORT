@@ -303,13 +303,13 @@ namespace Base.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult ListarLinea(LineaDTO lineaDTO)
+        public JsonResult ListarLinea()
         {
             var jsonResponse = new JsonResponse { Success = true };
             try
             {
-                var linea = MapperHelper.Map<LineaDTO, Linea>(lineaDTO);
-                var lineaList = CategoriaBL.Instancia.GetAllLinea(linea);
+           
+                var lineaList = CategoriaBL.Instancia.AllLinea();
                 var lineaDTOList = MapperHelper.Map<IEnumerable<Linea>, IEnumerable<LineaDTO>>(lineaList);
 
                 if (lineaDTOList.Count() > 0)
@@ -329,13 +329,13 @@ namespace Base.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult ListarSubLinea(SubLineaDTO sublineaDTO)
+        public JsonResult ListarSubLinea()
         {
             var jsonResponse = new JsonResponse { Success = true };
             try
             {
-                var sublinea = MapperHelper.Map<SubLineaDTO, SubLinea>(sublineaDTO);
-                var sublineaList = CategoriaBL.Instancia.GetAllSubLinea(sublinea);
+     
+                var sublineaList = CategoriaBL.Instancia.AllSubLinea();
                 var sublineaDTOList = MapperHelper.Map<IEnumerable<SubLinea>, IEnumerable<SubLineaDTO>>(sublineaList);
                 if (sublineaDTOList.Count() > 0)
                 {

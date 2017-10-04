@@ -136,7 +136,7 @@ var webApp = function () {
     }; 
     
     var createLoading = function () {
-        var urlImgLoading = location.protocol + "//" + location.host + "EmailingSite/Content/images/loading.gif";
+        var urlImgLoading = location.protocol + "//" + location.host + "/Content/images/loading.gif";
         $("body").append('<div id="' + _popupEspera + '" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade" data-backdrop="static" style="z-index:100000;"><div class="modal-dialog"><div class="modal-content"><div class="modal-body"><h4 class="text-center"> ' + _mensajeEspera + '</h4></div></div></div></div>');
     };    
 	

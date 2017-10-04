@@ -15,6 +15,8 @@ namespace Base.BusinessLogic.Interfaces
         IList<T> GetAll();
         IList<L> GetAllLinea(L entity);
         IList<S> GetAllSubLinea(S entity);
+        IList<L> AllLinea();
+        IList<S> AllSubLinea();
         IList<T> GetAllPaging(PaginationParameter<Q> paginationParameters);
     }
 }

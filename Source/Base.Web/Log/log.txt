@@ -4297,3 +4297,87 @@ Base.DTO.LineaDTO Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngin
 2017-10-03 23:25:11,984 ERROR  - Mensaje: Ya existe la Categoria de producto SUUNTO SPARTAN TRAINER WRIST HR STEEL Trace:    en Base.DataAccess.CategoriaRepository.Add(Categoria entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\CategoriaRepository.cs:línea 105
    en Base.BusinessLogic.CategoriaBL.Add(Categoria entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\CategoriaBL.cs:línea 18
    en Base.Web.Controllers.CategoriaLineaSublineaController.Add(CategoriaDTO categoriaDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 114
+2017-10-04 09:38:55,166 ERROR  - Mensaje: Invalid column name 'function'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProductoRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProductoRepository.cs:línea 81
+   en Base.BusinessLogic.ProductoBL.GetAllPaging(PaginationParameter`1 paginationParameters) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProductoBL.cs:línea 23
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 32
+2017-10-04 18:03:45,728 ERROR  - Mensaje: Invalid column name 'ctgcc_iid_categoria'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProductoRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProductoRepository.cs:línea 81
+   en Base.BusinessLogic.ProductoBL.GetAllPaging(PaginationParameter`1 paginationParameters) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProductoBL.cs:línea 23
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 32
+2017-10-04 18:04:54,863 ERROR  - Mensaje: Invalid column name 'ctgcc_iid_categoria'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProductoRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProductoRepository.cs:línea 81
+   en Base.BusinessLogic.ProductoBL.GetAllPaging(PaginationParameter`1 paginationParameters) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProductoBL.cs:línea 23
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 32
+2017-10-04 18:04:56,076 ERROR  - Mensaje: Invalid column name 'ctgcc_iid_categoria'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProductoRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProductoRepository.cs:línea 81
+   en Base.BusinessLogic.ProductoBL.GetAllPaging(PaginationParameter`1 paginationParameters) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProductoBL.cs:línea 23
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 32
+2017-10-04 18:04:56,671 ERROR  - Mensaje: Invalid column name 'ctgcc_iid_categoria'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProductoRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProductoRepository.cs:línea 81
+   en Base.BusinessLogic.ProductoBL.GetAllPaging(PaginationParameter`1 paginationParameters) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProductoBL.cs:línea 23
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 32
+2017-10-04 18:06:21,774 ERROR  - Mensaje: Invalid column name 'ctgcc_iid_categoria'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProductoRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProductoRepository.cs:línea 81
+   en Base.BusinessLogic.ProductoBL.GetAllPaging(PaginationParameter`1 paginationParameters) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProductoBL.cs:línea 23
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 32

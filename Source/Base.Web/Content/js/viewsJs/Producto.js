@@ -8,6 +8,9 @@ var urlMantenimiento = baseUrl + 'Producto/';
 var rowProducto = null;
 var tablaUnidad = 5;
 var tablaClasificacion = 6;
+var Categoria = new Array();
+var Linea = new Array();
+var SubLinea = new Array();
 
 
 $(document).ready(function () {
@@ -49,9 +52,15 @@ $(document).ready(function () {
             webApp.showMessageDialog("Por favor seleccione un registro.");
         }
         else {
-            checkSession(function () {
-                GetProductoById();
-            });
+            if (rowProducto.Estado==2) {
+                webApp.showMessageDialog("El Producto " + '<b>'+ rowProducto.prdc_vdescripcion +'</b>' +" se encuentra inactivo.");
+            } else {
+                checkSession(function () {
+                    $("#Linea").empty();
+                    $("#SubLinea").empty();
+                    GetProductoById();
+                });
+            }          
         }
 
     });
@@ -88,16 +97,26 @@ $(document).ready(function () {
                 GuardarProducto();
             });
         }
-
         e.preventDefault();
     });
 
     $("#Categoria").on("change", function (e) {
-        CargarLinea($(this).val().split(',')[0]);
-    
+        var id = $(this).val().split(',')[0]
+        $("#Linea").empty();
+        $.each(Linea, function (index, item) {
+            if (item.ctgcc_iid_categoria === parseInt(id)) {
+                $("#Linea").append('<option value="' + item.Id + ',' + item.linc_vcod_linea + '">' + item.linc_vdescripcion + '</option>');
+            }
+        });
     });
     $("#Linea").on("change", function (e) {
-        CargarSubLineas($(this).val().split(',')[0]);
+        var id= $(this).val().split(',')[0];
+        $("#SubLinea").empty();
+        $.each(SubLinea, function (index, item) {
+            if (item.idLinea ===parseInt(id)) {
+                $("#SubLinea").append('<option value="' + item.Id + ',' + item.lind_vcod_sublinea + '">' + item.lind_vdescripcion + '</option>');
+            }
+        });
     });
 
     webApp.validarLetrasEspacio(['descripcion']);
@@ -106,7 +125,6 @@ $(document).ready(function () {
         {
             Categoria: {
                 required: true
-
             },
             Linea: {
                 required: true
@@ -124,11 +142,9 @@ $(document).ready(function () {
         {
             Categoria: {
                 required: "Por favor seleccione Categoria.",
-
             },
             Linea: {
                 required: "Por favor seleccione Linea.",
-
             },
             SubLinea: {
                 required: "Por favor seleccione Sub-Linea.",
@@ -136,7 +152,6 @@ $(document).ready(function () {
             },
             descripcion: {
                 required: "Por favor seleccione Descripción.",
-
             },
             unidad: {
                 required: "Por favor seleccione Unidad medida.",
@@ -147,6 +162,8 @@ $(document).ready(function () {
     CargarMedidas();
     CargarClasificaciones();
     CargarCategoria();
+    CargarLinea();
+    CargarSubLineas();
     CargarEstado();
     $('[data-toggle="tooltip"]').tooltip();
 });
@@ -181,7 +198,7 @@ function VisualizarDataTableProducto() {
         "bAutoWidth": false,
         "columns": [
             { "data": "Id" },
-            { "data": "prdc_vcod_producto" },
+            //{ "data": "prdc_vcod_producto" },
             { "data": "prdc_vdescripcion" },
             { "data": "ctgc_v_categoria" },
             { "data": "linc_v_linea" },
@@ -204,14 +221,15 @@ function VisualizarDataTableProducto() {
         "aoColumnDefs": [
 
             { "bVisible": false, "aTargets": [0] },
-            { "className": "hidden-120", "aTargets": [1], "width": "10%" },
-            { "className": "hidden-120", "aTargets": [2], "width": "18%" },
-            { "className": "hidden-992", "aTargets": [3], "width": "18%" },
-            { "className": "hidden-768", "aTargets": [4], "width": "20%" },
+            //{ "className": "hidden-120", "aTargets": [1], "width": "10%" },
+            { "className": "hidden-120", "aTargets": [1], "width": "20%" },
+            { "className": "hidden-992", "aTargets": [2], "width": "12%" },
+            { "className": "hidden-768", "aTargets": [3], "width": "12%" },
+            { "className": "hidden-600", "aTargets": [4], "width": "12%" },
             { "className": "hidden-600", "aTargets": [5], "width": "10%" },
-            { "className": "hidden-600", "aTargets": [6], "width": "10%" },
-            { "className": "hidden-1200", "aTargets": [7], "width": "10%" },
-            { "bSortable": false, "className": "hidden-480", "aTargets": [8], "width": "10%" }
+            { "className": "hidden-1200", "aTargets": [6], "width": "10%" },
+              { "className": "hidden-1200", "aTargets": [7], "width": "7%" },
+            { "bSortable": false, "className": "hidden-480", "aTargets": [8], "width": "7%" }
 
         ],
         "order": [[1, "desc"]],
@@ -243,9 +261,38 @@ function GetProductoById() {
             } else {
                 LimpiarFormulario();
                 var producto = response.Data;
-                $("#Categoria").val(producto.ctgc_iid_categoria);
-                $("#Linea").val(producto.linc_iid_linea);
-                $("#SubLinea").val(producto.lind_iid_sublinea);
+       
+                Categoria.filter(function(obj){
+                    if (obj.Id===producto.ctgc_iid_categoria) {
+                        $("#Categoria").val(producto.ctgc_iid_categoria + ',' + obj.ctgcc_vcod_categoria);
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                });
+
+                Linea.filter(function (obj) {
+                    if (obj.ctgcc_iid_categoria === producto.ctgc_iid_categoria && obj.Id === producto.linc_iid_linea) {
+                        $("#Linea").append('<option value="' + producto.linc_iid_linea + ',' + obj.linc_vcod_linea + '">' + obj.linc_vdescripcion + '</option>');
+                        $("#Linea").val(producto.linc_iid_linea + ',' + obj.linc_vcod_linea);
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                });
+
+                SubLinea.filter(function (obj) {
+                    if (obj.idLinea === producto.linc_iid_linea && obj.Id === producto.lind_iid_sublinea) {
+                        $("#SubLinea").append('<option value="' + producto.lind_iid_sublinea + ',' + obj.lind_vcod_sublinea + '">' + obj.lind_vdescripcion + '</option>');
+                        $("#SubLinea").val(producto.lind_iid_sublinea + ',' + obj.lind_vcod_sublinea);
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                });
                 $("#correlativo").val(producto.prdc_vcod_producto.toString().substring(3,producto.prdc_vcod_producto.length));
                 $("#descripcion").val(producto.prdc_vdescripcion);
                 $("#clasificacion").val(producto.tablc_iid_iclasif_prod);
@@ -364,7 +411,6 @@ function GuardarProducto() {
         UsuarioRegistro: $("#usernameLogOn strong").text(),
         Estado:$("#Estado").val()
     };
-
     if (modelView.Id == 0)
         action = 'Add';
     else
@@ -412,7 +458,6 @@ function GuardarProducto() {
     });
 }
 
-
 function CargarCategoria() {
     $("#Categoria").empty();
     webApp.Ajax({
@@ -431,6 +476,7 @@ function CargarCategoria() {
                 $.each(response.Data, function (index, item) {
                     $("#Categoria").append('<option value="' + item.Id+','+item.ctgcc_vcod_categoria + '">' + item.ctgcc_vdescripcion + '</option>');
                 });
+                Categoria = response.Data;
             }
         } else {
             $.gritter.add({
@@ -454,16 +500,13 @@ function CargarCategoria() {
     });
 }
 
-
-function CargarLinea(Id) {
+function CargarLinea() {
     $("#Linea").empty();
-    var WhereFilter = {
-        Id: Id
-    };
+    Linea.length = 0;
     webApp.Ajax({
         url: urlMantenimiento + 'ListarLinea',
         async: false,
-        parametros: WhereFilter,
+
     }, function (response) {
         if (response.Success) {
 
@@ -474,9 +517,8 @@ function CargarLinea(Id) {
                     class_name: 'gritter-warning gritter'
                 });
             } else {
-                $.each(response.Data, function (index, item) {
-                    $("#Linea").append('<option value="' + item.Id+','+item.linc_vcod_linea  + '">' + item.linc_vdescripcion + '</option>');
-                });
+              
+                Linea = response.Data;
             }
         } else {
             $.gritter.add({
@@ -500,16 +542,13 @@ function CargarLinea(Id) {
     });
 }
 
-
-function CargarSubLineas(Id) {
+function CargarSubLineas() {
     $("#SubLinea").empty();
-    var WhereFilter = {
-        Id: Id
-    };
+    SubLinea.length = 0;
     webApp.Ajax({
         url: urlMantenimiento + 'ListarSubLinea',
         async: false,
-        parametros: WhereFilter,
+   
     }, function (response) {
         if (response.Success) {
 
@@ -519,11 +558,8 @@ function CargarSubLineas(Id) {
                     text: response.Message,
                     class_name: 'gritter-warning gritter'
                 });
-            } else {
-             
-                $.each(response.Data, function (index, item) {
-                    $("#SubLinea").append('<option value="' + item.Id + ',' + item.lind_vcod_sublinea + '">' + item.lind_vdescripcion + '</option>');
-                });
+            } else {  
+                SubLinea = response.Data;
             }
         } else {
             $.gritter.add({
@@ -546,7 +582,6 @@ function CargarSubLineas(Id) {
         });
     });
 }
-
 
 function CargarMedidas() {
     var WhereFilter = {
@@ -637,7 +672,6 @@ function CargarClasificaciones() {
     });
 }
 
-
 function CargarEstado() {
     var modelView = {
         idtabla: 1
@@ -681,6 +715,7 @@ function CargarEstado() {
         });
     });
 }
+
 function AddSearchFilter() {
     $("#UsuarioDataTable_wrapper").prepend($("#searchFilterDiv").html());
 }

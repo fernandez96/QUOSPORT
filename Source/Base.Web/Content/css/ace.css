@@ -8781,7 +8781,7 @@ input[type="color"] {
   border-radius: 7px !important;
   color: #858585;
   background-color: #ffffff;
-  border: 1px solid #d5d5d5;
+  /*border: 1px solid #d5d5d5;*/
   padding: 3px 5px 3px;
   font-size: 12px;
   font-family: inherit;
@@ -8828,7 +8828,7 @@ input[type="tel"]:focus,
 input[type="color"]:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
-  color: #696969;
+  color: #ffffff;
   border-color: #f59942;
   background-color: #ffffff;
   outline: none;
@@ -8860,7 +8860,7 @@ select {
   color: #858585;
   background-color: #ffffff;
   border: 0px solid #d5d5d5;
-     border-bottom: 1px solid rgba(67, 142, 185, 0.51);
+  border-bottom: 1px solid rgba(67, 142, 185, 0.51);
 
 }
 .form-control:focus,

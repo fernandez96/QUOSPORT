@@ -14,6 +14,8 @@ namespace Base.DataAccess.Interfaces
         T GetById(T entity);
         IList<T> GetAll();
         IList<L> GetAllLinea(L entity);
+        IList<L> AllLinea();
+        IList<S> AllSubLinea();
         IList<S> GetAllSubLinea(S entity);
         IList<T> GetAllPaging(PaginationParameter<Q> paginationParameters);
     }
