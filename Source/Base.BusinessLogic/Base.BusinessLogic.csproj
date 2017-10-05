@@ -58,6 +58,7 @@
     <Compile Include="Interfaces\IReporteBL.cs" />
     <Compile Include="Interfaces\IRolBL.cs" />
     <Compile Include="Interfaces\ISeguridadBL.cs" />
+    <Compile Include="Interfaces\IStatusBL.cs" />
     <Compile Include="Interfaces\ITablaRegistroBL.cs" />
     <Compile Include="Interfaces\ITipoDocumentoBL.cs" />
     <Compile Include="Interfaces\IUnidadMedidaBL.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="ReporteBL.cs" />
     <Compile Include="RolBL.cs" />
     <Compile Include="SeguridadBL.cs" />
+    <Compile Include="StatusBL.cs" />
     <Compile Include="TablaRegistroBL.cs" />
     <Compile Include="TipoDocumentoBL.cs" />
     <Compile Include="UnidadMedidaBL.cs" />

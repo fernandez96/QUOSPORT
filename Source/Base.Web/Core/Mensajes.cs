@@ -9,8 +9,7 @@ namespace Base.Web.Core
     {
         public static string IntenteloMasTarde = "Hubo un error, inténtelo más tarde.";
         public static string UsuarioNoExiste = "El usuario no pertenece al sistema o contraseña incorrecta.";
-        public static string CiudadNoExiste = "La ciudad no pertenece al sistema.";
-        public static string PiezaNoExiste = "La pieza no pertenece al sistema.";
+      
         public static string MapaCampanaNoExiste = "El mapa de campaña no pertenece al sistema.";
         public static string ConfiguracionNoExiste = "La configuración no pertenece al sistema.";
         public static string RegistroSatisfactorio = "Se realizó el registro satisfactoriamente.";
@@ -33,7 +32,7 @@ namespace Base.Web.Core
         public static string CorreoNoEnviado = "No se puede reenviar correo";
         public static string ValeRelacionado = "No se puede Actualizar debido a que hay registros relacionados a este registro";
         public static string OpenXmlFormats = "data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,";
-
+        public static string cambiostatus = "Se realizo el cambio de estado satisfactoriamente.";
         public static string Add = "Add";
         public static string Delete = "Delete";
         public static string Login = "Login";

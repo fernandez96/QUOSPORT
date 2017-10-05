@@ -328,6 +328,7 @@
     <Content Include="Content\images\sort_both.png" />
     <Content Include="Content\images\sort_desc.png" />
     <Content Include="Content\images\sort_desc_disabled.png" />
+    <Content Include="Content\images\systemIco.ico" />
     <Content Include="Content\images\upload.png" />
     <Content Include="Content\js\ace-extra.js" />
     <Content Include="Content\js\ace\ace.ajax-content.js" />

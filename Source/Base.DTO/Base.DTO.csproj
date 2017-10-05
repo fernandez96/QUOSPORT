@@ -66,6 +66,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReporteDTO.cs" />
     <Compile Include="RolDTO.cs" />
+    <Compile Include="StatusDTO.cs" />
     <Compile Include="SubLineaDTO.cs" />
     <Compile Include="TablaRegistroDTO.cs" />
     <Compile Include="TipoDocumentoDTO.cs" />

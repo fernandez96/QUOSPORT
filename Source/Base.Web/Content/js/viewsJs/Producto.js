@@ -53,7 +53,7 @@ $(document).ready(function () {
         }
         else {
             if (rowProducto.Estado==2) {
-                webApp.showMessageDialog("El Producto " + '<b>'+ rowProducto.prdc_vdescripcion +'</b>' +" se encuentra inactivo.");
+                webApp.showMessageDialog('El Producto ' + '<b>' + rowProducto.prdc_vdescripcion + '</b>' + ' se encuentra  ' + '<span class="label label-warning arrowed-in arrowed-in-right">Inactivo</span>' + '.Si desea hacer un modificación le recomendamoos cambiarle de estado a dicho producto.');
             } else {
                 checkSession(function () {
                     $("#Linea").empty();
@@ -65,7 +65,35 @@ $(document).ready(function () {
 
     });
 
-    $('#eliminarUsuario').on('click', function () {
+    $('#btnestadoProducto').on('click', function () {
+        var estado;
+        rowProducto = dataTableProducto.row('.selected').data();
+        if (typeof rowProducto === "undefined") {
+            webApp.showMessageDialog("Por favor seleccione un registro.");
+        }
+        else {
+            if (rowProducto.Estado == 2) {
+                webApp.showConfirmResumeDialog(function () {
+                    checkSession(function () {
+                        estado = 1;
+                        CambiarStatus(rowProducto.Id,estado);
+                    });
+                  
+                }, 'El estado del producto ' + '<b>' + rowProducto.prdc_vdescripcion + '</b>' + '  es ' + '<span class="label label-warning arrowed-in arrowed-in-right">Inactivo</span>' + ', por lo tanto pasara a estado activo' + '</n>' + ' ¿Desea continuar?');
+            } else if (rowProducto.Estado==1) {
+                webApp.showConfirmResumeDialog(function () {
+                    checkSession(function () {
+                        estado = 2;
+                        CambiarStatus(rowProducto.Id,estado);
+                    });
+
+                }, 'El estado del producto ' + '<b>' + rowProducto.prdc_vdescripcion + '</b>' + '  es ' + '<span class="label label-info label-sm arrowed-in arrowed-in-right">Activo</span>' + ', por lo tanto pasara a estado Inactivo,' + '</n>' + ' ¿Desea continuar?');
+            }
+        }
+
+    });
+
+    $('#btnEliminarProducto').on('click', function () {
         rowProducto = dataTableProducto.row('.selected').data();
         if (typeof rowProducto === "undefined") {
             webApp.showMessageDialog("Por favor seleccione un registro.");
@@ -181,7 +209,7 @@ function VisualizarDataTableProducto() {
                 request.filter = new Object();
 
                 request.filter = {
-                    codigoSearch: $("#Codigosearch").val(),
+                    //codigoSearch: $("#Codigosearch").val(),
                     descripcionSearch: $("#Descripcionsearch").val()
                 }
             },
@@ -338,7 +366,7 @@ function GetProductoById() {
 
 function EliminarProducto() {
     var modelView = {
-        Id: rowUsuario.Id,
+        Id: rowProducto.Id,
         UsuarioRegistro: $("#usernameLogOn strong").text()
     };
 
@@ -714,6 +742,65 @@ function CargarEstado() {
             class_name: 'gritter-error gritter'
         });
     });
+}
+
+function CambiarStatus(Id,estado) {
+    var modelView = {
+        Id: Id,
+        Estado:estado
+    };
+    webApp.Ajax({
+        url: urlMantenimiento + 'UpdateStatus',
+        async: false,
+        parametros: modelView
+    }, function (response) {
+        if (response.Success) {
+
+            if (response.Warning) {
+                $.gritter.add({
+                    title: 'Alerta',
+                    text: response.Message,
+                    class_name: 'gritter-warning gritter'
+                });
+            } else {
+                $.gritter.add({
+                    title: response.Title,
+                    text: response.Message,
+                    class_name: 'gritter-success gritter'
+                });
+                dataTableProducto.ajax.reload();
+            }
+        } else {
+            $.gritter.add({
+                title: 'Error',
+                text: response.Message,
+                class_name: 'gritter-error gritter'
+            });
+        }
+    }, function (response) {
+        $.gritter.add({
+            title: 'Error',
+            text: response,
+            class_name: 'gritter-error gritter'
+        });
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        $.gritter.add({
+            title: 'Error',
+            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
+            class_name: 'gritter-error gritter'
+        });
+    });
+}
+
+function buscar(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13) {
+        if ($('#ProductoSearchForm').valid()) {
+            checkSession(function () {
+                dataTableProducto.ajax.reload();
+            });
+        }
+    }
 }
 
 function AddSearchFilter() {

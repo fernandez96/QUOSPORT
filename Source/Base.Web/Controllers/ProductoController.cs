@@ -352,6 +352,42 @@ namespace Base.Web.Controllers
             return Json(jsonResponse);
         }
 
+        [HttpPost]
+        public JsonResult UpdateStatus(StatusDTO statusDTO)
+        {
+            var jsonResponse = new JsonResponse { Success = true };
+            try
+            {
+                
+                var status_ = MapperHelper.Map<StatusDTO, Status>(statusDTO);
+                status_.tabla = status.TablaProducto;
+                status_.setStatus = status.setStatusProducto + status_.Estado;
+                status_.where =status.WhereProducto + status_.Id;
+                int resultado = StatusBL.Instancia.status(status_);
+
+                if (resultado > 0)
+                {
+                    jsonResponse.Title = Title.TitleActualizar;
+                    jsonResponse.Message = Mensajes.cambiostatus;
+                }
+               else
+                {
+                    jsonResponse.Title = Title.TitleAlerta;
+                    jsonResponse.Warning = true;
+                    jsonResponse.Message = Mensajes.IntenteloMasTarde;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                jsonResponse.Success = false;
+                jsonResponse.Title = Title.TitleAlerta;
+                jsonResponse.Message = Mensajes.IntenteloMasTarde;
+            }
+
+            return Json(jsonResponse);
+        }
+
         #region Métodos Privados
 
         public void FormatDataTable(DataTableModel<ProductoFilterModel, int> dataTableModel)
@@ -365,11 +401,6 @@ namespace Base.Web.Controllers
             }
             string WhereModel = "WHERE  P.prdc_bflag_estado IN(1,2)";
 
-
-            if (dataTableModel.filter.codigoSearch != null)
-            {
-                WhereModel += "  AND P.prdc_vcod_producto = '" + dataTableModel.filter.codigoSearch + "' ";
-            }
             if (dataTableModel.filter.descripcionSearch != null)
             {
                 WhereModel += "  AND P.prdc_vdescripcion LIKE '%" + dataTableModel.filter.descripcionSearch + "%'";

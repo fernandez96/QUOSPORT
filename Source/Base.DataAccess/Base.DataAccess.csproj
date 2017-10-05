@@ -69,6 +69,7 @@
     <Compile Include="Interfaces\IReporteRepository.cs" />
     <Compile Include="Interfaces\IRolRepository.cs" />
     <Compile Include="Interfaces\ISeguridadRepository.cs" />
+    <Compile Include="Interfaces\IStatusRepository.cs" />
     <Compile Include="Interfaces\ITablaRegistroRepository.cs" />
     <Compile Include="Interfaces\ITipoDocumentoRepository.cs" />
     <Compile Include="Interfaces\IUnidadMedidaRepository.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="ReporteRepository.cs" />
     <Compile Include="RolRepository.cs" />
     <Compile Include="SeguridadRepository.cs" />
+    <Compile Include="StatusRepository.cs" />
     <Compile Include="TablaRegistroRepository.cs" />
     <Compile Include="TipoDocumentoRepository.cs" />
     <Compile Include="UnidadMedidaRepository.cs" />

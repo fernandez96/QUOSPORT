@@ -4381,3 +4381,217 @@ Base.DTO.LineaDTO Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngin
    en Base.DataAccess.ProductoRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProductoRepository.cs:línea 81
    en Base.BusinessLogic.ProductoBL.GetAllPaging(PaginationParameter`1 paginationParameters) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProductoBL.cs:línea 23
    en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 32
+2017-10-04 21:28:48,743 ERROR  - Mensaje: Ya existe la Categoria de producto SUUNTO SPARTAN TRAINER WRIST HR STEEL Trace:    en Base.DataAccess.CategoriaRepository.Add(Categoria entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\CategoriaRepository.cs:línea 105
+   en Base.BusinessLogic.CategoriaBL.Add(Categoria entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\CategoriaBL.cs:línea 18
+   en Base.Web.Controllers.CategoriaLineaSublineaController.Add(CategoriaDTO categoriaDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 114
+2017-10-04 23:13:54,337 ERROR  - Mensaje: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+StatusDTO -> Status
+Base.DTO.StatusDTO -> Base.BusinessEntity.Status
+
+Destination path:
+Status
+
+Source value:
+Base.DTO.StatusDTO Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.MappingEngine.MapCore(Object source, Type sourceType, Type destinationType, MappingOperationOptions options) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 131
+   en AutoMapper.MappingEngine.Map(Object source, Type sourceType, Type destinationType, Action`1 opts) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 120
+   en AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 78
+   en AutoMapper.Mapper.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\Mapper.cs:línea 73
+   en Base.DTO.AutoMapper.MapperHelper.Map[TSource,TDest](TSource source) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DTO\AutoMapper\MapperHelper.cs:línea 9
+   en Base.Web.Controllers.ProductoController.UpdateStatus(StatusDTO statusDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 362
+2017-10-04 23:19:14,173 ERROR  - Mensaje: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+StatusDTO -> Status
+Base.DTO.StatusDTO -> Base.BusinessEntity.Status
+
+Destination path:
+Status
+
+Source value:
+Base.DTO.StatusDTO Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.MappingEngine.MapCore(Object source, Type sourceType, Type destinationType, MappingOperationOptions options) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 131
+   en AutoMapper.MappingEngine.Map(Object source, Type sourceType, Type destinationType, Action`1 opts) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 120
+   en AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 78
+   en AutoMapper.Mapper.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\Mapper.cs:línea 73
+   en Base.DTO.AutoMapper.MapperHelper.Map[TSource,TDest](TSource source) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DTO\AutoMapper\MapperHelper.cs:línea 9
+   en Base.Web.Controllers.ProductoController.UpdateStatus(StatusDTO statusDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 362
+2017-10-04 23:20:03,807 ERROR  - Mensaje: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+StatusDTO -> Status
+Base.DTO.StatusDTO -> Base.BusinessEntity.Status
+
+Destination path:
+Status
+
+Source value:
+Base.DTO.StatusDTO Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.MappingEngine.MapCore(Object source, Type sourceType, Type destinationType, MappingOperationOptions options) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 131
+   en AutoMapper.MappingEngine.Map(Object source, Type sourceType, Type destinationType, Action`1 opts) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 120
+   en AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 78
+   en AutoMapper.Mapper.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\Mapper.cs:línea 73
+   en Base.DTO.AutoMapper.MapperHelper.Map[TSource,TDest](TSource source) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DTO\AutoMapper\MapperHelper.cs:línea 9
+   en Base.Web.Controllers.ProductoController.UpdateStatus(StatusDTO statusDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 362
+2017-10-04 23:21:24,487 ERROR  - Mensaje: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+StatusDTO -> Status
+Base.DTO.StatusDTO -> Base.BusinessEntity.Status
+
+Destination path:
+Status
+
+Source value:
+Base.DTO.StatusDTO Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.MappingEngine.MapCore(Object source, Type sourceType, Type destinationType, MappingOperationOptions options) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 131
+   en AutoMapper.MappingEngine.Map(Object source, Type sourceType, Type destinationType, Action`1 opts) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 120
+   en AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 78
+   en AutoMapper.Mapper.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\Mapper.cs:línea 73
+   en Base.DTO.AutoMapper.MapperHelper.Map[TSource,TDest](TSource source)
+   en Base.Web.Controllers.ProductoController.UpdateStatus(StatusDTO statusDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 362
+2017-10-04 23:21:37,236 ERROR  - Mensaje: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+StatusDTO -> Status
+Base.DTO.StatusDTO -> Base.BusinessEntity.Status
+
+Destination path:
+Status
+
+Source value:
+Base.DTO.StatusDTO Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.MappingEngine.MapCore(Object source, Type sourceType, Type destinationType, MappingOperationOptions options) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 131
+   en AutoMapper.MappingEngine.Map(Object source, Type sourceType, Type destinationType, Action`1 opts) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 120
+   en AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 78
+   en AutoMapper.Mapper.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\Mapper.cs:línea 73
+   en Base.DTO.AutoMapper.MapperHelper.Map[TSource,TDest](TSource source)
+   en Base.Web.Controllers.ProductoController.UpdateStatus(StatusDTO statusDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 362
+2017-10-04 23:39:46,590 ERROR  - Mensaje: Incorrect syntax near the keyword 'SET'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.DoExecuteNonQuery(DbCommand command)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteNonQuery(DbCommand command)
+   en Base.DataAccess.StatusRepository.status(Status entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\StatusRepository.cs:línea 31
+   en Base.BusinessLogic.StatusBL.status(Status entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\StatusBL.cs:línea 12
+   en Base.Web.Controllers.ProductoController.UpdateStatus(StatusDTO statusDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 366
+2017-10-04 23:44:05,733 ERROR  - Mensaje: Incorrect syntax near the keyword 'SET'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.DoExecuteNonQuery(DbCommand command)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteNonQuery(DbCommand command)
+   en Base.DataAccess.StatusRepository.status(Status entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\StatusRepository.cs:línea 31
+   en Base.BusinessLogic.StatusBL.status(Status entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\StatusBL.cs:línea 12
+   en Base.Web.Controllers.ProductoController.UpdateStatus(StatusDTO statusDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 366
+2017-10-04 23:45:44,075 ERROR  - Mensaje: Incorrect syntax near the keyword 'SET'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.DoExecuteNonQuery(DbCommand command)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteNonQuery(DbCommand command)
+   en Base.DataAccess.StatusRepository.status(Status entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\StatusRepository.cs:línea 31
+   en Base.BusinessLogic.StatusBL.status(Status entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\StatusBL.cs:línea 12
+   en Base.Web.Controllers.ProductoController.UpdateStatus(StatusDTO statusDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 366
+2017-10-05 00:03:38,103 ERROR  - Mensaje: Procedure or function 'SGE_SGE_PRODUCTO_UPDATE' expects parameter '@prdc_bflag_estado', which was not supplied. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.DoExecuteNonQuery(DbCommand command)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteNonQuery(DbCommand command)
+   en Base.DataAccess.ProductoRepository.Update(Producto entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProductoRepository.cs:línea 174
+   en Base.BusinessLogic.ProductoBL.Update(Producto entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProductoBL.cs:línea 31
+   en Base.Web.Controllers.ProductoController.Update(ProductoDTO productoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 126
+2017-10-05 00:03:42,944 ERROR  - Mensaje: Procedure or function 'SGE_SGE_PRODUCTO_UPDATE' expects parameter '@prdc_bflag_estado', which was not supplied. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.DoExecuteNonQuery(DbCommand command)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteNonQuery(DbCommand command)
+   en Base.DataAccess.ProductoRepository.Update(Producto entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProductoRepository.cs:línea 174
+   en Base.BusinessLogic.ProductoBL.Update(Producto entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProductoBL.cs:línea 31
+   en Base.Web.Controllers.ProductoController.Update(ProductoDTO productoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 126
+2017-10-05 00:04:08,477 ERROR  - Mensaje: Procedure or function 'SGE_SGE_PRODUCTO_UPDATE' expects parameter '@prdc_bflag_estado', which was not supplied. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.DoExecuteNonQuery(DbCommand command)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteNonQuery(DbCommand command)
+   en Base.DataAccess.ProductoRepository.Update(Producto entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProductoRepository.cs:línea 174
+   en Base.BusinessLogic.ProductoBL.Update(Producto entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProductoBL.cs:línea 31
+   en Base.Web.Controllers.ProductoController.Update(ProductoDTO productoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 126
+2017-10-05 00:06:34,396 ERROR  - Mensaje: Procedure or function 'SGE_SGE_PRODUCTO_UPDATE' expects parameter '@prdc_bflag_estado', which was not supplied. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.DoExecuteNonQuery(DbCommand command)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteNonQuery(DbCommand command)
+   en Base.DataAccess.ProductoRepository.Update(Producto entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProductoRepository.cs:línea 174
+   en Base.BusinessLogic.ProductoBL.Update(Producto entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProductoBL.cs:línea 31
+   en Base.Web.Controllers.ProductoController.Update(ProductoDTO productoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 126
+2017-10-05 00:28:14,593 ERROR  - Mensaje: Error converting data type numeric to decimal. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.DoExecuteNonQuery(DbCommand command)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteNonQuery(DbCommand command)
+   en Base.DataAccess.ProductoRepository.Add(Producto entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProductoRepository.cs:línea 51
+   en Base.BusinessLogic.ProductoBL.Add(Producto entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProductoBL.cs:línea 15
+   en Base.Web.Controllers.ProductoController.Add(ProductoDTO productoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 68
+2017-10-05 00:30:04,868 ERROR  - Mensaje: Error converting data type numeric to decimal. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.DoExecuteNonQuery(DbCommand command)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteNonQuery(DbCommand command)
+   en Base.DataAccess.ProductoRepository.Add(Producto entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProductoRepository.cs:línea 51
+   en Base.BusinessLogic.ProductoBL.Add(Producto entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProductoBL.cs:línea 15
+   en Base.Web.Controllers.ProductoController.Add(ProductoDTO productoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 68
