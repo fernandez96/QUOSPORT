@@ -156,6 +156,117 @@ namespace Base.Web.Controllers
         }
 
         [HttpPost]
+        public JsonResult Update(CategoriaDTO categoriaDTO)
+        {
+            var jsonResponse = new JsonResponse { Success = true };
+            try
+            {
+                var categoria = MapperHelper.Map<CategoriaDTO, Categoria>(categoriaDTO);
+
+                int resultado = 0;
+                resultado = CategoriaBL.Instancia.Update(categoria);
+                if (resultado > 0)
+                {
+                    jsonResponse.Title = Title.TitleActualizar;
+                    jsonResponse.Message = Mensajes.ActualizacionSatisfactoria;
+                }
+                if (resultado == -2)
+                {
+                    jsonResponse.Title = Title.TitleAlerta;
+                    jsonResponse.Warning = true;
+                    jsonResponse.Message = Mensajes.ActualizacionFallida;
+                }
+                if (resultado == -1)
+                {
+                    jsonResponse.Title = Title.TitleAlerta;
+                    jsonResponse.Warning = true;
+                    jsonResponse.Message = Mensajes.YaExisteRegistro;
+                }
+                LogBL.Instancia.Add(new Log
+                {
+                    Accion = Mensajes.Update,
+                    Controlador = Mensajes.UsuarioController,
+                    Identificador = resultado,
+                    Mensaje = jsonResponse.Message,
+                    Usuario = categoriaDTO.UsuarioRegistro,
+                    Objeto = JsonConvert.SerializeObject(categoriaDTO)
+                });
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                jsonResponse.Success = false;
+                jsonResponse.Title = Title.TitleAlerta;
+                jsonResponse.Message = Mensajes.YaExisteRegistro;
+
+                LogBL.Instancia.Add(new Log
+                {
+                    Accion = Mensajes.Update,
+                    Controlador = Mensajes.UsuarioController,
+                    Identificador = 0,
+                    Mensaje = ex.Message,
+                    Usuario = categoriaDTO.UsuarioRegistro,
+                    Objeto = JsonConvert.SerializeObject(categoriaDTO)
+                });
+            }
+
+            return Json(jsonResponse);
+        }
+
+
+        [HttpPost]
+        public JsonResult Delete(CategoriaDTO categoriaDTO)
+        {
+            var jsonResponse = new JsonResponse { Success = true };
+            try
+            {
+                var categoria = MapperHelper.Map<CategoriaDTO, Categoria>(categoriaDTO);
+                int resultado = CategoriaBL.Instancia.Delete(categoria);
+
+                if (resultado > 0)
+                {
+                    jsonResponse.Title = Title.TitleEliminar;
+                    jsonResponse.Message = Mensajes.EliminacionSatisfactoria;
+                }
+                else
+                {
+                    jsonResponse.Title = Title.TitleAlerta;
+                    jsonResponse.Warning = true;
+                    jsonResponse.Message = Mensajes.EliminacionFallida;
+                }
+
+                LogBL.Instancia.Add(new Log
+                {
+                    Accion = Mensajes.Delete,
+                    Controlador = Mensajes.UsuarioController,
+                    Identificador = resultado,
+                    Mensaje = jsonResponse.Message,
+                    Usuario = categoriaDTO.UsuarioRegistro,
+                    Objeto = JsonConvert.SerializeObject(categoriaDTO)
+                });
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                jsonResponse.Success = false;
+                jsonResponse.Title = Title.TitleAlerta;
+                jsonResponse.Message = Mensajes.IntenteloMasTarde;
+
+                LogBL.Instancia.Add(new Log
+                {
+                    Accion = Mensajes.Delete,
+                    Controlador = Mensajes.UsuarioController,
+                    Identificador = 0,
+                    Mensaje = ex.Message,
+                    Usuario = categoriaDTO.UsuarioRegistro,
+                    Objeto = JsonConvert.SerializeObject(categoriaDTO)
+                });
+            }
+
+            return Json(jsonResponse);
+        }
+
+        [HttpPost]
         public JsonResult GetById(CategoriaDTO categoriaDTO)
         {
             var jsonResponse = new JsonResponse { Success = true };
@@ -185,6 +296,41 @@ namespace Base.Web.Controllers
             return Json(jsonResponse);
         }
 
+        [HttpPost]
+        public JsonResult UpdateStatus(StatusDTO statusDTO)
+        {
+            var jsonResponse = new JsonResponse { Success = true };
+            try
+            {
+                var status_ = MapperHelper.Map<StatusDTO, Status>(statusDTO);
+                status_.tabla = status.TablaCategoria;
+                status_.setStatus = status.setStatusCategoria + status_.Estado;
+                status_.where = status.WhereCategoria + status_.Id;
+                int resultado = StatusBL.Instancia.status(status_);
+
+                if (resultado > 0)
+                {
+                    jsonResponse.Title = Title.TitleActualizar;
+                    jsonResponse.Message = Mensajes.cambiostatus;
+                }
+                else
+                {
+                    jsonResponse.Title = Title.TitleAlerta;
+                    jsonResponse.Warning = true;
+                    jsonResponse.Message = Mensajes.IntenteloMasTarde;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                jsonResponse.Success = false;
+                jsonResponse.Title = Title.TitleAlerta;
+                jsonResponse.Message = Mensajes.IntenteloMasTarde;
+            }
+
+            return Json(jsonResponse);
+        }
+
         #region Métodos Privados
 
         public void FormatDataTable(DataTableModel<CategoriaFilterModel, int> dataTableModel)
@@ -196,7 +342,7 @@ namespace Base.Web.Controllers
                 var column = dataTableModel.columns[columnIndex].data;
                 dataTableModel.orderBy = (" [" + column + "] " + columnDir + " ");
             }
-            string WhereModel = "WHERE ctgcc_iflag_estado=1";
+            string WhereModel = "WHERE ctgcc_iflag_estado in(1,2)";
 
 
             if (dataTableModel.filter.codigoSearch != null)

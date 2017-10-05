@@ -221,11 +221,11 @@ namespace Base.DataAccess
                             {
                                 using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_LINEA_PRODUCTO_CAB_DELETE")))
                                 {
-                                    _database.AddInParameter(comando, "@Id", DbType.Int32, idcategoria);
+                                    _database.AddInParameter(comando, "@Id", DbType.Int32, item.Id);
                                     _database.ExecuteNonQuery(comando);
 
                                     idlinea = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
-                                    if (idlinea == 0) throw new Exception("Error al iliminar " + item.linc_vdescripcion);
+                                    if (idlinea == 0) throw new Exception("Error al iliminar Linea" + item.linc_vdescripcion);
                                 }
                                 foreach (var itemsublinea in entity.detalleSubLinea)
                                 {
@@ -235,12 +235,12 @@ namespace Base.DataAccess
                                         {
                                             using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_LINEA_PRODUCTO_DET_DELETE")))
                                             {
-                                                _database.AddInParameter(comando, "@Id", DbType.Int32, idlinea);
+                                                _database.AddInParameter(comando, "@Id", DbType.Int32, itemsublinea.Id);
                                                 _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
                                                 _database.ExecuteNonQuery(comando);
 
                                                 idsublinea = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
-                                                if (idsublinea == 0) throw new Exception("Ya existe la Sub-Linea " + itemsublinea.lind_vdescripcion);
+                                                if (idsublinea == 0) throw new Exception("Error al elimimar Sub-Linea " + itemsublinea.lind_vdescripcion);
                                             }
                                         }
                                     }
@@ -258,6 +258,40 @@ namespace Base.DataAccess
                 }
             }
             return idcategoria;
+        }
+
+        public int Delete(Categoria entity)
+        {
+            int idResult;
+
+            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_CATEGORIAS_PRODUCTO_DELETE")))
+            {
+                _database.AddInParameter(comando, "@Id", DbType.Int32, entity.Id);
+                _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
+                _database.ExecuteNonQuery(comando);
+                idResult = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
+            }
+
+            using (var comandoLinea = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_LINEA_PRODUCTO_CAB_DELETE_ALL")))
+            {
+                _database.AddInParameter(comandoLinea, "@Id", DbType.Int32, idResult);
+                _database.AddOutParameter(comandoLinea, "@Response", DbType.Int32, 11);
+                _database.ExecuteNonQuery(comandoLinea);
+                int resultado = Convert.ToInt32(_database.GetParameterValue(comandoLinea, "@Response"));
+     
+                if (resultado == 0) throw new Exception("Error al Eliminar Linea.");
+
+            }
+            using (var comandoSubLinea = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_LINEA_PRODUCTO_DET_DELETE_ALL")))
+            {
+                _database.AddInParameter(comandoSubLinea, "@Id", DbType.Int32, idResult);
+                _database.AddOutParameter(comandoSubLinea, "@Response", DbType.Int32, 11);
+                _database.ExecuteNonQuery(comandoSubLinea);
+                int resultado = Convert.ToInt32(_database.GetParameterValue(comandoSubLinea, "@Response"));
+            
+                if (resultado == 0) throw new Exception("Error al Eliminar Sub-Linea.");
+            }          
+            return idResult;
         }
         public IList<Categoria> GetAllPaging(PaginationParameter<int> paginationParameters)
         {

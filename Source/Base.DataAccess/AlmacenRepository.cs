@@ -38,7 +38,7 @@ namespace Base.DataAccess
                 _database.AddInParameter(comando, "@almac_vtelefono", DbType.String, entity.almac_vtelefono);
                 _database.AddInParameter(comando, "@almac_vcorreo", DbType.String, entity.almac_vcorreo);
                 _database.AddInParameter(comando, "@almac_itipo", DbType.Int32, entity.almac_itipo);
-                _database.AddInParameter(comando, "@almac_bflag_estado", DbType.Int32, 1);
+                _database.AddInParameter(comando, "@almac_bflag_estado", DbType.Int32,  entity.Estado);
                 _database.AddInParameter(comando, "@almac_vusuario_crea", DbType.String, entity.UsuarioCreacion);
                 _database.AddInParameter(comando, "@almac_vpc_crea", DbType.String, WindowsIdentity.GetCurrent().Name);
                 _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
@@ -146,6 +146,7 @@ namespace Base.DataAccess
                 _database.AddInParameter(comando, "@almac_vusuario_modificado", DbType.String, entity.UsuarioModificacion);
                 _database.AddInParameter(comando, "@almac_vpc_modificado", DbType.String, WindowsIdentity.GetCurrent().Name); ;
                 _database.AddInParameter(comando, "@id", DbType.Int32, entity.Id);
+                _database.AddInParameter(comando, "@almac_bflag_estado", DbType.Int32, entity.Estado);
                 _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
 
                 _database.ExecuteNonQuery(comando);

@@ -11,6 +11,7 @@ namespace Base.BusinessLogic.Interfaces
     {
         Q Add(T entity);
         Q Update(T entity);
+        Q Delete(T entity);
         T GetById(T entity);
         IList<T> GetAll();
         IList<L> GetAllLinea(L entity);

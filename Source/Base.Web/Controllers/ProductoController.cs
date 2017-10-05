@@ -277,6 +277,26 @@ namespace Base.Web.Controllers
             return Json(jsonResponse);
         }
         [HttpPost]
+        public JsonResult GetAllUnidades()
+        {
+            var jsonResponse = new JsonResponse { Success = true };
+
+            try
+            {
+                var unidadesList = UnidadMedidaBL.Instancia.GetAll();
+                var usuarioDTOList = MapperHelper.Map<IEnumerable<UnidadMedida>, IEnumerable<UnidadMedidaDTO>>(unidadesList);
+                jsonResponse.Data = usuarioDTOList;
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                jsonResponse.Success = false;
+                jsonResponse.Message = Mensajes.IntenteloMasTarde;
+            }
+
+            return Json(jsonResponse);
+        }
+        [HttpPost]
         public JsonResult ListarCategoria()
         {
             var jsonResponse = new JsonResponse { Success = true };
@@ -358,7 +378,6 @@ namespace Base.Web.Controllers
             var jsonResponse = new JsonResponse { Success = true };
             try
             {
-                
                 var status_ = MapperHelper.Map<StatusDTO, Status>(statusDTO);
                 status_.tabla = status.TablaProducto;
                 status_.setStatus = status.setStatusProducto + status_.Estado;

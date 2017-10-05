@@ -41,16 +41,16 @@
                     <!-- PAGE CONTENT BEGINS -->
                     <!-- PAGE CONTENT BEGINS -->
                     <div class="search-area well no-margin-bottom">
-                        <form id="CategoriaLineaSearchForm" role="form">
+                        <form id="CategoriaSearchForm" role="form">
                             <div class="row">
                                 <div class="col-md-7">
                                     <div class="input-group">
 
-                                        <input type="text" class="form-control" name="Codigosearch" id="Codigosearch" placeholder="Codigo">
+                                        <input type="text" class="form-control" name="Codigosearch" id="Codigosearch" placeholder="Codigo" onkeypress="buscarCategoria(event)">
                                         <div class="input-group-btn">
 
                                         </div>
-                                        <input type="text" class="form-control" name="Descripcionsearch" id="Descripcionsearch" placeholder="Descripción">
+                                        <input type="text" class="form-control" name="Descripcionsearch" id="Descripcionsearch" placeholder="Descripción" onkeypress="buscarCategoria(event)">
                                         <div class="input-group-btn">
                                             <button type="button" id="btnSearchCategoriaLinea" class="btn btn-success btn-sm">
                                                 <i class="ace-icon fa fa-search icon-on-right bigger-110 right"></i>Buscar
@@ -71,8 +71,8 @@
                                             <a id="btnEliminarCategoria" data-toggle="tooltip" class="dt-button buttons-csv buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Eliminar">
                                                 <span><i class="fa fa-trash-o bigger-110 orange"> </i></span>
                                             </a>
-                                            <a id="btnsituacionCategoria" data-toggle="tooltip" class="dt-button buttons-print btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Asignar accesos a Modulos">
-                                                <span><i class="fa fa-wrench bigger-110 grey"></i> </span>
+                                            <a id="btnEstadoCategoria" data-toggle="tooltip" class="dt-button buttons-print btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Cambiar estado">
+                                                <span><i class="fa fa-link bigger-110 grey"></i> </span>
                                             </a>
                                         </div>
                                     </div>
@@ -356,7 +356,7 @@
                                                                 </ul>
                                                             </li>*@
                                                         </ul>
-                                                        <input type="hidden" name="IdCategoria" id="IdCategoria" value="0" />
+                                                
                                                     </form>
                                               
                                                 </div>
@@ -366,6 +366,7 @@
 
                                     </div>
                                 </div>
+                                <input type="hidden" name="IdCategoria" id="IdCategoria" value="0" />
                             </div>
                         </div>
                         </div>

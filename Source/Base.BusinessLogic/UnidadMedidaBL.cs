@@ -29,6 +29,10 @@ namespace Base.BusinessLogic
             return UnidadMedidaRepository.Instancia.GetAllPaging(paginationParameters);
         }
 
+        public IList<UnidadMedida> GetAll()
+        {
+            return UnidadMedidaRepository.Instancia.GetAll();
+        }
         public UnidadMedida GetById(UnidadMedida entity)
         {
             return UnidadMedidaRepository.Instancia.GetById(entity);
@@ -38,9 +42,6 @@ namespace Base.BusinessLogic
         {
             return UnidadMedidaRepository.Instancia.Update(entity);
         }
-        public int CambioEstado(UnidadMedida entity)
-        {
-            return UnidadMedidaRepository.Instancia.CambioEstado(entity);
-        }
+  
     }
 }

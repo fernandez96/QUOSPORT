@@ -29,7 +29,7 @@ namespace Base.DataAccess
                 _database.AddInParameter(comando, "@umec_vcod_unidad_medida", DbType.String, entity.umec_vcod_unidad_medida);
                 _database.AddInParameter(comando, "@umec_vdescripcion", DbType.String, entity.umec_vdescripcion);
                 _database.AddInParameter(comando, "@umec_vusuario_crea", DbType.String, entity.UsuarioCreacion);
-                _database.AddInParameter(comando, "@umec_bflag_estado", DbType.Int32, 1);
+                _database.AddInParameter(comando, "@umec_bflag_estado", DbType.Int32, entity.Estado);
                 _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
                 _database.ExecuteNonQuery(comando);
                 id = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
@@ -81,7 +81,28 @@ namespace Base.DataAccess
 
             return unidad;
         }
+        public IList<UnidadMedida> GetAll()
+        {
+            List<UnidadMedida> unidad = new List<UnidadMedida>();
+            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_UNIDAD_MEDIDA_GetAll")))
+            {
+                using (var lector = _database.ExecuteReader(comando))
+                {
+                    while (lector.Read())
+                    {
+                        unidad.Add(new UnidadMedida
+                        {
+                            Id = lector.IsDBNull(lector.GetOrdinal("Id")) ? default(int) : lector.GetInt32(lector.GetOrdinal("Id")),
+                            umec_vcod_unidad_medida = lector.IsDBNull(lector.GetOrdinal("umec_vcod_unidad_medida")) ? default(string) : lector.GetString(lector.GetOrdinal("umec_vcod_unidad_medida")),
+                            umec_vdescripcion = lector.IsDBNull(lector.GetOrdinal("umec_vdescripcion")) ? default(string) : lector.GetString(lector.GetOrdinal("umec_vdescripcion")),
+                            Estado = lector.IsDBNull(lector.GetOrdinal("umec_bflag_estado")) ? default(int) : lector.GetInt32(lector.GetOrdinal("umec_bflag_estado")),
+                        });
+                    }
+                }
+            }
 
+            return unidad;
+        }
         public  UnidadMedida GetById(UnidadMedida entity)
         {
             UnidadMedida unidad = null;
@@ -116,6 +137,7 @@ namespace Base.DataAccess
                 _database.AddInParameter(comando, "@umec_vdescripcion", DbType.String, entity.umec_vdescripcion);
                 _database.AddInParameter(comando, "@umec_vusuario_modifica", DbType.String, entity.UsuarioModificacion);
                 _database.AddInParameter(comando, "@id", DbType.Int32, entity.Id);
+                _database.AddInParameter(comando, "@umec_bflag_estado", DbType.Int32, entity.Estado);
                 _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
 
                 _database.ExecuteNonQuery(comando);
@@ -125,16 +147,7 @@ namespace Base.DataAccess
             return id;
         }
 
-        public int CambioEstado(UnidadMedida entity)
-        {
-            int id;
-            using (var comando=_database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName,"")))
-            {
 
-                id = 1;
-            }
-            return id;
-        }
 
 
         #endregion

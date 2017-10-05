@@ -6,12 +6,12 @@ var delRowID = 0;
 var urlListar = baseUrl + 'Producto/Listar';
 var urlMantenimiento = baseUrl + 'Producto/';
 var rowProducto = null;
-var tablaUnidad = 5;
 var tablaClasificacion = 6;
 var Categoria = new Array();
 var Linea = new Array();
 var SubLinea = new Array();
-
+var estadoActivo = 1;
+var estadoInactivo = 2;
 
 $(document).ready(function () {
     $.extend($.fn.dataTable.defaults, {
@@ -52,7 +52,7 @@ $(document).ready(function () {
             webApp.showMessageDialog("Por favor seleccione un registro.");
         }
         else {
-            if (rowProducto.Estado==2) {
+            if (rowProducto.Estado==estadoInactivo) {
                 webApp.showMessageDialog('El Producto ' + '<b>' + rowProducto.prdc_vdescripcion + '</b>' + ' se encuentra  ' + '<span class="label label-warning arrowed-in arrowed-in-right">Inactivo</span>' + '.Si desea hacer un modificación le recomendamoos cambiarle de estado a dicho producto.');
             } else {
                 checkSession(function () {
@@ -66,25 +66,22 @@ $(document).ready(function () {
     });
 
     $('#btnestadoProducto').on('click', function () {
-        var estado;
         rowProducto = dataTableProducto.row('.selected').data();
         if (typeof rowProducto === "undefined") {
             webApp.showMessageDialog("Por favor seleccione un registro.");
         }
         else {
-            if (rowProducto.Estado == 2) {
+            if (rowProducto.Estado == estadoInactivo) {
                 webApp.showConfirmResumeDialog(function () {
                     checkSession(function () {
-                        estado = 1;
-                        CambiarStatus(rowProducto.Id,estado);
+                        CambiarStatus(rowProducto.Id,estadoActivo);
                     });
                   
                 }, 'El estado del producto ' + '<b>' + rowProducto.prdc_vdescripcion + '</b>' + '  es ' + '<span class="label label-warning arrowed-in arrowed-in-right">Inactivo</span>' + ', por lo tanto pasara a estado activo' + '</n>' + ' ¿Desea continuar?');
-            } else if (rowProducto.Estado==1) {
+            } else if (rowProducto.Estado==estadoActivo) {
                 webApp.showConfirmResumeDialog(function () {
                     checkSession(function () {
-                        estado = 2;
-                        CambiarStatus(rowProducto.Id,estado);
+                        CambiarStatus(rowProducto.Id,estadoInactivo);
                     });
 
                 }, 'El estado del producto ' + '<b>' + rowProducto.prdc_vdescripcion + '</b>' + '  es ' + '<span class="label label-info label-sm arrowed-in arrowed-in-right">Activo</span>' + ', por lo tanto pasara a estado Inactivo,' + '</n>' + ' ¿Desea continuar?');
@@ -146,9 +143,9 @@ $(document).ready(function () {
             }
         });
     });
-
-    webApp.validarLetrasEspacio(['descripcion']);
-
+    $("#serie,#UPC,#EAN").mask("9999-9999999");
+    webApp.validarLetrasEspacio(['descripcion','color']);
+    webApp.validarNumerico(['UPC', 'serie', 'orden', 'EAN']);
     webApp.InicializarValidacion(formularioMantenimiento,
         {
             Categoria: {
@@ -612,13 +609,9 @@ function CargarSubLineas() {
 }
 
 function CargarMedidas() {
-    var WhereFilter = {
-        idtabla: tablaUnidad
-    };
     webApp.Ajax({
-        url: urlMantenimiento + 'GetAll',
+        url: urlMantenimiento + 'GetAllUnidades',
         async: false,
-        parametros: WhereFilter,
     }, function (response) {
         if (response.Success) {
 
@@ -630,7 +623,7 @@ function CargarMedidas() {
                 });
             } else {
                 $.each(response.Data, function (index, item) {
-                    $("#unidad").append('<option value="' + item.Id + '">' + item.tbpd_vdescripcion_detalle + '</option>');
+                    $("#unidad").append('<option value="' + item.Id + '">' + item.umec_vdescripcion + '</option>');
                 });
             }
         } else {
@@ -699,6 +692,7 @@ function CargarClasificaciones() {
         });
     });
 }
+
 
 function CargarEstado() {
     var modelView = {
@@ -811,7 +805,7 @@ function LimpiarFormulario() {
     webApp.clearForm(formularioMantenimiento);
     $("#clasificacion").val(8);
     $("#textDescripcion").val('');
-    $("#unidad").val(7);
+    $("#unidad").val(1);
     $("#descripcion").focus();
     $("#Estado").val(1);
 

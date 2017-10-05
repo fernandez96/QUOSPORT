@@ -4,8 +4,11 @@ var delRowPos = null;
 var delRowID = 0;
 var urlListar = baseUrl + 'UnidadMedida/Listar';
 var urlMantenimiento = baseUrl + 'UnidadMedida/';
+var urlcargarEstado = baseUrl + 'Usuario/GetAll';
 var rowUnidadMedida = null;
-
+var tablaEstado = 1;
+var estadoActivo = 1;
+var estadoInactivo = 2;
 
 $(document).ready(function () {
     $.extend($.fn.dataTable.defaults, {
@@ -45,9 +48,14 @@ $(document).ready(function () {
             webApp.showMessageDialog("Por favor seleccione un registro.");
         }
         else {
-            checkSession(function () {
-                GetUnidadMedidaById();
-            });
+            if (rowUnidadMedida.Estado===estadoInactivo) {
+                webApp.showMessageDialog('La unidad medida ' + '<b>' + rowUnidadMedida.umec_vdescripcion + '</b>' + ' se encuentra  ' + '<span class="label label-warning arrowed-in arrowed-in-right">Inactivo</span>' + '.Si desea hacer una modificación le recomendamos cambiarle de estado a dicha unidad medida.');
+            }
+            else {
+                checkSession(function () {
+                    GetUnidadMedidaById();
+                });
+            }
         }
 
     });
@@ -63,6 +71,33 @@ $(document).ready(function () {
                     EliminarUnidadMedida();
                 });
             }, 'Se eliminará el registro. ¿Está seguro que desea continuar?');
+        }
+
+    });
+
+
+
+    $('#btnestadoUnidadMedida').on('click', function () {
+        rowUnidadMedida = dataTableUnidadMedida.row('.selected').data();
+        if (typeof rowUnidadMedida === "undefined") {
+            webApp.showMessageDialog("Por favor seleccione un registro.");
+        }
+        else {
+            if (rowUnidadMedida.Estado == estadoInactivo) {
+                webApp.showConfirmResumeDialog(function () {
+                    checkSession(function () {
+                        CambiarStatus(rowUnidadMedida.Id, estadoActivo);
+                    });
+
+                }, 'El estado de la unidad medida ' + '<b>' + rowUnidadMedida.umec_vdescripcion + '</b>' + '  es ' + '<span class="label label-warning arrowed-in arrowed-in-right">Inactivo</span>' + ', por lo tanto pasara a estado activo' + '</n>' + ' ¿Desea continuar?');
+            } else if (rowUnidadMedida.Estado == estadoActivo) {
+                webApp.showConfirmResumeDialog(function () {
+                    checkSession(function () {
+                        CambiarStatus(rowUnidadMedida.Id, estadoInactivo);
+                    });
+
+                }, 'El estado de la unidad medida ' + '<b>' + rowUnidadMedida.umec_vdescripcion + '</b>' + '  es ' + '<span class="label label-info label-sm arrowed-in arrowed-in-right">Activo</span>' + ', por lo tanto pasara a estado Inactivo,' + '</n>' + ' ¿Desea continuar?');
+            }
         }
 
     });
@@ -106,6 +141,7 @@ $(document).ready(function () {
 
             }
         });
+    CargarEstado();
     $('[data-toggle="tooltip"]').tooltip();
 });
 
@@ -122,8 +158,8 @@ function VisualizarDataTableUnidadMedida() {
                 request.filter = new Object();
 
                 request.filter = {
-                    codigoSearch: $("#CodigoSearch").val(),
-                    descripcionSearch: $("#Descripcionsearch").val()
+                    CodigoSearch: $("#Codigosearch").val(),
+                    DescripcionSearch: $("#Descripcionsearch").val()
                 }
             },
             dataFilter: function (data) {
@@ -143,10 +179,12 @@ function VisualizarDataTableUnidadMedida() {
             { "data": "umec_vdescripcion" }, 
             {
                 "data": function (obj) {
-                    if (obj.Estado == 1)
+                    if (obj.Estado == 1) {
                         return '<span class="label label-info label-sm arrowed-in arrowed-in-right">Activo</span>';
-                    else
-                        return '<span class="label label-sm arrowed-in arrowed-in-right">Inactivo</span>';
+                    }
+                    else if (obj.Estado == 2) {
+                        return '<span class="label label-warning arrowed-in arrowed-in-right">Inactivo</span>';
+                    }
                 }
             }
         ],
@@ -192,6 +230,7 @@ function GetUnidadMedidaById() {
                 $("#descripcion").val(unidad.umec_vdescripcion);
                 $("#accionTitle").text('Editar');
                 $("#NuevoUnidadMedida").modal("show");
+                $("#Estado").val(unidad.Estado);
                 $("#codigo").prop("disabled", true);
             }
 
@@ -271,12 +310,12 @@ function EliminarUnidadMedida() {
 function GuardarUnidadMedida() {
 
     var modelView = {
-        Id: $("#UsuarioId").val(),
+        Id: $("#UnidadMedidaId").val(),
         umec_vcod_unidad_medida: $("#codigo").val(),
         umec_vdescripcion: $("#descripcion").val(),
+        Estado: $("#Estado").val(),
         UsuarioRegistro: $("#usernameLogOn strong").text()
     };
-
     if (modelView.Id == 0)
         action = 'Add';
     else
@@ -324,7 +363,112 @@ function GuardarUnidadMedida() {
     });
 }
 
+function CambiarStatus(Id, estado) {
+    var modelView = {
+        Id: Id,
+        Estado: estado
+    };
+    webApp.Ajax({
+        url: urlMantenimiento + 'UpdateStatus',
+        async: false,
+        parametros: modelView
+    }, function (response) {
+        if (response.Success) {
+
+            if (response.Warning) {
+                $.gritter.add({
+                    title: 'Alerta',
+                    text: response.Message,
+                    class_name: 'gritter-warning gritter'
+                });
+            } else {
+                $.gritter.add({
+                    title: response.Title,
+                    text: response.Message,
+                    class_name: 'gritter-success gritter'
+                });
+                dataTableUnidadMedida.ajax.reload();
+            }
+        } else {
+            $.gritter.add({
+                title: 'Error',
+                text: response.Message,
+                class_name: 'gritter-error gritter'
+            });
+        }
+    }, function (response) {
+        $.gritter.add({
+            title: 'Error',
+            text: response,
+            class_name: 'gritter-error gritter'
+        });
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        $.gritter.add({
+            title: 'Error',
+            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
+            class_name: 'gritter-error gritter'
+        });
+    });
+}
+
+function CargarEstado() {
+    var modelView = {
+        idtabla: tablaEstado
+    };
+    webApp.Ajax({
+        url: urlcargarEstado,
+        async: false,
+        parametros: modelView
+    }, function (response) {
+        if (response.Success) {
+
+            if (response.Warning) {
+                $.gritter.add({
+                    title: 'Alerta',
+                    text: response.Message,
+                    class_name: 'gritter-warning gritter'
+                });
+            } else {
+                $.each(response.Data, function (index, item) {
+                    $("#Estado").append('<option value="' + item.Id + '">' + item.tbpd_vdescripcion_detalle + '</option>');
+                });
+                webApp.clearForm('UsuarioSearchForm');
+            }
+        } else {
+            $.gritter.add({
+                title: 'Error',
+                text: response.Message,
+                class_name: 'gritter-error gritter'
+            });
+        }
+    }, function (response) {
+        $.gritter.add({
+            title: 'Error',
+            text: response,
+            class_name: 'gritter-error gritter'
+        });
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        $.gritter.add({
+            title: 'Error',
+            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
+            class_name: 'gritter-error gritter'
+        });
+    });
+}
+
+function buscar(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13) {
+        if ($('#UnidadMedidaSearchForm').valid()) {
+            checkSession(function () {
+                dataTableUnidadMedida.ajax.reload();
+            });
+        }
+    }
+}
+
 function LimpiarFormulario() {
     webApp.clearForm(formularioMantenimiento);
+    $("#Estado").val(1);
     $("#codigo").focus();
 }

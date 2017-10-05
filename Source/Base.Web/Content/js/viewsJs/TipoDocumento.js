@@ -644,6 +644,16 @@ function cleanInputCheckList() {
     });
 }
 
+function buscar(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13) {
+        if ($('#TipoDocumentoSearchForm').valid()) {
+            checkSession(function () {
+                dataTableTipoDocumento.ajax.reload();
+            });
+        }
+    }
+}
 
 function CountInputCheckList() {
     jQuery('#' + divCheckList + ' input[type=checkbox]').each(function (index, item) {

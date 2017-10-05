@@ -275,6 +275,41 @@ namespace Base.Web.Controllers
             return Json(jsonResponse);
         }
 
+        [HttpPost]
+        public JsonResult UpdateStatus(StatusDTO statusDTO)
+        {
+            var jsonResponse = new JsonResponse { Success = true };
+            try
+            {
+                var status_ = MapperHelper.Map<StatusDTO, Status>(statusDTO);
+                status_.tabla = status.TablaAlmacen;
+                status_.setStatus = status.setStatusAlmacen + status_.Estado;
+                status_.where = status.WhereAlmacen + status_.Id;
+                int resultado = StatusBL.Instancia.status(status_);
+
+                if (resultado > 0)
+                {
+                    jsonResponse.Title = Title.TitleActualizar;
+                    jsonResponse.Message = Mensajes.cambiostatus;
+                }
+                else
+                {
+                    jsonResponse.Title = Title.TitleAlerta;
+                    jsonResponse.Warning = true;
+                    jsonResponse.Message = Mensajes.IntenteloMasTarde;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                jsonResponse.Success = false;
+                jsonResponse.Title = Title.TitleAlerta;
+                jsonResponse.Message = Mensajes.IntenteloMasTarde;
+            }
+
+            return Json(jsonResponse);
+        }
+
         #region Métodos Privados
         public void FormatDataTable(DataTableModel<AlmacenFilterModel, int> dataTableModel)
         {
@@ -285,7 +320,7 @@ namespace Base.Web.Controllers
                 var column = dataTableModel.columns[columnIndex].data;
                 dataTableModel.orderBy = (" [" + column + "] " + columnDir + " ");
             }
-            string WhereModel = "WHERE A.almac_bflag_estado=1";
+            string WhereModel = "WHERE A.almac_bflag_estado in(1,2)";
 
 
             if (dataTableModel.filter.CodigoSearch != null)

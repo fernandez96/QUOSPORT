@@ -168,6 +168,7 @@ namespace Base.DataAccess
                 _database.AddInParameter(comando, "@prdc_vcaracteristicas", DbType.String, entity.prdc_vcaracteristicas);
                 _database.AddInParameter(comando, "@prdc_vpc_modifica", DbType.String, WindowsIdentity.GetCurrent().Name);
                 _database.AddInParameter(comando, "@prdc_vusuario_modifica", DbType.String, entity.UsuarioModificacion);
+                _database.AddInParameter(comando, "@prdc_bflag_estado", DbType.Int32, entity.Estado);
                 _database.AddInParameter(comando, "@id", DbType.Int32, entity.Id);
                 _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
 

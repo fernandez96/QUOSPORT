@@ -757,9 +757,32 @@ function Imprimir(id) {
     });
 }
 
+function buscarCabezera(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13) {
+        if ($('#TablaSearchForm').valid()) {
+            checkSession(function () {
+                dataTableTabla.ajax.reload();
+            });
+        }
+    }
+}
+
+function buscarDetalle(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13) {
+        if ($('#TablaDetalleSearchForm').valid()) {
+            checkSession(function () {
+                dataTableTablaDetalle.ajax.reload();
+            });
+        }
+    }
+}
+
 function LimpiarFormularioTabla() {
     webApp.clearForm(formularioMantenimientoTabla);
 }
+
 
 function LimpiarFormularioTablaDetalle() {
     webApp.clearForm(formularioMantenimientoTablaDetalle);

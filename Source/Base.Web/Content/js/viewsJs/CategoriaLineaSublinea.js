@@ -32,6 +32,8 @@ var TitleRegistro = "Registro Satisfactorio";
 var TitleActualizar = "Actualización Satisfactoria";
 var TitleEliminar = "Eliminación Satisfactoria";
 var TitleAlerta = "Alerta";
+var estadoActivo = 1;
+var estadoInactivo = 2;
 
 $(document).ready(function () {
     Array.prototype.unique = function (a) {
@@ -79,7 +81,7 @@ $(document).ready(function () {
 	            if (categoriaProductoLinea.length > 0) {
 	                rowLinea = dataTableLinea.row('.selected').data();
 	                if (typeof rowLinea === "undefined") {
-	                    webApp.showMessageDialog("Por favor seleccione un registro.");
+	                    webApp.showMessageDialog("Por favor seleccione una Linea para poder asignar Sub-Linea(as)");
 	                    e.preventDefault();
 	                }
 	                else {
@@ -93,7 +95,7 @@ $(document).ready(function () {
 	            }
 	            else {
 	                if (categoriaProductoLinea<=0) {
-	                    webApp.showMessageDialog("Por favor debe ingresar una categoria de producto - Linea.");
+	                    webApp.showMessageDialog("Por favor debe ingresar al menos una Linea.");
 	                    e.preventDefault();
 	                   
                     }
@@ -114,7 +116,7 @@ $(document).ready(function () {
 	            }
 	            else {
 	                if (categoriaProductoSubLinea.length <= 0) {
-	                    webApp.showMessageDialog("Por favor debe ingresar una categoria de producto - Sub-Linea.");
+	                    webApp.showMessageDialog("Por favor debe ingresar al menos una Sub-Linea.");
 	                    e.preventDefault();
 	                }
 	            }
@@ -222,26 +224,56 @@ $(document).ready(function () {
             webApp.showMessageDialog("Por favor seleccione un registro.");
         }
         else {
-            checkSession(function () {
-               
-                GetCategoriaById();
-                GetAllLinea(rowCategoria.Id);
-            });
+            if (rowCategoria.Estado===estadoInactivo) {
+                webApp.showMessageDialog('La categoria ' + '<b>' + rowCategoria.ctgcc_vdescripcion + '</b>' + ' se encuentra  ' + '<span class="label label-warning arrowed-in arrowed-in-right">Inactivo</span>' + '.Si desea hacer una modificación le recomendamos cambiarle de estado a dicha categoria.');
+            }
+            else {
+                checkSession(function () {
+                    GetCategoriaById();
+                    GetAllLinea(rowCategoria.Id);
+                });
+            }
+           
         }
 
     });
 
     $('#btnEliminarCategoria').on('click', function () {
-        rowUsuario = dataTableUsuario.row('.selected').data();
-        if (typeof rowUsuario === "undefined") {
+        rowCategoria = dataTableCategoria.row('.selected').data();
+        if (typeof rowCategoria === "undefined") {
             webApp.showMessageDialog("Por favor seleccione un registro.");
         }
         else {
             webApp.showDeleteConfirmDialog(function () {
                 checkSession(function () {
-                    EliminarUsuario();
+                    EliminarCategoria();
                 });
             }, 'Se eliminará el registro. ¿Está seguro que desea continuar?');
+        }
+
+    });
+
+    $('#btnEstadoCategoria').on('click', function () {
+        rowCategoria = dataTableCategoria.row('.selected').data();
+        if (typeof rowCategoria === "undefined") {
+            webApp.showMessageDialog("Por favor seleccione un registro.");
+        }
+        else {
+            if (rowCategoria.Estado == estadoInactivo) {
+                webApp.showConfirmResumeDialog(function () {
+                    checkSession(function () {
+                        CambiarStatus(rowCategoria.Id, estadoActivo);
+                    });
+
+                }, 'El estado de la categoria ' + '<b>' + rowCategoria.ctgcc_vdescripcion + '</b>' + '  es ' + '<span class="label label-warning arrowed-in arrowed-in-right">Inactivo</span>' + ', por lo tanto pasara a estado activo' + '</n>' + ' ¿Desea continuar?');
+            } else if (rowCategoria.Estado == estadoActivo) {
+                webApp.showConfirmResumeDialog(function () {
+                    checkSession(function () {
+                        CambiarStatus(rowCategoria.Id, estadoInactivo);
+                    });
+
+                }, 'El estado de la categoria ' + '<b>' + rowCategoria.ctgcc_vdescripcion + '</b>' + '  es ' + '<span class="label label-info label-sm arrowed-in arrowed-in-right">Activo</span>' + ', por lo tanto pasara a estado Inactivo,' + '</n>' + ' ¿Desea continuar?');
+            }
         }
 
     });
@@ -322,11 +354,8 @@ $(document).ready(function () {
     });
     //#endregion acciones de Categoria SubLinea
     $("#btnCancelar").on("click", function () {
-        webApp.showConfirmResumeDialog(function () {
             $("#NuevoTipoCategoriaLinea").modal('hide');
             rest();
-        }, '¿Está seguro de salir?');
-
     });
 
     webApp.validarNumerico(['codigoL', 'codigoLS', 'codigoCP']);
@@ -386,6 +415,7 @@ $(document).ready(function () {
                required: "Por favor ingrese Descripción"
            }
        });
+    $('[data-toggle="tooltip"]').tooltip();
 });
 
 
@@ -427,10 +457,12 @@ function VisualizarDataTableCategoria() {
             { "data": "ctgcc_vdescripcion" },
             {
                 "data": function (obj) {
-                    if (obj.Estado == "1")
+                    if (obj.Estado == estadoActivo){
                         return '<span class="label label-info label-sm arrowed-in arrowed-in-right">Activo</span>';
-                    else
-                        return '<span class="label label-sm arrowed-in arrowed-in-right">Inactivo</span>';
+                    }      
+                    else if(obj.Estado==estadoInactivo){
+                        return '<span class="label label-warning arrowed-in arrowed-in-right">Inactivo</span>';
+                    }
                 }
             }
         ],
@@ -572,7 +604,7 @@ function DrawAddLinea() {
         if (categoriaProductoLinea.length > 0) {
             $.each(categoriaProductoLinea, function (index, value) {
                
-                if (codigoL === value.linc_vcod_linea || descripcionL === value.linc_vdescripcion) {
+                if ((codigoL === value.linc_vcod_linea || descripcionL === value.linc_vdescripcion) && value.status!=eliminar) {
                     $.gritter.add({
                         title: TitleAlerta,
                         text: YaExisteRegistro,
@@ -596,7 +628,14 @@ function DrawAddLinea() {
                 });
                 categoriaProductoLinea.push(categoriaLinea);
                 dataTableLinea.clear();
-                dataTableLinea.rows.add(categoriaProductoLinea).draw();
+                dataTableLinea.rows.add(categoriaProductoLinea.filter(function (obj) {
+                    if (obj.status!=eliminar) {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                })).draw();
             }
         }
         else {
@@ -610,13 +649,20 @@ function DrawAddLinea() {
             });
             categoriaProductoLinea.push(categoriaLinea);
             dataTableLinea.clear();
-            dataTableLinea.rows.add(categoriaProductoLinea).draw();
+            dataTableLinea.rows.add(categoriaProductoLinea.filter(function (obj) {
+                if (obj.status!=eliminar) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            })).draw();
         }
  
     }
     else {
         $.each(categoriaProductoLinea, function (index, value) {
-            if (value.linc_vdescripcion == descripcionL) {
+            if (value.linc_vdescripcion == descripcionL && value.status!=eliminar) {
                 if (value.Id != parseInt(Id)) {
                     $.gritter.add({
                         title: TitleAlerta,
@@ -641,13 +687,21 @@ function DrawAddLinea() {
 
         if (exitoedit) {
             dataTableLinea.clear();
-            dataTableLinea.rows.add(categoriaProductoLinea).draw();
+            dataTableLinea.rows.add(categoriaProductoLinea.filter(function (obj) {
+                if (obj.status!=eliminar) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            })).draw();
             $.gritter.add({
                 title: TitleActualizar,
                 text: ActualizacionSatisfactoria,
                 class_name: 'gritter-success gritter',
 
             });
+
             $("#NuevoCategoriaLinea").modal("hide");
         }
   
@@ -678,13 +732,21 @@ function DrawEliminarLinea(id) {
     $.each(categoriaProductoLinea, function (index, value) {
         debugger;
         if (value.Id == id) {
+            value.status = eliminar;
             idEliminacion = index;   
             }
     });
     if (idEliminacion > -1) {
-        categoriaProductoLinea.splice(idEliminacion, 1);
-        dataTableLinea.clear();
-        dataTableLinea.rows.add(categoriaProductoLinea).draw();
+        dataTableLinea.clear().draw();     
+      //  categoriaProductoLinea.splice(idEliminacion, 1);
+        dataTableLinea.rows.add(categoriaProductoLinea.filter(function (obj) {
+            if (obj.status != eliminar) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        })).draw();
         $.gritter.add({
             title: TitleEliminar,
             text: EliminacionSatisfactoria,
@@ -698,6 +760,7 @@ function DrawEliminarLinea(id) {
             class_name: 'gritter-success gritter'
         });
     }
+
 }
 // #endregion operaciones linea
 
@@ -715,7 +778,7 @@ function DrawAddSubLinea() {
         if (categoriaProductoSubLinea.length > 0) {
             $.each(categoriaProductoSubLinea, function (index, value) {
                 if (value.idLinea===idLinea) {
-                    if (codigoLS === value.lind_vcod_sublinea || descripcionLS === value.lind_vdescripcion) {
+                    if ((codigoLS === value.lind_vcod_sublinea || descripcionLS === value.lind_vdescripcion) && value.status!=eliminar) {
                         $.gritter.add({
                             title: TitleAlerta,
                             text: YaExisteRegistro,
@@ -740,7 +803,7 @@ function DrawAddSubLinea() {
                 dataTableSubLinea.clear();
                 dataTableSubLinea.rows.add(categoriaProductoSubLinea.filter(function (obj)
                 {
-                    if (obj.idLinea === idLinea) {
+                    if (obj.idLinea === idLinea && obj.status!=eliminar) {
                         return true;
                     } else {
                         return false;
@@ -759,12 +822,19 @@ function DrawAddSubLinea() {
             });
             categoriaProductoSubLinea.push(categoriaSubLinea);
             dataTableSubLinea.clear();
-            dataTableSubLinea.rows.add(categoriaProductoSubLinea).draw();
+            dataTableSubLinea.rows.add(categoriaProductoSubLinea.filter(function (obj) {
+                if (obj.status!=eliminar) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            })).draw();
         }
     }
     else {
         $.each(categoriaProductoSubLinea, function (index, value) {
-            if (value.lind_vdescripcion == descripcionLS) {
+            if (value.lind_vdescripcion == descripcionLS && value.status!=eliminar) {
                 if (value.Id != parseInt(Id)) {
                     $.gritter.add({
                         title: TitleAlerta,
@@ -791,7 +861,7 @@ function DrawAddSubLinea() {
         if (exitoedit) {
             dataTableSubLinea.clear();
             dataTableSubLinea.rows.add(categoriaProductoSubLinea.filter(function (obj) {
-                if (obj.idLinea === idLinea) {
+                if (obj.idLinea === idLinea && obj.status!=eliminar) {
                     return true;
                 } else {
                     return false;
@@ -807,8 +877,6 @@ function DrawAddSubLinea() {
         }
 
     }
-    console.log(categoriaProductoSubLinea);
-
 }
 
 function DrawEditSubLinea() {
@@ -832,15 +900,16 @@ function DrawEliminarSubLinea(id) {
     var idEliminacion = -1;
     $.each(categoriaProductoSubLinea, function (index, value) {
         debugger;
-        if (value.Id == id && value.idLinea===rowLinea.Id) {
+        if (value.Id == id && value.idLinea === rowLinea.Id) {
+            value.status = eliminar;
             idEliminacion = index;
         }
     });
     if (idEliminacion > -1) {
-        categoriaProductoSubLinea.splice(idEliminacion, 1);
+      //  categoriaProductoSubLinea.splice(idEliminacion, 1);
         dataTableSubLinea.clear().draw();
         dataTableSubLinea.rows.add(categoriaProductoSubLinea.filter(function (obj) {
-            if (obj.idLinea === rowLinea.Id) {
+            if (obj.idLinea === rowLinea.Id && obj.status!=eliminar) {
                 return true;
             } else {
                 return false;
@@ -860,42 +929,42 @@ function DrawEliminarSubLinea(id) {
         });
     }
 }
-
 //#endregion operaciones sub-linea
-
 function getResumen() {
     LimpiarFormularioResumen();
     var contedetalle = null;
     var contentLinea = null;
     $("#Resumen").empty();
     $.each(categoriaProductoLinea, function (index, value) {
-         contentLinea ='<li id="li'+value.Id+'">'
-          + '<i class="ace-icon fa fa-caret-right blue"></i>Linea : '
-          + '<b class="black"><span id="categoriaProductoLineaRsm">' + value.linc_vdescripcion + '</span></b>'  
-      + '</li>'
-         $("#Resumen").append(contentLinea);
+        if (value.status!=eliminar) {
+            contentLinea = '<li id="li' + value.Id + '">'
+                    + '<i class="ace-icon fa fa-caret-right blue"></i>Linea : '
+                    + '<b class="black"><span id="categoriaProductoLineaRsm">' + value.linc_vdescripcion + '</span></b>'
+                + '</li>'
+            $("#Resumen").append(contentLinea);
+        }
     });
 
     $.each(categoriaProductoSubLinea, function (index, value) {
-        if ($("#li" + value.idLinea).length) {           
-            contedetalle = '<li style="margin-left:30px;margin-top:-15px; ">'
-                + '<ul class="list-unstyled">'
-                            + '<li>'
-               + '<i class="ace-icon fa fa-caret-right black"></i>Sub - Linea :'
-               + '<b class="black"><span id="countLineaRsm">' + value.lind_vdescripcion + '</span></b>'
-               + '</li>'
-               + '</ul>'
-            + '</li>';
-         
+        if ($("#li" + value.idLinea).length) {
+            if (value.status!=eliminar) {
+                contedetalle = '<li style="margin-left:30px;margin-top:-15px; ">'
+                              + '<ul class="list-unstyled">'
+                                          + '<li>'
+                             + '<i class="ace-icon fa fa-caret-right black"></i>Sub - Linea :'
+                             + '<b class="black"><span id="countLineaRsm">' + value.lind_vdescripcion + '</span></b>'
+                             + '</li>'
+                             + '</ul>'
+                          + '</li>';
+                $("#li" + value.idLinea).append(contedetalle);
             }
-        $("#li" + value.idLinea).append(contedetalle);
+          }
     });
 
     //$("#countLineaRsm").text(categoriaProductoLinea.length);
     //$("#countSubLineaRsm").text(categoriaProductoSubLinea.length);
 
 };
-
 //#region
 function cargarDatatableSubLinea(id) {
     var dataSubLinea = [];
@@ -905,7 +974,7 @@ function cargarDatatableSubLinea(id) {
         GetAllSubLinea(id);
     }
     $.each(categoriaProductoSubLinea, function (index, value) {
-        if (value.idLinea === id) {
+        if (value.idLinea === id && value.status!=eliminar) {
             SubLinea = { "Id": value.Id, "idLinea": value.idLinea, "lind_vcod_sublinea": value.lind_vcod_sublinea, "lind_vdescripcion": value.lind_vdescripcion, "Estado": value.Estado, 'status': value.status };
            dataSubLinea.push(SubLinea);
         }
@@ -919,9 +988,6 @@ function cargarDatatableSubLinea(id) {
     }
 }
 //#endregion
-
-
-
 function GetCategoriaById() {
     var modelView = {
         Id: rowCategoria.Id
@@ -1057,8 +1123,6 @@ function GetAllSubLinea(id) {
 }
 
 function GuardarCategoria() {
-
-  
         var modelView = {
             Id: $("#IdCategoria").val(),
             ctgcc_vcod_categoria: $("#codigoCP").val(),
@@ -1067,7 +1131,6 @@ function GuardarCategoria() {
             detalleSubLinea: categoriaProductoSubLinea,
             UsuarioRegistro: $("#usernameLogOn strong").text()
         };
-
         if (modelView.Id == 0)
             action = 'Add';
         else
@@ -1086,10 +1149,7 @@ function GuardarCategoria() {
                     });
                 } else {
                     $("#NuevoTipoCategoriaLinea").modal("hide");
-                    dataTableCategoria.ajax.reload();
-                    categoriaProductoLinea.length = 0;
-                    categoriaProductoSubLinea.length = 0;
-
+                    rest();
                     $.gritter.add({
                         title: response.Title,
                         text: response.Message,
@@ -1120,22 +1180,156 @@ function GuardarCategoria() {
  
 }
 
+function EliminarCategoria() {
+    var modelView = {
+        Id: rowCategoria.Id,
+        UsuarioRegistro: $("#usernameLogOn strong").text()
+    };
+
+    webApp.Ajax({
+        url: urlMantenimiento + 'Delete',
+        async: false,
+        parametros: modelView
+    }, function (response) {
+        if (response.Success) {
+            if (response.Warning) {
+                $.gritter.add({
+                    title: 'Alerta',
+                    text: response.Message,
+                    class_name: 'gritter-warning gritter'
+                });
+            } else {
+                $("#NuevoTipoCategoriaLinea").modal("hide");
+                dataTableCategoria.ajax.reload();
+                $.gritter.add({
+                    title: response.Title,
+                    text: response.Message,
+                    class_name: 'gritter-success gritter'
+                });
+            }
+        } else {
+            $.gritter.add({
+                title: 'Error',
+                text: response.Message,
+                class_name: 'gritter-error gritter'
+            });
+        }
+    }, function (response) {
+        $.gritter.add({
+            title: 'Error',
+            text: response,
+            class_name: 'gritter-error gritter'
+        });
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        $.gritter.add({
+            title: 'Error',
+            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
+            class_name: 'gritter-error gritter'
+        });
+    });
+}
+
+function buscarCategoria(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13) {
+        if ($('#CategoriaSearchForm').valid()) {
+            checkSession(function () {
+                dataTableCategoria.ajax.reload();
+            });
+        }
+    }
+}
+
+function buscarLinea(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13) {
+        if ($('#UsuarioSearchForm').valid()) {
+            checkSession(function () {
+                dataTableLinea.ajax.reload();
+            });
+        }
+    }
+}
+
+function buscarSudLinea(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13) {
+        if ($('#UsuarioSearchForm').valid()) {
+            checkSession(function () {
+                dataTableSubLinea.ajax.reload();
+            });
+        }
+    }
+}
+
+function CambiarStatus(Id, estado) {
+    var modelView = {
+        Id: Id,
+        Estado: estado
+    };
+    webApp.Ajax({
+        url: urlMantenimiento + 'UpdateStatus',
+        async: false,
+        parametros: modelView
+    }, function (response) {
+        if (response.Success) {
+
+            if (response.Warning) {
+                $.gritter.add({
+                    title: 'Alerta',
+                    text: response.Message,
+                    class_name: 'gritter-warning gritter'
+                });
+            } else {
+                $.gritter.add({
+                    title: response.Title,
+                    text: response.Message,
+                    class_name: 'gritter-success gritter'
+                });
+                dataTableCategoria.ajax.reload();
+            }
+        } else {
+            $.gritter.add({
+                title: 'Error',
+                text: response.Message,
+                class_name: 'gritter-error gritter'
+            });
+        }
+    }, function (response) {
+        $.gritter.add({
+            title: 'Error',
+            text: response,
+            class_name: 'gritter-error gritter'
+        });
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        $.gritter.add({
+            title: 'Error',
+            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
+            class_name: 'gritter-error gritter'
+        });
+    });
+}
+
 function LimpiarFormularioCategoria() {
     webApp.clearForm(formularioMantenimientoCategoria);
     $("#codigoCP").focus();
 }
+
 function LimpiarFormularioLinea() {
     webApp.clearForm(formularioMantenimientoLinea);
     $("#codigoL").focus();
 }
+
 function LimpiarFormularioSubLinea() {
     webApp.clearForm(formularioMantenimientoSubLinea);
     $("#codigoLS").focus();
 }
+
 function LimpiarFormularioResumen() {
     webApp.clearForm(formularioResumen);
 }
 function rest() {
+    LimpiarFormularioCategoria();
     LimpiarFormularioLinea();
     LimpiarFormularioSubLinea();
     LimpiarFormularioResumen();
@@ -1143,4 +1337,7 @@ function rest() {
     categoriaProductoSubLinea.length = 0;
     dataTableLinea.clear().draw();
     dataTableSubLinea.clear().draw();
+    var wizard = $('#modal-wizard-container').data('fu.wizard')
+    wizard.currentStep = 1;
+    wizard.setState();
 }

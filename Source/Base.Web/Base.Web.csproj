@@ -393,6 +393,7 @@
     <Content Include="Content\js\inputmask.js" />
     <Content Include="Content\js\jqGrid\i18n\grid.locale-es.js" />
     <Content Include="Content\js\jqGrid\jquery.jqGrid.src.js" />
+    <Content Include="Content\js\jquery-mask.js" />
     <Content Include="Content\js\jquery-ui-1.10.4.custom.min.js" />
     <Content Include="Content\js\jquery-ui-timepicker-addon.js" />
     <Content Include="Content\js\jquery-ui.custom.js" />

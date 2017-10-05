@@ -21,6 +21,10 @@ namespace Base.BusinessLogic
         {
             return CategoriaRepository.Instancia.Update(entity);
         }
+        public int Delete(Categoria entity)
+        {
+            return CategoriaRepository.Instancia.Delete(entity);
+        }
         public IList<Categoria> GetAll()
         {
             return CategoriaRepository.Instancia.GetAll();

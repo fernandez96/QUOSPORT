@@ -890,7 +890,11 @@ var webApp = function () {
             $('#'+item).validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéíóú_');
         });        
     };
-
+    var validarCorreos = function (identificadores) {
+        $.each(identificadores, function (index, item) {
+            $('#' + item).validCampoFranz(' /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i');
+        });
+    };
     var validarAlfanumerico = function(identificadores) {
         $.each(identificadores, function (index, item) {
             $('#'+item).validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéíóú1234567890_');

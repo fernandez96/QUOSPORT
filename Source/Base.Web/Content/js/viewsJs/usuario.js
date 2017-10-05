@@ -114,7 +114,7 @@ $(document).ready(function () {
     });  
 
     webApp.validarLetrasEspacio(['Nombre', 'Apellido']);
-    $('#Correo').validCampoFranz('@abcdefghijklmnÃ±opqrstuvwxyz_1234567890.');
+    $('#Correo').validCampoFranz(' @abcdefghijklmnÃ±opqrstuvwxyz_1234567890.');
 
     webApp.InicializarValidacion(formularioMantenimiento, 
         {
@@ -143,7 +143,10 @@ $(document).ready(function () {
             },
             RolId: {
                 required: true
-            }            
+            },
+            Correo: {
+                email: true
+            }
         },
         {
             Username: {
@@ -170,7 +173,10 @@ $(document).ready(function () {
             },
             RolId: {
                 required: "Por favor seleccione Rol."
-            }            
+            },
+            Correo: {
+                email: "Por favor ingrese Correo válido."
+            }
         });
     CargarCargo();
     CargarRol();
@@ -548,9 +554,19 @@ function CargarEstado() {
     });
 }
 
-
 function AddSearchFilter() {
     $("#UsuarioDataTable_wrapper").prepend($("#searchFilterDiv").html());
+}
+
+function buscar(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13) {
+        if ($('#UsuarioSearchForm').valid()) {
+            checkSession(function () {
+                dataTableUsuario.ajax.reload();
+            });
+        }
+    }
 }
 
 function LimpiarFormulario(){

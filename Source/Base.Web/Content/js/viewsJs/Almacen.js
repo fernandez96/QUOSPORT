@@ -6,7 +6,12 @@ var urlListar = baseUrl + 'Almacen/Listar';
 var urlMantenimiento = baseUrl + 'Almacen/';
 var rowAlmacen = null;
 var urlcargarEstado = baseUrl + 'Usuario/GetAll';
-
+var estadoActivo = 1;
+var estadoInactivo = 2;
+var tablaEstado = 1;
+var tablaTipo = 7;
+var estadoActivo = 1;
+var estadoInactivo = 2;
 $(document).ready(function () {
     $.extend($.fn.dataTable.defaults, {
         language: { url: baseUrl + 'Content/js/dataTables/Internationalisation/es.txt' },
@@ -32,7 +37,6 @@ $(document).ready(function () {
 
     $('#btnAgregarAlmacen').on('click', function () {
         LimpiarFormulario();
-
         $("#AlmacenId").val(0);
         $("#accionTitle").text('Nuevo');
         $("#NuevoAlmacen ").modal("show");
@@ -46,9 +50,16 @@ $(document).ready(function () {
             webApp.showMessageDialog("Por favor seleccione un registro.");
         }
         else {
-            checkSession(function () {
-                GetAlmacenById();
-            });
+            if (rowAlmacen.Estado===estadoInactivo) {
+                webApp.showMessageDialog('El Almacen ' + '<b>' + rowAlmacen.almac_vdescripcion + '</b>' + ' se encuentra  ' + '<span class="label label-warning arrowed-in arrowed-in-right">Inactivo</span>' + '.Si desea hacer un modificación le recomendamoos cambiarle de estado a dicho Almacen.');
+            }
+            else
+            {
+                checkSession(function () {
+                    GetAlmacenById();
+                });
+            }
+          
         }
 
     });
@@ -68,6 +79,31 @@ $(document).ready(function () {
 
     });
 
+
+    $('#btnEstadoAlmacen').on('click', function () {
+        rowAlmacen = dataTableAlmacen.row('.selected').data();
+        if (typeof rowAlmacen === "undefined") {
+            webApp.showMessageDialog("Por favor seleccione un registro.");
+        }
+        else {
+            if (rowAlmacen.Estado == estadoInactivo) {
+                webApp.showConfirmResumeDialog(function () {
+                    checkSession(function () {
+                        CambiarStatus(rowAlmacen.Id, estadoActivo);
+                    });
+
+                }, 'El estado del almacen ' + '<b>' + rowAlmacen.almac_vdescripcion + '</b>' + '  es ' + '<span class="label label-warning arrowed-in arrowed-in-right">Inactivo</span>' + ', por lo tanto pasara a estado activo' + '</n>' + ' ¿Desea continuar?');
+            } else if (rowAlmacen.Estado == estadoActivo) {
+                webApp.showConfirmResumeDialog(function () {
+                    checkSession(function () {
+                        CambiarStatus(rowAlmacen.Id, estadoInactivo);
+                    });
+
+                }, 'El estado del almacen ' + '<b>' + rowAlmacen.almac_vdescripcion + '</b>' + '  es ' + '<span class="label label-info label-sm arrowed-in arrowed-in-right">Activo</span>' + ', por lo tanto pasara a estado Inactivo,' + '</n>' + ' ¿Desea continuar?');
+            }
+        }
+
+    });
   
 
     $("#btnSearchAlmacen").on("click", function (e) {
@@ -97,13 +133,12 @@ $(document).ready(function () {
 
     // webApp.validarLetrasEspacio(['Nombre', '']);
     webApp.validarNumerico(['telefono']);
-    $('#correo').validCampoFranz('@abcdefghijklmnÃ±opqrstuvwxyz_1234567890.');
+    $('#correo').validCampoFranz(' @abcdefghijklmnÃ±opqrstuvwxyz_1234567890.');
 
     webApp.InicializarValidacion(formularioMantenimiento,
         {
             codigo: {
                 required: true
-
             },
             descripcion: {
                 required: true
@@ -118,7 +153,10 @@ $(document).ready(function () {
                 strippedminlength: {
                     param: 6
                 },
-               }
+            },
+            correo: {
+                email: true
+            }
           
         },
         {
@@ -139,10 +177,14 @@ $(document).ready(function () {
             },
             telefono:{
                 strippedminlength: "Por favor ingrese al menos 6 caracteres."
+            },
+            correo: {
+                email: "Por favor ingrese Correo válido"
             }
           
         });
-   // CargarEstado();
+    CargarTipo();
+    CargarEstado();
     $('[data-toggle="tooltip"]').tooltip();
 });
 
@@ -185,10 +227,12 @@ function VisualizarDataTableAlmacen() {
             { "data": "almac_vcorreo" },
             {
                 "data": function (obj) {
-                    if (obj.Estado == 1)
+                    if (obj.Estado == 1) {
                         return '<span class="label label-info label-sm arrowed-in arrowed-in-right">Activo</span>';
-                    else
-                        return '<span class="label label-sm arrowed-in arrowed-in-right">Inactivo</span>';
+                    }
+                    else if (obj.Estado == 2) {
+                        return '<span class="label label-warning arrowed-in arrowed-in-right">Inactivo</span>';
+                    }
                 }
             }
         ],
@@ -240,7 +284,7 @@ function GetAlmacenById() {
                 $("#responsable").val(almacen.almac_vresponsable);
                 $("#telefono").val(almacen.almac_vtelefono);
                 $("#correo").val(almacen.almac_vcorreo);
-                //$("#Estado").val(almacen.Estado);
+                $("#Estado").val(almacen.Estado);
                 $("#AlmacenId").val(almacen.Id);
                 $("#accionTitle").text('Editar');
                 $("#NuevoAlmacen").modal("show");
@@ -331,8 +375,10 @@ function GuardarAlmacen() {
         almac_vresponsable: $("#responsable").val(),
         almac_vtelefono: $("#telefono").val(),
         almac_vcorreo: $("#correo").val(),
-        almac_itipo: $("#tipo").val(),
+        almac_itipo: $("#Tipo").val(),
+        Estado:$("#Estado").val(),
         UsuarioRegistro: $("#usernameLogOn strong").text()
+   
     };
 
     if (modelView.Id == 0)
@@ -384,7 +430,7 @@ function GuardarAlmacen() {
 
 function CargarEstado() {
     var modelView = {
-        idtabla: 1
+        idtabla: tablaEstado
     };
     webApp.Ajax({
         url: urlcargarEstado,
@@ -427,15 +473,116 @@ function CargarEstado() {
     });
 }
 
+function CargarTipo() {
+    var modelView = {
+        idtabla: tablaTipo
+    };
+    webApp.Ajax({
+        url: urlMantenimiento + 'GetAll',
+        async: false,
+        parametros: modelView
+    }, function (response) {
+        if (response.Success) {
+
+            if (response.Warning) {
+                $.gritter.add({
+                    title: 'Alerta',
+                    text: response.Message,
+                    class_name: 'gritter-warning gritter'
+                });
+            } else {
+                $.each(response.Data, function (index, item) {
+                    $("#Tipo").append('<option value="' + item.Id + '">' + item.tbpd_vdescripcion_detalle + '</option>');
+                });
+            }
+        } else {
+            $.gritter.add({
+                title: 'Error',
+                text: response.Message,
+                class_name: 'gritter-error gritter'
+            });
+        }
+    }, function (response) {
+        $.gritter.add({
+            title: 'Error',
+            text: response,
+            class_name: 'gritter-error gritter'
+        });
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        $.gritter.add({
+            title: 'Error',
+            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
+            class_name: 'gritter-error gritter'
+        });
+    });
+}
+
+function CambiarStatus(Id, estado) {
+    var modelView = {
+        Id: Id,
+        Estado: estado
+    };
+    webApp.Ajax({
+        url: urlMantenimiento + 'UpdateStatus',
+        async: false,
+        parametros: modelView
+    }, function (response) {
+        if (response.Success) {
+
+            if (response.Warning) {
+                $.gritter.add({
+                    title: 'Alerta',
+                    text: response.Message,
+                    class_name: 'gritter-warning gritter'
+                });
+            } else {
+                $.gritter.add({
+                    title: response.Title,
+                    text: response.Message,
+                    class_name: 'gritter-success gritter'
+                });
+                dataTableAlmacen.ajax.reload();
+            }
+        } else {
+            $.gritter.add({
+                title: 'Error',
+                text: response.Message,
+                class_name: 'gritter-error gritter'
+            });
+        }
+    }, function (response) {
+        $.gritter.add({
+            title: 'Error',
+            text: response,
+            class_name: 'gritter-error gritter'
+        });
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        $.gritter.add({
+            title: 'Error',
+            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
+            class_name: 'gritter-error gritter'
+        });
+    });
+}
 
 function AddSearchFilter() {
     $("#UsuarioDataTable_wrapper").prepend($("#searchFilterDiv").html());
 }
 
+function buscar(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13) {
+        if ($('#AlmacenSearchForm').valid()) {
+            checkSession(function () {
+                dataTableAlmacen.ajax.reload();
+            });
+        }
+    }
+}
+
 function LimpiarFormulario() {
     webApp.clearForm(formularioMantenimiento);
-    $("#CargoId").val(1);
-    $("#RolId").val(1);
+    $("#Tipo").val(9);
     $("#Estado").val(1);
     $("#Username").focus();
     $("#Contrasena").prop("type", "password");
