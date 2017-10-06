@@ -155,7 +155,7 @@ namespace Base.DataAccess
                                     {
                                         if (item.Id == itemsublinea.idLinea)
                                         {
-                                            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_LINEA_PRODUCTO_DET_INSERT")))
+                                            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_LINEA_PRODUCTO_DET_UPDATE")))
                                             {
                                                 _database.AddInParameter(comando, "@id", DbType.Int32, itemsublinea.Id);
                                                 _database.AddInParameter(comando, "@lind_vcod_sublinea", DbType.String, itemsublinea.lind_vcod_sublinea);
