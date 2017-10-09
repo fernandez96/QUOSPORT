@@ -120,6 +120,7 @@ namespace Base.DataAccess
                 {
                     try
                     {
+                        //Actualizar categoria 
                         using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_CATEGORIAS_PRODUCTO_UPDATE")))
                         {
                             _database.AddInParameter(comando, "@id", DbType.String, entity.Id);
@@ -132,6 +133,8 @@ namespace Base.DataAccess
                             idcategoria = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
                             if (idcategoria == -1) throw new Exception("Ya existe la Categoria de producto " + entity.ctgcc_vdescripcion);
                         }
+
+                        //Actualizar linea
                         foreach (var item in entity.detalleLinea)
                         {
                             if (item.status == update)
@@ -149,32 +152,69 @@ namespace Base.DataAccess
                                     idlinea = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
                                     if (idlinea == -1) throw new Exception("Ya existe la Linea " + item.linc_vdescripcion);
                                 }
-                                foreach (var itemsublinea in entity.detalleSubLinea)
+                              
+                            }  
+                        }
+
+                        //eliminar linea
+                        foreach (var item in entity.detalleLinea)
+                        {
+                            if (item.status == delete)
+                            {
+                                using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_LINEA_PRODUCTO_CAB_DELETE")))
                                 {
-                                    if (itemsublinea.status == update)
-                                    {
-                                        if (item.Id == itemsublinea.idLinea)
-                                        {
-                                            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_LINEA_PRODUCTO_DET_UPDATE")))
-                                            {
-                                                _database.AddInParameter(comando, "@id", DbType.Int32, itemsublinea.Id);
-                                                _database.AddInParameter(comando, "@lind_vcod_sublinea", DbType.String, itemsublinea.lind_vcod_sublinea);
-                                                _database.AddInParameter(comando, "@lind_vdescripcion", DbType.String, itemsublinea.lind_vdescripcion);
-                                                _database.AddInParameter(comando, "@lind_vusuario_modifica", DbType.String, entity.UsuarioModificacion);
-                                                _database.AddInParameter(comando, "@lind_vpc_modifica", DbType.String, WindowsIdentity.GetCurrent().Name);
-                                                _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
-                                                _database.ExecuteNonQuery(comando);
+                                    _database.AddInParameter(comando, "@Id", DbType.Int32, item.Id);
+                                    _database.ExecuteNonQuery(comando);
 
-                                                idsublinea = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
-                                                if (idsublinea == -1) throw new Exception("Ya existe la Sub-Linea " + itemsublinea.lind_vdescripcion);
-                                            }
-                                        }
-
-                                    }
-
+                                    idlinea = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
+                                    if (idlinea == 0) throw new Exception("Error al iliminar Linea" + item.linc_vdescripcion);
                                 }
                             }
-                            else if (item.status==add)
+                        }
+
+                        //actualizar sub-linea
+                        foreach (var itemsublinea in entity.detalleSubLinea)
+                        {
+                            if (itemsublinea.status == update)
+                            {
+                                    using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_LINEA_PRODUCTO_DET_UPDATE")))
+                                    {
+                                        _database.AddInParameter(comando, "@id", DbType.Int32, itemsublinea.Id);
+                                        _database.AddInParameter(comando, "@lind_vcod_sublinea", DbType.String, itemsublinea.lind_vcod_sublinea);
+                                        _database.AddInParameter(comando, "@lind_vdescripcion", DbType.String, itemsublinea.lind_vdescripcion);
+                                        _database.AddInParameter(comando, "@lind_vusuario_modifica", DbType.String, entity.UsuarioModificacion);
+                                        _database.AddInParameter(comando, "@lind_vpc_modifica", DbType.String, WindowsIdentity.GetCurrent().Name);
+                                        _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
+                                        _database.ExecuteNonQuery(comando);
+
+                                        idsublinea = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
+                                        if (idsublinea == -1) throw new Exception("Ya existe la Sub-Linea " + itemsublinea.lind_vdescripcion);
+                                    }
+                                }
+                        }
+                        //eliminar sub-linea
+                        foreach (var item in entity.detalleSubLinea)
+                        {
+                            if (item.status==delete && item.linc_iid_linea!=0)
+                            {
+                                using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_LINEA_PRODUCTO_DET_DELETE")))
+                                {
+                                    _database.AddInParameter(comando, "@Id", DbType.Int32, item.Id);
+                                    _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
+                                    _database.ExecuteNonQuery(comando);
+
+                                    idsublinea = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
+                                    if (idsublinea == 0) throw new Exception("Error al elimimar Sub-Linea " + item.lind_vdescripcion);
+                                }
+                            }
+                        }
+
+
+                        //agragar una linea mas sub-linea
+                        foreach (var item in entity.detalleLinea)
+                        {
+                            idlinea = 0;
+                            if (item.status==add)
                             {
                                 using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_LINEA_PRODUCTO_CAB_INSERT")))
                                 {
@@ -190,11 +230,11 @@ namespace Base.DataAccess
                                     idlinea = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
                                     if (idlinea == -1) throw new Exception("Ya existe la Linea " + item.linc_vdescripcion);
                                 }
-                                foreach (var itemsublinea in entity.detalleSubLinea)
+                              foreach (var itemsublinea in entity.detalleSubLinea)
                                 {
-                                    if (itemsublinea.status == add)
+                                    if (item.status == add)
                                     {
-                                        if (item.Id == itemsublinea.idLinea)
+                                        if (item.Id==itemsublinea.idLinea)
                                         {
                                             using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_LINEA_PRODUCTO_DET_INSERT")))
                                             {
@@ -211,42 +251,41 @@ namespace Base.DataAccess
                                                 idsublinea = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
                                                 if (idsublinea == -1) throw new Exception("Ya existe la Sub-Linea " + itemsublinea.lind_vdescripcion);
                                             }
-                                        }
-
+                                        } 
                                     }
-
                                 }
                             }
-                            else if (item.status == delete)
+                            //agregar sub-linea
+                            foreach (var itemSubLinea in entity.detalleSubLinea)
                             {
-                                using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_LINEA_PRODUCTO_CAB_DELETE")))
+                                if (idlinea==0)
                                 {
-                                    _database.AddInParameter(comando, "@Id", DbType.Int32, item.Id);
-                                    _database.ExecuteNonQuery(comando);
-
-                                    idlinea = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
-                                    if (idlinea == 0) throw new Exception("Error al iliminar Linea" + item.linc_vdescripcion);
-                                }
-                                foreach (var itemsublinea in entity.detalleSubLinea)
-                                {
-                                    if (itemsublinea.status == delete)
+                                    if (itemSubLinea.status == add)
                                     {
-                                        if (item.Id == itemsublinea.idLinea)
+                                        if (item.Id == itemSubLinea.idLinea)
                                         {
-                                            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_LINEA_PRODUCTO_DET_DELETE")))
+                                            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_LINEA_PRODUCTO_DET_INSERT")))
                                             {
-                                                _database.AddInParameter(comando, "@Id", DbType.Int32, itemsublinea.Id);
+                                                _database.AddInParameter(comando, "@ctgcc_iid_categoria", DbType.Int32, idcategoria);
+                                                _database.AddInParameter(comando, "@linc_iid_linea", DbType.Int32, item.Id);
+                                                _database.AddInParameter(comando, "@lind_vcod_sublinea", DbType.String, itemSubLinea.lind_vcod_sublinea);
+                                                _database.AddInParameter(comando, "@lind_vdescripcion", DbType.String, itemSubLinea.lind_vdescripcion);
+                                                _database.AddInParameter(comando, "@lind_vusuario_crea", DbType.String, entity.UsuarioCreacion);
+                                                _database.AddInParameter(comando, "@lind_vpc_crea", DbType.String, WindowsIdentity.GetCurrent().Name);
+                                                _database.AddInParameter(comando, "@lind_iflag_estado", DbType.Int32, 1);
                                                 _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
                                                 _database.ExecuteNonQuery(comando);
 
                                                 idsublinea = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
-                                                if (idsublinea == 0) throw new Exception("Error al elimimar Sub-Linea " + itemsublinea.lind_vdescripcion);
+                                                if (idsublinea == -1) throw new Exception("Ya existe la Sub-Linea " + itemSubLinea.lind_vdescripcion);
                                             }
                                         }
                                     }
                                 }
                             }
                         }
+
+                    
 
                         transaction.Commit();
                     }
@@ -259,7 +298,6 @@ namespace Base.DataAccess
             }
             return idcategoria;
         }
-
         public int Delete(Categoria entity)
         {
             int idResult;

@@ -520,7 +520,7 @@ namespace Base.Web.Controllers
             });
 
             var report = new StiReport();
-            // report.Load(Server.MapPath("~/Prints/M_Administrador/TablaRegistro/TablaOpciones.mrt"));
+            report.Load(Server.MapPath("~/Prints/M_Administrador/TablaRegistro/TablaOpciones.mrt"));
             report.RegBusinessObject("tabla", "tabla", dataTabla);
             report.RegBusinessObject("tabladetalle", "tabladetalle", dataBtabladetablle);
 

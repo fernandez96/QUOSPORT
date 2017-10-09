@@ -231,6 +231,7 @@ $(document).ready(function () {
                 checkSession(function () {
                     GetCategoriaById();
                     GetAllLinea(rowCategoria.Id);
+                    GetAllSubLinea();
                 });
             }
            
@@ -293,16 +294,34 @@ $(document).ready(function () {
  
     $('#btnEliminarCategoriaLinea').on('click', function () {
         rowLinea = dataTableLinea.row('.selected').data();
+        var sublinea = 0;
         if (typeof rowLinea === "undefined") {
             webApp.showMessageDialog("Por favor seleccione un registro.");
         }
         else {
-            webApp.showDeleteConfirmDialog(function () {
-                checkSession(function () {
- 
-                    DrawEliminarLinea(rowLinea.Id);
-                });
-            }, 'Se eliminará el registro. ¿Está seguro que desea continuar?');
+            categoriaProductoSubLinea.filter(function (obj) {
+                if (obj.idLinea === rowLinea.Id && obj.status !== eliminar) {
+                    sublinea += 1;
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            });
+            if (sublinea<=0) {
+                webApp.showDeleteConfirmDialog(function () {
+                    checkSession(function () {
+
+                        DrawEliminarLinea(rowLinea.Id);
+                    });
+                }, 'Se eliminará el registro. ¿Está seguro que desea continuar?');
+            }
+            else
+            {
+                webApp.showMessageDialog("Lo sentimos no se puede eliminar la linea <b> " + rowLinea.linc_vdescripcion + " </b> ya que contiene una Sub-linea(as).");
+
+            }
+      
         }
     });
 
@@ -356,6 +375,29 @@ $(document).ready(function () {
     $("#btnCancelar").on("click", function () {
             $("#NuevoTipoCategoriaLinea").modal('hide');
             rest();
+    });
+
+    $('#CodigoLineasearch').on('keypress', function (e) {
+        tecla = (document.all) ? e.keyCode : e.which;
+        if (tecla == 13) {
+            if ($('#CategoriaLineaSearchForm').valid()) {
+                checkSession(function () {
+                    var regExSearch = '^\\s' + $("#CodigoLineasearch").val() + '\\s*$';
+                    //if ($("#CodigoLineasearch").val()!='') {
+                    //    dataTableLinea.clear();
+                    //    dataTableLinea.rows.add(categoriaProductoLinea.filter(function (obj) {
+                    //        if (obj.linc_vcod_linea == $("#CodigoLineasearch").val() && obj.status != eliminar) {
+                    //            return true;
+                    //        }
+                    //        else {
+                    //            return false;
+                    //        }
+                    //    })).draw();
+                    //}
+                    dataTableLinea.columns(2).search(regExSearch, true, false,true).draw()
+                });
+            }
+        }
     });
 
     webApp.validarNumerico(['codigoL', 'codigoLS', 'codigoCP']);
@@ -489,6 +531,7 @@ function VisualizarDataTableCategoria() {
 function VisualizarDataTableLinea() {
     dataTableLinea = $('#CategoriaLineaDataTable').DataTable({
         "bFilter": false,
+        "searching": false,
         "bProcessing": true,
         "serverSide": false,
         responsive: true,
@@ -733,34 +776,34 @@ function DrawEliminarLinea(id) {
         debugger;
         if (value.Id == id) {
             value.status = eliminar;
-            idEliminacion = index;   
-            }
+            idEliminacion = index;
+        }
     });
-    if (idEliminacion > -1) {
-        dataTableLinea.clear().draw();     
-      //  categoriaProductoLinea.splice(idEliminacion, 1);
-        dataTableLinea.rows.add(categoriaProductoLinea.filter(function (obj) {
-            if (obj.status != eliminar) {
-                return true;
-            }
-            else {
-                return false;
-            }
-        })).draw();
-        $.gritter.add({
-            title: TitleEliminar,
-            text: EliminacionSatisfactoria,
-            class_name: 'gritter-success gritter'
-        });
-    }
-    else {
-        $.gritter.add({
-            title: TitleAlerta,
-            text: IntenteloMasTarde,
-            class_name: 'gritter-success gritter'
-        });
-    }
 
+        if (idEliminacion > -1) {
+            dataTableLinea.clear().draw();
+            //  categoriaProductoLinea.splice(idEliminacion, 1);
+            dataTableLinea.rows.add(categoriaProductoLinea.filter(function (obj) {
+                if (obj.status != eliminar) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            })).draw();
+            $.gritter.add({
+                title: TitleEliminar,
+                text: EliminacionSatisfactoria,
+                class_name: 'gritter-success gritter'
+            });
+        }
+        else {
+            $.gritter.add({
+                title: TitleAlerta,
+                text: IntenteloMasTarde,
+                class_name: 'gritter-success gritter'
+            });
+        }
 }
 // #endregion operaciones linea
 
@@ -969,10 +1012,7 @@ function getResumen() {
 function cargarDatatableSubLinea(id) {
     var dataSubLinea = [];
     var SubLinea = null;
- 
-    if ($("#IdCategoria").val()!= 0) {
-        GetAllSubLinea(id);
-    }
+
     $.each(categoriaProductoSubLinea, function (index, value) {
         if (value.idLinea === id && value.status!=eliminar) {
             SubLinea = { "Id": value.Id, "idLinea": value.idLinea, "lind_vcod_sublinea": value.lind_vcod_sublinea, "lind_vdescripcion": value.lind_vdescripcion, "Estado": value.Estado, 'status': value.status };
@@ -1081,14 +1121,10 @@ function GetAllLinea(id) {
     });
 }
 
-function GetAllSubLinea(id) {
-    var modelView = {
-        Id: id
-    };
+function GetAllSubLinea() {
     webApp.Ajax({
         url: urlListarSubLinea,
         async: false,
-        parametros: modelView
     }, function (response) {
         if (response.Success) {
             if (response.Warning) {
@@ -1148,6 +1184,7 @@ function GuardarCategoria() {
                         class_name: 'gritter-warning gritter'
                     });
                 } else {
+                    dataTableCategoria.ajax.reload();
                     $("#NuevoTipoCategoriaLinea").modal("hide");
                     rest();
                     $.gritter.add({
@@ -1241,11 +1278,13 @@ function buscarCategoria(e) {
 }
 
 function buscarLinea(e) {
+
     tecla = (document.all) ? e.keyCode : e.which;
     if (tecla == 13) {
-        if ($('#UsuarioSearchForm').valid()) {
+        if ($('#CategoriaLineaSearchForm').valid()) {
             checkSession(function () {
-                dataTableLinea.ajax.reload();
+                dataTableLinea.columns(2).search($("#CodigoLineasearch").val()).draw();
+             
             });
         }
     }
