@@ -134,8 +134,9 @@ $(document).ready(function () {
             }
         });
     });
+ 
     $("#Linea").on("change", function (e) {
-        var id= $(this).val().split(',')[0];
+        var id = $(this).val().split(',')[0];
         $("#SubLinea").empty();
         $.each(SubLinea, function (index, item) {
             if (item.idLinea ===parseInt(id)) {
@@ -496,7 +497,6 @@ function CargarCategoria() {
         async: false,
     }, function (response) {
         if (response.Success) {
-
             if (response.Warning) {
                 $.gritter.add({
                     title: 'Alerta',
@@ -504,10 +504,12 @@ function CargarCategoria() {
                     class_name: 'gritter-warning gritter'
                 });
             } else {
-                $.each(response.Data, function (index, item) {
-                    $("#Categoria").append('<option value="' + item.Id+','+item.ctgcc_vcod_categoria + '">' + item.ctgcc_vdescripcion + '</option>');
-                });
-                Categoria = response.Data;
+                if (response.Data !==null) {
+                    $.each(response.Data, function (index, item) {
+                        $("#Categoria").append('<option value="' + item.Id + ',' + item.ctgcc_vcod_categoria + '">' + item.ctgcc_vdescripcion + '</option>');
+                    });
+                    Categoria = response.Data;
+                }
             }
         } else {
             $.gritter.add({

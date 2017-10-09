@@ -231,7 +231,7 @@ $(document).ready(function () {
                 checkSession(function () {
                     GetCategoriaById();
                     GetAllLinea(rowCategoria.Id);
-                    GetAllSubLinea();
+                    GetAllSubLinea(rowCategoria.Id);
                 });
             }
            
@@ -308,20 +308,14 @@ $(document).ready(function () {
                     return false;
                 }
             });
-            if (sublinea<=0) {
+   
                 webApp.showDeleteConfirmDialog(function () {
                     checkSession(function () {
 
                         DrawEliminarLinea(rowLinea.Id);
+                        console.log(categoriaProductoSubLinea);
                     });
-                }, 'Se eliminará el registro. ¿Está seguro que desea continuar?');
-            }
-            else
-            {
-                webApp.showMessageDialog("Lo sentimos no se puede eliminar la linea <b> " + rowLinea.linc_vdescripcion + " </b> ya que contiene una Sub-linea(as).");
-
-            }
-      
+                }, 'Se eliminará el registro Linea, ademas las Sub-lineas que contenga ¿Está seguro que desea continuar?');
         }
     });
 
@@ -777,12 +771,16 @@ function DrawEliminarLinea(id) {
 
     var idEliminacion = -1;
     $.each(categoriaProductoLinea, function (index, value) {
-        debugger;
-        if (value.Id == id) {
-            value.status = eliminar;
-            idEliminacion = index;
-        }
+        $.each(categoriaProductoSubLinea, function (index, value_) {
+            if (value.Id === id && value_.idLinea===id) {
+                value.status = eliminar;
+                value_.status = eliminar;
+                idEliminacion = index;
+
+            }
+        });
     });
+    
 
         if (idEliminacion > -1) {
             dataTableLinea.clear().draw();
@@ -995,7 +993,7 @@ function getResumen() {
     $.each(categoriaProductoSubLinea, function (index, value) {
         if ($("#li" + value.idLinea).length) {
             if (value.status!=eliminar) {
-                contedetalle = '<li style="margin-left:30px;margin-top:-15px; ">'
+                contedetalle = '<li style="margin-left:30px;margin-top:1px; ">'
                               + '<ul class="list-unstyled">'
                                           + '<li>'
                              + '<i class="ace-icon fa fa-caret-right black"></i>Sub - Linea :'
@@ -1125,10 +1123,14 @@ function GetAllLinea(id) {
     });
 }
 
-function GetAllSubLinea() {
+function GetAllSubLinea(id) {
+    var modelView = {
+        ctgcc_iid_categoria: id
+    };
     webApp.Ajax({
         url: urlListarSubLinea,
         async: false,
+        parametros: modelView
     }, function (response) {
         if (response.Success) {
             if (response.Warning) {

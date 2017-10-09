@@ -68,24 +68,19 @@ $(document).ready(function () {
 
     });
 
-    $("#mostarPass").on('click', function () {
-        var allInputs = $("#Contrasena").get(0).type;
-        if (allInputs === 'text') {
-            $("#Contrasena").prop("type", "password");
-        }
-        if (allInputs === 'password') {
-            $("#Contrasena").prop("type", "text");
-        }
+    $("#natural").on('click', function () {
+        $("#juridico").prop("checked", false);
+        var valor = $('input:radio[id=natural]:checked').val();       
+        FormularioJuridico(true);
+        FormularioNatural(false);
     });
 
-    $("#mostarPassConf").on('click', function () {
-        var allInputs = $("#ContrasenaConf").get(0).type;
-        if (allInputs === 'text') {
-            $("#ContrasenaConf").prop("type", "password");
-        }
-        if (allInputs === 'password') {
-            $("#ContrasenaConf").prop("type", "text");
-        }
+
+    $("#juridico").on('click', function () {
+        $("#natural").prop("checked", false);
+        var valor = $('input:radio[id=juridico]:checked').val();
+        FormularioNatural(true);
+        FormularioJuridico(false);
     });
 
 
@@ -585,6 +580,13 @@ function LimpiarFormulario() {
     $("#Username").focus();
     
 }
-function Formulrio(vlor) {
-
+function FormularioNatural(valor) {
+    $("#Nombre").prop("disabled", valor);
+    $("#Paterno").prop("disabled", valor);
+    $("#Materno").prop("disabled", valor);
+ 
+}
+function FormularioJuridico(valor) {
+    $("#RUC").prop("disabled", valor);
+    $("#RSocial").prop("disabled", valor);
 }

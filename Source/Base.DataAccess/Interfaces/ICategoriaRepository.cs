@@ -18,6 +18,8 @@ namespace Base.DataAccess.Interfaces
         IList<L> AllLinea();
         IList<S> AllSubLinea();
         IList<S> GetAllSubLinea(S entity);
+        IList<S> AllSubLineaIdCategoria(S entity);
+        
         IList<T> GetAllPaging(PaginationParameter<Q> paginationParameters);
     }
 }

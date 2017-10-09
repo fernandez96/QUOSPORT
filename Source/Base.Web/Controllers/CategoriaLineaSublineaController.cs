@@ -81,13 +81,13 @@ namespace Base.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult ListarSubLinea()
+        public JsonResult ListarSubLinea(SubLineaDTO sublineaDTO)
         {
             var jsonResponse = new JsonResponse { Success = true };
             try
             {
-          
-                var sublineaList = CategoriaBL.Instancia.AllSubLinea();
+                var sublinea = MapperHelper.Map<SubLineaDTO, SubLinea>(sublineaDTO);
+                var sublineaList = CategoriaBL.Instancia.AllSubLineaIdCategoria(sublinea);
                 var sublineaDTOList = MapperHelper.Map<IEnumerable<SubLinea>, IEnumerable<SubLineaDTO>>(sublineaList);
                 if (sublineaDTOList.Count() > 0)
                 {

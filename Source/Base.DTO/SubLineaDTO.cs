@@ -9,5 +9,6 @@ namespace Base.DTO
         public string lind_vdescripcion { get; set; }
         public int status { get; set; }
         public int idLinea { get; set; }
+        public int ctgcc_iid_categoria { get; set; }
     }
 }

@@ -164,6 +164,7 @@ namespace Base.DataAccess
                                 using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_LINEA_PRODUCTO_CAB_DELETE")))
                                 {
                                     _database.AddInParameter(comando, "@Id", DbType.Int32, item.Id);
+                                    _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
                                     _database.ExecuteNonQuery(comando);
 
                                     idlinea = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
@@ -195,7 +196,7 @@ namespace Base.DataAccess
                         //eliminar sub-linea
                         foreach (var item in entity.detalleSubLinea)
                         {
-                            if (item.status==delete && item.linc_iid_linea!=0)
+                            if (item.status==delete && item.linc_iid_linea==0)
                             {
                                 using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_LINEA_PRODUCTO_DET_DELETE")))
                                 {
@@ -477,6 +478,33 @@ namespace Base.DataAccess
 
             return subLinea;
         }
+
+        public IList<SubLinea> AllSubLineaIdCategoria(SubLinea entity)
+        {
+            List<SubLinea> subLinea = new List<SubLinea>();
+            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_LINEA_PRODUCTO_DET_GetIdCategoriaAll")))
+            {
+                _database.AddInParameter(comando, "@id", DbType.Int32, entity.ctgcc_iid_categoria);
+                using (var lector = _database.ExecuteReader(comando))
+                {
+                    while (lector.Read())
+                    {
+                        subLinea.Add(new SubLinea
+                        {
+                            Id = lector.IsDBNull(lector.GetOrdinal("lind_iid_sublinea")) ? default(int) : lector.GetInt32(lector.GetOrdinal("lind_iid_sublinea")),
+                            idLinea = lector.IsDBNull(lector.GetOrdinal("linc_iid_linea")) ? default(int) : lector.GetInt32(lector.GetOrdinal("linc_iid_linea")),
+                            ctgcc_iid_categoria= lector.IsDBNull(lector.GetOrdinal("ctgcc_iid_categoria")) ? default(int) : lector.GetInt32(lector.GetOrdinal("ctgcc_iid_categoria")),
+                            lind_vcod_sublinea = lector.IsDBNull(lector.GetOrdinal("lind_vcod_sublinea")) ? default(string) : lector.GetString(lector.GetOrdinal("lind_vcod_sublinea")),
+                            lind_vdescripcion = lector.IsDBNull(lector.GetOrdinal("lind_vdescripcion")) ? default(string) : lector.GetString(lector.GetOrdinal("lind_vdescripcion")),
+                            Estado = lector.IsDBNull(lector.GetOrdinal("lind_iflag_estado")) ? default(int) : lector.GetInt32(lector.GetOrdinal("lind_iflag_estado")),
+                        });
+                    }
+                }
+            }
+
+            return subLinea;
+        }
+
         public Categoria GetById(Categoria entity)
         {
             Categoria categoria = null;

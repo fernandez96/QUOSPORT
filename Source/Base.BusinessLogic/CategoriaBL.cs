@@ -46,6 +46,10 @@ namespace Base.BusinessLogic
         {
             return CategoriaRepository.Instancia.AllSubLinea();
         }
+        public IList<SubLinea> AllSubLineaIdCategoria(SubLinea entity)
+        {
+            return CategoriaRepository.Instancia.AllSubLineaIdCategoria(entity);
+        }
         public IList<Categoria> GetAllPaging(PaginationParameter<int> paginationParameters)
         {
             return CategoriaRepository.Instancia.GetAllPaging(paginationParameters);
