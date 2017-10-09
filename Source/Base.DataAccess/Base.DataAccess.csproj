@@ -52,6 +52,7 @@
     <Compile Include="AlmacenRepository.cs" />
     <Compile Include="CargoRepository.cs" />
     <Compile Include="CategoriaRepository.cs" />
+    <Compile Include="ClienteRepository.cs" />
     <Compile Include="Core\ConectionStringRepository.cs" />
     <Compile Include="Core\IReadOnlyRepository.cs" />
     <Compile Include="Core\IRepository.cs" />
@@ -61,11 +62,13 @@
     <Compile Include="Interfaces\IAlmacenRepository.cs" />
     <Compile Include="Interfaces\ICargoRepository.cs" />
     <Compile Include="Interfaces\ICategoriaRepository.cs" />
+    <Compile Include="Interfaces\IClienteRepository.cs" />
     <Compile Include="Interfaces\IEnvioEmailRepository.cs" />
     <Compile Include="Interfaces\ILogRepository.cs" />
     <Compile Include="Interfaces\IModuloRepository.cs" />
     <Compile Include="Interfaces\IParametroRepository.cs" />
     <Compile Include="Interfaces\IProductoRepository.cs" />
+    <Compile Include="Interfaces\IProveedorRepository.cs" />
     <Compile Include="Interfaces\IReporteRepository.cs" />
     <Compile Include="Interfaces\IRolRepository.cs" />
     <Compile Include="Interfaces\ISeguridadRepository.cs" />
@@ -79,6 +82,7 @@
     <Compile Include="ParametroRepository.cs" />
     <Compile Include="ProductoRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProveedorRepository.cs" />
     <Compile Include="ReporteRepository.cs" />
     <Compile Include="RolRepository.cs" />
     <Compile Include="SeguridadRepository.cs" />

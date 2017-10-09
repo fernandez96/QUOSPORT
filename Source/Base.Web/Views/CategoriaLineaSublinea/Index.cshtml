@@ -6,6 +6,7 @@
 
 @section styles{
     <link rel="stylesheet" href="@Url.Content("~/Content/css/jquery.dataTables.css")" />
+
 }
 <!-- /section:basics/sidebar -->
 <div class="main-content">
@@ -88,7 +89,7 @@
                         </div>
                         <div class="dataTables_wrapper form-inline no-footer">
                             <div class="table-responsive">
-                                <table id="CategoriaDataTable" class="table table-bordered dataTable no-footer" cellspacing="0" role="grid" aria-describedby="dynamic-table_info">
+                                <table id="CategoriaDataTable" class="table table-bordered" cellspacing="0" role="grid" aria-describedby="dynamic-table_info">
                                     <thead>
                                         <tr>
                                             <th>Id</th>
@@ -183,12 +184,12 @@
                                                     </h4>
                                                 </div>
                                                 <div class="search-area well no-margin-bottom">
-                                                    <form id="CategoriaSubLineaSearchForm" role="form">
+                                                    <form id="CategoriaLineaSearchForm" role="form">
                                                         <div class="row">
                                                             <div class="col-md-7">
                                                                 <div class="input-group">
 
-                                                                    <input type="text" class="form-control" name="CodigoCPLsearch" id="Codigosearch" placeholder="Codigo">
+                                                                    <input type="text" class="form-control" name="CodigoLineasearch" id="CodigoLineasearch" placeholder="Codigo" >
                                                                     <div class="input-group-btn">
                                                                     </div>
                                                                     <input type="text" class="form-control" name="DescripcionCPLsearch" id="Descripcionsearch" placeholder="Descripción">
