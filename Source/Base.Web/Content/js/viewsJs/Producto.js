@@ -191,6 +191,12 @@ $(document).ready(function () {
     CargarSubLineas();
     CargarEstado();
     $('[data-toggle="tooltip"]').tooltip();
+ 
+
+    $('textarea.limited').inputlimiter({
+        remText: '%n caracter%s restantes...',
+        limitText: 'permite maximo : %n.'
+    });
 });
 
 function VisualizarDataTableProducto() {

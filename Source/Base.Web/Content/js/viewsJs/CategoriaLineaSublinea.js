@@ -333,6 +333,10 @@ $(document).ready(function () {
         }
         e.preventDefault();
     });
+
+  
+   
+
     //#endregion acciones de Categoria Linea
 
     //#region acciones de Categoria SubLinea
@@ -1380,3 +1384,4 @@ function rest() {
     wizard.currentStep = 1;
     wizard.setState();
 }
+

@@ -431,12 +431,14 @@
     <Content Include="Content\js\viewsJs\canje.js" />
     <Content Include="Content\js\viewsJs\carga.js" />
     <Content Include="Content\js\viewsJs\CategoriaLineaSublinea.js" />
+    <Content Include="Content\js\viewsJs\Cliente.js" />
     <Content Include="Content\js\viewsJs\configuracion.js" />
     <Content Include="Content\js\viewsJs\Curso.js" />
     <Content Include="Content\js\viewsJs\envio.js" />
     <Content Include="Content\js\viewsJs\EnvioEmail.js" />
     <Content Include="Content\js\viewsJs\Parametro.js" />
     <Content Include="Content\js\viewsJs\Producto.js" />
+    <Content Include="Content\js\viewsJs\Proveedor.js" />
     <Content Include="Content\js\viewsJs\reporte.js" />
     <Content Include="Content\js\viewsJs\TablaRegistro.js" />
     <Content Include="Content\js\viewsJs\TipoDocumento.js" />
@@ -470,10 +472,13 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlmacenController.cs" />
     <Compile Include="Controllers\CategoriaLineaSublineaController.cs" />
+    <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NotaIngresoController.cs" />
     <Compile Include="Controllers\ParametroController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
+    <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\ReporteController.cs" />
     <Compile Include="Controllers\TipoDocumentoController.cs" />
     <Compile Include="Controllers\TipoOpcionesController.cs" />
@@ -607,6 +612,9 @@
     <Content Include="Views\Producto\Index.cshtml" />
     <Content Include="Views\Almacen\Index.cshtml" />
     <Content Include="Views\CategoriaLineaSublinea\Index.cshtml" />
+    <Content Include="Views\Cliente\Index.cshtml" />
+    <Content Include="Views\Proveedor\Index.cshtml" />
+    <Content Include="Views\NotaIngreso\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

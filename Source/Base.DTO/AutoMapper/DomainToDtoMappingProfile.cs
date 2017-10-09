@@ -34,7 +34,8 @@ namespace Base.DTO.AutoMapper
             Mapper.CreateMap<SubLinea, SubLineaDTO>();
             Mapper.CreateMap<Producto, ProductoDTO>();
             Mapper.CreateMap<Status, StatusDTO>();
-
+            Mapper.CreateMap<Cliente, ClienteDTO>();
+            Mapper.CreateMap<Proveedor, ProveedorDTO>();
         }
     }
 }
