@@ -7,6 +7,9 @@
 
 @section styles{
     <link rel="stylesheet" href="@Url.Content("~/Content/css/jquery.dataTables.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/buttons_dataTables_min.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/select_dataTables_min.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/editor.dataTables.min.css")" />
 }
 <!-- /section:basics/sidebar -->
 <div class="main-content">
@@ -42,7 +45,7 @@
                     <!-- PAGE CONTENT BEGINS -->
                     <!-- PAGE CONTENT BEGINS -->
                     <div class="search-area well no-margin-bottom">
-                        <form id="CategoriaSearchForm" role="form">
+                        <form id="NotaIngresoSearchForm" role="form">
                             <div class="row">
                                 <div class="col-md-7">
                                     <div class="input-group">
@@ -53,7 +56,7 @@
                                         </div>
                                         <input type="text" class="form-control" name="Descripcionsearch" id="Descripcionsearch" placeholder="Descripción" onkeypress="buscarCategoria(event)">
                                         <div class="input-group-btn">
-                                            <button type="button" id="btnSearchCategoriaLinea" class="btn btn-success btn-sm">
+                                            <button type="button" id="btnSearchNotaIngreso" class="btn btn-success btn-sm">
                                                 <i class="ace-icon fa fa-search icon-on-right bigger-110 right"></i>Buscar
                                             </button>
                                         </div>
@@ -62,17 +65,17 @@
                                 <div class="clearfix">
                                     <div class="pull-right tableTools-container">
                                         <div class="dt-buttons btn-overlap btn-group">
-                                            <a id="btnAgregarCategoria" data-toggle="tooltip" class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="Nuevo" title="Nuevo">
+                                            <a id="btnAgregarNotaIngreso" data-toggle="tooltip" class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="Nuevo" title="Nuevo">
                                                 <span><i class="fa fa-plus-circle bigger-110 blue"></i> </span>
                                             </a>
 
-                                            <a id="btnEditarCategoria" data-toggle="tooltip" class="dt-button buttons-copy buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Editar">
+                                            <a id="btnEditarNotaIngreso" data-toggle="tooltip" class="dt-button buttons-copy buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Editar">
                                                 <span><i class="fa fa-pencil bigger-110 pink"></i> </span>
                                             </a>
-                                            <a id="btnEliminarCategoria" data-toggle="tooltip" class="dt-button buttons-csv buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Eliminar">
+                                            <a id="btnEliminarNotaIngreso" data-toggle="tooltip" class="dt-button buttons-csv buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Eliminar">
                                                 <span><i class="fa fa-trash-o bigger-110 orange"> </i></span>
                                             </a>
-                                            <a id="btnEstadoCategoria" data-toggle="tooltip" class="dt-button buttons-print btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Cambiar estado">
+                                            <a id="btnEstadoNotaIngreso" data-toggle="tooltip" class="dt-button buttons-print btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Cambiar estado">
                                                 <span><i class="fa fa-link bigger-110 grey"></i> </span>
                                             </a>
                                         </div>
@@ -89,7 +92,7 @@
                         </div>
                         <div class="dataTables_wrapper form-inline no-footer">
                             <div class="table-responsive">
-                                <table id="CategoriaDataTable" class="table table-bordered" cellspacing="0" role="grid" aria-describedby="dynamic-table_info">
+                                <table id="NotaIngresoDataTable" class="table table-bordered" cellspacing="0" role="grid" aria-describedby="dynamic-table_info">
                                     <thead>
                                         <tr>
                                             <th>Id</th>
@@ -107,7 +110,97 @@
             </div><!-- /.row -->
             <!-- FILTER BEGINS-->
             <!-- FILTER ENDS-->
+        <div id='NuevaNotaIngreso' tabindex='-1' role='dialog' aria-hidden='true' class='modal fade' data-backdrop='static' style='z-index:100000;'>
+                <div class='modal-dialog pasos'>
+                    <div class='modal-content'>
+                        <div class='modal-header'>
+                            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class='modal-title'> <i class="fa fa-sitemap" aria-hidden="true"></i> <span id="accionTitle"></span> detalle de tabla registro <span id="idtable"></span></h4>
+                        </div>
+                        <div class='modal-body'>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <!-- PAGE CONTENT BEGINS -->
+                                    <br />
+                                    <div class="col-xs-11-97">
 
+                                        <div class="search-area well no-margin-bottom" style="margin-left:10px;">
+                                            <form id="NotaIngresoDetalleSearchForm" role="form">
+                                                <div class="row">
+                                                    <div class="col-md-7">
+                                                        <div class="input-group">
+
+                                                            <input type="text" class="form-control" name="CodigoDetallesearch" id="CodigoDetallesearch" placeholder="Codigo" onkeypress="buscarDetalle(event)">
+                                                            <div class="input-group-btn">
+
+                                                            </div>
+                                                            <input type="text" class="form-control" name="DescripcionDetallesearch" id="DescripcionDetallesearch" placeholder="Descripción" onkeypress="buscarDetalle(event)">
+                                                            <div class="input-group-btn">
+                                                                <button type="button" id="btnSearchTablaDetalle" class="btn btn-primary btn-sm">
+                                                                    <i class="ace-icon fa fa-search icon-on-right bigger-110 right"></i>Buscar
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix">
+
+                                                        <a id="btnAgregarTablaDetalle" data-toggle="tooltip" class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Nuevo">
+                                                            <span><i class="fa fa-plus-circle bigger-110 blue"></i> </span>
+                                                        </a>
+
+                                                        <a id="btnEditarTablaDetalle" data-toggle="tooltip" class="dt-button buttons-copy buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Editar">
+                                                            <span><i class="fa fa-pencil bigger-110 pink"> </i> </span>
+                                                        </a>
+                                                        <a id="btnEliminarTablaDetalle" data-toggle="tooltip" class="dt-button buttons-csv buttons-html5 btn btn-white btn-primary btn-bold " tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Eliminar">
+                                                            <span><i class="fa fa-trash-o bigger-110 orange"></i></span>
+                                                        </a>
+
+
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="NotaIngresoId" id="NotaIngresoId" value="0" />
+                                            </form>
+                                        </div>
+                                        <!-- PAGE CONTENT BEGINS -->
+                                        <br />
+
+                                        <div class="table-header" style="margin-left:10px;">
+                                            Resultado detalle de tabla -  <span id="nombreTabla"></span>
+                                        </div>
+                                        <div class="dataTables_wrapper form-inline no-footer" style="margin-left:10px;">
+                                            <div class="table-responsive">
+                                                <table id="NotaIngresoDetalleDataTable" class="table table-bordered dataTable no-footer" cellspacing="0" role="grid" aria-describedby="dynamic-table_info">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Id</th>
+                                                            <th class="hidden-120 center">Item</th>
+                                                            <th class="hidden-120 center">Producto</th>
+                                                            <th class="hidden-120 center">Descripci&oacute;n</th>
+                                                            <th class="hidden-120 center">U.M</th>
+                                                            <th class="hidden-120 center">Cantidad</th>
+                                                            <th class="hidden-120 center">Estado</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>
+                            <button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-close'></i> Salir</button>
+                            <button class='btn btn-primary btn-sm hidden' id="btnGuardarTipodocumento"><i class='fa fa-floppy-o'></i> Guardar</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div><!-- /.page-content -->
     </div>
@@ -122,6 +215,9 @@
     <script src="@Url.Content("~/Content/js/fuelux/fuelux.wizard.js")"></script>
     <script src="@Url.Content("~/Content/js/jquery.gritter.js")"></script>
     <script src="@Url.Content("~/Content/js/jquery.blockUI.js")"></script>
+    <script src="@Url.Content("~/Content/js/dataTable_buttons_min.js")"></script>
+    <script src="@Url.Content("~/Content/js/dataTables_select_min.js")"></script>
+    <script src="@Url.Content("~/Content/js/dataTables_editor_min.js")"></script>
 
     <!-- inline scripts related to this page -->
     <script src="@Url.Content("~/Content/js/viewsJs/NotaIngreso.js")"></script>

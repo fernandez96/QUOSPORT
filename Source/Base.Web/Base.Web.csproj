@@ -235,6 +235,7 @@
     <Content Include="Content\css\bootstrap-tagsinput.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\Bootstrap3.css" />
+    <Content Include="Content\css\buttons_dataTables_min.css" />
     <Content Include="Content\css\chosen.css" />
     <Content Include="Content\css\custom.css" />
     <Content Include="Content\css\datatableBooststrap3.css" />
@@ -242,6 +243,7 @@
     <Content Include="Content\css\dataTables.bootstrap.css" />
     <Content Include="Content\css\datepicker.css" />
     <Content Include="Content\css\daterangepicker.css" />
+    <Content Include="Content\css\editor.dataTables.min.css" />
     <Content Include="Content\css\font-awesome.css" />
     <Content Include="Content\css\fullcalendar.css" />
     <Content Include="Content\css\images\border.png" />
@@ -286,6 +288,7 @@
     <Content Include="Content\css\jquery.multiselect.filter.css" />
     <Content Include="Content\css\jquery.tagsinput.css" />
     <Content Include="Content\css\select.dataTables.min.css" />
+    <Content Include="Content\css\select_dataTables_min.css" />
     <Content Include="Content\css\tabContentCustomer.css" />
     <Content Include="Content\css\Tree\tree_component.css" />
     <Content Include="Content\css\ui.jqgrid.css" />
@@ -377,6 +380,9 @@
     <Content Include="Content\js\dataTables\jquery.dataTables.bootstrap.js" />
     <Content Include="Content\js\dataTables\jquery.dataTables.fnReloadAjax.js" />
     <Content Include="Content\js\dataTables\jquery.dataTables.js" />
+    <Content Include="Content\js\dataTables_editor_min.js" />
+    <Content Include="Content\js\dataTables_select_min.js" />
+    <Content Include="Content\js\dataTable_buttons_min.js" />
     <Content Include="Content\js\date-time\bootstrap-datepicker.js" />
     <Content Include="Content\js\date-time\bootstrap-datetimepicker.js" />
     <Content Include="Content\js\date-time\bootstrap-timepicker.js" />
@@ -436,6 +442,7 @@
     <Content Include="Content\js\viewsJs\Curso.js" />
     <Content Include="Content\js\viewsJs\envio.js" />
     <Content Include="Content\js\viewsJs\EnvioEmail.js" />
+    <Content Include="Content\js\viewsJs\NotaIngreso.js" />
     <Content Include="Content\js\viewsJs\Parametro.js" />
     <Content Include="Content\js\viewsJs\Producto.js" />
     <Content Include="Content\js\viewsJs\Proveedor.js" />
