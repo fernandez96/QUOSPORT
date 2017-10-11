@@ -207,6 +207,8 @@ $(document).ready(function () {
             $(this).addClass('selected');
         }
     });
+
+
     //acciones de Categoria
     $('#btnAgregarCategoria').on('click', function () {
         rest();
@@ -286,6 +288,7 @@ $(document).ready(function () {
         $("#accionTitleLinea").text('Nuevo');
         $("#NuevoCategoriaLinea").modal("show");
         $("#codigoL").prop("disabled", false);
+        GenerarCorrelativaLinea();
     });
 
     $('#btnEditarCategoriaLinea').on('click', function () {
@@ -311,9 +314,7 @@ $(document).ready(function () {
    
                 webApp.showDeleteConfirmDialog(function () {
                     checkSession(function () {
-
                         DrawEliminarLinea(rowLinea.Id);
-                        console.log(categoriaProductoSubLinea);
                     });
                 }, 'Se eliminará el registro Linea, ademas las Sub-lineas que contenga ¿Está seguro que desea continuar?');
         }
@@ -335,11 +336,13 @@ $(document).ready(function () {
 
     //#region acciones de Categoria SubLinea
     $('#btnAgregarCategoriaSubLinea').on('click', function () {
+        rowLinea = dataTableLinea.row('.selected').data();
         LimpiarFormularioSubLinea();
         $("#SubLineaId").val(0);
         $("#accionTitleSubLinea").text('Nuevo');
         $("#NuevoCategoriaSubLinea").modal("show");
         $("#codigoLS").prop("disabled", false);
+        GenerarCorrelativaSubLinea(rowLinea.Id);
     });
 
     $('#btnEditarCategoriaSubLinea').on('click', function () {
@@ -373,6 +376,11 @@ $(document).ready(function () {
     $("#btnCancelar").on("click", function () {
             $("#NuevoTipoCategoriaLinea").modal('hide');
             rest();
+    });
+    $('#resumen').ace_scroll({
+        height: '350px',
+        mouseWheelLock: true,
+        alwaysVisible: true
     });
 
     $('#CodigoLineasearch').on('keypress', function (e) {
@@ -455,6 +463,7 @@ $(document).ready(function () {
                required: "Por favor ingrese Descripción"
            }
        });
+ 
     $('[data-toggle="tooltip"]').tooltip();
 });
 
@@ -770,21 +779,27 @@ function DrawEditLinea() {
 function DrawEliminarLinea(id) {
 
     var idEliminacion = -1;
+    var countSubLinea = JSLINQ(categoriaProductoSubLinea)
+                         .Where(function (x) { return x.status != eliminar && x.idLinea==id });                 
     $.each(categoriaProductoLinea, function (index, value) {
-        $.each(categoriaProductoSubLinea, function (index, value_) {
-            if (value.Id === id && value_.idLinea===id) {
+        if (countSubLinea.items.length > 0) {
+            $.each(categoriaProductoSubLinea, function (index, value_) {
+                if (value.Id === id && value_.idLinea === id) {
+                    value.status = eliminar;
+                    value_.status = eliminar;
+                    idEliminacion = index;
+                }
+            });
+        } else {
+            if (value.Id === id) {
                 value.status = eliminar;
-                value_.status = eliminar;
                 idEliminacion = index;
-
             }
-        });
+        }
+      
     });
-    
-
         if (idEliminacion > -1) {
             dataTableLinea.clear().draw();
-            //  categoriaProductoLinea.splice(idEliminacion, 1);
             dataTableLinea.rows.add(categoriaProductoLinea.filter(function (obj) {
                 if (obj.status != eliminar) {
                     return true;
@@ -803,7 +818,7 @@ function DrawEliminarLinea(id) {
             $.gritter.add({
                 title: TitleAlerta,
                 text: IntenteloMasTarde,
-                class_name: 'gritter-success gritter'
+                class_name: 'gritter-warning gritter'
             });
         }
 }
@@ -980,6 +995,8 @@ function getResumen() {
     var contedetalle = null;
     var contentLinea = null;
     $("#Resumen").empty();
+    $("#categoria").html('');
+    $("#resumen").removeClass("ace-scroll");
     $.each(categoriaProductoLinea, function (index, value) {
         if (value.status!=eliminar) {
             contentLinea = '<li id="li' + value.Id + '">'
@@ -1006,8 +1023,8 @@ function getResumen() {
           }
     });
 
-    //$("#countLineaRsm").text(categoriaProductoLinea.length);
-    //$("#countSubLineaRsm").text(categoriaProductoSubLinea.length);
+    $("#categoria").html('<i class="ace-icon fa fa-unlink orange"></i>' + 'Categoria Producto :' + $("#descripcionCP").val());
+
 
 };
 //#region
@@ -1373,6 +1390,7 @@ function LimpiarFormularioSubLinea() {
 function LimpiarFormularioResumen() {
     webApp.clearForm(formularioResumen);
 }
+
 function rest() {
     LimpiarFormularioCategoria();
     LimpiarFormularioLinea();
@@ -1386,4 +1404,58 @@ function rest() {
     wizard.currentStep = 1;
     wizard.setState();
 }
+
+function GenerarCorrelativaLinea() {
+    var countLinea = JSLINQ(categoriaProductoLinea)
+                       .Where(function (x) { return x.status != eliminar });
+  
+    if (countLinea.items.length > 0) {
+        var jquery = JSLINQ(countLinea.items)
+                     .OrderByDescending(function (o) { return o.linc_vcod_linea })
+                      .Select(function (item) { return parseInt(item.linc_vcod_linea)});
+        var correlativo = parseInt(jquery.items[0] +1);
+        if (correlativo < 10 ) {
+            $("#codigoL").val('00'+correlativo);
+        }
+        if (correlativo >= 10) {
+            $("#codigoL").val('0' +correlativo);
+        }
+        if (correlativo >= 100) {
+            $("#codigoL").val(correlativo);
+        }
+    
+    }
+    else {
+        $("#codigoL").val('00' + 1);
+        $("#descripcionL").focus();
+    }
+}
+
+function GenerarCorrelativaSubLinea(id) {
+    var countSubLinea = JSLINQ(categoriaProductoSubLinea)
+                         .Where(function (x) { return x.status != eliminar && x.idLinea==id });
+
+    if (countSubLinea.items.length > 0) {
+        var jquery = JSLINQ(countSubLinea.items)
+                     .OrderByDescending(function (o) { return o.lind_vcod_sublinea })
+                      .Select(function (item) { return parseInt(item.lind_vcod_sublinea) });
+        var correlativo = parseInt(jquery.items[0] + 1);
+        if (correlativo < 10) {
+            $("#codigoLS").val('00' + correlativo);
+        }
+        if (correlativo >= 10) {
+            $("#codigoLS").val('0' + correlativo);
+        }
+        if (correlativo >= 100) {
+            $("#codigoLS").val(correlativo);
+        }
+        $("#descripcionLS").focus();
+    }
+    else {
+        $("#codigoLS").val('00' + 1);
+        $("#descripcionLS").focus();
+    }
+}
+
+
 

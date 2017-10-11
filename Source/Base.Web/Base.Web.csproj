@@ -426,6 +426,7 @@
     <Content Include="Content\js\languages\stimulsoft\es.xml" />
     <Content Include="Content\js\realTime.js" />
     <Content Include="Content\js\respond.js" />
+    <Content Include="Content\js\shCore.js" />
     <Content Include="Content\js\tree\tree_component.js" />
     <Content Include="Content\js\tree\_all.js" />
     <Content Include="Content\js\ui.datepicker-es.js" />

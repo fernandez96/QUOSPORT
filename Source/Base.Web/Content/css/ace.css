@@ -15320,7 +15320,7 @@ div.ColVis_collectionBackground {
 .steps li.complete:before,
 .steps li.active .step,
 .steps li.complete .step {
-  border-color: #d9e6ec;
+  border-color: rgb(5, 88, 136);
 }
 .steps li.complete .step {
   cursor: default;

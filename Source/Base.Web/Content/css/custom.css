@@ -133,13 +133,13 @@ input[type=radio].ace + .lbl:hover::before {
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
     color: #FFFFFF!important;
-    background:#438EB9;
+    background:rgb(67, 142, 185);
     border: 0px;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-    color: #007936!important;
-    background:#bccf1c;
+    color: #f5f5f5!important;
+    background:rgba(67, 142, 185, 0.69);
     border: 0px;
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {

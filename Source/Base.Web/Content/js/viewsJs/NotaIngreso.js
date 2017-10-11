@@ -8,7 +8,7 @@ var urlMantenimiento = baseUrl + 'NotaIngreso/';
 var urlListaCargo = baseUrl + 'NotaIngreso/';
 var rowNotaIngreso = null;
 var NotaIngreso = new Array();
-
+var editor;
 $(document).ready(function () {
     $.extend($.fn.dataTable.defaults, {
         language: { url: baseUrl + 'Content/js/dataTables/Internationalisation/es.txt' },
@@ -18,6 +18,41 @@ $(document).ready(function () {
         "dom": 'fltip'
     });
 
+    editor = new $.fn.dataTable.Editor({
+        table: "#NotaIngresoDetalleDataTable",
+        ajax:NotaIngreso,
+        idSrc: 'id',
+        fields: [{
+            label: "Id",
+            name: "Id"
+        }, {
+            label: "item",
+            name: "item",
+        }, {
+            label: "Producto",
+            name: "Producto",
+            type: "select",
+        }, {
+            label: "Descripcion",
+            name: "Descripcion",
+        }, {
+            label: "UNIDAD",
+            name: "UM",
+        }, {
+            label: "Cantidad",
+            name: "Cantidad",
+        }, {
+            label: "ESTADO",
+            name: "Estado",
+        }
+        ]
+    });
+    $('#NotaIngresoDetalleDataTable').on('click', 'tbody td:not(:first-child)', function (e) {
+        //editor.inline(this, {
+        //    onBlur: 'submit'
+        //});
+        editor.inline(this);
+    });
     checkSession(function () {
          VisualizarDataTableNotaIngresoDetalle();
     });
@@ -88,6 +123,8 @@ $(document).ready(function () {
 
         e.preventDefault();
     });
+
+ 
 
     webApp.validarLetrasEspacio(['Nombre', 'Apellido']);
     $('#Correo').validCampoFranz(' @abcdefghijklmnÃ±opqrstuvwxyz_1234567890.');
@@ -189,7 +226,7 @@ function VisualizarDataTableNotaIngresoDetalle() {
             { "data": "Producto" ,className:'editable'},
             { "data": "Descripcion" },
             { "data": "UM" },
-            { "data": "Cantidad", render: $.fn.dataTable.render.number(',', '.', 0, ''), className: 'editable' },
+            { "data": "Cantidad", render: $.fn.dataTable.render.number(',', '.', 0, '$'), className: 'editable' },
             {
                 "data": function (obj) {
                     if (obj.Estado == 1)
