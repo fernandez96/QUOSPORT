@@ -68,6 +68,7 @@ $(document).ready(function () {
 	                    wizard.setState();
 	                    $("#frmCategoriaProducto .form-group").removeClass('has-error');
 	                    $("#frmCategoriaProducto .help-block").remove();
+	                    $("#Lcategoria").text($("#descripcionCP").val());
 	            }
 	        }
 
@@ -90,6 +91,7 @@ $(document).ready(function () {
 	                    wizard.setState();
 	                    e.preventDefault();
 	                    $("#linea").text(rowLinea.linc_vdescripcion);
+	                    $("#Scategoria").text($("#descripcionCP").val());
 	                    cargarDatatableSubLinea(rowLinea.Id)
 	                }
 	            }
@@ -112,7 +114,7 @@ $(document).ready(function () {
 	                wizard.currentStep = 4;
 	                wizard.setState();
 	                e.preventDefault();
-	                getResumen();
+	               // getResumen();
 	            }
 	            else {
 	                if (categoriaProductoSubLinea.length <= 0) {
@@ -125,18 +127,18 @@ $(document).ready(function () {
 	        }
 	    }
 
-	    if (info.step == 4) {
-	        if (info.direction == "previous") {
-	                var wizard = $('#modal-wizard-container').data('fu.wizard')
-	                wizard.currentStep = 3;
-	                wizard.setState();
-	                e.preventDefault();
+	    //if (info.step == 4) {
+	    //    if (info.direction == "previous") {
+	    //            var wizard = $('#modal-wizard-container').data('fu.wizard')
+	    //            wizard.currentStep = 3;
+	    //            wizard.setState();
+	    //            e.preventDefault();
 	            
-	        }
-	    }
+	    //    }
+	    //}
 	})
 	.on('finished.fu.wizard', function (e) {
-	    if ($('#ResumenForm').valid()) {
+	    if ($('#CategoriaSubLineaSearchForm').valid()) {
 	        var exito = true;
 	        var lineasErrores = [];
 	        lineasErrores.length = 0;
@@ -234,6 +236,7 @@ $(document).ready(function () {
                     GetCategoriaById();
                     GetAllLinea(rowCategoria.Id);
                     GetAllSubLinea(rowCategoria.Id);
+                    $("#NuevoTipoCategoriaLinea").modal("show");
                 });
             }
            
@@ -281,6 +284,25 @@ $(document).ready(function () {
 
     });
 
+    $("#btnDetalle").on("click", function () {
+        rowCategoria = dataTableCategoria.row('.selected').data();
+        if (typeof rowCategoria === "undefined") {
+            webApp.showMessageDialog("Por favor seleccione un registro.");
+        }
+        else {
+            checkSession(function () {
+           
+                    GetCategoriaById();
+                    GetAllLinea(rowCategoria.Id);
+                    GetAllSubLinea(rowCategoria.Id);
+                    getResumen();
+                    $("#DetalleCategoriaProducto").modal("show");
+                });
+
+
+        }
+    });
+
     //#region acciones de Categoria Linea
     $('#btnAgregarCategoriaLinea').on('click', function () {
         LimpiarFormularioLinea();
@@ -288,6 +310,7 @@ $(document).ready(function () {
         $("#accionTitleLinea").text('Nuevo');
         $("#NuevoCategoriaLinea").modal("show");
         $("#codigoL").prop("disabled", false);
+        $("#descripcionL").focus();
         GenerarCorrelativaLinea();
     });
 
@@ -378,7 +401,7 @@ $(document).ready(function () {
             rest();
     });
     $('#resumen').ace_scroll({
-        height: '350px',
+        size: 450,
         mouseWheelLock: true,
         alwaysVisible: true
     });
@@ -997,6 +1020,7 @@ function getResumen() {
     $("#Resumen").empty();
     $("#categoria").html('');
     $("#resumen").removeClass("ace-scroll");
+    ////$('#scroll').css({'max-height': '400px' });
     $.each(categoriaProductoLinea, function (index, value) {
         if (value.status!=eliminar) {
             contentLinea = '<li id="li' + value.Id + '">'
@@ -1023,7 +1047,7 @@ function getResumen() {
           }
     });
 
-    $("#categoria").html('<i class="ace-icon fa fa-unlink orange"></i>' + 'Categoria Producto :' + $("#descripcionCP").val());
+    $("#categoria").html('<i class="ace-icon fa fa-unlink orange"></i>' + 'Categoria Producto :' + rowCategoria.ctgcc_vdescripcion);
 
 
 };
@@ -1071,7 +1095,7 @@ function GetCategoriaById() {
                 $("#descripcionCP").val(categoria.ctgcc_vdescripcion);
                 $("#IdCategoria").val(categoria.Id);
                 $("#codigoCP").prop("disabled", true);
-                $("#NuevoTipoCategoriaLinea").modal("show");
+             
             }
 
         } else {
@@ -1379,12 +1403,12 @@ function LimpiarFormularioCategoria() {
 
 function LimpiarFormularioLinea() {
     webApp.clearForm(formularioMantenimientoLinea);
-    $("#codigoL").focus();
+    $("#descripcionL").focus();
 }
 
 function LimpiarFormularioSubLinea() {
     webApp.clearForm(formularioMantenimientoSubLinea);
-    $("#codigoLS").focus();
+    $("#descripcionLS").focus();
 }
 
 function LimpiarFormularioResumen() {
@@ -1392,10 +1416,7 @@ function LimpiarFormularioResumen() {
 }
 
 function rest() {
-    LimpiarFormularioCategoria();
-    LimpiarFormularioLinea();
-    LimpiarFormularioSubLinea();
-    LimpiarFormularioResumen();
+
     categoriaProductoLinea.length = 0;
     categoriaProductoSubLinea.length = 0;
     dataTableLinea.clear().draw();
@@ -1423,7 +1444,7 @@ function GenerarCorrelativaLinea() {
         if (correlativo >= 100) {
             $("#codigoL").val(correlativo);
         }
-    
+        $("#descripcionL").focus();
     }
     else {
         $("#codigoL").val('00' + 1);

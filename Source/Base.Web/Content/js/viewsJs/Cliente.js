@@ -32,6 +32,12 @@ $(document).ready(function () {
     });
 
     $('#btnAgregarCliente').on('click', function () {
+        if ($("#natural").is(":checked")) {
+            $("#juridico").prop("checked", false);
+            var valor = $('input:radio[id=natural]:checked').val();
+            FormularioJuridico(true);
+            FormularioNatural(false);
+        }
         LimpiarFormulario();
 
         $("#UsuarioId").val(0);
@@ -584,9 +590,13 @@ function FormularioNatural(valor) {
     $("#Nombre").prop("disabled", valor);
     $("#Paterno").prop("disabled", valor);
     $("#Materno").prop("disabled", valor);
- 
+    $("#Nombre").val('');
+    $("#Paterno").val('');
+    $("#Materno").val('');
 }
 function FormularioJuridico(valor) {
     $("#RUC").prop("disabled", valor);
     $("#RSocial").prop("disabled", valor);
+    $("#RUC").val('');
+    $("#RSocial").val('');
 }

@@ -76,6 +76,9 @@
                                             <a id="btnEstadoCategoria" data-toggle="tooltip" class="dt-button buttons-print btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Cambiar estado">
                                                 <span><i class="fa fa-link bigger-110 grey"></i> </span>
                                             </a>
+                                            <a id="btnDetalle" data-toggle="tooltip" class="dt-button buttons-print btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Ver detalle">
+                                                <span><i class="fa fa-eye bigger-110 grey"></i> </span>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -129,10 +132,10 @@
                                     <span class="title white">Sub-Linea de producto</span>
                                 </li>
 
-                                <li data-step="4" class="">
+                                @*<li data-step="4" class="">
                                     <span class="step">4</span>
                                     <span class="title white">Resumen de registro</span>
-                                </li>
+                                </li>*@
                             </ul>
                             
                         </div>
@@ -180,9 +183,14 @@
                                                         Categoria
                                                         <small>
                                                             <i class="ace-icon fa fa-angle-double-right"></i>
-                                                            Registre categoria de Producto - Linea
+                                                             Registre categoria de Producto <span class="label label-sm label-primary arrowed arrowed-right" id="Lcategoria"></span> 
+                                                        </small>
+                                                        Linea
+                                                        <small>
+                                                            <i class="ace-icon fa fa-angle-double-right"></i>
                                                         </small>
                                                     </h4>
+
                                                 </div>
                                                 <div class="search-area well no-margin-bottom">
                                                     <form id="CategoriaLineaSearchForm" role="form">
@@ -246,8 +254,15 @@
                                                         Categoria
                                                         <small>
                                                             <i class="ace-icon fa fa-angle-double-right"></i>
-                                                            Registre categoria de Producto - Linea <span class="label label-sm label-primary arrowed arrowed-right" id="linea"></span> - Sub-Linea 
+                                                            Registre categoria de Producto <span class="label label-sm label-primary arrowed arrowed-right" id="Scategoria"></span> 
+                                                       </small>
+                                                        Linea
+                                                        <small>
+                                                            <i class="ace-icon fa fa-angle-double-right"></i>
+                                                             <span class="label label-sm label-primary arrowed arrowed-right" id="linea"></span>
                                                         </small>
+                                                        Sub-Linea
+
                                                     </h4>
                                                 </div>
                                             
@@ -310,7 +325,7 @@
 
                                         </div>
 
-                                        <div class="step-pane" data-step="4">
+                                        @*<div class="step-pane" data-step="4">
                                             <div class="page-header">
                                                 <h4>
                                                     Categoria
@@ -329,52 +344,11 @@
 
                                                 <div>
 
-                                                    <div class="widget-box transparent">
-                                                        <div class="widget-header widget-header-small">
-                                                            <h4 class="widget-title blue smaller" id="categoria">
-                                                                
-                                                               
-                                                            </h4>
-
-                                                            <div class="widget-toolbar action-buttons">
-                                                                <a href="#" data-action="reload">
-                                                                    <i class="ace-icon fa fa-refresh blue"></i>
-                                                                </a>
-                                                                &nbsp;
-                                                               
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="widget-body">
-                                                            <div class="widget-main padding-8">
-                                                                <div id="resumen" class="profile-feed">
-                                                                    <div class="scroll-track scroll-active" style="display:block; height:300px;">
-                                                                        <div class="scroll-bar" style="height:63px; top:0px;">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="scroll-content" style="max-height:300px;">
-                                                                                        <form id="ResumenForm">
-                                                                                            <ul class="list-unstyled spaced" id="Resumen">
-                                                                                                <li id="categoria">
-                                                                                                    <i class="ace-icon fa fa-caret-right blue"></i>Categoria Prodcuto :
-                                                                                                    <b class="black"><span id="categoriaProductoRsm"></span></b>
-                                                                                                </li>
-
-
-                                                                                            </ul>
-
-                                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            
-                                                        </div>
-                                                    </div>
 
                                               
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div>*@
                                         
 
                                     </div>
@@ -495,6 +469,73 @@
                         <div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>
                             <button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-remove'></i> Cancelar</button>
                             <button class='btn btn-primary btn-sm' id="btnGuardarSubLinea"><i class='fa fa-floppy-o'></i> Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id='DetalleCategoriaProducto' tabindex='-1' role='dialog' aria-hidden='true' class='modal fade' data-backdrop='static' style='z-index:100000;'>
+                <div class='modal-dialog pasos'>
+                    <div class='modal-content'>
+                        <div class='modal-header'>
+                            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class='modal-title'> <i class="fa fa-sitemap" aria-hidden="true"></i> <span id="accionTitleDetalle"></span> Detalle de categoria producto  <span id="idtable"></span></h4>
+                        </div>
+                        <div class='modal-body'>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <!-- PAGE CONTENT BEGINS -->
+                                    <div class="col-xs-11-97">
+
+                                        <div class="widget-box transparent">
+                                            <div class="widget-header widget-header-small">
+                                                <h4 class="widget-title blue smaller" id="categoria"></h4>
+
+                                                <div class="widget-toolbar action-buttons">
+                                                    <a href="#" data-action="reload">
+                                                        <i class="ace-icon fa fa-refresh blue"></i>
+                                                    </a>
+                                                    &nbsp;
+
+                                                </div>
+                                            </div>
+
+                                            <div class="widget-body" style="height:455px;">
+                                                <div class="widget-main padding-8">
+                                                    <div id="resumen" class="profile-feed">
+                                                        <div class="scroll-track scroll-active" style="display:block; height:450px;">
+                                                            <div class="scroll-bar" style="height:450px; top:0px;">
+                                                            </div>
+                                                        </div>
+                                                        <div id="scroll" class="scroll-content">
+                                                            <form id="ResumenForm">
+                                                                <ul class="list-unstyled spaced" id="Resumen">
+                                                                    <li id="categoria">
+                                                                        <i class="ace-icon fa fa-caret-right blue"></i>Categoria Prodcuto :
+                                                                        <b class="black"><span id="categoriaProductoRsm"></span></b>
+                                                                    </li>
+
+
+                                                                </ul>
+
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                       
+                                        <!-- PAGE CONTENT BEGINS -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>
+                            <button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-close'></i> Salir</button>
+                            <button class='btn btn-primary btn-sm hidden' id="btnGuardarTipodocumento"><i class='fa fa-floppy-o'></i> Guardar</button>
+
                         </div>
                     </div>
                 </div>
