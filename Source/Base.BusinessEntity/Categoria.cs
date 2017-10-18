@@ -9,6 +9,7 @@ namespace Base.BusinessEntity
             detalleLinea = new List<Linea>();
             detalleSubLinea = new List<SubLinea>();
         }
+        public int correlativaCab { get; set; }
         public string ctgcc_vcod_categoria { get; set; }
         public string ctgcc_vdescripcion { get; set; }
         public IList<Linea> detalleLinea { get; set; }

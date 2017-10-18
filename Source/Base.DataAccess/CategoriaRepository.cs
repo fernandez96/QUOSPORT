@@ -529,6 +529,27 @@ namespace Base.DataAccess
 
             return categoria;
         }
+
+        public Categoria GetCorrelativaCab()
+        {
+            Categoria categoria = null;
+            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_CATEGORIA_PRODUCTO_GetDocumento")))
+            {
+                using (var lector = _database.ExecuteReader(comando))
+                {
+                    if (lector.Read())
+                    {
+                        categoria = new Categoria
+                        {
+                            correlativaCab = lector.IsDBNull(lector.GetOrdinal("correlativo")) ? default(int) : lector.GetInt32(lector.GetOrdinal("correlativo")),
+
+                        };
+                    }
+                }
+            }
+
+            return categoria;
+        }
         #endregion
     }
 }

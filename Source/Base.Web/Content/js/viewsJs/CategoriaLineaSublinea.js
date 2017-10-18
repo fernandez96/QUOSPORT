@@ -218,8 +218,7 @@ $(document).ready(function () {
         $("#NuevoTipoCategoriaLinea").modal("show");
         $("#IdCategoria").val(0);
         $("#codigoCP").prop("disabled", false);
-
-       
+        GetCorrelativoCab();
     });
 
     $('#btnEditarCategoria').on('click', function () {
@@ -1424,6 +1423,57 @@ function rest() {
     var wizard = $('#modal-wizard-container').data('fu.wizard')
     wizard.currentStep = 1;
     wizard.setState();
+}
+
+function GetCorrelativoCab() {
+    webApp.Ajax({
+        url: urlMantenimiento + 'GetCorrelativoCab'
+    }, function (response) {
+        if (response.Success) {
+            if (response.Warning) {
+                $.gritter.add({
+                    title: 'Alerta',
+                    text: response.Message,
+                    class_name: 'gritter-warning gritter'
+                });
+            } else {
+                LimpiarFormularioCategoria();
+                var categoria = response.Data;
+                if (categoria == null) {
+                    $("#codigoCP").val('00' + 1);
+                }
+                else if (categoria.correlativaCab < 10) {
+                    $("#codigoCP").val('00' + categoria.correlativaCab);
+                }
+                else if (categoria.correlativaCab >= 10) {
+                    $("#codigoCP").val('0' + categoria.correlativaCab);
+                }
+                else if (categoria.correlativaCab > 99) {
+                    $("#codigoCP").val(categoria.correlativaCab);
+                }
+            }
+
+        } else {
+            $.gritter.add({
+                title: 'Error',
+                text: response.Message,
+                class_name: 'gritter-error gritter'
+            });
+        }
+    }, function (response) {
+        $.gritter.add({
+            title: 'Error',
+            text: response,
+            class_name: 'gritter-error gritter'
+        });
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        $.gritter.add({
+            title: 'Error',
+            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
+            class_name: 'gritter-error gritter'
+        });
+    });
+
 }
 
 function GenerarCorrelativaLinea() {

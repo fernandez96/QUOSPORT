@@ -59,5 +59,9 @@ namespace Base.BusinessLogic
         {
             return CategoriaRepository.Instancia.GetById(entity);
         }
+        public Categoria GetCorrelativaCab( )
+        {
+            return CategoriaRepository.Instancia.GetCorrelativaCab();
+        }
     }
 }

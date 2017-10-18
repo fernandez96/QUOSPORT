@@ -458,6 +458,7 @@
     <Content Include="Global.asax" />
     <Content Include="Log\log.txt" />
     <Content Include="Prints\M_Administrador\TablaRegistro\TablaOpciones.mrt" />
+    <None Include="Properties\PublishProfiles\side_web.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
     <None Include="Properties\PublishProfiles\webside.pubxml" />
     <Content Include="Scripts\jquery.signalR-2.2.2.js" />

@@ -19,7 +19,7 @@ namespace Base.DataAccess.Interfaces
         IList<S> AllSubLinea();
         IList<S> GetAllSubLinea(S entity);
         IList<S> AllSubLineaIdCategoria(S entity);
-        
+        T GetCorrelativaCab();
         IList<T> GetAllPaging(PaginationParameter<Q> paginationParameters);
     }
 }

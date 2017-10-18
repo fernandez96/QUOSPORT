@@ -18,54 +18,26 @@ $(document).ready(function () {
         "dom": 'fltip'
     });
 
+
+
+
+
     editor = new $.fn.dataTable.Editor({
         table: "#NotaIngresoDetalleDataTable",
-        ajax:NotaIngreso,
-        idSrc: 'id',
-        fields: [{
-            label: "Id",
-            name: "Id"
-        }, {
-            label: "item",
-            name: "item",
-        }, {
-            label: "Producto",
-            name: "Producto",
-            type: "select",
-        }, {
-            label: "Descripcion",
-            name: "Descripcion",
-        }, {
-            label: "UNIDAD",
-            name: "UM",
-        }, {
-            label: "Cantidad",
-            name: "Cantidad",
-        }, {
-            label: "ESTADO",
-            name: "Estado",
-        }
-        ]
+  
     });
     $('#NotaIngresoDetalleDataTable').on('click', 'tbody td:not(:first-child)', function (e) {
         //editor.inline(this, {
         //    onBlur: 'submit'
         //});
-        editor.inline(this);
+        //editor.inline($('#NotaIngresoDetalleDataTable tbody tr:first-child td:last-child'));
+
+        editor.inline($('#NotaIngresoDetalleDataTable tbody tr:first-child td:last-child'));
     });
     checkSession(function () {
          VisualizarDataTableNotaIngresoDetalle();
     });
 
-    $('#UsuarioDataTable  tbody').on('click', 'tr', function () {
-        if ($(this).hasClass('selected')) {
-            $(this).removeClass('selected');
-        }
-        else {
-            dataTableUsuario.$('tr.selected').removeClass('selected');
-            $(this).addClass('selected');
-        }
-    });
 
     $('#btnAgregarNotaIngreso').on('click', function () {
         LimpiarFormulario();
@@ -76,121 +48,11 @@ $(document).ready(function () {
         $("#Username").prop("disabled", false);
     });
 
-    $('#btnEditarNotaIngreso').on('click', function () {
-        rowNotaIngreso = dataTableUsuario.row('.selected').data();
-        if (typeof rowUsuario === "undefined") {
-            webApp.showMessageDialog("Por favor seleccione un registro.");
-        }
-        else {
-            checkSession(function () {
-                GetUsuarioById();
-            });
-        }
-
-    });
-
-    $('#btnEliminarNotaIngreso').on('click', function () {
-        rowUsuario = dataTableUsuario.row('.selected').data();
-        if (typeof rowUsuario === "undefined") {
-            webApp.showMessageDialog("Por favor seleccione un registro.");
-        }
-        else {
-            webApp.showDeleteConfirmDialog(function () {
-                checkSession(function () {
-                    EliminarUsuario();
-                });
-            }, 'Se eliminará el registro. ¿Está seguro que desea continuar?');
-        }
-
-    });
 
 
-    $("#btnSearchNotaIngreso").on("click", function (e) {
-        if ($('#UsuarioSearchForm').valid()) {
-            checkSession(function () {
-                dataTableUsuario.ajax.reload();
-            });
-        }
-        e.preventDefault();
-    });
 
-    $("#btnGuardarUsuario").on("click", function (e) {
-        if ($('#' + formularioMantenimiento).valid()) {
-            checkSession(function () {
-                GuardarUsuario();
-            });
-        }
-
-        e.preventDefault();
-    });
 
  
-
-    webApp.validarLetrasEspacio(['Nombre', 'Apellido']);
-    $('#Correo').validCampoFranz(' @abcdefghijklmnÃ±opqrstuvwxyz_1234567890.');
-
-    webApp.InicializarValidacion(formularioMantenimiento,
-        {
-            Username: {
-                required: true
-
-            },
-            Contrasena: {
-                required: true
-            },
-            ContrasenaConf: {
-                required: true
-            },
-            Nombre: {
-                required: true,
-                noPasteAllowLetterAndSpace: true,
-                firstCharacterBeLetter: true
-            },
-            Apellido: {
-                required: true,
-                noPasteAllowLetterAndSpace: true,
-                firstCharacterBeLetter: true
-            },
-            CargoId: {
-                required: true
-            },
-            RolId: {
-                required: true
-            },
-            Correo: {
-                email: true
-            }
-        },
-        {
-            Username: {
-                required: "Por favor ingrese Usuario.",
-
-            },
-            Contrasena: {
-                required: "Por favor ingrese Contraseña.",
-
-            },
-            ContrasenaConf: {
-                required: "Por favor confirme Contraseña.",
-
-            },
-            Nombre: {
-                required: "Por favor ingrese Nombre."
-            },
-            Apellido: {
-                required: "Por favor ingrese Apellido."
-            },
-
-            CargoId: {
-                required: "Por favor seleccione Cargo."
-            },
-            RolId: {
-                required: "Por favor seleccione Rol."
-            },
-            Correo: {
-                email: "Por favor ingrese Correo válido."
-            }
-        });
     //CargarCargo();
     //CargarRol();
     //CargarEstado();
@@ -221,10 +83,10 @@ function VisualizarDataTableNotaIngresoDetalle() {
         },
         "bAutoWidth": false,
         "columns": [
-            { "data": "id" },
+            { "data": "id"},
             { "data": "item"},
             { "data": "Producto" ,className:'editable'},
-            { "data": "Descripcion" },
+            { "data": "Descripcion", editField: "Descripcion" },
             { "data": "UM" },
             { "data": "Cantidad", render: $.fn.dataTable.render.number(',', '.', 0, '$'), className: 'editable' },
             {
@@ -246,6 +108,15 @@ function VisualizarDataTableNotaIngresoDetalle() {
             { "className": "hidden-600", "aTargets": [5], "width": "10%" },
             { "bSortable": false, "className": "hidden-480", "aTargets": [6], "width": "10%" }
 
+        ],
+        select: {
+            style: 'os',
+            selector: 'td:first-child'
+        },
+        buttons: [
+          { extend: "create", editor: editor },
+          { extend: "edit",   editor: editor },
+          { extend: "remove", editor: editor }
         ],
         "order": [[1, "desc"]],
         "initComplete": function (settings, json) {

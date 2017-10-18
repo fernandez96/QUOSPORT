@@ -20,13 +20,11 @@
             <script type="text/javascript">
                 try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
             </script>
-
             <ul class="breadcrumb">
                 <li>
                     <i class="ace-icon fa fa-home home-icon"></i>
                     <a href="@Url.Action("Index", "Home")">INICIO</a>
                 </li>
-
                 <li>
                     <a href="javascript:void(0)">ALMACEN</a>
                 </li>
@@ -85,7 +83,6 @@
                         </form>
                     </div>
                     <br />
-
                     <div class="col-xs-12">
                         <div class="table-header">
                             Resultado "Nota de ingreso"
@@ -123,13 +120,11 @@
                                     <!-- PAGE CONTENT BEGINS -->
                                     <br />
                                     <div class="col-xs-11-97">
-
                                         <div class="search-area well no-margin-bottom" style="margin-left:10px;">
                                             <form id="NotaIngresoDetalleSearchForm" role="form">
                                                 <div class="row">
                                                     <div class="col-md-7">
                                                         <div class="input-group">
-
                                                             <input type="text" class="form-control" name="CodigoDetallesearch" id="CodigoDetallesearch" placeholder="Codigo" onkeypress="buscarDetalle(event)">
                                                             <div class="input-group-btn">
 
@@ -143,19 +138,15 @@
                                                         </div>
                                                     </div>
                                                     <div class="clearfix">
-
                                                         <a id="btnAgregarTablaDetalle" data-toggle="tooltip" class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Nuevo">
                                                             <span><i class="fa fa-plus-circle bigger-110 blue"></i> </span>
                                                         </a>
-
                                                         <a id="btnEditarTablaDetalle" data-toggle="tooltip" class="dt-button buttons-copy buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Editar">
                                                             <span><i class="fa fa-pencil bigger-110 pink"> </i> </span>
                                                         </a>
                                                         <a id="btnEliminarTablaDetalle" data-toggle="tooltip" class="dt-button buttons-csv buttons-html5 btn btn-white btn-primary btn-bold " tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Eliminar">
                                                             <span><i class="fa fa-trash-o bigger-110 orange"></i></span>
                                                         </a>
-
-
                                                     </div>
                                                 </div>
                                                 <input type="hidden" name="NotaIngresoId" id="NotaIngresoId" value="0" />
@@ -163,7 +154,6 @@
                                         </div>
                                         <!-- PAGE CONTENT BEGINS -->
                                         <br />
-
                                         <div class="table-header" style="margin-left:10px;">
                                             Resultado detalle de tabla -  <span id="nombreTabla"></span>
                                         </div>
@@ -184,27 +174,21 @@
                                                 </table>
                                             </div>
                                         </div>
-
-
                                     </div>
-
-
-
                                 </div>
                             </div>
                         </div>
                         <div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>
                             <button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-close'></i> Salir</button>
                             <button class='btn btn-primary btn-sm hidden' id="btnGuardarTipodocumento"><i class='fa fa-floppy-o'></i> Guardar</button>
-
                         </div>
                     </div>
                 </div>
             </div>
-
         </div><!-- /.page-content -->
     </div>
 </div><!-- /.main-content -->
+
 @section scripts{
     <!-- page specific plugin scripts -->
     <script src="@Url.Content("~/Content/js/jquery.dataTables.min.js")"></script>
@@ -225,7 +209,6 @@
     <script type="text/javascript">
         var pageBlocked = false;
         var handlerActivo = false;
-
         $(document).ready(function () {
             $.blockUI.defaults.baseZ = 100000;
             $.blockUI.defaults.overlayCSS.opacity = 0.4;
