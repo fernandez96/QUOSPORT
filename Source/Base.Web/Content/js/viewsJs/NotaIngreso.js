@@ -18,14 +18,25 @@ $(document).ready(function () {
         "dom": 'fltip'
     });
 
+
+
+
+
     editor = new $.fn.dataTable.Editor({
+<<<<<<< HEAD
         table: "#NotaIngresoDetalleDataTable",      
+=======
+        table: "#NotaIngresoDetalleDataTable",
+  
+>>>>>>> 2944a65e21ecd9cb87d464a5cb77cfa4d8125380
     });
     $('#NotaIngresoDetalleDataTable').on('click', 'tbody td:not(:first-child)', function (e) {
         //editor.inline(this, {
         //    onBlur: 'submit'
         //});
-        editor.inline(this);
+        //editor.inline($('#NotaIngresoDetalleDataTable tbody tr:first-child td:last-child'));
+
+        editor.inline($('#NotaIngresoDetalleDataTable tbody tr:first-child td:last-child'));
     });
     checkSession(function () {
          VisualizarDataTableNotaIngresoDetalle();
@@ -40,6 +51,7 @@ $(document).ready(function () {
         $("#NuevaNotaIngreso").modal("show");
         $("#Username").prop("disabled", false);
     });
+<<<<<<< HEAD
     //agregar detalle
     var contenect='<div>'+
 													
@@ -72,6 +84,14 @@ $(document).ready(function () {
         dataTableNotaIngresoDetalle.rows.add(addRow).draw();
     });
    
+=======
+
+
+
+
+
+ 
+>>>>>>> 2944a65e21ecd9cb87d464a5cb77cfa4d8125380
     //CargarCargo();
     //CargarRol();
     //CargarEstado();
@@ -107,10 +127,10 @@ function VisualizarDataTableNotaIngresoDetalle() {
         },
         "bAutoWidth": false,
         "columns": [
-            { "data": "id" },
+            { "data": "id"},
             { "data": "item"},
             { "data": "Producto" ,className:'editable'},
-            { "data": "Descripcion" },
+            { "data": "Descripcion", editField: "Descripcion" },
             { "data": "UM" },
             { "data": "Cantidad", render: $.fn.dataTable.render.number(',', '.', 0, '$'), className: 'editable' },
             {
@@ -132,6 +152,15 @@ function VisualizarDataTableNotaIngresoDetalle() {
             { "className": "hidden-600", "aTargets": [5], "width": "10%" },
             { "bSortable": false, "className": "hidden-480", "aTargets": [6], "width": "10%" }
 
+        ],
+        select: {
+            style: 'os',
+            selector: 'td:first-child'
+        },
+        buttons: [
+          { extend: "create", editor: editor },
+          { extend: "edit",   editor: editor },
+          { extend: "remove", editor: editor }
         ],
         "order": [[1, "desc"]],
         "initComplete": function (settings, json) {

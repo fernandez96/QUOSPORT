@@ -19,6 +19,7 @@ namespace Base.BusinessLogic.Interfaces
         IList<L> AllLinea();
         IList<S> AllSubLinea();
         IList<S> AllSubLineaIdCategoria(S entity);
+        T GetCorrelativaCab();
         IList<T> GetAllPaging(PaginationParameter<Q> paginationParameters);
     }
 }

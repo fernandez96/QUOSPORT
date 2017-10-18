@@ -331,6 +331,37 @@ namespace Base.Web.Controllers
             return Json(jsonResponse);
         }
 
+        [HttpPost]
+        public JsonResult GetCorrelativoCab()
+        {
+            var jsonResponse = new JsonResponse { Success = true };
+
+            try
+            {
+
+                var getcorrelativoDTO = CategoriaBL.Instancia.GetCorrelativaCab();
+                if (getcorrelativoDTO != null)
+                {
+                    jsonResponse.Data = getcorrelativoDTO;
+                }
+                else
+                {
+                    jsonResponse.Success = true;
+                    jsonResponse.Data = getcorrelativoDTO;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                jsonResponse.Success = false;
+                jsonResponse.Message = Mensajes.IntenteloMasTarde;
+            }
+
+            return Json(jsonResponse);
+        }
+
+
         #region Métodos Privados
 
         public void FormatDataTable(DataTableModel<CategoriaFilterModel, int> dataTableModel)

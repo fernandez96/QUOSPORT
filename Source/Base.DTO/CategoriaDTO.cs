@@ -13,5 +13,6 @@ namespace Base.DTO
         public string ctgcc_vdescripcion { get; set; }
         public IList<LineaDTO> detalleLinea { get; set; }
         public IList<SubLineaDTO> detalleSubLinea { get; set; }
+        public int correlativaCab { get; set; }
     }
 }
