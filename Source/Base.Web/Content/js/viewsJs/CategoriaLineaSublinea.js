@@ -1137,9 +1137,11 @@ function GetAllLinea(id) {
                     class_name: 'gritter-warning gritter'
                 });
             } else {
-                dataTableLinea.clear().draw();
-                categoriaProductoLinea = response.Data;
-                dataTableLinea.rows.add(categoriaProductoLinea).draw();
+                if (response.Data!=null) {
+                    dataTableLinea.clear().draw();
+                    categoriaProductoLinea = response.Data;
+                    dataTableLinea.rows.add(categoriaProductoLinea).draw();
+                }           
             
             }
         } else {
@@ -1181,7 +1183,9 @@ function GetAllSubLinea(id) {
                     class_name: 'gritter-warning gritter'
                 });
             } else {
-                categoriaProductoSubLinea = response.Data;
+                if (response.Data!=null) {
+                    categoriaProductoSubLinea = response.Data;
+                }
             }
         } else {
             $.gritter.add({
@@ -1233,7 +1237,7 @@ function GuardarCategoria() {
                 } else {
                     dataTableCategoria.ajax.reload();
                     $("#NuevoTipoCategoriaLinea").modal("hide");
-                    rest();
+                    LimpiarPasarela();
                     $.gritter.add({
                         title: response.Title,
                         text: response.Message,
@@ -1426,6 +1430,11 @@ function rest() {
     wizard.setState();
 }
 
+function LimpiarPasarela() {
+    var wizard = $('#modal-wizard-container').data('fu.wizard')
+    wizard.currentStep = 1;
+    wizard.setState();
+}
 function GenerarCorrelativaLinea() {
     var countLinea = JSLINQ(categoriaProductoLinea)
                        .Where(function (x) { return x.status != eliminar });

@@ -19,33 +19,7 @@ $(document).ready(function () {
     });
 
     editor = new $.fn.dataTable.Editor({
-        table: "#NotaIngresoDetalleDataTable",
-        ajax:NotaIngreso,
-        idSrc: 'id',
-        fields: [{
-            label: "Id",
-            name: "Id"
-        }, {
-            label: "item",
-            name: "item",
-        }, {
-            label: "Producto",
-            name: "Producto",
-            type: "select",
-        }, {
-            label: "Descripcion",
-            name: "Descripcion",
-        }, {
-            label: "UNIDAD",
-            name: "UM",
-        }, {
-            label: "Cantidad",
-            name: "Cantidad",
-        }, {
-            label: "ESTADO",
-            name: "Estado",
-        }
-        ]
+        table: "#NotaIngresoDetalleDataTable",      
     });
     $('#NotaIngresoDetalleDataTable').on('click', 'tbody td:not(:first-child)', function (e) {
         //editor.inline(this, {
@@ -57,15 +31,6 @@ $(document).ready(function () {
          VisualizarDataTableNotaIngresoDetalle();
     });
 
-    $('#UsuarioDataTable  tbody').on('click', 'tr', function () {
-        if ($(this).hasClass('selected')) {
-            $(this).removeClass('selected');
-        }
-        else {
-            dataTableUsuario.$('tr.selected').removeClass('selected');
-            $(this).addClass('selected');
-        }
-    });
 
     $('#btnAgregarNotaIngreso').on('click', function () {
         LimpiarFormulario();
@@ -75,128 +40,49 @@ $(document).ready(function () {
         $("#NuevaNotaIngreso").modal("show");
         $("#Username").prop("disabled", false);
     });
-
-    $('#btnEditarNotaIngreso').on('click', function () {
-        rowNotaIngreso = dataTableUsuario.row('.selected').data();
-        if (typeof rowUsuario === "undefined") {
-            webApp.showMessageDialog("Por favor seleccione un registro.");
-        }
-        else {
-            checkSession(function () {
-                GetUsuarioById();
-            });
-        }
-
+    //agregar detalle
+    var contenect='<div>'+
+													
+															+'<select class="chosen-select" id="form-field-select-3" data-placeholder="Producto..." style="display:none;">'
+															+'	<option value="AL">Alabama</option>'
+															+'	<option value="AK">Alaska</option>'
+															+'	<option value="AZ">Arizona</option>'
+															+'	<option value="AR">Arkansas</option>'
+															+'</select>'
+															+'<div class="chosen-container chosen-container-single" style="width:200px;" title="" id="form_field_select_3_chosen">'
+															+'<a class="chosen-single chosen-default">'
+															+'<span>Producto...</span>'
+															+'<div>'
+															+'<b></b>'
+															+'</div>'
+															+'</a>'
+															+'<div class="chosen-drop">'
+															+'<div class="chosen-search">'
+															+'<input type="text" autocomplete="off">'
+															+'</div>'
+															+'<ul class="chosen-results">'
+															+'</ul>'
+															+'</div>'
+															+'</div>'
+														+'</div>';
+    $("#btnAgregarNotaIngresoDetalle").on("click", function () {
+        var addRow = [{ 'Id': '<input type="text"></input>', 'item': '001', 'Producto': contenect,															
+            'Descripcion': 'PRODUCTO DE BUENA CALIDAD', 'UM': 'UNIDAD', Cantidad: 123, 'Estado': 1
+        }]
+        dataTableNotaIngresoDetalle.rows.add(addRow).draw();
     });
-
-    $('#btnEliminarNotaIngreso').on('click', function () {
-        rowUsuario = dataTableUsuario.row('.selected').data();
-        if (typeof rowUsuario === "undefined") {
-            webApp.showMessageDialog("Por favor seleccione un registro.");
-        }
-        else {
-            webApp.showDeleteConfirmDialog(function () {
-                checkSession(function () {
-                    EliminarUsuario();
-                });
-            }, 'Se eliminará el registro. ¿Está seguro que desea continuar?');
-        }
-
-    });
-
-
-    $("#btnSearchNotaIngreso").on("click", function (e) {
-        if ($('#UsuarioSearchForm').valid()) {
-            checkSession(function () {
-                dataTableUsuario.ajax.reload();
-            });
-        }
-        e.preventDefault();
-    });
-
-    $("#btnGuardarUsuario").on("click", function (e) {
-        if ($('#' + formularioMantenimiento).valid()) {
-            checkSession(function () {
-                GuardarUsuario();
-            });
-        }
-
-        e.preventDefault();
-    });
-
- 
-
-    webApp.validarLetrasEspacio(['Nombre', 'Apellido']);
-    $('#Correo').validCampoFranz(' @abcdefghijklmnÃ±opqrstuvwxyz_1234567890.');
-
-    webApp.InicializarValidacion(formularioMantenimiento,
-        {
-            Username: {
-                required: true
-
-            },
-            Contrasena: {
-                required: true
-            },
-            ContrasenaConf: {
-                required: true
-            },
-            Nombre: {
-                required: true,
-                noPasteAllowLetterAndSpace: true,
-                firstCharacterBeLetter: true
-            },
-            Apellido: {
-                required: true,
-                noPasteAllowLetterAndSpace: true,
-                firstCharacterBeLetter: true
-            },
-            CargoId: {
-                required: true
-            },
-            RolId: {
-                required: true
-            },
-            Correo: {
-                email: true
-            }
-        },
-        {
-            Username: {
-                required: "Por favor ingrese Usuario.",
-
-            },
-            Contrasena: {
-                required: "Por favor ingrese Contraseña.",
-
-            },
-            ContrasenaConf: {
-                required: "Por favor confirme Contraseña.",
-
-            },
-            Nombre: {
-                required: "Por favor ingrese Nombre."
-            },
-            Apellido: {
-                required: "Por favor ingrese Apellido."
-            },
-
-            CargoId: {
-                required: "Por favor seleccione Cargo."
-            },
-            RolId: {
-                required: "Por favor seleccione Rol."
-            },
-            Correo: {
-                email: "Por favor ingrese Correo válido."
-            }
-        });
+   
     //CargarCargo();
     //CargarRol();
     //CargarEstado();
+    //if (!ace.vars['touch']) {
+    //$('#FormFiltroKeys').chosen({ allow_single_deselect: true });
+    //resize the chosen on window resize
+    $(".chosen-select").chosen({ allow_single_deselect: true });
+    //}
     $('[data-toggle="tooltip"]').tooltip();
-    NotaIngreso = [{ 'Id': 1, 'item': '001', 'Producto': 'ejemplazo', 'Descripcion': 'PRODUCTO DE BUENA CALIDAD', 'UM': 'UNIDAD', Cantidad: 123, 'Estado': 1 }]
-    dataTableNotaIngresoDetalle.rows.add(NotaIngreso);
+    //NotaIngreso = [{ 'Id': 1, 'item': '001', 'Producto': 'ejemplazo', 'Descripcion': 'PRODUCTO DE BUENA CALIDAD', 'UM': 'UNIDAD', Cantidad: 123, 'Estado': 1 }]
+    //dataTableNotaIngresoDetalle.rows.add(NotaIngreso);
 });
 
 function VisualizarDataTableNotaIngresoDetalle() {

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="@Url.Content("~/Content/css/buttons_dataTables_min.css")" />
     <link rel="stylesheet" href="@Url.Content("~/Content/css/select_dataTables_min.css")" />
     <link rel="stylesheet" href="@Url.Content("~/Content/css/editor.dataTables.min.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/jquery-chosen.css")" />
 }
 <!-- /section:basics/sidebar -->
 <div class="main-content">
@@ -26,7 +27,6 @@
                     <i class="ace-icon fa fa-home home-icon"></i>
                     <a href="@Url.Action("Index", "Home")">INICIO</a>
                 </li>
-
                 <li>
                     <a href="javascript:void(0)">ALMACEN</a>
                 </li>
@@ -35,7 +35,6 @@
             </ul><!-- /.breadcrumb -->
             <!-- /section:basics/content.searchbox -->
         </div>
-
         <!-- /section:basics/content.breadcrumbs -->
         <div class="page-content">
             <!-- #section:settings.box -->
@@ -49,14 +48,12 @@
                             <div class="row">
                                 <div class="col-md-7">
                                     <div class="input-group">
-
                                         <input type="text" class="form-control" name="Codigosearch" id="Codigosearch" placeholder="Codigo" onkeypress="buscarCategoria(event)">
                                         <div class="input-group-btn">
-
                                         </div>
                                         <input type="text" class="form-control" name="Descripcionsearch" id="Descripcionsearch" placeholder="Descripción" onkeypress="buscarCategoria(event)">
                                         <div class="input-group-btn">
-                                            <button type="button" id="btnSearchNotaIngreso" class="btn btn-success btn-sm">
+                                            <button type="button" id="btnSearchNotaIngreso" class="btn btn-primary btn-sm">
                                                 <i class="ace-icon fa fa-search icon-on-right bigger-110 right"></i>Buscar
                                             </button>
                                         </div>
@@ -68,7 +65,6 @@
                                             <a id="btnAgregarNotaIngreso" data-toggle="tooltip" class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="Nuevo" title="Nuevo">
                                                 <span><i class="fa fa-plus-circle bigger-110 blue"></i> </span>
                                             </a>
-
                                             <a id="btnEditarNotaIngreso" data-toggle="tooltip" class="dt-button buttons-copy buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Editar">
                                                 <span><i class="fa fa-pencil bigger-110 pink"></i> </span>
                                             </a>
@@ -123,16 +119,13 @@
                                     <!-- PAGE CONTENT BEGINS -->
                                     <br />
                                     <div class="col-xs-11-97">
-
                                         <div class="search-area well no-margin-bottom" style="margin-left:10px;">
                                             <form id="NotaIngresoDetalleSearchForm" role="form">
                                                 <div class="row">
                                                     <div class="col-md-7">
                                                         <div class="input-group">
-
                                                             <input type="text" class="form-control" name="CodigoDetallesearch" id="CodigoDetallesearch" placeholder="Codigo" onkeypress="buscarDetalle(event)">
                                                             <div class="input-group-btn">
-
                                                             </div>
                                                             <input type="text" class="form-control" name="DescripcionDetallesearch" id="DescripcionDetallesearch" placeholder="Descripción" onkeypress="buscarDetalle(event)">
                                                             <div class="input-group-btn">
@@ -144,7 +137,7 @@
                                                     </div>
                                                     <div class="clearfix">
 
-                                                        <a id="btnAgregarTablaDetalle" data-toggle="tooltip" class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Nuevo">
+                                                        <a id="btnAgregarNotaIngresoDetalle" data-toggle="tooltip" class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Nuevo">
                                                             <span><i class="fa fa-plus-circle bigger-110 blue"></i> </span>
                                                         </a>
 
@@ -162,8 +155,32 @@
                                             </form>
                                         </div>
                                         <!-- PAGE CONTENT BEGINS -->
-                                        <br />
 
+                                        <div>
+                                            <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose a State..." style="">
+                                                <option value="">  </option>
+                                                <option value="AL">Alabama</option>
+                                                <option value="AK">Alaska</option>
+                                                <option value="AZ">Arizona</option>
+                                                <option value="AR">Arkansas</option>
+                                            </select>
+                                            @*<div class="chosen-container chosen-container-single" style="width: 551px;" title="" id="form_field_select_3_chosen">
+                                                <a class="chosen-single chosen-default">
+                                                    <span>Choose a State...</span>
+                                                    <div>
+                                                        <b></b>
+                                                    </div>
+                                                </a>
+                                                <div class="chosen-drop">
+                                                    <div class="chosen-search">
+                                                        <input type="text" autocomplete="off">
+                                                    </div>
+                                                    <ul class="chosen-results"></ul>
+                                                </div>
+                                            </div>*@
+                                        </div>
+                                        <br />
+               
                                         <div class="table-header" style="margin-left:10px;">
                                             Resultado detalle de tabla -  <span id="nombreTabla"></span>
                                         </div>
@@ -183,13 +200,8 @@
                                                     </thead>
                                                 </table>
                                             </div>
-                                        </div>
-
-
+                                           </div>
                                     </div>
-
-
-
                                 </div>
                             </div>
                         </div>
@@ -214,11 +226,14 @@
     <script src="@Url.Content("~/Content/js/additional-methods.js")"></script>
     <script src="@Url.Content("~/Content/js/fuelux/fuelux.wizard.js")"></script>
     <script src="@Url.Content("~/Content/js/jquery.gritter.js")"></script>
+   <script src="@Url.Content("~/Content/js/jquery-chosen.js")"></script>
+    @*<script src="@Url.Content("~/Content/js/chosen.jquery.js")"></script>*@
     <script src="@Url.Content("~/Content/js/jquery.blockUI.js")"></script>
     <script src="@Url.Content("~/Content/js/dataTable_buttons_min.js")"></script>
     <script src="@Url.Content("~/Content/js/dataTables_select_min.js")"></script>
     <script src="@Url.Content("~/Content/js/dataTables_editor_min.js")"></script>
     <script src="@Url.Content("~/Content/js/shCore.js")"></script>
+
     <!-- inline scripts related to this page -->
     <script src="@Url.Content("~/Content/js/viewsJs/NotaIngreso.js")"></script>
     <!-- Ajax BlockUi scripts -->

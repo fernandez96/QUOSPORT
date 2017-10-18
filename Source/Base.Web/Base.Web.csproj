@@ -275,6 +275,7 @@
     <Content Include="Content\css\img\hue.png" />
     <Content Include="Content\css\img\saturation.png" />
     <Content Include="Content\css\img\uploadify-cancel.png" />
+    <Content Include="Content\css\jquery-chosen.css" />
     <Content Include="Content\css\jquery-ui-1.10.4.custom.css" />
     <Content Include="Content\css\jquery-ui-timepicker-addon.css" />
     <Content Include="Content\css\jquery-ui.css" />
@@ -399,6 +400,7 @@
     <Content Include="Content\js\inputmask.js" />
     <Content Include="Content\js\jqGrid\i18n\grid.locale-es.js" />
     <Content Include="Content\js\jqGrid\jquery.jqGrid.src.js" />
+    <Content Include="Content\js\jquery-chosen.js" />
     <Content Include="Content\js\jquery-mask.js" />
     <Content Include="Content\js\jquery-ui-1.10.4.custom.min.js" />
     <Content Include="Content\js\jquery-ui-timepicker-addon.js" />

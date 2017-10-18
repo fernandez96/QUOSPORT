@@ -4891,3 +4891,6 @@ Base.DTO.StatusDTO Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngi
 2017-10-09 10:44:56,191 ERROR  - Mensaje: Procedure or function 'SGE_LINEA_PRODUCTO_CAB_DELETE' expects parameter '@Response', which was not supplied. Trace:    en Base.DataAccess.CategoriaRepository.Update(Categoria entity)
    en Base.BusinessLogic.CategoriaBL.Update(Categoria entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\CategoriaBL.cs:línea 22
    en Base.Web.Controllers.CategoriaLineaSublineaController.Update(CategoriaDTO categoriaDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 167
+2017-10-12 12:35:41,444 ERROR  - Mensaje: Ya existe la Categoria de producto ejemplzzzzz Trace:    en Base.DataAccess.CategoriaRepository.Add(Categoria entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\CategoriaRepository.cs:línea 105
+   en Base.BusinessLogic.CategoriaBL.Add(Categoria entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\CategoriaBL.cs:línea 18
+   en Base.Web.Controllers.CategoriaLineaSublineaController.Add(CategoriaDTO categoriaDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 114

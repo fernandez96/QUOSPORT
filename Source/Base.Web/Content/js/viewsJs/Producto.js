@@ -124,8 +124,7 @@ $(document).ready(function () {
         }
         e.preventDefault();
     });
-
-    $("#Categoria").on("change", function (e) {
+    $('body').on('change', '#Categoria', function () {
         var id = $(this).val().split(',')[0]
         $("#Linea").empty();
         $.each(Linea, function (index, item) {
@@ -134,16 +133,17 @@ $(document).ready(function () {
             }
         });
     });
- 
-    $("#Linea").on("change", function (e) {
+    $('body').on('change', '#Linea', function () {
         var id = $(this).val().split(',')[0];
         $("#SubLinea").empty();
         $.each(SubLinea, function (index, item) {
-            if (item.idLinea ===parseInt(id)) {
+            if (item.idLinea === parseInt(id)) {
                 $("#SubLinea").append('<option value="' + item.Id + ',' + item.lind_vcod_sublinea + '">' + item.lind_vdescripcion + '</option>');
             }
         });
     });
+ 
+  
     $("#serie,#UPC,#EAN").mask("9999-9999999");
     webApp.validarLetrasEspacio(['descripcion','color']);
     webApp.validarNumerico(['UPC', 'serie', 'orden', 'EAN']);
