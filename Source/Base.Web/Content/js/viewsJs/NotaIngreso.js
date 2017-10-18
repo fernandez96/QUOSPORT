@@ -18,26 +18,32 @@ $(document).ready(function () {
         "dom": 'fltip'
     });
 
-
-
-
+    checkSession(function () {
+        VisualizarDataTableNotaIngresoDetalle();
+    });
 
     editor = new $.fn.dataTable.Editor({
-<<<<<<< HEAD
-        table: "#NotaIngresoDetalleDataTable",      
-=======
         table: "#NotaIngresoDetalleDataTable",
   
->>>>>>> 2944a65e21ecd9cb87d464a5cb77cfa4d8125380
     });
-    $('#NotaIngresoDetalleDataTable').on('click', 'tbody td:not(:first-child)', function (e) {
-        //editor.inline(this, {
-        //    onBlur: 'submit'
-        //});
-        //editor.inline($('#NotaIngresoDetalleDataTable tbody tr:first-child td:last-child'));
+    $('#NotaIngresoDetalleDataTable  tbody').on('click', 'tr', function () {
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+        }
+        else {
+            dataTableNotaIngresoDetalle.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+         
+        }
+    });
+    //$('#NotaIngresoDetalleDataTable').on('click', 'tbody td:not(:first-child)', function (e) {
+    //    //editor.inline(this, {
+    //    //    onBlur: 'submit'
+    //    //});
+    //    //editor.inline($('#NotaIngresoDetalleDataTable tbody tr:first-child td:last-child'));
 
-        editor.inline($('#NotaIngresoDetalleDataTable tbody tr:first-child td:last-child'));
-    });
+    //    editor.inline($('#NotaIngresoDetalleDataTable tbody tr:first-child td:last-child'));
+    //});
     checkSession(function () {
          VisualizarDataTableNotaIngresoDetalle();
     });
@@ -51,58 +57,33 @@ $(document).ready(function () {
         $("#NuevaNotaIngreso").modal("show");
         $("#Username").prop("disabled", false);
     });
-<<<<<<< HEAD
     //agregar detalle
-    var contenect='<div>'+
-													
-															+'<select class="chosen-select" id="form-field-select-3" data-placeholder="Producto..." style="display:none;">'
-															+'	<option value="AL">Alabama</option>'
-															+'	<option value="AK">Alaska</option>'
-															+'	<option value="AZ">Arizona</option>'
-															+'	<option value="AR">Arkansas</option>'
-															+'</select>'
-															+'<div class="chosen-container chosen-container-single" style="width:200px;" title="" id="form_field_select_3_chosen">'
-															+'<a class="chosen-single chosen-default">'
-															+'<span>Producto...</span>'
-															+'<div>'
-															+'<b></b>'
-															+'</div>'
-															+'</a>'
-															+'<div class="chosen-drop">'
-															+'<div class="chosen-search">'
-															+'<input type="text" autocomplete="off">'
-															+'</div>'
-															+'<ul class="chosen-results">'
-															+'</ul>'
-															+'</div>'
-															+'</div>'
-														+'</div>';
+
+															
+														
     $("#btnAgregarNotaIngresoDetalle").on("click", function () {
-        var addRow = [{ 'Id': '<input type="text"></input>', 'item': '001', 'Producto': contenect,															
-            'Descripcion': 'PRODUCTO DE BUENA CALIDAD', 'UM': 'UNIDAD', Cantidad: 123, 'Estado': 1
+        $("#chosenProducto").val('').trigger("chosen:updated");
+
+        var selectProducto = '<select class="chosen-container chosen-container-single" id="chosenProducto" data-placeholder="Producto..." style="width:200px;">'
+                                                    + '	<option value="AL">Alabama</option>'
+                                                    + '	<option value="AK">Alaska</option>'
+                                                    + '	<option value="AZ">Arizona</option>'
+                                                    + '	<option value="AR">Arkansas</option>'
+                                                    + '</select>';
+        var txtCantidad = "<input type='text' />";
+        var addRow = [{
+            'Id': 1, 'item': '001', 'Producto': selectProducto, 'Descripcion': '', 'UM': '', 'Cantidad': txtCantidad, 'Estado': 1
         }]
         dataTableNotaIngresoDetalle.rows.add(addRow).draw();
+        $('#chosenProducto').chosen({ allow_single_deselect: true });
+        $('#chosenProducto').trigger('chosen:updated');
     });
-   
-=======
-
-
-
-
-
- 
->>>>>>> 2944a65e21ecd9cb87d464a5cb77cfa4d8125380
-    //CargarCargo();
-    //CargarRol();
-    //CargarEstado();
-    //if (!ace.vars['touch']) {
-    //$('#FormFiltroKeys').chosen({ allow_single_deselect: true });
-    //resize the chosen on window resize
-    $(".chosen-select").chosen({ allow_single_deselect: true });
-    //}
+  
+    //setTimeout(function () {
+    //  $('#chosenProducto').chosen({ allow_single_deselect: true });
+    //   $('#chosenProducto').trigger('chosen:updated');
+    //}, 10000);
     $('[data-toggle="tooltip"]').tooltip();
-    //NotaIngreso = [{ 'Id': 1, 'item': '001', 'Producto': 'ejemplazo', 'Descripcion': 'PRODUCTO DE BUENA CALIDAD', 'UM': 'UNIDAD', Cantidad: 123, 'Estado': 1 }]
-    //dataTableNotaIngresoDetalle.rows.add(NotaIngreso);
 });
 
 function VisualizarDataTableNotaIngresoDetalle() {
@@ -132,7 +113,7 @@ function VisualizarDataTableNotaIngresoDetalle() {
             { "data": "Producto" ,className:'editable'},
             { "data": "Descripcion", editField: "Descripcion" },
             { "data": "UM" },
-            { "data": "Cantidad", render: $.fn.dataTable.render.number(',', '.', 0, '$'), className: 'editable' },
+            { "data": "Cantidad"},
             {
                 "data": function (obj) {
                     if (obj.Estado == 1)
@@ -153,15 +134,15 @@ function VisualizarDataTableNotaIngresoDetalle() {
             { "bSortable": false, "className": "hidden-480", "aTargets": [6], "width": "10%" }
 
         ],
-        select: {
-            style: 'os',
-            selector: 'td:first-child'
-        },
-        buttons: [
-          { extend: "create", editor: editor },
-          { extend: "edit",   editor: editor },
-          { extend: "remove", editor: editor }
-        ],
+        //select: {
+        //    style: 'os',
+        //    selector: 'td:first-child'
+        //},
+        //buttons: [
+        //  { extend: "create", editor: editor },
+        //  { extend: "edit",   editor: editor },
+        //  { extend: "remove", editor: editor }
+        //],
         "order": [[1, "desc"]],
         "initComplete": function (settings, json) {
             // AddSearchFilter();
@@ -172,266 +153,26 @@ function VisualizarDataTableNotaIngresoDetalle() {
     });
 }
 
-function GetUsuarioById() {
-    var modelView = {
-        Id: rowUsuario.Id
-    };
 
-    webApp.Ajax({
-        url: urlMantenimiento + 'GetById',
-        parametros: modelView
-    }, function (response) {
-        if (response.Success) {
-            if (response.Warning) {
-                $.gritter.add({
-                    title: 'Alerta',
-                    text: response.Message,
-                    class_name: 'gritter-warning gritter'
-                });
-            } else {
-                LimpiarFormulario();
-                var usuario = response.Data;
-                $("#Username").val(usuario.Username);
-                $("#Nombre").val(usuario.Nombre);
-                $("#Apellido").val(usuario.Apellido);
-                $("#Correo").val(usuario.Correo);
-                $("#CargoId").val(usuario.CargoId);
-                $("#RolId").val(usuario.RolId);
-                $("#Estado").val(usuario.Estado);
-                $("#UsuarioId").val(usuario.Id);
-                $("#Contrasena").val(usuario.Password);
-                $("#accionTitle").text('Editar');
-                $("#NuevoUsuario").modal("show");
-                $("#ContrasenaConf").val(usuario.ConfirmarPassword);
-                $("#Username").prop("disabled", true);
-            }
+function createRows(data) {
 
-        } else {
-            $.gritter.add({
-                title: 'Error',
-                text: response.Message,
-                class_name: 'gritter-error gritter'
-            });
-        }
-    }, function (response) {
-        $.gritter.add({
-            title: 'Error',
-            text: response,
-            class_name: 'gritter-error gritter'
-        });
-    }, function (XMLHttpRequest, textStatus, errorThrown) {
-        $.gritter.add({
-            title: 'Error',
-            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
-            class_name: 'gritter-error gritter'
-        });
-    });
+    return (
+    `<tr>` +
+      //`<td>${data.id=$("tbody tr").length + 1}</td>` +
+      `<td> ${data.item}</td>` +
+      `<td> ${contenect} </td>` +
+      `<td>${data.Descripcion}</td>` +
+      `<td>${data.UM}</td>` +
+      `<td><input type="text"></input></td>` +
+      `<td>${data.Estado}</td>` +
+    `</tr>`
+  );
+    setTimeout(function () {
+        $('#chosenProducto').chosen({ allow_single_deselect: true });
+        $('#chosenProducto').trigger('chosen:updated');
+    }, 1000);
 }
 
-function EliminarUsuario() {
-    var modelView = {
-        Id: rowUsuario.Id,
-        UsuarioRegistro: $("#usernameLogOn strong").text()
-    };
-
-    webApp.Ajax({
-        url: urlMantenimiento + 'Delete',
-        async: false,
-        parametros: modelView
-    }, function (response) {
-        if (response.Success) {
-            if (response.Warning) {
-                $.gritter.add({
-                    title: 'Alerta',
-                    text: response.Message,
-                    class_name: 'gritter-warning gritter'
-                });
-            } else {
-                $("#NuevoUsuario").modal("hide");
-                dataTableUsuario.row('.selected').remove().draw();
-                $.gritter.add({
-                    title: response.Title,
-                    text: response.Message,
-                    class_name: 'gritter-success gritter'
-                });
-            }
-        } else {
-            $.gritter.add({
-                title: 'Error',
-                text: response.Message,
-                class_name: 'gritter-error gritter'
-            });
-        }
-    }, function (response) {
-        $.gritter.add({
-            title: 'Error',
-            text: response,
-            class_name: 'gritter-error gritter'
-        });
-    }, function (XMLHttpRequest, textStatus, errorThrown) {
-        $.gritter.add({
-            title: 'Error',
-            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
-            class_name: 'gritter-error gritter'
-        });
-    });
-    delRowPos = null;
-    delRowID = 0;
-}
-
-function GuardarUsuario() {
-
-    var modelView = {
-        Id: $("#UsuarioId").val(),
-        Username: $("#Username").val(),
-        Password: $("#Contrasena").val(),
-        ConfirmarPassword: $("#ContrasenaConf").val(),
-        Nombre: $("#Nombre").val(),
-        Apellido: $("#Apellido").val(),
-        Correo: $("#Correo").val(),
-        CargoId: $("#CargoId").val(),
-        RolId: $("#RolId").val(),
-        Estado: $("#Estado").val(),
-        UsuarioRegistro: $("#usernameLogOn strong").text()
-    };
-
-    if (modelView.Id == 0)
-        action = 'Add';
-    else
-        action = 'Update';
-
-    webApp.Ajax({
-        url: urlMantenimiento + action,
-        parametros: modelView
-    }, function (response) {
-        if (response.Success) {
-            if (response.Warning) {
-                $.gritter.add({
-                    title: response.Title,
-                    text: response.Message,
-                    class_name: 'gritter-warning gritter'
-                });
-            } else {
-                $("#NuevoUsuario").modal("hide");
-                dataTableUsuario.ajax.reload();
-                $.gritter.add({
-                    title: response.Title,
-                    text: response.Message,
-                    class_name: 'gritter-success gritter'
-                });
-            }
-        } else {
-            $.gritter.add({
-                title: 'Error',
-                text: response.Message,
-                class_name: 'gritter-error gritter'
-            });
-        }
-    }, function (response) {
-        $.gritter.add({
-            title: 'Error',
-            text: response,
-            class_name: 'gritter-error gritter'
-        });
-    }, function (XMLHttpRequest, textStatus, errorThrown) {
-        $.gritter.add({
-            title: 'Error',
-            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
-            class_name: 'gritter-error gritter'
-        });
-    });
-}
-
-function CargarCargo() {
-    var WhereFilter = {
-        idtabla: 2
-    };
-    webApp.Ajax({
-        url: urlListaCargo + 'GetAll',
-        async: false,
-        parametros: WhereFilter,
-    }, function (response) {
-        if (response.Success) {
-
-            if (response.Warning) {
-                $.gritter.add({
-                    title: 'Alerta',
-                    text: response.Message,
-                    class_name: 'gritter-warning gritter'
-                });
-            } else {
-                $.each(response.Data, function (index, item) {
-                    $("#CargoId").append('<option value="' + item.Id + '">' + item.tbpd_vdescripcion_detalle + '</option>');
-                });
-            }
-        } else {
-            $.gritter.add({
-                title: 'Error',
-                text: response.Message,
-                class_name: 'gritter-error gritter'
-            });
-        }
-    }, function (response) {
-        $.gritter.add({
-            title: 'Error',
-            text: response,
-            class_name: 'gritter-error gritter'
-        });
-    }, function (XMLHttpRequest, textStatus, errorThrown) {
-        $.gritter.add({
-            title: 'Error',
-            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
-            class_name: 'gritter-error gritter'
-        });
-    });
-}
-
-function CargarRol() {
-    var WhereFilter = {
-        idtabla: 3
-    };
-    webApp.Ajax({
-        url: urlMantenimiento + 'GetAll',
-        parametros: WhereFilter,
-        async: false,
-    }, function (response) {
-        if (response.Success) {
-
-            if (response.Warning) {
-                $.gritter.add({
-                    title: 'Alerta',
-                    text: response.Message,
-                    class_name: 'gritter-warning gritter'
-                });
-            } else {
-                $("#RolIdSearch").append('<option value=""> - TODOS - </option>');
-                $.each(response.Data, function (index, item) {
-                    $("#RolId,#RolIdSearch").append('<option value="' + item.Id + '">' + item.tbpd_vdescripcion_detalle + '</option>');
-                });
-                console.log(response.Data);
-                webApp.clearForm('UsuarioSearchForm');
-            }
-        } else {
-            $.gritter.add({
-                title: 'Error',
-                text: response.Message,
-                class_name: 'gritter-error gritter'
-            });
-        }
-    }, function (response) {
-        $.gritter.add({
-            title: 'Error',
-            text: response,
-            class_name: 'gritter-error gritter'
-        });
-    }, function (XMLHttpRequest, textStatus, errorThrown) {
-        $.gritter.add({
-            title: 'Error',
-            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
-            class_name: 'gritter-error gritter'
-        });
-    });
-}
 
 function CargarEstado() {
     var modelView = {

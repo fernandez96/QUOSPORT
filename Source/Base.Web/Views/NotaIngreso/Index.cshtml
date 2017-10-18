@@ -7,6 +7,7 @@
 
 @section styles{
     <link rel="stylesheet" href="@Url.Content("~/Content/css/jquery.dataTables.css")" />
+    @*<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />*@
     <link rel="stylesheet" href="@Url.Content("~/Content/css/buttons_dataTables_min.css")" />
     <link rel="stylesheet" href="@Url.Content("~/Content/css/select_dataTables_min.css")" />
     <link rel="stylesheet" href="@Url.Content("~/Content/css/editor.dataTables.min.css")" />
@@ -134,12 +135,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="clearfix">
-<<<<<<< HEAD
+                                        
+                                                  
 
                                                         <a id="btnAgregarNotaIngresoDetalle" data-toggle="tooltip" class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Nuevo">
-=======
-                                                        <a id="btnAgregarTablaDetalle" data-toggle="tooltip" class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Nuevo">
->>>>>>> 2944a65e21ecd9cb87d464a5cb77cfa4d8125380
                                                             <span><i class="fa fa-plus-circle bigger-110 blue"></i> </span>
                                                         </a>
                                                         <a id="btnEditarTablaDetalle" data-toggle="tooltip" class="dt-button buttons-copy buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Editar">
@@ -154,36 +153,11 @@
                                             </form>
                                         </div>
                                         <!-- PAGE CONTENT BEGINS -->
-<<<<<<< HEAD
 
-                                        <div>
-                                            <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Choose a State..." style="">
-                                                <option value="">  </option>
-                                                <option value="AL">Alabama</option>
-                                                <option value="AK">Alaska</option>
-                                                <option value="AZ">Arizona</option>
-                                                <option value="AR">Arkansas</option>
-                                            </select>
-                                            @*<div class="chosen-container chosen-container-single" style="width: 551px;" title="" id="form_field_select_3_chosen">
-                                                <a class="chosen-single chosen-default">
-                                                    <span>Choose a State...</span>
-                                                    <div>
-                                                        <b></b>
-                                                    </div>
-                                                </a>
-                                                <div class="chosen-drop">
-                                                    <div class="chosen-search">
-                                                        <input type="text" autocomplete="off">
-                                                    </div>
-                                                    <ul class="chosen-results"></ul>
-                                                </div>
-                                            </div>*@
-                                        </div>
+
                                         <br />
                
-=======
                                         <br />
->>>>>>> 2944a65e21ecd9cb87d464a5cb77cfa4d8125380
                                         <div class="table-header" style="margin-left:10px;">
                                             Resultado detalle de tabla -  <span id="nombreTabla"></span>
                                         </div>
@@ -201,13 +175,28 @@
                                                             <th class="hidden-120 center">Estado</th>
                                                         </tr>
                                                     </thead>
+                                                  
+                                                    <tbody></tbody>
+                                                    <tfoot>
+
+                                                        <tr class="profile-info-row">
+
+                                                            <th colspan="6" style="text-align:right">SubTotal:</th>
+                                                            <th></th>
+                                                        </tr>
+                                                        <tr class="profile-info-row">
+                                                            <th colspan="6" style="text-align:right">IGV:</th>
+                                                            <th></th>
+                                                        </tr>
+                                                        <tr class="profile-info-row">
+                                                            <th colspan="6" style="text-align:right">Total:</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </tfoot>
                                                 </table>
                                             </div>
-<<<<<<< HEAD
                                            </div>
-=======
                                         </div>
->>>>>>> 2944a65e21ecd9cb87d464a5cb77cfa4d8125380
                                     </div>
                                 </div>
                             </div>
@@ -220,8 +209,36 @@
                 </div>
             </div>
         </div><!-- /.page-content -->
-    </div>
-</div><!-- /.main-content -->
+
+
+    <table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th colspan="4" style="text-align:right">Total:</th>
+                <th></th>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr>
+                <td>Tiger</td>
+                <td>Nixon</td>
+                <td>System Architect</td>
+                <td>Edinburgh</td>
+                <td>$320,800</td>
+        
+        </tbody>
+    </table>
+    </div><!-- /.main-content -->
+
 
 @section scripts{
     <!-- page specific plugin scripts -->

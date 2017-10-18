@@ -1429,13 +1429,11 @@ function rest() {
     wizard.setState();
 }
 
-<<<<<<< HEAD
 function LimpiarPasarela() {
     var wizard = $('#modal-wizard-container').data('fu.wizard')
     wizard.currentStep = 1;
     wizard.setState();
 }
-=======
 function GetCorrelativoCab() {
     webApp.Ajax({
         url: urlMantenimiento + 'GetCorrelativoCab'
@@ -1487,7 +1485,6 @@ function GetCorrelativoCab() {
 
 }
 
->>>>>>> 2944a65e21ecd9cb87d464a5cb77cfa4d8125380
 function GenerarCorrelativaLinea() {
     var countLinea = JSLINQ(categoriaProductoLinea)
                        .Where(function (x) { return x.status != eliminar });
