@@ -1,5 +1,6 @@
 ﻿var dataTableNotaIngreso = null;
 var dataTableNotaIngresoDetalle = null;
+var dataTableProducto = null;
 var formularioMantenimiento = "NotaIngresoForm";
 var delRowPos = null;
 var delRowID = 0;
@@ -7,8 +8,10 @@ var urlListar = baseUrl + 'NotaIngreso/Listar';
 var urlMantenimiento = baseUrl + 'NotaIngreso/';
 var urlListaCargo = baseUrl + 'NotaIngreso/';
 var rowNotaIngreso = null;
+var urlListarProductos = baseUrl + 'Producto/Listar';
 var NotaIngreso = new Array();
 var editor;
+var rowProducto = null;
 $(document).ready(function () {
     $.extend($.fn.dataTable.defaults, {
         language: { url: baseUrl + 'Content/js/dataTables/Internationalisation/es.txt' },
@@ -17,9 +20,9 @@ $(document).ready(function () {
         "bProcessing": true,
         "dom": 'fltip'
     });
-
     checkSession(function () {
         VisualizarDataTableNotaIngresoDetalle();
+        VisualizarDataTableProducto();
     });
 
     editor = new $.fn.dataTable.Editor({
@@ -31,23 +34,28 @@ $(document).ready(function () {
             $(this).removeClass('selected');
         }
         else {
-            dataTableNotaIngresoDetalle.$('tr.selected').removeClass('selected');
+            dataTableProducto.$('tr.selected').removeClass('selected');
             $(this).addClass('selected');
-         
         }
     });
-    //$('#NotaIngresoDetalleDataTable').on('click', 'tbody td:not(:first-child)', function (e) {
-    //    //editor.inline(this, {
-    //    //    onBlur: 'submit'
-    //    //});
-    //    //editor.inline($('#NotaIngresoDetalleDataTable tbody tr:first-child td:last-child'));
+    $('#ProductoDataTable  tbody').on('dblclick', 'tr', function () {
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+        }
+        else {
+            dataTableProducto.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+            rowProducto = dataTableProducto.row('.selected').data();
+            $("#codigoP").val('');
+            $("#unidad").val(rowProducto.umec_v_unidad_medida);
+            $("#descripcionP").val(rowProducto.prdc_vdescripcion);
+            $("#cantidad").focus();
+            $("#ProductoModal").modal("hide");
 
-    //    editor.inline($('#NotaIngresoDetalleDataTable tbody tr:first-child td:last-child'));
-    //});
-    checkSession(function () {
-         VisualizarDataTableNotaIngresoDetalle();
+        }
     });
 
+  
 
     $('#btnAgregarNotaIngreso').on('click', function () {
         LimpiarFormulario();
@@ -58,31 +66,17 @@ $(document).ready(function () {
         $("#Username").prop("disabled", false);
     });
     //agregar detalle
-
-															
-														
+												
     $("#btnAgregarNotaIngresoDetalle").on("click", function () {
-        $("#chosenProducto").val('').trigger("chosen:updated");
+        $("#NuevoDetalleProducto").modal("show");
+      
+    });
 
-        var selectProducto = '<select class="chosen-container chosen-container-single" id="chosenProducto" data-placeholder="Producto..." style="width:200px;">'
-                                                    + '	<option value="AL">Alabama</option>'
-                                                    + '	<option value="AK">Alaska</option>'
-                                                    + '	<option value="AZ">Arizona</option>'
-                                                    + '	<option value="AR">Arkansas</option>'
-                                                    + '</select>';
-        var txtCantidad = "<input type='text' />";
-        var addRow = [{
-            'Id': 1, 'item': '001', 'Producto': selectProducto, 'Descripcion': '', 'UM': '', 'Cantidad': txtCantidad, 'Estado': 1
-        }]
-        dataTableNotaIngresoDetalle.rows.add(addRow).draw();
-        $('#chosenProducto').chosen({ allow_single_deselect: true });
-        $('#chosenProducto').trigger('chosen:updated');
+    $("#productoBuscar").on("click", function () {
+        $("#ProductoModal").modal("show");
     });
   
-    //setTimeout(function () {
-    //  $('#chosenProducto').chosen({ allow_single_deselect: true });
-    //   $('#chosenProducto').trigger('chosen:updated');
-    //}, 10000);
+
     $('[data-toggle="tooltip"]').tooltip();
 });
 
@@ -105,6 +99,27 @@ function VisualizarDataTableNotaIngresoDetalle() {
                 //var json = jQuery.parseJSON(data);
                 //return JSON.stringify(json); // return JSON string
             }
+        },
+        "footerCallback": function ( row, data, start, end, display ) {
+            var api = this.api(), data;
+            // Remove the formatting to get integer data for summation
+            var intVal = function ( i ) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '')*1 :
+                    typeof i === 'number' ?
+                    i : 0;
+            };
+            // Total over all pages
+            total = api
+                .column( 5 )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+            // Update footer
+            $( api.column(6).footer() ).html(
+                'S/. '+total+''
+            );
         },
         "bAutoWidth": false,
         "columns": [
@@ -143,6 +158,7 @@ function VisualizarDataTableNotaIngresoDetalle() {
         //  { extend: "edit",   editor: editor },
         //  { extend: "remove", editor: editor }
         //],
+
         "order": [[1, "desc"]],
         "initComplete": function (settings, json) {
             // AddSearchFilter();
@@ -153,6 +169,71 @@ function VisualizarDataTableNotaIngresoDetalle() {
     });
 }
 
+function VisualizarDataTableProducto() {
+    dataTableProducto = $('#ProductoDataTable').DataTable({
+        "bFilter": false,
+        "bProcessing": true,
+        "serverSide": true,
+        //"scrollY": "350px",              
+        "ajax": {
+            "url": urlListarProductos,
+            "type": "POST",
+            "data": function (request) {
+                request.filter = new Object();
+
+                request.filter = {
+                    //codigoSearch: $("#Codigosearch").val(),
+                    descripcionSearch: $("#Descripcionsearch").val()
+                }
+            },
+            dataFilter: function (data) {
+                if (data.substring(0, 9) == "<!DOCTYPE") {
+                    redireccionarLogin("Sesión Terminada", "Se terminó la sesión");
+                } else {
+                    return data;
+                    //var json = jQuery.parseJSON(data);
+                    //return JSON.stringify(json); // return JSON string
+                }
+            }
+        },
+        "bAutoWidth": false,
+        "columns": [
+            { "data": "Id" },
+            //{ "data": "prdc_vcod_producto" },
+            { "data": "prdc_vdescripcion" },
+            { "data": "umec_v_unidad_medida" },
+            {
+                "data": function (obj) {
+                    if (obj.Estado == 1) {
+                        return '<span class="label label-info label-sm arrowed-in arrowed-in-right">Activo</span>';
+                    }
+                    else if (obj.Estado == 2) {
+                        return '<span class="label label-warning arrowed-in arrowed-in-right">Inactivo</span>';
+                    }
+
+                }
+            }
+        ],
+        "aoColumnDefs": [
+
+            { "bVisible": false, "aTargets": [0] },
+            //{ "className": "hidden-120", "aTargets": [1], "width": "10%" },
+            { "className": "hidden-120", "aTargets": [1], "width": "20%" },
+            { "className": "hidden-120", "aTargets": [2], "width": "12%" },
+            { "className": "hidden-120", "aTargets": [3], "width": "12%" },
+       
+            { "bSortable": false, "className": "hidden-480", "aTargets": [3], "width": "7%" }
+
+        ],
+        "order": [[1, "desc"]],
+        "initComplete": function (settings, json) {
+            // AddSearchFilter();
+        },
+        "fnDrawCallback": function (oSettings) {
+
+        }
+    });
+}
 
 function createRows(data) {
 
