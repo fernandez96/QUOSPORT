@@ -3,11 +3,8 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
 @section styles{
     <link rel="stylesheet" href="@Url.Content("~/Content/css/jquery.dataTables.css")" />
-    @*<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />*@
     <link rel="stylesheet" href="@Url.Content("~/Content/css/buttons_dataTables_min.css")" />
     <link rel="stylesheet" href="@Url.Content("~/Content/css/select_dataTables_min.css")" />
     <link rel="stylesheet" href="@Url.Content("~/Content/css/editor.dataTables.min.css")" />
@@ -105,7 +102,7 @@
             </div><!-- /.row -->
             <!-- FILTER BEGINS-->
             <!-- FILTER ENDS-->
-        <div id='NuevaNotaIngreso' tabindex='-1' role='dialog' aria-hidden='true' class='modal fade' data-backdrop='static' style='z-index:100000;'>
+           <div id='NuevaNotaIngreso' tabindex='-1' role='dialog' aria-hidden='true' class='modal fade' data-backdrop='static' style='z-index:100000;'>
                 <div class='modal-dialog pasos'>
                     <div class='modal-content'>
                         <div class='modal-header'>
@@ -118,49 +115,82 @@
                                     <!-- PAGE CONTENT BEGINS -->
                                     <br />
                                     <div class="col-xs-11-97">
-                                        <div class="search-area well no-margin-bottom" style="margin-left:10px;">
-                                            <form id="NotaIngresoDetalleSearchForm" role="form">
-                                                <div class="row">
-                                                    <div class="col-md-7">
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control" name="CodigoDetallesearch" id="CodigoDetallesearch" placeholder="Codigo" onkeypress="buscarDetalle(event)">
-                                                            <div class="input-group-btn">
-                                                            </div>
-                                                            <input type="text" class="form-control" name="DescripcionDetallesearch" id="DescripcionDetallesearch" placeholder="Descripción" onkeypress="buscarDetalle(event)">
-                                                            <div class="input-group-btn">
-                                                                <button type="button" id="btnSearchTablaDetalle" class="btn btn-primary btn-sm">
-                                                                    <i class="ace-icon fa fa-search icon-on-right bigger-110 right"></i>Buscar
-                                                                </button>
-                                                            </div>
+                              
+                                        <!-- PAGE CONTENT BEGINS -->
+                                            <!-- PAGE CONTENT BEGINS -->
+                                            <form class="form-horizontal" role="form" id="UsuarioForm">
+                                                <div class="form-group"></div>
+                                                <!-- #section:elements.form -->
+
+                                            
+                                                <div class="form-group">
+                                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="Correo">Correo </label>
+
+                                                    <div class="col-xs-12 col-sm-9">
+                                                        <div class="clearfix">
+                                                            <input type="text" id="Nro. N/I" autocomplete="off" name="nroNI" placeholder="000000" maxlength="7" class="col-xs-12 col-sm-12" />
                                                         </div>
                                                     </div>
-                                                    <div class="clearfix">
-                                        
-                                                  
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="CargoId">Cargo </label>
 
-                                                        <a id="btnAgregarNotaIngresoDetalle" data-toggle="tooltip" class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Nuevo">
-                                                            <span><i class="fa fa-plus-circle bigger-110 blue"></i> </span>
-                                                        </a>
-                                                        <a id="btnEditarTablaDetalle" data-toggle="tooltip" class="dt-button buttons-copy buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Editar">
-                                                            <span><i class="fa fa-pencil bigger-110 pink"> </i> </span>
-                                                        </a>
-                                                        <a id="btnEliminarTablaDetalle" data-toggle="tooltip" class="dt-button buttons-csv buttons-html5 btn btn-white btn-primary btn-bold " tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Eliminar">
-                                                            <span><i class="fa fa-trash-o bigger-110 orange"></i></span>
-                                                        </a>
+                                                    <div class="col-xs-12 col-sm-9">
+                                                        <div class="clearfix">
+                                                            <select id="CargoId" name="CargoId" class="col-xs-12 col-sm-12"></select>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <input type="hidden" name="NotaIngresoId" id="NotaIngresoId" value="0" />
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="RolId">Rol </label>
+
+                                                    <div class="col-xs-12 col-sm-9">
+                                                        <div class="clearfix">
+                                                            <select id="RolId" name="RolId" class="col-xs-12 col-sm-12"></select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="Estado">Estado </label>
+
+                                                    <div class="col-xs-12 col-sm-9">
+                                                        <div class="clearfix">
+                                                            <select id="Estado" name="Estado" class="col-xs-12 col-sm-12"></select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </form>
-                                        </div>
-                                        <!-- PAGE CONTENT BEGINS -->
+            
+                     
+                                        <h3 class="row-fluid header smaller lighter blue">
+                                            <span class="span7"> Registro de los productos a la nota de ingreso</span>
 
-
-                                        <br />
-               
-                                        <br />
-                                        <div class="table-header" style="margin-left:10px;">
-                                            Resultado detalle de tabla -  <span id="nombreTabla"></span>
-                                        </div>
+                                            <span class="span5">
+                                                <span class="pull-right inline">
+                                                    <span class="btn-toolbar inline middle no-margin">
+                                                      
+                                                        <span class="btn-group no-margin">
+                                                            <a id="btnAgregarNotaIngresoDetalle" data-toggle="tooltip" class="buttons-colvis btn btn-sm btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Nuevo">
+                                                                <span><i class="fa fa-plus-circle bigger-110 blue"></i> </span>
+                                                            </a>
+                                                        </span>
+                                                        <span class="btn-group no-margin">
+                                                            <a id="btnEditarTablaDetalle" data-toggle="tooltip" class="buttons-colvis btn btn-sm btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Editar">
+                                                                <span><i class="fa fa-pencil bigger-110 pink"> </i> </span>
+                                                            </a>
+                                                        </span>
+                                                        <span class="btn-group no-margin">
+                                                            <a id="btnEliminarTablaDetalle" data-toggle="tooltip" class="buttons-colvis btn btn-sm btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Eliminar">
+                                                                <span><i class="fa fa-trash-o bigger-110 orange"></i></span>
+                                                            </a>
+                                                        </span>
+                                                        </span>
+                                                </span>
+                                            </span>
+                                        </h3>
                                         <div class="dataTables_wrapper form-inline no-footer" style="margin-left:10px;">
                                             <div class="table-responsive">
                                                 <table id="NotaIngresoDetalleDataTable" class="table table-bordered dataTable no-footer" cellspacing="0" role="grid" aria-describedby="dynamic-table_info">
@@ -203,40 +233,162 @@
                         </div>
                         <div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>
                             <button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-close'></i> Salir</button>
-                            <button class='btn btn-primary btn-sm hidden' id="btnGuardarTipodocumento"><i class='fa fa-floppy-o'></i> Guardar</button>
+                            <button class='btn btn-primary btn-sm ' id="btnGuardarTipodocumento"><i class='fa fa-floppy-o'></i> Guardar</button>
+                        </div>
+                    </div>
+                </div>
+
+           <div id='NuevoDetalleProducto' tabindex='-1' role='dialog' aria-hidden='true' class='modal fade' data-backdrop='static' style='z-index:100000;'>
+                <div class='modal-dialog'>
+                    <div class='modal-content'>
+                        <div class='modal-header'>
+                            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class='modal-title'><i class="fa fa-sitemap" aria-hidden="true"></i> <span id='accionTitleProducto'></span> Seleccione Producto </h4>
+                        </div>
+                        <div class='modal-body'>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <!-- PAGE CONTENT BEGINS -->
+                                    <form class="form-horizontal" role="form" id="LineaForm">
+                                        <div class="form-group"></div>
+                                        <!-- #section:elements.form -->
+
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="codigoP">Codigo </label>
+
+                                            <div class="col-xs-12 col-sm-9">
+                                                <div class="clearfix">
+                                                    <input type="text" disabled="disabled" id="codigoP" autocomplete="off" name="codigoL" placeholder="Codigo" maxlength="3" class="col-xs-9 col-sm-9" />
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-default btn-sm" id="productoBuscar">
+                                                            <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
+                                                            Buscar
+                                                        </button>
+                                                    </span>
+                                                 </div>
+                                                
+                                            </div>
+                                        </div>
+
+                                       
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="unidad">Unidad </label>
+
+                                            <div class="col-xs-12 col-sm-9">
+                                                <div class="clearfix">
+                                                    <input type="text" disabled="disabled" id="unidad" autocomplete="off" name="unidad" placeholder="Unidad" maxlength="100" class="col-xs-12 col-sm-12" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="descripcionP">Descripci&oacute;n </label>
+
+                                            <div class="col-xs-12 col-sm-9">
+                                                <div class="clearfix">
+                                                    <input type="text" disabled="disabled" id="descripcionP" autocomplete="off" name="descripcionP" placeholder="Descripción" maxlength="100" class="col-xs-12 col-sm-12" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="cantidada">Cantidad </label>
+
+                                            <div class="col-xs-12 col-sm-9">
+                                                <div class="clearfix">
+                                                    <input type="text" id="cantidad" autocomplete="off" name="cantidad" placeholder="0.00" maxlength="100" class="col-xs-12 col-sm-12" />
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <input type="hidden" name="LineaId" id="LineaId" value="0" />
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>
+                            <button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-remove'></i> Cancelar</button>
+                            <button class='btn btn-primary btn-sm' id="btnGuardarLinea"><i class='fa fa-floppy-o'></i> Guardar</button>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div id='ProductoModal' tabindex='-1' role='dialog' aria-hidden='true' class='modal fade' data-backdrop='static' style='z-index:100000;'>
+                <div class='modal-dialog pasos'>
+                    <div class='modal-content'>
+                        <div class='modal-header'>
+                            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class='modal-title'> <i class="fa fa-sitemap" aria-hidden="true"></i> <span id="accionTitleDetalle"></span>Productos<span id="idtable"></span></h4>
+                        </div>
+                        <div class='modal-body'>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <!-- PAGE CONTENT BEGINS -->
+                                    <br />
+                                    <div class="col-xs-11-97">
+
+                                        <div class="search-area well no-margin-bottom" style="margin-left:10px;">
+                                            <form id="ProductoSearchForm" role="form">
+                                                <div class="row">
+                                                    <div class="col-md-7">
+                                                        <div class="input-group">
+
+                                                            <input type="text" class="form-control" name="CodigoDetallesearch" id="CodigoDetallesearch" placeholder="Codigo" onkeypress="buscarDetalle(event)">
+                                                            <div class="input-group-btn">
+
+                                                            </div>
+                                                            <input type="text" class="form-control" name="DescripcionDetallesearch" id="DescripcionDetallesearch" placeholder="Descripción" onkeypress="buscarDetalle(event)">
+                                                            <div class="input-group-btn">
+                                                                <button type="button" id="btnSearchTablaDetalle" class="btn btn-primary btn-sm">
+                                                                    <i class="ace-icon fa fa-search icon-on-right bigger-110 right"></i>Buscar
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                   
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!-- PAGE CONTENT BEGINS -->
+                                        <br />
+
+                                        <div class="table-header" style="margin-left:10px;">
+                                            Resultado detalle de tabla -  <span id="nombreTabla"></span>
+                                        </div>
+                                        <div class="dataTables_wrapper form-inline no-footer" style="margin-left:10px;">
+                                            <div class="table-responsive">
+                                                <table id="ProductoDataTable" class="table table-bordered dataTable no-footer" cellspacing="0" role="grid" aria-describedby="dynamic-table_info">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Id</th>
+                                                            @*<th class="hidden-120 center">Codigo</th>*@
+                                                            <th class="hidden-120">Nombre</th>
+                                                            <th class="hidden-992">Medida</th>
+                                                            <th class="hidden-480">Estado</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>
+                            <button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-close'></i> Salir</button>
+                            <button class='btn btn-primary btn-sm hidden' id="btnGuardarTipodocumento"><i class='fa fa-floppy-o'></i> Guardar</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            </div>
         </div><!-- /.page-content -->
 
 
-    <table id="example" class="display" cellspacing="0" width="100%">
-        <thead>
-            <tr>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Salary</th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <th colspan="4" style="text-align:right">Total:</th>
-                <th></th>
-            </tr>
-        </tfoot>
-        <tbody>
-            <tr>
-                <td>Tiger</td>
-                <td>Nixon</td>
-                <td>System Architect</td>
-                <td>Edinburgh</td>
-                <td>$320,800</td>
-        
-        </tbody>
-    </table>
+
     </div><!-- /.main-content -->
 
 
