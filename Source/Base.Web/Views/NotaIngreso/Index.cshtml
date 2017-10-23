@@ -43,7 +43,7 @@
                             <div class="row">
                                 <div class="col-md-7">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="Codigosearch" id="Codigosearch" placeholder="Codigo" onkeypress="buscarCategoria(event)">
+                                        <input type="text" class="form-control" name="numerosearch" id="numerosearch" placeholder="Codigo" onkeypress="buscarCategoria(event)">
                                         <div class="input-group-btn">
                                         </div>
                                         <input type="text" class="form-control" name="Descripcionsearch" id="Descripcionsearch" placeholder="Descripción" onkeypress="buscarCategoria(event)">
@@ -66,8 +66,8 @@
                                             <a id="btnEliminarNotaIngreso" data-toggle="tooltip" class="dt-button buttons-csv buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Eliminar">
                                                 <span><i class="fa fa-trash-o bigger-110 orange"> </i></span>
                                             </a>
-                                            <a id="btnEstadoNotaIngreso" data-toggle="tooltip" class="dt-button buttons-print btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Cambiar estado">
-                                                <span><i class="fa fa-link bigger-110 grey"></i> </span>
+                                            <a id="btnImprimir" data-toggle="tooltip" class="dt-button buttons-print btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Imprimir">
+                                                <span><i class="fa fa-print bigger-110 grey"></i> </span>
                                             </a>
                                         </div>
                                     </div>
@@ -114,13 +114,9 @@
                                 <div class="col-xs-12">
                                     <!-- PAGE CONTENT BEGINS -->
                                     <div class="col-xs-11-97">
-
                                         <!-- PAGE CONTENT BEGINS -->
-                                        <!-- PAGE CONTENT BEGINS -->
-                                    
-
+                                        <!-- PAGE CONTENT BEGINS -->                                    
                                             <!-- #section:elements.form -->
-
                                             <div class="col-xs-12 col-sm-12 widget-container-col ui-sortable" id="widget-container-col-1">
                                                 <div class="widget-box ui-sortable-handle" id="widget-box-1" style="opacity: 1;">
                                                     <div class="widget-header">
@@ -128,11 +124,9 @@
 
                                                         <div class="widget-toolbar">
                                                           
-
                                                             <a href="#" data-action="fullscreen" class="orange2">
                                                                 <i class="ace-icon fa fa-expand"></i>
                                                             </a>
-
                                                             <a href="#" data-action="collapse">
                                                                 <i class="ace-icon fa fa-chevron-up"></i>
                                                             </a>
@@ -144,16 +138,23 @@
                                                             <form class="form-horizontal" role="form" id="NotaIngresoForm">
                                                                 <div class="form-group">
                                                                     <div class="col-xs-12">
+                                                                       
+                                                                        <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="almacen">Almacen </label>
+                                                                        <div class="col-xs-3">
+                                                                            <div class="clearfix">
+                                                                                <select id="almacen" name="almacen" class="col-xs-12 col-sm-12"></select>
+                                                                            </div>
+                                                                        </div>
                                                                         <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="nroNI">Nro. N/I </label>
 
-                                                                        <div class="col-xs-5">
+                                                                        <div class="col-xs-3">
                                                                             <div class="clearfix">
                                                                                 <input type="text" id="nroNI" disabled="disabled" autocomplete="off" name="nroNI" placeholder="000000" maxlength="7" class="col-xs-12 col-sm-12" />
 
                                                                             </div>
                                                                         </div>
                                                                         <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="fecha">Fecha </label>
-                                                                        <div class="col-xs-5">
+                                                                        <div class="col-xs-3">
                                                                             <div class="clearfix">
                                                                                 <div class="input-group">
                                                                                     <input type="text" id="fecha" autocomplete="off" name="fecha" placeholder="Numero serie" maxlength="100" class="col-xs-12 col-sm-12" />
@@ -173,20 +174,20 @@
 
                                                                     <div class="col-xs-12 col-sm-9">
                                                                         <div class="clearfix">
-                                                                            <select id="motivo" name="motivo" class="col-xs-12 col-sm-12"></select>
+                                                                            <select id="motivo" name="motivo" class="col-xs-12 col-sm-4"></select>
                                                                         </div>
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="form-group">
-                                                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="observacion">Observaci&oacute;n </label>
-
-                                                                    <div class="col-xs-12 col-sm-9">
+      
+                                                                    <div class="col-xs-12 col-sm-12">
                                                                         <div class="clearfix">
-                                                                            <textarea name="observacion" id="observacion" class="col-xs-12 col-sm-12"></textarea>
+                                                                            <textarea name="observacion" id="observacion" placeholder="Escriba aqui su observación" class="col-xs-12 col-sm-12"></textarea>
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                                <input type="hidden" name="NotaIngresoId" id="NotaIngresoId" value="0" />
                                                             </form>
                                                            </div>
                                                         </div>
@@ -226,7 +227,6 @@
                                                             <th>Id</th>
                                                             <th class="hidden-120 center">Item</th>
                                                             <th class="hidden-120 center">Producto</th>
-                                                            <th class="hidden-120 center">Descripci&oacute;n</th>
                                                             <th class="hidden-992 center">U.M</th>
                                                             <th class="hidden-992 center">Costo</th>
                                                             <th class="hidden-120 center">Cantidad</th>
@@ -241,7 +241,7 @@
                         </div>
                         <div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>
                             <button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-close'></i> Salir</button>
-                            <button class='btn btn-primary btn-sm ' id="btnGuardarDetalle"><i class='fa fa-floppy-o'></i> Guardar</button>
+                            <button class='btn btn-primary btn-sm ' id="btnGuardarNotaIngreso"><i class='fa fa-floppy-o'></i> Guardar</button>
                         </div>
                     </div>
                 </div>
@@ -262,11 +262,11 @@
                                         <!-- #section:elements.form -->
 
                                         <div class="form-group">
-                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="codigoP">Codigo </label>
+                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="descripcionP">Producto </label>
 
                                             <div class="col-xs-12 col-sm-9">
                                                 <div class="clearfix">
-                                                    <input type="text" disabled="disabled" id="codigoP" autocomplete="off" name="codigoL" placeholder="Codigo" maxlength="3" class="col-xs-9 col-sm-9" />
+                                                    <input type="text" disabled="disabled" id="descripcionP" autocomplete="off" name="descripcionP" placeholder="Codigo" maxlength="3" class="col-xs-9 col-sm-9" />
                                                     <span class="input-group-btn">
                                                         <button type="button" class="btn btn-default btn-sm" id="productoBuscar" style="border-radius:7px;">
                                                             <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
@@ -288,12 +288,21 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        @*<div class="form-group">
                                             <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="descripcionP">Descripci&oacute;n </label>
 
                                             <div class="col-xs-12 col-sm-9">
                                                 <div class="clearfix">
                                                     <input type="text" disabled="disabled" id="descripcionP" autocomplete="off" name="descripcionP" placeholder="Descripción" maxlength="100" class="col-xs-12 col-sm-12" />
+                                                </div>
+                                            </div>
+                                        </div>*@
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="cantidada">Cantidad </label>
+
+                                            <div class="col-xs-12 col-sm-9">
+                                                <div class="clearfix">
+                                                    <input type="text" id="cantidad" autocomplete="off" name="cantidad" placeholder="0.00" maxlength="100" class="col-xs-12 col-sm-12" />
                                                 </div>
                                             </div>
                                         </div>
@@ -306,17 +315,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="cantidada">Cantidad </label>
-
-                                            <div class="col-xs-12 col-sm-9">
-                                                <div class="clearfix">
-                                                    <input type="text"  id="cantidad" autocomplete="off" name="cantidad" placeholder="0.00" maxlength="100" class="col-xs-12 col-sm-12" />
-                                                </div>
-                                            </div>
-                                        </div>
+                                   
                         
-                                        <input type="hidden" name="ProductoId" id="ProductoId" value="0" />
+                                        <input type="hidden" name="NotaIngresoDetalleId" id="NotaIngresoDetalleId" value="0" />
                                     </form>
                                 </div>
                             </div>

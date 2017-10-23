@@ -29,6 +29,12 @@ namespace Base.BusinessLogic
             return AlmacenRepository.Instancia.GetAllPaging(paginationParameters);
         }
 
+        public IList<Almacen> GetAll()
+        {
+            return AlmacenRepository.Instancia.GetAll();
+        }
+
+
         public Almacen GetById(Almacen entity)
         {
             return AlmacenRepository.Instancia.GetById(entity);

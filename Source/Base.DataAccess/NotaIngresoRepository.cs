@@ -7,6 +7,7 @@ using Microsoft.Practices.EnterpriseLibrary.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Security.Principal;
 namespace Base.DataAccess
 {
@@ -26,7 +27,7 @@ namespace Base.DataAccess
             int idKardex;
             int idND;
             int idStock;
-            using (IDbConnection conexion=_database.CreateConnection())
+            using (DbConnection conexion =_database.CreateConnection())
             {
                 conexion.Open();
                 using (var transaction= conexion.BeginTransaction(IsolationLevel.Serializable))
@@ -45,10 +46,11 @@ namespace Base.DataAccess
                             _database.AddInParameter(comando, "@ningc_observaciones", DbType.String, entity.ningc_observaciones);
                             _database.AddInParameter(comando, "@ningc_vusuario_crea", DbType.String, entity.UsuarioCreacion);
                             _database.AddInParameter(comando, "@ningc_vpc_crea", DbType.String, WindowsIdentity.GetCurrent().Name);
-                            _database.AddInParameter(comando, "@ningc_ilag_estado", DbType.Int32, 1);
+                            _database.AddInParameter(comando, "@ningc_ilag_estado", DbType.Int32, entity.Estado);
                             _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
 
-                            _database.ExecuteNonQuery(comando);
+                 
+                            _database.ExecuteNonQuery(comando, transaction);
                             id = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
                             if (id == 0) throw new Exception("Error al ingresar Nota Ingreso");                            
                         }
@@ -74,7 +76,7 @@ namespace Base.DataAccess
                                 _database.AddInParameter(comandoKardex, "@kardc_ilag_estado", DbType.Int32, entity.Estado);
                                 _database.AddOutParameter(comandoKardex, "@Response", DbType.Int32, 11);
 
-                                _database.ExecuteNonQuery(comandoKardex);
+                                _database.ExecuteNonQuery(comandoKardex, transaction);
                                 idKardex = Convert.ToInt32(_database.GetParameterValue(comandoKardex, "@Response"));
                                 if (idKardex == 0) throw new Exception("Error al ingresar kardex");
                             }
@@ -88,10 +90,10 @@ namespace Base.DataAccess
                                 _database.AddInParameter(comando, "@kardc_icod_correlativo", DbType.Int32, idKardex);
                                 _database.AddInParameter(comando, "@dninc_vusuario_crea", DbType.String, entity.UsuarioCreacion);
                                 _database.AddInParameter(comando, "@dninc_vpc_crea", DbType.String, WindowsIdentity.GetCurrent().Name);
-                                _database.AddInParameter(comando, "@@dninc_ilag_estado", DbType.Int32, entity.Estado);
+                                _database.AddInParameter(comando, "@dninc_ilag_estado", DbType.Int32, entity.Estado);
                                 _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
 
-                                _database.ExecuteNonQuery(comando);
+                                _database.ExecuteNonQuery(comando, transaction);
                                 idND = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
                                 if (idND==0) throw new Exception("Error al ingresar nota de ingreso detalle");
                             }
@@ -104,7 +106,7 @@ namespace Base.DataAccess
                                 _database.AddInParameter(ComandoStock, "@tipo_movimiento", DbType.Int32, itemdetalle.kardc_tipo_movimiento);
                                 _database.AddOutParameter(ComandoStock, "@Response", DbType.Int32, 11);
 
-                                _database.ExecuteNonQuery(ComandoStock);
+                                _database.ExecuteNonQuery(ComandoStock, transaction);
                                 idStock = Convert.ToInt32(_database.GetParameterValue(ComandoStock, "@Response"));
                                 if (idStock == 0) throw new Exception("Error al ingresar stock");
                             }
@@ -128,7 +130,7 @@ namespace Base.DataAccess
             int idKardex;
             int idND;
             int idStock;
-            using (IDbConnection conexion= _database.CreateConnection())
+            using (DbConnection conexion = _database.CreateConnection())
             {
                 conexion.Open();
                 using (var transaction= conexion.BeginTransaction(IsolationLevel.Serializable))
@@ -145,15 +147,15 @@ namespace Base.DataAccess
                             _database.AddInParameter(comando, "@ningc_numero_doc", DbType.String, entity.ningc_numero_doc);
                             _database.AddInParameter(comando, "@ningc_referencia", DbType.String, entity.ningc_referencia);
                             _database.AddInParameter(comando, "@ningc_observaciones", DbType.String, entity.ningc_observaciones);
-                            _database.AddInParameter(comando, "@ningc_vusuario_modificado", DbType.String, entity.UsuarioCreacion);
+                            _database.AddInParameter(comando, "@ningc_vusuario_modificado", DbType.String, entity.UsuarioModificacion);
                             _database.AddInParameter(comando, "@ningc_vpc_modificado", DbType.String, WindowsIdentity.GetCurrent().Name);
                             _database.AddInParameter(comando, "@ningc_ilag_estado", DbType.Int32, 1);
                             _database.AddInParameter(comando, "@id", DbType.Int32, entity.Id);
                             _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
 
-                            _database.ExecuteNonQuery(comando);
+                            _database.ExecuteNonQuery(comando, transaction);
                             id = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
-                            if (id == 0) throw new Exception("Error al modificar nota de ingreso");
+                            if (id == -1) throw new Exception("Error al modificar nota de ingreso");
                         }
                         foreach (var itemdetalle in entity.listaDetalleNI)
                         {
@@ -179,7 +181,7 @@ namespace Base.DataAccess
                                     _database.AddInParameter(comandoKardex, "@Id", DbType.Int32, itemdetalle.kardc_icod_correlativo);
                                     _database.AddOutParameter(comandoKardex, "@Response", DbType.Int32, 11);
 
-                                    _database.ExecuteNonQuery(comandoKardex);
+                                    _database.ExecuteNonQuery(comandoKardex, transaction);
                                     idKardex = Convert.ToInt32(_database.GetParameterValue(comandoKardex, "@Response"));
                                     if (idKardex == 0) throw new Exception("Error al modificar kardex");
                                 }
@@ -197,7 +199,7 @@ namespace Base.DataAccess
                                     _database.AddInParameter(comandoND, "@id", DbType.Int32, entity.Id);
                                     _database.AddOutParameter(comandoND, "@Response", DbType.Int32, 11);
 
-                                    _database.ExecuteNonQuery(comandoND);
+                                    _database.ExecuteNonQuery(comandoND, transaction);
                                     idND = Convert.ToInt32(_database.GetParameterValue(comandoND, "@Response"));
                                     if (idND == 0) throw new Exception("Error al modifcar nota de ingreso detalle");
                                 }
@@ -223,7 +225,7 @@ namespace Base.DataAccess
                                     _database.AddInParameter(comandoKardex, "@kardc_ilag_estado", DbType.Int32, entity.Estado);
                                     _database.AddOutParameter(comandoKardex, "@Response", DbType.Int32, 11);
 
-                                    _database.ExecuteNonQuery(comandoKardex);
+                                    _database.ExecuteNonQuery(comandoKardex , transaction);
                                     idKardex = Convert.ToInt32(_database.GetParameterValue(comandoKardex, "@Response"));
                                     if (idKardex == 0) throw new Exception("Error al ingresar kardex");
                                 }
@@ -240,7 +242,7 @@ namespace Base.DataAccess
                                     _database.AddInParameter(comando, "@dninc_ilag_estado", DbType.Int32, entity.Estado);
                                     _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
 
-                                    _database.ExecuteNonQuery(comando);
+                                    _database.ExecuteNonQuery(comando, transaction);
                                     idND = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
                                     if (idND == 0) throw new Exception("Error al ingresar nota de ingreso detalle");
                                 }
@@ -251,11 +253,17 @@ namespace Base.DataAccess
                                 {
                                     _database.AddInParameter(comandokardexElimnar, "@Id", DbType.Int32, itemdetalle.kardc_icod_correlativo);
                                     _database.AddOutParameter(comandokardexElimnar, "@Response", DbType.Int32, 11);
+                                    _database.ExecuteNonQuery(comandokardexElimnar, transaction);
+                                    idKardex = Convert.ToInt32(_database.GetParameterValue(comandokardexElimnar, "@Response"));
+                                    if (idKardex == 0) throw new Exception("Error al eliminar kardex.");
                                 }
-                                using (var comandokardexElimnar = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_NOTA_INGRESO_DETALLE_DELETE")))
+                                using (var comandonotadetalleEliminar = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_NOTA_INGRESO_DETALLE_DELETE")))
                                 {
-                                    _database.AddInParameter(comandokardexElimnar, "@Id", DbType.Int32, entity.Id);
-                                    _database.AddOutParameter(comandokardexElimnar, "@Response", DbType.Int32, 11);
+                                    _database.AddInParameter(comandonotadetalleEliminar, "@Id", DbType.Int32, entity.Id);
+                                    _database.AddOutParameter(comandonotadetalleEliminar, "@Response", DbType.Int32, 11);
+                                    _database.ExecuteNonQuery(comandonotadetalleEliminar, transaction);
+                                    idND = Convert.ToInt32(_database.GetParameterValue(comandonotadetalleEliminar, "@Response"));
+                                    if (idND == 0) throw new Exception("Error al eliminar Nota ingreso detalle.");
                                 }
                             }
                             using (var ComandoStock = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_STOCK_UPDATE")))
@@ -267,7 +275,7 @@ namespace Base.DataAccess
                                 _database.AddInParameter(ComandoStock, "@tipo_movimiento", DbType.Int32, itemdetalle.kardc_tipo_movimiento);
                                 _database.AddOutParameter(ComandoStock, "@Response", DbType.Int32, 11);
 
-                                _database.ExecuteNonQuery(ComandoStock);
+                                _database.ExecuteNonQuery(ComandoStock, transaction);
                                 idStock = Convert.ToInt32(_database.GetParameterValue(ComandoStock, "@Response"));
                                 if (idStock == 0) throw new Exception("Error al actualizar stock");
                             }
@@ -395,9 +403,10 @@ namespace Base.DataAccess
                             ningc_icod_nota_ingreso = lector.IsDBNull(lector.GetOrdinal("ningc_icod_nota_ingreso")) ? default(int) : lector.GetInt32(lector.GetOrdinal("ningc_icod_nota_ingreso")),
                             dninc_nro_item = lector.IsDBNull(lector.GetOrdinal("dninc_nro_item")) ? default(string) : lector.GetString(lector.GetOrdinal("dninc_nro_item")),
                             dninc_v_unidad = lector.IsDBNull(lector.GetOrdinal("Unidad")) ? default(string) : lector.GetString(lector.GetOrdinal("Unidad")),
-                            dninc_cantidad = lector.IsDBNull(lector.GetOrdinal("ningc_observaciones")) ? default(decimal) : lector.GetDecimal(lector.GetOrdinal("dninc_cantidad")),
+                            dninc_cantidad = lector.IsDBNull(lector.GetOrdinal("dninc_cantidad")) ? default(decimal) : lector.GetDecimal(lector.GetOrdinal("dninc_cantidad")),
                             dninc_costo = lector.IsDBNull(lector.GetOrdinal("dnind_ncosto")) ? default(decimal) : lector.GetDecimal(lector.GetOrdinal("dnind_ncosto")),
                             prdc_icod_producto = lector.IsDBNull(lector.GetOrdinal("prdc_icod_producto")) ? default(int) : lector.GetInt32(lector.GetOrdinal("prdc_icod_producto")),
+                            prdc_vdescripcion = lector.IsDBNull(lector.GetOrdinal("prdc_vdescripcion")) ? default(string) : lector.GetString(lector.GetOrdinal("prdc_vdescripcion")),
                             kardc_icod_correlativo = lector.IsDBNull(lector.GetOrdinal("kardc_icod_correlativo")) ? default(int) : lector.GetInt32(lector.GetOrdinal("kardc_icod_correlativo"))
                         });
                     }

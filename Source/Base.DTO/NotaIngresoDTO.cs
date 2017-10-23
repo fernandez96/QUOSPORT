@@ -11,6 +11,7 @@ namespace Base.DTO
         public int almac_icod_almacen { get; set; }
         public int ningc_iid_motivo { get; set; }
         public string ningc_v_motivo { get; set; }
+        public string fecha { get; set; }
         public DateTime ningc_fecha_nota_ingreso { get; set; }
         public int tdocc_icod_tipo_doc { get; set; }
         public string ningc_numero_doc { get; set; }

@@ -4903,3 +4903,349 @@ Base.DTO.StatusDTO Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngi
    en Base.Common.Generics.Singleton`1.get_Instancia() en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Common\Generics\Singleton.cs:línea 20
    en Base.BusinessLogic.UsuarioBL.GetByUsername(String username, String pass) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\UsuarioBL.cs:línea 45
    en Base.Web.Controllers.AccountController.Login_(AccountModel loginDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\AccountController.cs:línea 145
+2017-10-23 15:47:23,550 ERROR  - Mensaje: Ya existe la Linea ejmplo de linea Trace:    en Base.DataAccess.CategoriaRepository.Add(Categoria entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\CategoriaRepository.cs:línea 105
+   en Base.BusinessLogic.CategoriaBL.Add(Categoria entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\CategoriaBL.cs:línea 18
+   en Base.Web.Controllers.CategoriaLineaSublineaController.Add(CategoriaDTO categoriaDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 114
+2017-10-23 15:47:32,856 ERROR  - Mensaje: Ya existe la Categoria de producto ejmplo Trace:    en Base.DataAccess.CategoriaRepository.Add(Categoria entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\CategoriaRepository.cs:línea 105
+   en Base.BusinessLogic.CategoriaBL.Add(Categoria entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\CategoriaBL.cs:línea 18
+   en Base.Web.Controllers.CategoriaLineaSublineaController.Add(CategoriaDTO categoriaDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 114
+2017-10-23 15:47:52,085 ERROR  - Mensaje: Ya existe la Categoria de producto ejemplito Trace:    en Base.DataAccess.CategoriaRepository.Add(Categoria entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\CategoriaRepository.cs:línea 105
+   en Base.BusinessLogic.CategoriaBL.Add(Categoria entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\CategoriaBL.cs:línea 18
+   en Base.Web.Controllers.CategoriaLineaSublineaController.Add(CategoriaDTO categoriaDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 114
+2017-10-23 15:48:04,147 ERROR  - Mensaje: Ya existe la Categoria de producto ejemplito4665464 Trace:    en Base.DataAccess.CategoriaRepository.Add(Categoria entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\CategoriaRepository.cs:línea 105
+   en Base.BusinessLogic.CategoriaBL.Add(Categoria entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\CategoriaBL.cs:línea 18
+   en Base.Web.Controllers.CategoriaLineaSublineaController.Add(CategoriaDTO categoriaDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 114
+2017-10-23 15:50:24,349 ERROR  - Mensaje: Ya existe la Linea DGDG Trace:    en Base.DataAccess.CategoriaRepository.Add(Categoria entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\CategoriaRepository.cs:línea 105
+   en Base.BusinessLogic.CategoriaBL.Add(Categoria entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\CategoriaBL.cs:línea 18
+   en Base.Web.Controllers.CategoriaLineaSublineaController.Add(CategoriaDTO categoriaDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 114
+2017-10-23 16:12:02,254 ERROR  - Mensaje: almac_vcod_almacen Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Base.DataAccess.AlmacenRepository.GetAll() en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\AlmacenRepository.cs:línea 168
+   en Base.BusinessLogic.AlmacenBL.GetAll() en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\AlmacenBL.cs:línea 34
+   en Base.Web.Controllers.AlmacenController.GetAllAlmacen() en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\AlmacenController.cs:línea 286
+2017-10-23 16:15:26,251 ERROR  - Mensaje: almac_vcod_almacen Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Base.DataAccess.AlmacenRepository.GetAll() en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\AlmacenRepository.cs:línea 168
+   en Base.BusinessLogic.AlmacenBL.GetAll() en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\AlmacenBL.cs:línea 34
+   en Base.Web.Controllers.AlmacenController.GetAllAlmacen() en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\AlmacenController.cs:línea 286
+2017-10-23 16:28:41,512 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.NotaIngresoController.FormatDataTable(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 368
+   en Base.Web.Controllers.NotaIngresoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 31
+2017-10-23 16:29:40,889 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.NotaIngresoController.FormatDataTable(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 368
+   en Base.Web.Controllers.NotaIngresoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 31
+2017-10-23 16:30:25,131 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.NotaIngresoController.FormatDataTable(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 368
+   en Base.Web.Controllers.NotaIngresoController.Listar(DataTableModel`2 dataTableModel) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 31
+2017-10-23 16:31:59,266 ERROR  - Mensaje: Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 0, current count = 1. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 118
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO)
+2017-10-23 16:32:02,423 ERROR  - Mensaje: Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 0, current count = 1. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 118
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO)
+2017-10-23 16:34:41,186 ERROR  - Mensaje: Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 0, current count = 1. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 118
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO)
+2017-10-23 16:35:00,139 ERROR  - Mensaje: Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 0, current count = 1. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 118
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO)
+2017-10-23 16:36:36,721 ERROR  - Mensaje: Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 0, current count = 1. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 118
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO)
+2017-10-23 16:38:27,745 ERROR  - Mensaje: Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 0, current count = 1. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 118
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO)
+2017-10-23 16:55:11,227 ERROR  - Mensaje: Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 1, current count = 2. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 120
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 92
+2017-10-23 16:59:48,434 ERROR  - Mensaje: Procedure or function 'SGE_NOTA_INGRESO_DETALLE_INSERT' expects parameter '@dninc_ilag_estado', which was not supplied. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity)
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 92
+2017-10-23 17:02:47,456 ERROR  - Mensaje: Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 1, current count = 2. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity)
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 92
+2017-10-23 17:04:41,427 ERROR  - Mensaje: Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 1, current count = 2. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity)
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 92
+2017-10-23 17:07:10,804 ERROR  - Mensaje: Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 1, current count = 2. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity)
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 92
+2017-10-23 17:10:19,083 ERROR  - Mensaje: Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 1, current count = 2. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity)
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 92
+2017-10-23 17:12:09,681 ERROR  - Mensaje: Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 1, current count = 2. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity)
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 92
+2017-10-23 17:38:39,935 ERROR  - Mensaje: ningc_observaciones Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Base.DataAccess.NotaIngresoRepository.GetAll(NotaIngreso entiy) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 394
+   en Base.BusinessLogic.NotaIngresoBL.GetAll(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 33
+   en Base.Web.Controllers.NotaIngresoController.ListarNotaIngresoDetalle(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 65
+2017-10-23 17:39:04,789 ERROR  - Mensaje: ningc_observaciones Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Base.DataAccess.NotaIngresoRepository.GetAll(NotaIngreso entiy) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 394
+   en Base.BusinessLogic.NotaIngresoBL.GetAll(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 33
+   en Base.Web.Controllers.NotaIngresoController.ListarNotaIngresoDetalle(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 65
+2017-10-23 17:40:29,637 ERROR  - Mensaje: ningc_observaciones Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Base.DataAccess.NotaIngresoRepository.GetAll(NotaIngreso entiy) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 394
+   en Base.BusinessLogic.NotaIngresoBL.GetAll(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 33
+   en Base.Web.Controllers.NotaIngresoController.ListarNotaIngresoDetalle(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 65
+2017-10-23 17:40:58,718 ERROR  - Mensaje: ningc_observaciones Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Base.DataAccess.NotaIngresoRepository.GetAll(NotaIngreso entiy) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 394
+   en Base.BusinessLogic.NotaIngresoBL.GetAll(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 33
+   en Base.Web.Controllers.NotaIngresoController.ListarNotaIngresoDetalle(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 65
+2017-10-23 17:41:32,418 ERROR  - Mensaje: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+String -> DateTime
+System.String -> System.DateTime
+
+Destination path:
+NotaIngreso.ningc_fecha_nota_ingreso.ningc_fecha_nota_ingreso
+
+Source value:
+23/10/2017 Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.MapPropertyValue(ResolutionContext context, IMappingEngineRunner mapper, Object mappedObject, PropertyMap propertyMap) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapObjectMapperRegistry.cs:línea 163
+   en AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapObjectMapperRegistry.cs:línea 89
+   en AutoMapper.Mappers.TypeMapMapper.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapMapper.cs:línea 22
+   en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 78
+   en Base.DTO.AutoMapper.MapperHelper.Map[TSource,TDest](TSource source) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DTO\AutoMapper\MapperHelper.cs:línea 9
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 91
+2017-10-23 17:41:36,421 ERROR  - Mensaje: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+String -> DateTime
+System.String -> System.DateTime
+
+Destination path:
+NotaIngreso.ningc_fecha_nota_ingreso.ningc_fecha_nota_ingreso
+
+Source value:
+23/10/2017 Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.MapPropertyValue(ResolutionContext context, IMappingEngineRunner mapper, Object mappedObject, PropertyMap propertyMap) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapObjectMapperRegistry.cs:línea 163
+   en AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapObjectMapperRegistry.cs:línea 89
+   en AutoMapper.Mappers.TypeMapMapper.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapMapper.cs:línea 22
+   en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 78
+   en Base.DTO.AutoMapper.MapperHelper.Map[TSource,TDest](TSource source) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DTO\AutoMapper\MapperHelper.cs:línea 9
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 91
+2017-10-23 17:42:13,148 ERROR  - Mensaje: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+String -> DateTime
+System.String -> System.DateTime
+
+Destination path:
+NotaIngreso.ningc_fecha_nota_ingreso.ningc_fecha_nota_ingreso
+
+Source value:
+23/10/2017 Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.MapPropertyValue(ResolutionContext context, IMappingEngineRunner mapper, Object mappedObject, PropertyMap propertyMap) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapObjectMapperRegistry.cs:línea 163
+   en AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapObjectMapperRegistry.cs:línea 89
+   en AutoMapper.Mappers.TypeMapMapper.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapMapper.cs:línea 22
+   en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 78
+   en Base.DTO.AutoMapper.MapperHelper.Map[TSource,TDest](TSource source) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DTO\AutoMapper\MapperHelper.cs:línea 9
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 91
+2017-10-23 17:42:44,919 ERROR  - Mensaje: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+String -> DateTime
+System.String -> System.DateTime
+
+Destination path:
+NotaIngreso.ningc_fecha_nota_ingreso.ningc_fecha_nota_ingreso
+
+Source value:
+23/10/2017 Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.MapPropertyValue(ResolutionContext context, IMappingEngineRunner mapper, Object mappedObject, PropertyMap propertyMap) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapObjectMapperRegistry.cs:línea 163
+   en AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapObjectMapperRegistry.cs:línea 89
+   en AutoMapper.Mappers.TypeMapMapper.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapMapper.cs:línea 22
+   en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 78
+   en Base.DTO.AutoMapper.MapperHelper.Map[TSource,TDest](TSource source) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DTO\AutoMapper\MapperHelper.cs:línea 9
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 91
+2017-10-23 17:43:27,707 ERROR  - Mensaje: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+String -> DateTime
+System.String -> System.DateTime
+
+Destination path:
+NotaIngreso.ningc_fecha_nota_ingreso.ningc_fecha_nota_ingreso
+
+Source value:
+23/10/2017 Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.MapPropertyValue(ResolutionContext context, IMappingEngineRunner mapper, Object mappedObject, PropertyMap propertyMap) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapObjectMapperRegistry.cs:línea 163
+   en AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapObjectMapperRegistry.cs:línea 89
+   en AutoMapper.Mappers.TypeMapMapper.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapMapper.cs:línea 22
+   en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 78
+   en Base.DTO.AutoMapper.MapperHelper.Map[TSource,TDest](TSource source) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DTO\AutoMapper\MapperHelper.cs:línea 9
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 91
+2017-10-23 17:43:46,657 ERROR  - Mensaje: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+String -> DateTime
+System.String -> System.DateTime
+
+Destination path:
+NotaIngreso.ningc_fecha_nota_ingreso.ningc_fecha_nota_ingreso
+
+Source value:
+23/10/2017 Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.MapPropertyValue(ResolutionContext context, IMappingEngineRunner mapper, Object mappedObject, PropertyMap propertyMap) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapObjectMapperRegistry.cs:línea 163
+   en AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapObjectMapperRegistry.cs:línea 89
+   en AutoMapper.Mappers.TypeMapMapper.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapMapper.cs:línea 22
+   en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 78
+   en Base.DTO.AutoMapper.MapperHelper.Map[TSource,TDest](TSource source) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DTO\AutoMapper\MapperHelper.cs:línea 9
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 91
+2017-10-23 17:44:42,639 ERROR  - Mensaje: ningc_observaciones Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Base.DataAccess.NotaIngresoRepository.GetAll(NotaIngreso entiy) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 394
+   en Base.BusinessLogic.NotaIngresoBL.GetAll(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 33
+   en Base.Web.Controllers.NotaIngresoController.ListarNotaIngresoDetalle(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 65
+2017-10-23 17:45:49,474 ERROR  - Mensaje: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+String -> DateTime
+System.String -> System.DateTime
+
+Destination path:
+NotaIngreso.ningc_fecha_nota_ingreso.ningc_fecha_nota_ingreso
+
+Source value:
+23/10/2017 Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.MapPropertyValue(ResolutionContext context, IMappingEngineRunner mapper, Object mappedObject, PropertyMap propertyMap) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapObjectMapperRegistry.cs:línea 163
+   en AutoMapper.Mappers.TypeMapObjectMapperRegistry.PropertyMapMappingStrategy.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapObjectMapperRegistry.cs:línea 89
+   en AutoMapper.Mappers.TypeMapMapper.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\TypeMapMapper.cs:línea 22
+   en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 78
+   en Base.DTO.AutoMapper.MapperHelper.Map[TSource,TDest](TSource source) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DTO\AutoMapper\MapperHelper.cs:línea 9
+   en Base.Web.Controllers.NotaIngresoController.Update(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 142
+2017-10-23 17:49:22,988 ERROR  - Mensaje: ningc_observaciones Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Base.DataAccess.NotaIngresoRepository.GetAll(NotaIngreso entiy) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 394
+   en Base.BusinessLogic.NotaIngresoBL.GetAll(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 33
+   en Base.Web.Controllers.NotaIngresoController.ListarNotaIngresoDetalle(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 65
+2017-10-23 17:49:50,487 ERROR  - Mensaje: ningc_observaciones Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Base.DataAccess.NotaIngresoRepository.GetAll(NotaIngreso entiy) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 394
+   en Base.BusinessLogic.NotaIngresoBL.GetAll(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 33
+   en Base.Web.Controllers.NotaIngresoController.ListarNotaIngresoDetalle(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 65
+2017-10-23 17:55:19,118 ERROR  - Mensaje: ningc_observaciones Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Base.DataAccess.NotaIngresoRepository.GetAll(NotaIngreso entiy) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 400
+   en Base.BusinessLogic.NotaIngresoBL.GetAll(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 33
+   en Base.Web.Controllers.NotaIngresoController.ListarNotaIngresoDetalle(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 65
+2017-10-23 17:56:23,815 ERROR  - Mensaje: Procedure or function 'SGE_NOTA_INGRESO_UPDATE' expects parameter '@ningc_fecha_modificado', which was not supplied. Trace:    en Base.DataAccess.NotaIngresoRepository.UpdateNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 289
+   en Base.BusinessLogic.NotaIngresoBL.UpdateNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 17
+   en Base.Web.Controllers.NotaIngresoController.Update(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 145
+2017-10-23 17:58:15,397 ERROR  - Mensaje: Invalid object name 'Base.SGE_NOTA_INGRES'.
+Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 1, current count = 2. Trace:    en Base.DataAccess.NotaIngresoRepository.UpdateNI(NotaIngreso entity)
+   en Base.BusinessLogic.NotaIngresoBL.UpdateNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 17
+   en Base.Web.Controllers.NotaIngresoController.Update(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 145
+2017-10-23 17:59:11,893 ERROR  - Mensaje: Invalid object name 'Base.SGE_NOTA_INGRES'.
+Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 1, current count = 2. Trace:    en Base.DataAccess.NotaIngresoRepository.UpdateNI(NotaIngreso entity)
+   en Base.BusinessLogic.NotaIngresoBL.UpdateNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 17
+   en Base.Web.Controllers.NotaIngresoController.Update(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 145
+2017-10-23 18:08:32,717 ERROR  - Mensaje: ningc_observaciones Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Base.DataAccess.NotaIngresoRepository.GetAll(NotaIngreso entiy)
+   en Base.BusinessLogic.NotaIngresoBL.GetAll(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 33
+   en Base.Web.Controllers.NotaIngresoController.ListarNotaIngresoDetalle(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 65
+2017-10-23 18:14:49,021 ERROR  - Mensaje: ningc_observaciones Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Base.DataAccess.NotaIngresoRepository.GetAll(NotaIngreso entiy) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 400
+   en Base.BusinessLogic.NotaIngresoBL.GetAll(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 33
+   en Base.Web.Controllers.NotaIngresoController.ListarNotaIngresoDetalle(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 65
+2017-10-23 18:15:12,884 ERROR  - Mensaje: ningc_observaciones Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Base.DataAccess.NotaIngresoRepository.GetAll(NotaIngreso entiy) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 400
+   en Base.BusinessLogic.NotaIngresoBL.GetAll(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 33
+   en Base.Web.Controllers.NotaIngresoController.ListarNotaIngresoDetalle(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 65
+2017-10-23 18:15:18,057 ERROR  - Mensaje: ningc_observaciones Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Base.DataAccess.NotaIngresoRepository.GetAll(NotaIngreso entiy) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 400
+   en Base.BusinessLogic.NotaIngresoBL.GetAll(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 33
+   en Base.Web.Controllers.NotaIngresoController.ListarNotaIngresoDetalle(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 65
+2017-10-23 18:15:22,489 ERROR  - Mensaje: ningc_observaciones Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Base.DataAccess.NotaIngresoRepository.GetAll(NotaIngreso entiy) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 400
+   en Base.BusinessLogic.NotaIngresoBL.GetAll(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 33
+   en Base.Web.Controllers.NotaIngresoController.ListarNotaIngresoDetalle(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 65
+2017-10-23 18:15:49,640 ERROR  - Mensaje: ningc_observaciones Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Base.DataAccess.NotaIngresoRepository.GetAll(NotaIngreso entiy) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 400
+   en Base.BusinessLogic.NotaIngresoBL.GetAll(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 33
+   en Base.Web.Controllers.NotaIngresoController.ListarNotaIngresoDetalle(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 65
+2017-10-23 18:17:40,775 ERROR  - Mensaje: ningc_observaciones Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Base.DataAccess.NotaIngresoRepository.GetAll(NotaIngreso entiy)
+   en Base.BusinessLogic.NotaIngresoBL.GetAll(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 33
+   en Base.Web.Controllers.NotaIngresoController.ListarNotaIngresoDetalle(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 65
+2017-10-23 18:17:51,706 ERROR  - Mensaje: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+NotaIngresoDetalle -> NotaIngresoDetalleDTO
+Base.BusinessEntity.NotaIngresoDetalle -> Base.DTO.NotaIngresoDetalleDTO
+
+Destination path:
+IEnumerable`1[0]
+
+Source value:
+Base.BusinessEntity.NotaIngresoDetalle Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.Mappers.EnumerableMapperBase`1.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\EnumerableMapperBase.cs:línea 44
+   en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 78
+   en Base.DTO.AutoMapper.MapperHelper.Map[TSource,TDest](TSource source) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DTO\AutoMapper\MapperHelper.cs:línea 9
+   en Base.Web.Controllers.NotaIngresoController.ListarNotaIngresoDetalle(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 66
+2017-10-23 18:18:26,402 ERROR  - Mensaje: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+NotaIngresoDetalle -> NotaIngresoDetalleDTO
+Base.BusinessEntity.NotaIngresoDetalle -> Base.DTO.NotaIngresoDetalleDTO
+
+Destination path:
+IEnumerable`1[0]
+
+Source value:
+Base.BusinessEntity.NotaIngresoDetalle Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.Mappers.EnumerableMapperBase`1.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\EnumerableMapperBase.cs:línea 44
+   en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 78
+   en Base.DTO.AutoMapper.MapperHelper.Map[TSource,TDest](TSource source) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DTO\AutoMapper\MapperHelper.cs:línea 9
+   en Base.Web.Controllers.NotaIngresoController.ListarNotaIngresoDetalle(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 66
+2017-10-23 18:19:53,254 ERROR  - Mensaje: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+NotaIngresoDetalle -> NotaIngresoDetalleDTO
+Base.BusinessEntity.NotaIngresoDetalle -> Base.DTO.NotaIngresoDetalleDTO
+
+Destination path:
+IEnumerable`1[0]
+
+Source value:
+Base.BusinessEntity.NotaIngresoDetalle Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.Mappers.EnumerableMapperBase`1.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\EnumerableMapperBase.cs:línea 44
+   en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 78
+   en Base.DTO.AutoMapper.MapperHelper.Map[TSource,TDest](TSource source)
+   en Base.Web.Controllers.NotaIngresoController.ListarNotaIngresoDetalle(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 66
+2017-10-23 18:20:16,800 ERROR  - Mensaje: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+NotaIngresoDetalle -> NotaIngresoDetalleDTO
+Base.BusinessEntity.NotaIngresoDetalle -> Base.DTO.NotaIngresoDetalleDTO
+
+Destination path:
+IEnumerable`1[0]
+
+Source value:
+Base.BusinessEntity.NotaIngresoDetalle Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.Mappers.EnumerableMapperBase`1.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\EnumerableMapperBase.cs:línea 44
+   en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 78
+   en Base.DTO.AutoMapper.MapperHelper.Map[TSource,TDest](TSource source)
+   en Base.Web.Controllers.NotaIngresoController.ListarNotaIngresoDetalle(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 66

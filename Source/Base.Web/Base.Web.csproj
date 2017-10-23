@@ -463,6 +463,7 @@
     <Content Include="Global.asax" />
     <Content Include="Log\log.txt" />
     <Content Include="Prints\M_Administrador\TablaRegistro\TablaOpciones.mrt" />
+    <Content Include="Prints\M_Almaden\NotaIngreso\notaIngreso.mrt" />
     <None Include="Properties\PublishProfiles\side_web.pubxml" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
     <None Include="Properties\PublishProfiles\webside.pubxml" />

@@ -43,7 +43,7 @@ namespace Base.DataAccess
                             _database.AddInParameter(comando, "@ctgc_vpc_crea", DbType.String, WindowsIdentity.GetCurrent().Name);
                             _database.AddInParameter(comando, "@ctgcc_iflag_estado", DbType.Int32, 1);
                             _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
-                            _database.ExecuteNonQuery(comando);
+                            _database.ExecuteNonQuery(comando, transaction);
 
                             idcategoria = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
                             if (idcategoria == -1) throw new Exception("Ya existe la Categoria de producto " + entity.ctgcc_vdescripcion);
@@ -61,7 +61,7 @@ namespace Base.DataAccess
                                     _database.AddInParameter(comando, "@linc_vpc_crea", DbType.String, WindowsIdentity.GetCurrent().Name);
                                     _database.AddInParameter(comando, "@linc_iflag_estado", DbType.Int32, 1);
                                     _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
-                                    _database.ExecuteNonQuery(comando);
+                                    _database.ExecuteNonQuery(comando, transaction);
 
                                     idlinea = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
                                     if (idlinea == -1) throw new Exception("Ya existe la Linea " + item.linc_vdescripcion);
@@ -82,7 +82,7 @@ namespace Base.DataAccess
                                                 _database.AddInParameter(comando, "@lind_vpc_crea", DbType.String, WindowsIdentity.GetCurrent().Name);
                                                 _database.AddInParameter(comando, "@lind_iflag_estado", DbType.Int32, 1);
                                                 _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
-                                                _database.ExecuteNonQuery(comando);
+                                                _database.ExecuteNonQuery(comando, transaction);
 
                                                 idsublinea = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
                                                 if (idsublinea == -1) throw new Exception("Ya existe la Sub-Linea " + itemsublinea.lind_vdescripcion);
@@ -128,7 +128,7 @@ namespace Base.DataAccess
                             _database.AddInParameter(comando, "@ctgc_vusuario_modifica", DbType.String, entity.UsuarioModificacion);
                             _database.AddInParameter(comando, "@ctgc_vpc_modifica", DbType.String, WindowsIdentity.GetCurrent().Name);
                             _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
-                            _database.ExecuteNonQuery(comando);
+                            _database.ExecuteNonQuery(comando, transaction);
 
                             idcategoria = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
                             if (idcategoria == -1) throw new Exception("Ya existe la Categoria de producto " + entity.ctgcc_vdescripcion);
@@ -147,7 +147,7 @@ namespace Base.DataAccess
                                     _database.AddInParameter(comando, "@linc_vusuario_modifica", DbType.String, entity.UsuarioModificacion);
                                     _database.AddInParameter(comando, "@linc_vpc_modifica", DbType.String, WindowsIdentity.GetCurrent().Name);
                                     _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
-                                    _database.ExecuteNonQuery(comando);
+                                    _database.ExecuteNonQuery(comando, transaction);
 
                                     idlinea = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
                                     if (idlinea == -1) throw new Exception("Ya existe la Linea " + item.linc_vdescripcion);
@@ -165,7 +165,7 @@ namespace Base.DataAccess
                                 {
                                     _database.AddInParameter(comando, "@Id", DbType.Int32, item.Id);
                                     _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
-                                    _database.ExecuteNonQuery(comando);
+                                    _database.ExecuteNonQuery(comando, transaction);
 
                                     idlinea = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
                                     if (idlinea == 0) throw new Exception("Error al iliminar Linea" + item.linc_vdescripcion);
@@ -186,7 +186,7 @@ namespace Base.DataAccess
                                         _database.AddInParameter(comando, "@lind_vusuario_modifica", DbType.String, entity.UsuarioModificacion);
                                         _database.AddInParameter(comando, "@lind_vpc_modifica", DbType.String, WindowsIdentity.GetCurrent().Name);
                                         _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
-                                        _database.ExecuteNonQuery(comando);
+                                        _database.ExecuteNonQuery(comando, transaction);
 
                                         idsublinea = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
                                         if (idsublinea == -1) throw new Exception("Ya existe la Sub-Linea " + itemsublinea.lind_vdescripcion);
@@ -202,7 +202,7 @@ namespace Base.DataAccess
                                 {
                                     _database.AddInParameter(comando, "@Id", DbType.Int32, item.Id);
                                     _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
-                                    _database.ExecuteNonQuery(comando);
+                                    _database.ExecuteNonQuery(comando,transaction);
 
                                     idsublinea = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
                                     if (idsublinea == 0) throw new Exception("Error al elimimar Sub-Linea " + item.lind_vdescripcion);
@@ -226,7 +226,7 @@ namespace Base.DataAccess
                                     _database.AddInParameter(comando, "@linc_vpc_crea", DbType.String, WindowsIdentity.GetCurrent().Name);
                                     _database.AddInParameter(comando, "@linc_iflag_estado", DbType.Int32, 1);
                                     _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
-                                    _database.ExecuteNonQuery(comando);
+                                    _database.ExecuteNonQuery(comando, transaction);
 
                                     idlinea = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
                                     if (idlinea == -1) throw new Exception("Ya existe la Linea " + item.linc_vdescripcion);
@@ -247,7 +247,7 @@ namespace Base.DataAccess
                                                 _database.AddInParameter(comando, "@lind_vpc_crea", DbType.String, WindowsIdentity.GetCurrent().Name);
                                                 _database.AddInParameter(comando, "@lind_iflag_estado", DbType.Int32, 1);
                                                 _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
-                                                _database.ExecuteNonQuery(comando);
+                                                _database.ExecuteNonQuery(comando, transaction);
 
                                                 idsublinea = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
                                                 if (idsublinea == -1) throw new Exception("Ya existe la Sub-Linea " + itemsublinea.lind_vdescripcion);
@@ -275,7 +275,7 @@ namespace Base.DataAccess
                                                 _database.AddInParameter(comando, "@lind_vpc_crea", DbType.String, WindowsIdentity.GetCurrent().Name);
                                                 _database.AddInParameter(comando, "@lind_iflag_estado", DbType.Int32, 1);
                                                 _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
-                                                _database.ExecuteNonQuery(comando);
+                                                _database.ExecuteNonQuery(comando, transaction);
 
                                                 idsublinea = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
                                                 if (idsublinea == -1) throw new Exception("Ya existe la Sub-Linea " + itemSubLinea.lind_vdescripcion);

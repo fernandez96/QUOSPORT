@@ -130,7 +130,6 @@ $(document).ready(function () {
                 Imprimir(rowTabla.Id);
             });
         }
-        
     });
 
     

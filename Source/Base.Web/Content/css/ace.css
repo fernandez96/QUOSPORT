@@ -412,7 +412,7 @@ pre.prettyprint {
   color: #333333 !important;
 }
 .white {
-  color: #ffffff !important;
+  color: #000000 !important;
 }
 .red {
   color: #dd5a43 !important;
@@ -8720,7 +8720,7 @@ input[type="color"] {
   transition-duration: 0.1s;
   border: 0px solid white;
   padding-left: 0;
-  border-bottom: 1px solid rgba(67, 142, 185, 0.5);
+  border: 1px solid rgba(67, 142, 185, 0.5);
 }
 /*textarea:hover,*/
 input[type="text"]:hover,
@@ -8760,7 +8760,7 @@ input[type="color"]:focus {
   /*border-color: #f59942;*/
   /*background-color: #ffffff;*/
   outline: none;
- border: 0px solid #007936 !important
+ border: 1px solid #2f7096 !important
 }
 input::-webkit-input-placeholder,
 .form-control::-webkit-input-placeholder {
@@ -8790,7 +8790,7 @@ select {
   /*border: 1px solid #d5d5d5;*/
   border: 0px solid white;
   padding-left: 0;
-  border-bottom: 1px solid rgba(67, 142, 185, 0.5);
+  border: 1px solid rgba(67, 142, 185, 0.5);
 }
 .form-control:focus,
 select:focus {
@@ -8798,7 +8798,7 @@ select:focus {
   border-color: #f59942;
   background-color: #ffffff;*/
   outline: none;
- border: 0px solid #007936 !important
+ border: 1px solid #2f7096 !important
 }
 textarea.form-control {
   padding: 5px 9px;

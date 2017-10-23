@@ -255,6 +255,7 @@ namespace Base.Web.Controllers
             return Json(jsonResponse);
         }
 
+        [HttpPost]
         public JsonResult GetAll(int idtabla)
         {
             var jsonResponse = new JsonResponse { Success = true };
@@ -263,6 +264,27 @@ namespace Base.Web.Controllers
             {
                 var estadoList = TablaRegistroBL.Instancia.GetAll(idtabla);
                 var usuarioDTOList = MapperHelper.Map<IEnumerable<TablaRegistro>, IEnumerable<TablaRegistroDTO>>(estadoList);
+                jsonResponse.Data = usuarioDTOList;
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                jsonResponse.Success = false;
+                jsonResponse.Message = Mensajes.IntenteloMasTarde;
+            }
+
+            return Json(jsonResponse);
+        }
+
+        [HttpPost]
+        public JsonResult GetAllAlmacen()
+        {
+            var jsonResponse = new JsonResponse { Success = true };
+
+            try
+            {
+                var almacenList = AlmacenBL.Instancia.GetAll();
+                var usuarioDTOList = MapperHelper.Map<IEnumerable<Almacen>, IEnumerable<AlmacenDTO>>(almacenList);
                 jsonResponse.Data = usuarioDTOList;
             }
             catch (Exception ex)

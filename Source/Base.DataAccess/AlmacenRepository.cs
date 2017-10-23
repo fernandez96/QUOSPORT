@@ -156,6 +156,34 @@ namespace Base.DataAccess
             return id;
         }
 
+        public IList<Almacen> GetAll()
+        {
+            List<Almacen> almances = new List<Almacen>();
+            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_ALMACEN_GETALL")))
+            {
+                using (var lector = _database.ExecuteReader(comando))
+                {
+                    while (lector.Read())
+                    {
+                        almances.Add(new Almacen
+                        {
+                            Id = lector.IsDBNull(lector.GetOrdinal("almac_iid_almacen")) ? default(int) : lector.GetInt32(lector.GetOrdinal("almac_iid_almacen")),
+                            almac_vcod_almacen = lector.IsDBNull(lector.GetOrdinal("almac_vcod_almacen")) ? default(string) : lector.GetString(lector.GetOrdinal("almac_vcod_almacen")),
+                            almac_vdescripcion = lector.IsDBNull(lector.GetOrdinal("almac_vdescripcion")) ? default(string) : lector.GetString(lector.GetOrdinal("almac_vdescripcion")),
+                            almac_vubicacion = lector.IsDBNull(lector.GetOrdinal("almac_vubicacion")) ? default(string) : lector.GetString(lector.GetOrdinal("almac_vubicacion")),
+                            almac_vtelefono = lector.IsDBNull(lector.GetOrdinal("almac_vtelefono")) ? default(string) : lector.GetString(lector.GetOrdinal("almac_vtelefono")),
+                            almac_vresponsable = lector.IsDBNull(lector.GetOrdinal("almac_vresponsable")) ? default(string) : lector.GetString(lector.GetOrdinal("almac_vresponsable")),
+                            almac_itipo = lector.IsDBNull(lector.GetOrdinal("almac_itipo")) ? default(int) : lector.GetInt32(lector.GetOrdinal("almac_itipo")),
+                            almac_vcorreo = lector.IsDBNull(lector.GetOrdinal("almac_vcorreo")) ? default(string) : lector.GetString(lector.GetOrdinal("almac_vcorreo")),
+
+                        });
+                    }
+                }
+            }
+
+            return almances;
+        }
+
         public int CambioEstado(Almacen entity)
         {
             int estado;

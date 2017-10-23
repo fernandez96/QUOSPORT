@@ -7,8 +7,9 @@ var delRowPos = null;
 var delRowID = 0;
 var urlListar = baseUrl + 'NotaIngreso/Listar';
 var urlMantenimiento = baseUrl + 'NotaIngreso/';
+var urlMantenimientoAlmacen = baseUrl + 'Almacen/';
 var urlListaCargo = baseUrl + 'NotaIngreso/';
-var rowNotaIngreso = null;
+var urlMantenimientoReport = baseUrl + 'Reporte/';
 var urlListarProductos = baseUrl + 'Producto/Listar';
 var ActualizacionFallida = "No se pudo realizar la actualización.";
 var ActualizacionSatisfactoria = "Se realizó la actualización satisfactoriamente.";
@@ -21,15 +22,17 @@ var IntenteloMasTarde = "Hubo un error, inténtelo más tarde.";
 var TitleRegistro = "Registro Satisfactorio";
 var TitleActualizar = "Actualización Satisfactoria";
 var TitleEliminar = "Eliminación Satisfactoria";
+var tipoMovimiento=1;
 var TitleAlerta = "Alerta";
 var NotaIngresoDetalle = new Array();
 var editor;
-var rowProducto = null;
 var rowNotaIngreso = null;
+var rowProducto = null;
+var rowNotaIngresoDetalle = null;
 var agregar = 1;
 var editar = 2;
 var eliminar = 3;
-
+var tipoDocumento=1;
 $(document).ready(function () {
     $.extend($.fn.dataTable.defaults, {
         language: { url: baseUrl + 'Content/js/dataTables/Internationalisation/es.txt' },
@@ -41,20 +44,28 @@ $(document).ready(function () {
     $.extend($.gritter.options, {
         time: '1000'
     });
+
     checkSession(function () {
         VisualizarDataTableNotaIngreso();
         VisualizarDataTableNotaIngresoDetalle();
         VisualizarDataTableProducto();
     });
-
+    $('#NotaIngresoDataTable  tbody').on('click', 'tr', function () {
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+        }
+        else {
+            dataTableNotaIngreso.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    });
     $('#NotaIngresoDetalleDataTable  tbody').on('click', 'tr', function () {
         if ($(this).hasClass('selected')) {
             $(this).removeClass('selected');
         }
         else {
             dataTableNotaIngresoDetalle.$('tr.selected').removeClass('selected');
-            $(this).addClass('selected');
-            
+            $(this).addClass('selected');        
         }
     });
     $('#ProductoDataTable  tbody').on('click', 'tr', function () {
@@ -72,8 +83,6 @@ $(document).ready(function () {
                 $("#cantidad").focus();
                 $("#ProductoModal").modal("hide");
             },100);
-            
-
         }
     });
 
@@ -89,11 +98,35 @@ $(document).ready(function () {
 												
     $("#btnAgregarNotaIngresoDetalle").on("click", function () {
         LimpiarFormularioDetalle();
-       
+        $("#NotaIngresoDetalleId").val(0);
         $("#accionTitleProducto").text("Nueva");
         $("#productoBuscar").prop("disabled", false);
         $("#NuevoDetalleProducto").modal("show");
 
+    });
+    $("#btnEditarNotaIngreso").on("click", function () {
+        rowNotaIngreso = dataTableNotaIngreso.row('.selected').data();
+        if (typeof rowNotaIngreso === "undefined") {
+            webApp.showMessageDialog("Por favor seleccione un registro.");
+        }
+        else {
+            checkSession(function () {
+                GetNotaIngresoById(rowNotaIngreso.Id);
+                GetNotaIngresoDetalleAll(rowNotaIngreso.Id);
+            });
+        }
+    });
+    $("#btnGuardarNotaIngreso").on("click", function () {
+        if (NotaIngresoDetalle.filter(function (obj) { if (obj.status != eliminar) { return true } else {return false }}).length<= 0 ) {
+            webApp.showMessageDialog("Por favor debe ingresar al menos un producto.");
+        }
+        else {
+            if ($('#' + formularioMantenimiento).valid()) {
+                checkSession(function () {
+                   GuardarNotaIngreso();
+                });
+            }
+        }
     });
 
     $("#btnGuardarProducto").on("click", function () {
@@ -107,13 +140,11 @@ $(document).ready(function () {
                 });
             }
         }
-       
-      
     });
 
     $("#btnEditarTablaDetalle").on("click", function () {
-        rowNotaIngreso = dataTableNotaIngresoDetalle.row('.selected').data();
-        if (typeof rowNotaIngreso === "undefined") {
+        rowNotaIngresoDetalle = dataTableNotaIngresoDetalle.row('.selected').data();
+        if (typeof rowNotaIngresoDetalle === "undefined") {
             webApp.showMessageDialog("Por favor seleccione un registro.");
         }
         else {
@@ -124,8 +155,8 @@ $(document).ready(function () {
     });
 
     $("#btnEliminarTablaDetalle").on("click", function () {
-        rowNotaIngreso = dataTableNotaIngresoDetalle.row('.selected').data();
-        if (typeof rowNotaIngreso === "undefined") {
+        rowNotaIngresoDetalle = dataTableNotaIngresoDetalle.row('.selected').data();
+        if (typeof rowNotaIngresoDetalle === "undefined") {
             webApp.showMessageDialog("Por favor seleccione un registro.");
         }
         else{
@@ -142,31 +173,65 @@ $(document).ready(function () {
         $("#ProductoModal").modal("show");
     });
   
+    $('#btnImprimir').on('click', function () {
+        rowNotaIngreso = dataTableNotaIngreso.row('.selected').data();
+        if (typeof rowNotaIngreso === "undefined") {
+            webApp.showMessageDialog("Por favor seleccione un registro.");
+        }
+        else {
+            checkSession(function () {
+                Imprimir(rowNotaIngreso.Id);
+            });
+        }
+    });
+
     webApp.validarNumerico(['costo', 'cantidad']);
     webApp.InicializarValidacion(formularioMantenimientoDetalle,
-       {
-           costo: {
-               required: true,
-           },
+       {       
            cantidad: {
                required: true,
            },
 
        },
        {
-           costo: {
-               required: "Por favor ingrese Costo",
-           },
            cantidad: {
                required: "Por favor ingrese Cantidad",
            },
-
        }
-
        );
 
+    webApp.InicializarValidacion(formularioMantenimiento,
+      {
+          almacen: {
+              required: true,
+          },
+          nroNI: {
+              required: true,
+          },
+          fecha: {
+              required:true
+          },
+          motivo: {
+              required:true
+          }
+      },
+      {
+          almacen: {
+              required: "Por favor seleccione Almacen.",
+          },
+          nroNI: {
+              required: "Por favor falta generar numero de nota de ingreso.",
+          },
+          fecha: {
+              required: "Por favor seleccione fecha.",
+          },
+          motivo: {
+              required: "Por favor seleccione Motivo.",
+          },
+      }
+      );
+
     $('[data-toggle="tooltip"]').tooltip();
-    //or change it into a date range picker
     
     $('#observacion').inputlimiter({
         remText: '%n caracter%s restantes...',
@@ -177,6 +242,8 @@ $(document).ready(function () {
     //$("#costo").inputmask('00.00', { regex: "^[0-9]{1,6}(\\.\\d{1,2})?$" });
     //$('#costo').mask('#,##0.00', { reverse: true });
     //$('#cantidad').mask('#,##0.00', { reverse: true });
+    CargarAlmacen();
+    CargarMotivo();
 });
 function VisualizarDataTableNotaIngreso() {
     dataTableNotaIngreso = $('#NotaIngresoDataTable').DataTable({
@@ -191,8 +258,8 @@ function VisualizarDataTableNotaIngreso() {
                 request.filter = new Object();
 
                 request.filter = {
-                    CodigoSearch: $("#Codigosearch").val(),
-                    DescripcionSearch: $("#Descripcionsearch").val()
+                    numeroSearch: $("#numerosearch").val(),
+                    //DescripcionSearch: $("#Descripcionsearch").val()
                 }
             },
             dataFilter: function (data) {
@@ -209,7 +276,7 @@ function VisualizarDataTableNotaIngreso() {
         "columns": [
             { "data": "Id" },
             { "data": "ningc_numero_nota_ingreso" },
-            { "data": "ningc_fecha_nota_ingreso" },
+            { "data": "fecha" },
             { "data": "ningc_v_motivo" },
             { "data": "ningc_observaciones" },
             {
@@ -263,24 +330,22 @@ function VisualizarDataTableNotaIngresoDetalle() {
      
         "bAutoWidth": false,
         "columns": [
-            { "data": "id"},
-            { "data": "item"},
-            { "data": "Producto" ,className:'editable'},
-            { "data": "Descripcion", editField: "Descripcion" },
-            { "data": "UM" },
-            { "data": "Costo", render: $.fn.dataTable.render.number( ',', '.', 0, 'S/ ' )  },
-            { "data": "Cantidad" }
+            { "data": "Id"},
+            { "data": "dninc_nro_item" },
+            { "data": "prdc_vdescripcion" },
+            { "data": "dninc_v_unidad" },
+            { "data": "dninc_costo", render: $.fn.dataTable.render.number(',', '.', 0, 'S/ ') },
+            { "data": "dninc_cantidad" }
          
         ],
         "aoColumnDefs": [
 
             { "bVisible": false, "aTargets": [0] },
             { "className": "center hidden-120", "aTargets": [1], "width": "5%" },
-            { "className": "hidden-120", "aTargets": [2], "width": "18%" },
-            { "className": "hidden-992", "aTargets": [3], "width": "27%" },
-            { "className": "hidden-992", "aTargets": [4], "width": "10%" },
-            { "className": "center hidden-992", "aTargets": [5], "width": "7%" },
-            { "className": "center hidden-120", "aTargets": [6], "width": "7%" },
+            { "className": "hidden-120", "aTargets": [2], "width": "27%" },
+            { "className": "hidden-992", "aTargets": [3], "width": "10%" },
+            { "className": "center hidden-992", "aTargets": [4], "width": "7%" },
+            { "className": "center hidden-120", "aTargets": [5], "width": "7%" },
        
 
         ],
@@ -361,24 +426,24 @@ function VisualizarDataTableProducto() {
 }
 
 function AddProductoDraw() {
-    var idProducto = $("#ProductoId").val();
+    var idNotaIngresoDetalle = $("#NotaIngresoDetalleId").val();
     var codigo = $("#codigoP").val();
     var unidad = $("#unidad").val();
     var descripcion = $("#descripcionP").val();
-    var cantidad = $("#cantidad").val()+".00";
-    var costo = $("#costo").val()+".00";
+    var cantidad = $("#cantidad").val();
+    var costo = $("#costo").val();
     var detalle = null;
     var exito = true;
     var editarStatus = false;
-    if (idProducto == 0) {
+    if (idNotaIngresoDetalle == 0) {
         if (NotaIngresoDetalle.length > 0) {
             $.each(NotaIngresoDetalle, function (index, value) {
-                if (value.Id == rowProducto.Id && value.status != eliminar) {
+                if (value.prdc_icod_producto == rowProducto.Id && value.status != eliminar) {
                     exito = false;
                 }
             });
             if (exito) {
-                detalle = { "Id": rowProducto.Id, "dninc_nro_item": CorrelativoProducto(), "Producto": codigo, "Descripcion": descripcion, "UM": unidad, "Costo": costo, "Cantidad": cantidad, "Estado": 1, "status": agregar };
+                detalle = { "Id": NotaIngresoDetalle.length + 1, "prdc_icod_producto": rowProducto.Id, "kardc_icod_correlativo": NotaIngresoDetalle.length + 1, "dninc_nro_item": CorrelativoProducto(), "prdc_vdescripcion": descripcion, "dninc_v_unidad": unidad, "dninc_costo": costo, "dninc_cantidad": cantidad, "Estado": 1, "status": agregar,"kardc_tipo_movimiento": tipoMovimiento };
                 NotaIngresoDetalle.push(detalle);
                 dataTableNotaIngresoDetalle.clear();
                 dataTableNotaIngresoDetalle.rows.add(NotaIngresoDetalle.filter(function (e) {
@@ -406,7 +471,7 @@ function AddProductoDraw() {
             }
         }
         else {
-            detalle = { "Id": rowProducto.Id, "item": CorrelativoProducto(), "Producto": codigo, "Descripcion": descripcion, "UM": unidad, "Costo": costo, "Cantidad": cantidad, "Estado": 1, "status": agregar };
+            detalle = { "Id": 1, "prdc_icod_producto": rowProducto.Id, "kardc_icod_correlativo": 1, "dninc_nro_item": CorrelativoProducto(), "prdc_vdescripcion": descripcion, "dninc_v_unidad": unidad, "dninc_costo": costo, "dninc_cantidad": cantidad, "Estado": 1, "status": agregar,"kardc_tipo_movimiento":tipoMovimiento };
             NotaIngresoDetalle.push(detalle);
             dataTableNotaIngresoDetalle.rows.add(NotaIngresoDetalle).draw();
             $("#NuevoDetalleProducto").modal("hide");
@@ -421,7 +486,7 @@ function AddProductoDraw() {
     else {
 
         $.each(NotaIngresoDetalle, function (index, value) {
-            if (value.Id==rowNotaIngreso.Id && value.status!=eliminar) {
+            if (value.prdc_icod_producto == rowNotaIngresoDetalle.Id && value.status != eliminar) {
                 value.Costo = costo;
                 value.Cantidad = cantidad;
                 value.status = editar;
@@ -464,12 +529,12 @@ function AddProductoDraw() {
 function GetByProductoDraw() {
     $("#accionTitleProducto").text("Editar");
     $("#productoBuscar").prop("disabled", true);
-    $("#ProductoId").val(rowNotaIngreso.Id);
-    $("#codigoP").val(rowNotaIngreso.Producto);
-    $("#unidad").val(rowNotaIngreso.UM);
-    $("#descripcionP").val(rowNotaIngreso.Descripcion);
-    $("#cantidad").val(rowNotaIngreso.Cantidad);
-    $("#costo").val(rowNotaIngreso.Costo);
+    $("#NotaIngresoDetalleId").val(rowNotaIngresoDetalle.prdc_icod_producto);
+    //$("#codigoP").val(rowNotaIngresoDetalle.prdc_icod_producto);
+    $("#unidad").val(rowNotaIngresoDetalle.dninc_v_unidad);
+    $("#descripcionP").val(rowNotaIngresoDetalle.prdc_vdescripcion);
+    $("#cantidad").val(rowNotaIngresoDetalle.dninc_cantidad);
+    $("#costo").val(rowNotaIngresoDetalle.dninc_costo);
     $("#NuevoDetalleProducto").modal("show");
 }
 
@@ -477,7 +542,7 @@ function DeleteProductoDraw() {
     var statusEliminacion = false;
 
     $.each(NotaIngresoDetalle, function (index, value) {
-        if (value.Id==rowNotaIngreso.Id && value.status!=eliminar) {
+        if (value.Id == rowNotaIngresoDetalle.Id && value.status != eliminar) {
             value.status = eliminar;
             statusEliminacion = true;
         } 
@@ -509,7 +574,7 @@ function DeleteProductoDraw() {
 }
 
 function correlativaNotaIngreso() {
-    var correlativo = '000001';
+    var correlativo = '000005';
     $("#nroNI").val(correlativo);
     
 }
@@ -519,8 +584,8 @@ function CorrelativoProducto() {
     if (NotaIngresoDetalle.length>0) {
         var jquery = JSLINQ(NotaIngresoDetalle)
                       .Where(function (v) { return v.status!=eliminar})
-                      .OrderByDescending(function (o) { return o.item })
-                      .Select(function (item) { return parseInt(item.item) });
+                      .OrderByDescending(function (o) { return o.dninc_nro_item })
+                      .Select(function (item) { return parseInt(item.dninc_nro_item) });
         var correlativoValue = parseInt(jquery.items[0] + 1);
         if (correlativoValue < 10) {
             correlativo = '00' + correlativoValue;
@@ -536,6 +601,169 @@ function CorrelativoProducto() {
         correlativo = "001";
     }
     return correlativo;
+}
+
+
+function GuardarNotaIngreso() {
+    var modelView = {
+        Id: $("#NotaIngresoId").val(),
+        ningc_numero_doc: $("#nroNI").val(),
+        tdocc_icod_tipo_doc: tipoDocumento,
+        ningc_fecha_nota_ingreso: $("#fecha").val(),
+        ningc_iid_motivo: $("#motivo").val(),
+        almac_icod_almacen:$("#almacen").val(),
+        ningc_numero_nota_ingreso: $("#nroNI").val(),
+        Estado:agregar,
+        listaDetalleNI: NotaIngresoDetalle,
+        ningc_observaciones: $("#observacion").val(),
+        ningc_referencia:"",
+        UsuarioRegistro: $("#usernameLogOn strong").text()
+    };
+    if (modelView.Id == 0)
+        action = 'Add';
+    else
+        action = 'Update';
+
+    webApp.Ajax({
+        url: urlMantenimiento + action,
+        parametros: modelView
+    }, function (response) {
+        if (response.Success) {
+            if (response.Warning) {
+                $.gritter.add({
+                    title: response.Title,
+                    text: response.Message,
+                    class_name: 'gritter-warning gritter'
+                });
+            } else {
+                dataTableNotaIngreso.ajax.reload();
+                $("#NuevaNotaIngreso").modal("hide");
+                LimpiarFormulario();
+                $.gritter.add({
+                    title: response.Title,
+                    text: response.Message,
+                    class_name: 'gritter-success gritter'
+                });
+            }
+        } else {
+            $.gritter.add({
+                title: 'Error',
+                text: response.Message,
+                class_name: 'gritter-warning gritter'
+            });
+        }
+    }, function (response) {
+        $.gritter.add({
+            title: 'Error',
+            text: response,
+            class_name: 'gritter-error gritter'
+        });
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        $.gritter.add({
+            title: 'Error',
+            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
+            class_name: 'gritter-error gritter'
+        });
+    });
+
+
+}
+
+function GetNotaIngresoById(id) {
+    var modelView = {
+        Id: id
+    };
+
+    webApp.Ajax({
+        url: urlMantenimiento + 'GetById',
+        parametros: modelView
+    }, function (response) {
+        if (response.Success) {
+            if (response.Warning) {
+                $.gritter.add({
+                    title: 'Alerta',
+                    text: response.Message,
+                    class_name: 'gritter-warning gritter'
+                });
+            } else {
+                //LimpiarFormulario();
+                var notaingreso = response.Data;
+                $("#NotaIngresoId").val(notaingreso.Id);
+                $("#almacen").val(notaingreso.almac_icod_almacen);
+                $("#nroNI").val(notaingreso.ningc_numero_nota_ingreso);
+                $("#fecha").val(notaingreso.fecha);
+                $("#motivo").val(notaingreso.ningc_iid_motivo);
+                $("#observacion").val(notaingreso.ningc_observaciones);
+                $("#NuevaNotaIngreso").modal("show");
+                $("#accionTitle").text('Editar');
+          
+            }
+
+        } else {
+            $.gritter.add({
+                title: 'Error',
+                text: response.Message,
+                class_name: 'gritter-error gritter'
+            });
+        }
+    }, function (response) {
+        $.gritter.add({
+            title: 'Error',
+            text: response,
+            class_name: 'gritter-error gritter'
+        });
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        $.gritter.add({
+            title: 'Error',
+            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
+            class_name: 'gritter-error gritter'
+        });
+    });
+}
+
+function GetNotaIngresoDetalleAll(id) {
+    var modelView = {
+        Id: id
+    };
+    webApp.Ajax({
+        url: urlMantenimiento + 'ListarNotaIngresoDetalle',
+        parametros: modelView
+    }, function (response) {
+        if (response.Success) {
+            if (response.Warning) {
+                $.gritter.add({
+                    title: 'Alerta',
+                    text: response.Message,
+                    class_name: 'gritter-warning gritter'
+                });
+            } else {
+                dataTableNotaIngresoDetalle.clear().draw();
+                NotaIngresoDetalle = response.Data;
+                console.log(NotaIngresoDetalle);
+                dataTableNotaIngresoDetalle.rows.add(NotaIngresoDetalle).draw();
+
+            }
+
+        } else {
+            $.gritter.add({
+                title: 'Error',
+                text: response.Message,
+                class_name: 'gritter-error gritter'
+            });
+        }
+    }, function (response) {
+        $.gritter.add({
+            title: 'Error',
+            text: response,
+            class_name: 'gritter-error gritter'
+        });
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        $.gritter.add({
+            title: 'Error',
+            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
+            class_name: 'gritter-error gritter'
+        });
+    });
 }
 
 function createRows(data) {
@@ -602,6 +830,25 @@ function CargarEstado() {
     });
 }
 
+function Imprimir(id) {
+    webApp.Ajax({
+        url: urlMantenimientoReport + 'StimulsoftControl',
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        datatype: 'html',
+        parametros: {
+            parametros: [
+                          { key: 'NotaIngresoId', value: id }
+            ],
+            controllerGetSnapshot: 'NotaIngreso',
+        },
+
+
+    }, function (result) {
+        $('#divReport').html(result);
+        $("#modal-print-tabla").modal("show");
+    });
+}
+
 function AddSearchFilter() {
     $("#UsuarioDataTable_wrapper").prepend($("#searchFilterDiv").html());
 }
@@ -621,16 +868,100 @@ function LimpiarFormulario() {
     webApp.clearForm(formularioMantenimiento);
     NotaIngresoDetalle.length = 0;
     dataTableNotaIngresoDetalle.clear().draw();
-    $("#CargoId").val(1);
+    $("#almacen").val(1);
+    $("#almacen").val(1);
     $('#fecha').datepicker({
         autoclose: true,
         language: 'es',
         format: 'dd/mm/yyyy'
     }).datepicker('setDate', new Date());
-
-
 }
 
 function LimpiarFormularioDetalle() {
     webApp.clearForm(formularioMantenimientoDetalle);
+}
+
+function CargarAlmacen() {
+
+    webApp.Ajax({
+        url: urlMantenimientoAlmacen + 'GetAllAlmacen',
+        async: false,
+    }, function (response) {
+        if (response.Success) {
+
+            if (response.Warning) {
+                $.gritter.add({
+                    title: 'Alerta',
+                    text: response.Message,
+                    class_name: 'gritter-warning gritter'
+                });
+            } else {
+                $.each(response.Data, function (index, item) {
+                    $("#almacen").append('<option value="' + item.Id + '">' + item.almac_vdescripcion + '</option>');
+                });
+            }
+        } else {
+            $.gritter.add({
+                title: 'Error',
+                text: response.Message,
+                class_name: 'gritter-error gritter'
+            });
+        }
+    }, function (response) {
+        $.gritter.add({
+            title: 'Error',
+            text: response,
+            class_name: 'gritter-error gritter'
+        });
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        $.gritter.add({
+            title: 'Error',
+            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
+            class_name: 'gritter-error gritter'
+        });
+    });
+}
+
+function CargarMotivo() {
+    var modelView = {
+        idtabla: 1
+    };
+    webApp.Ajax({
+        url: urlMantenimiento + 'GetAll',
+        parametros: modelView,
+        async: false,
+    }, function (response) {
+        if (response.Success) {
+
+            if (response.Warning) {
+                $.gritter.add({
+                    title: 'Alerta',
+                    text: response.Message,
+                    class_name: 'gritter-warning gritter'
+                });
+            } else {
+                $.each(response.Data, function (index, item) {
+                    $("#motivo").append('<option value="' + item.Id + '">' + item.tbpd_vdescripcion_detalle + '</option>');
+                });
+            }
+        } else {
+            $.gritter.add({
+                title: 'Error',
+                text: response.Message,
+                class_name: 'gritter-error gritter'
+            });
+        }
+    }, function (response) {
+        $.gritter.add({
+            title: 'Error',
+            text: response,
+            class_name: 'gritter-error gritter'
+        });
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        $.gritter.add({
+            title: 'Error',
+            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
+            class_name: 'gritter-error gritter'
+        });
+    });
 }

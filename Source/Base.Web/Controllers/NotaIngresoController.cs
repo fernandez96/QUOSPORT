@@ -309,7 +309,7 @@ namespace Base.Web.Controllers
         [HttpPost]
         public override ActionResult GetReportSnapshot()
         {
-            var documentoId = Int32.Parse(ParametrosReport["TablaId"]);
+            var documentoId = Int32.Parse(ParametrosReport["NotaIngresoId"]);
             TablaRegistroDTO entity = new TablaRegistroDTO();
             entity.Id = documentoId;
             var tablaregistro = MapperHelper.Map<TablaRegistroDTO, TablaRegistro>(entity);
@@ -323,11 +323,32 @@ namespace Base.Web.Controllers
             });
 
             var report = new StiReport();
-            report.Load(Server.MapPath("~/Prints/M_Administrador/TablaRegistro/TablaOpciones.mrt"));
-            report.RegBusinessObject("tabla", "tabla", dataTabla);
-            report.RegBusinessObject("tabladetalle", "tabladetalle", dataBtabladetablle);
+            report.Load(Server.MapPath("~/Prints/M_Almacen/NotaIngreso/notaIngreso.mrt"));
+            report.RegBusinessObject("NotaIngreso", "NotaIngreso", dataTabla);
+            report.RegBusinessObject("NotaIngresoDetalle", "NotaIngresoDetalle", dataBtabladetablle);
 
             return StiMvcViewer.GetReportResult(report);
+        }
+
+        [HttpPost]
+        public JsonResult GetAll(int idtabla)
+        {
+            var jsonResponse = new JsonResponse { Success = true };
+
+            try
+            {
+                var estadoList = TablaRegistroBL.Instancia.GetAll(idtabla);
+                var usuarioDTOList = MapperHelper.Map<IEnumerable<TablaRegistro>, IEnumerable<TablaRegistroDTO>>(estadoList);
+                jsonResponse.Data = usuarioDTOList;
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                jsonResponse.Success = false;
+                jsonResponse.Message = Mensajes.IntenteloMasTarde;
+            }
+
+            return Json(jsonResponse);
         }
 
         #region Métodos Privados
@@ -348,10 +369,10 @@ namespace Base.Web.Controllers
             {
                 WhereModel += "  AND n.ningc_numero_nota_ingreso = '" + dataTableModel.filter.numeroSearch + "' ";
             }
-            if (dataTableModel.filter.fechaInicioSearch != null)
-            {
-                WhereModel += "  AND n.ningc_fecha_nota_ingreso LIKE '%" + dataTableModel.filter.fechaInicioSearch + "%'";
-            }
+            //if (dataTableModel.filter.fechaInicioSearch != null)
+            //{
+            //    WhereModel += "  AND n.ningc_fecha_nota_ingreso LIKE '%" + dataTableModel.filter.fechaInicioSearch + "%'";
+            //}
             dataTableModel.whereFilter = WhereModel;
         }
 
