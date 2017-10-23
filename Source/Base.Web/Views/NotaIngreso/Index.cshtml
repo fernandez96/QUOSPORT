@@ -5,10 +5,8 @@
 }
 @section styles{
     <link rel="stylesheet" href="@Url.Content("~/Content/css/jquery.dataTables.css")" />
-    <link rel="stylesheet" href="@Url.Content("~/Content/css/buttons_dataTables_min.css")" />
-    <link rel="stylesheet" href="@Url.Content("~/Content/css/select_dataTables_min.css")" />
-    <link rel="stylesheet" href="@Url.Content("~/Content/css/editor.dataTables.min.css")" />
     <link rel="stylesheet" href="@Url.Content("~/Content/css/jquery-chosen.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/datepicker.css")" />
 }
 <!-- /section:basics/sidebar -->
 <div class="main-content">
@@ -88,9 +86,11 @@
                                     <thead>
                                         <tr>
                                             <th>Id</th>
-                                            <th class="hidden-120 center">Codigo</th>
-                                            <th class="hidden-120">Descripci&oacute;n</th>
-                                            <th class="hidden-480">Estado</th>
+                                            <th class="hidden-120 center">N°. Nota Ingreso</th>
+                                            <th class="hidden-120">Fecha</th>
+                                            <th class="hidden-120">Motivo</th>
+                                            <th class="hidden-992">Observaci&oacute;n</th>
+                                            <th class="hidden-992">Estado</th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -107,64 +107,92 @@
                     <div class='modal-content'>
                         <div class='modal-header'>
                             <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class='modal-title'> <i class="fa fa-sitemap" aria-hidden="true"></i> <span id="accionTitle"></span> detalle de tabla registro <span id="idtable"></span></h4>
+                            <h4 class='modal-title'> <i class="fa fa-sitemap" aria-hidden="true"></i> <span id="accionTitle"></span> Nota de Ingreso <span id="idtable"></span></h4>
                         </div>
                         <div class='modal-body'>
                             <div class="row">
                                 <div class="col-xs-12">
                                     <!-- PAGE CONTENT BEGINS -->
-                                    <br />
                                     <div class="col-xs-11-97">
-                              
+
                                         <!-- PAGE CONTENT BEGINS -->
-                                            <!-- PAGE CONTENT BEGINS -->
-                                            <form class="form-horizontal" role="form" id="UsuarioForm">
-                                                <div class="form-group"></div>
-                                                <!-- #section:elements.form -->
+                                        <!-- PAGE CONTENT BEGINS -->
+                                    
 
-                                            
-                                                <div class="form-group">
-                                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="Correo">Correo </label>
+                                            <!-- #section:elements.form -->
 
-                                                    <div class="col-xs-12 col-sm-9">
-                                                        <div class="clearfix">
-                                                            <input type="text" id="Nro. N/I" autocomplete="off" name="nroNI" placeholder="000000" maxlength="7" class="col-xs-12 col-sm-12" />
+                                            <div class="col-xs-12 col-sm-12 widget-container-col ui-sortable" id="widget-container-col-1">
+                                                <div class="widget-box ui-sortable-handle" id="widget-box-1" style="opacity: 1;">
+                                                    <div class="widget-header">
+                                                        <h5 class="widget-title">Registre Nota de ingreso</h5>
+
+                                                        <div class="widget-toolbar">
+                                                          
+
+                                                            <a href="#" data-action="fullscreen" class="orange2">
+                                                                <i class="ace-icon fa fa-expand"></i>
+                                                            </a>
+
+                                                            <a href="#" data-action="collapse">
+                                                                <i class="ace-icon fa fa-chevron-up"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="widget-body" style="display: block;">
+                                                        <div class="widget-main">
+                                                            <form class="form-horizontal" role="form" id="NotaIngresoForm">
+                                                                <div class="form-group">
+                                                                    <div class="col-xs-12">
+                                                                        <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="nroNI">Nro. N/I </label>
+
+                                                                        <div class="col-xs-5">
+                                                                            <div class="clearfix">
+                                                                                <input type="text" id="nroNI" disabled="disabled" autocomplete="off" name="nroNI" placeholder="000000" maxlength="7" class="col-xs-12 col-sm-12" />
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="fecha">Fecha </label>
+                                                                        <div class="col-xs-5">
+                                                                            <div class="clearfix">
+                                                                                <div class="input-group">
+                                                                                    <input type="text" id="fecha" autocomplete="off" name="fecha" placeholder="Numero serie" maxlength="100" class="col-xs-12 col-sm-12" />
+                                                                                    <span class="input-group-addon" style="border-radius:7px">
+                                                                                        <i class="fa fa-calendar bigger-110"></i>
+                                                                                    </span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <div class="form-group">
+                                                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="motivo">Motivo </label>
+
+                                                                    <div class="col-xs-12 col-sm-9">
+                                                                        <div class="clearfix">
+                                                                            <select id="motivo" name="motivo" class="col-xs-12 col-sm-12"></select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="observacion">Observaci&oacute;n </label>
+
+                                                                    <div class="col-xs-12 col-sm-9">
+                                                                        <div class="clearfix">
+                                                                            <textarea name="observacion" id="observacion" class="col-xs-12 col-sm-12"></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                           </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="CargoId">Cargo </label>
 
-                                                    <div class="col-xs-12 col-sm-9">
-                                                        <div class="clearfix">
-                                                            <select id="CargoId" name="CargoId" class="col-xs-12 col-sm-12"></select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="RolId">Rol </label>
-
-                                                    <div class="col-xs-12 col-sm-9">
-                                                        <div class="clearfix">
-                                                            <select id="RolId" name="RolId" class="col-xs-12 col-sm-12"></select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="Estado">Estado </label>
-
-                                                    <div class="col-xs-12 col-sm-9">
-                                                        <div class="clearfix">
-                                                            <select id="Estado" name="Estado" class="col-xs-12 col-sm-12"></select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </form>
-            
-                     
                                         <h3 class="row-fluid header smaller lighter blue">
                                             <span class="span7"> Registro de los productos a la nota de ingreso</span>
 
@@ -191,40 +219,20 @@
                                                 </span>
                                             </span>
                                         </h3>
-                                        <div class="dataTables_wrapper form-inline no-footer" style="margin-left:10px;">
                                             <div class="table-responsive">
-                                                <table id="NotaIngresoDetalleDataTable" class="table table-bordered dataTable no-footer" cellspacing="0" role="grid" aria-describedby="dynamic-table_info">
+                                                <table id="NotaIngresoDetalleDataTable" class="table table-bordered dataTable no-footer">
                                                     <thead>
                                                         <tr>
                                                             <th>Id</th>
                                                             <th class="hidden-120 center">Item</th>
                                                             <th class="hidden-120 center">Producto</th>
                                                             <th class="hidden-120 center">Descripci&oacute;n</th>
-                                                            <th class="hidden-120 center">U.M</th>
+                                                            <th class="hidden-992 center">U.M</th>
+                                                            <th class="hidden-992 center">Costo</th>
                                                             <th class="hidden-120 center">Cantidad</th>
-                                                            <th class="hidden-120 center">Estado</th>
                                                         </tr>
                                                     </thead>
-                                                  
-                                                    <tbody></tbody>
-                                                    <tfoot>
-
-                                                        <tr class="profile-info-row">
-
-                                                            <th colspan="6" style="text-align:right">SubTotal:</th>
-                                                            <th></th>
-                                                        </tr>
-                                                        <tr class="profile-info-row">
-                                                            <th colspan="6" style="text-align:right">IGV:</th>
-                                                            <th></th>
-                                                        </tr>
-                                                        <tr class="profile-info-row">
-                                                            <th colspan="6" style="text-align:right">Total:</th>
-                                                            <th></th>
-                                                        </tr>
-                                                    </tfoot>
                                                 </table>
-                                            </div>
                                            </div>
                                         </div>
                                     </div>
@@ -233,7 +241,7 @@
                         </div>
                         <div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>
                             <button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-close'></i> Salir</button>
-                            <button class='btn btn-primary btn-sm ' id="btnGuardarTipodocumento"><i class='fa fa-floppy-o'></i> Guardar</button>
+                            <button class='btn btn-primary btn-sm ' id="btnGuardarDetalle"><i class='fa fa-floppy-o'></i> Guardar</button>
                         </div>
                     </div>
                 </div>
@@ -243,13 +251,13 @@
                     <div class='modal-content'>
                         <div class='modal-header'>
                             <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class='modal-title'><i class="fa fa-sitemap" aria-hidden="true"></i> <span id='accionTitleProducto'></span> Seleccione Producto </h4>
+                            <h4 class='modal-title'><i class="fa fa-sitemap" aria-hidden="true"></i> <span id='accionTitleProducto'></span> producto </h4>
                         </div>
                         <div class='modal-body'>
                             <div class="row">
                                 <div class="col-xs-12">
                                     <!-- PAGE CONTENT BEGINS -->
-                                    <form class="form-horizontal" role="form" id="LineaForm">
+                                    <form class="form-horizontal" role="form" id="ProductoDetalleForm">
                                         <div class="form-group"></div>
                                         <!-- #section:elements.form -->
 
@@ -260,7 +268,7 @@
                                                 <div class="clearfix">
                                                     <input type="text" disabled="disabled" id="codigoP" autocomplete="off" name="codigoL" placeholder="Codigo" maxlength="3" class="col-xs-9 col-sm-9" />
                                                     <span class="input-group-btn">
-                                                        <button type="button" class="btn btn-default btn-sm" id="productoBuscar">
+                                                        <button type="button" class="btn btn-default btn-sm" id="productoBuscar" style="border-radius:7px;">
                                                             <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
                                                             Buscar
                                                         </button>
@@ -272,7 +280,7 @@
 
                                        
                                         <div class="form-group">
-                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="unidad">Unidad </label>
+                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="unidad">U.Medida </label>
 
                                             <div class="col-xs-12 col-sm-9">
                                                 <div class="clearfix">
@@ -290,23 +298,32 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="costo">Costo </label>
+
+                                            <div class="col-xs-12 col-sm-9">
+                                                <div class="clearfix">
+                                                    <input type="text"  id="costo" autocomplete="off" name="costo" placeholder="0.00" maxlength="10" class="col-xs-12 col-sm-12" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
                                             <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="cantidada">Cantidad </label>
 
                                             <div class="col-xs-12 col-sm-9">
                                                 <div class="clearfix">
-                                                    <input type="text" id="cantidad" autocomplete="off" name="cantidad" placeholder="0.00" maxlength="100" class="col-xs-12 col-sm-12" />
+                                                    <input type="text"  id="cantidad" autocomplete="off" name="cantidad" placeholder="0.00" maxlength="100" class="col-xs-12 col-sm-12" />
                                                 </div>
                                             </div>
                                         </div>
                         
-                                        <input type="hidden" name="LineaId" id="LineaId" value="0" />
+                                        <input type="hidden" name="ProductoId" id="ProductoId" value="0" />
                                     </form>
                                 </div>
                             </div>
                         </div>
                         <div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>
                             <button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-remove'></i> Cancelar</button>
-                            <button class='btn btn-primary btn-sm' id="btnGuardarLinea"><i class='fa fa-floppy-o'></i> Guardar</button>
+                            <button class='btn btn-primary btn-sm' id="btnGuardarProducto"><i class='fa fa-floppy-o'></i> Guardar</button>
                         </div>
                     </div>
                 </div>
@@ -402,12 +419,16 @@
     <script src="@Url.Content("~/Content/js/fuelux/fuelux.wizard.js")"></script>
     <script src="@Url.Content("~/Content/js/jquery.gritter.js")"></script>
    <script src="@Url.Content("~/Content/js/jquery-chosen.js")"></script>
-    @*<script src="@Url.Content("~/Content/js/chosen.jquery.js")"></script>*@
     <script src="@Url.Content("~/Content/js/jquery.blockUI.js")"></script>
-    <script src="@Url.Content("~/Content/js/dataTable_buttons_min.js")"></script>
-    <script src="@Url.Content("~/Content/js/dataTables_select_min.js")"></script>
-    <script src="@Url.Content("~/Content/js/dataTables_editor_min.js")"></script>
     <script src="@Url.Content("~/Content/js/shCore.js")"></script>
+  <script src="@Url.Content("~/Content/js/dataTables_editor_min.js")"></script>
+<script src="@Url.Content("~/Content/js/date-time/daterangepicker.js")"></script>
+   <script src="@Url.Content("~/Content/js/date-time/bootstrap-datepicker.js")"></script>
+   <script src="@Url.Content("~/Content/js/date-time/locate/bootstrap-datepicker.es.js")"></script>
+   <script src="@Url.Content("~/Content/js/JSLINQ.js")"></script>
+   <script src="@Url.Content("~/Content/js/jquery-mask.js")"></script>
+<script src="@Url.Content("~/Content/js/numeric.js")"></script>
+
 
     <!-- inline scripts related to this page -->
     <script src="@Url.Content("~/Content/js/viewsJs/NotaIngreso.js")"></script>

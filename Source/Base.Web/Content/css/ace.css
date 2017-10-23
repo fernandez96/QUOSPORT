@@ -14263,7 +14263,7 @@ ul.attachment-list > li {
   font-weight: normal;
 }
 .dataTables_info {
-  font-size: 14px;
+  font-size: 12px;
 }
 .dataTables_paginate {
   text-align: right;
@@ -14273,7 +14273,7 @@ ul.attachment-list > li {
 }
 .dataTables_wrapper label {
   display: inline-block;
-  font-size: 13px;
+  font-size: 12px;
 }
 .dataTables_wrapper input[type=text],
 .dataTables_wrapper input[type=search],
@@ -14313,7 +14313,7 @@ ul.attachment-list > li {
   display: inline;
   content: "\f0dc";
   font-family: FontAwesome;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: normal;
   color: #555;
 }

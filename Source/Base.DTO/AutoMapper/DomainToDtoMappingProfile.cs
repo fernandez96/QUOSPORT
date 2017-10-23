@@ -36,6 +36,9 @@ namespace Base.DTO.AutoMapper
             Mapper.CreateMap<Status, StatusDTO>();
             Mapper.CreateMap<Cliente, ClienteDTO>();
             Mapper.CreateMap<Proveedor, ProveedorDTO>();
+            Mapper.CreateMap<NotaIngreso, NotaIngresoDTO>();
+            Mapper.CreateMap<Kardex, KardexDTO>();
+            Mapper.CreateMap<Stock, StockDTO>();
         }
     }
 }

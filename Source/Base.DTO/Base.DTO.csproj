@@ -59,9 +59,12 @@
     <Compile Include="Core\EntityAuditableDTO.cs" />
     <Compile Include="Core\EntityBaseDTO.cs" />
     <Compile Include="EnvioEmailDTO.cs" />
+    <Compile Include="KardexDTO.cs" />
     <Compile Include="LineaDTO.cs" />
     <Compile Include="LoginDTO.cs" />
     <Compile Include="ModuloDTO.cs" />
+    <Compile Include="NotaIngresoDetalleDTO.cs" />
+    <Compile Include="NotaIngresoDTO.cs" />
     <Compile Include="ParametroDTO.cs" />
     <Compile Include="ProductoDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,6 +72,7 @@
     <Compile Include="ReporteDTO.cs" />
     <Compile Include="RolDTO.cs" />
     <Compile Include="StatusDTO.cs" />
+    <Compile Include="StockDTO.cs" />
     <Compile Include="SubLineaDTO.cs" />
     <Compile Include="TablaRegistroDTO.cs" />
     <Compile Include="TipoDocumentoDTO.cs" />

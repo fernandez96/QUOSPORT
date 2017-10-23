@@ -55,6 +55,7 @@
     <Compile Include="Interfaces\IEnvioEmailBL.cs" />
     <Compile Include="Interfaces\ILogBL.cs" />
     <Compile Include="Interfaces\IModeloBL.cs" />
+    <Compile Include="Interfaces\INotaIngresoBL.cs" />
     <Compile Include="Interfaces\IParametroBL.cs" />
     <Compile Include="Interfaces\IProductoBL.cs" />
     <Compile Include="Interfaces\IProveedorBL.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Interfaces\IUsuarioBL.cs" />
     <Compile Include="LogBL.cs" />
     <Compile Include="ModeloBL.cs" />
+    <Compile Include="NotaIngresoBL.cs" />
     <Compile Include="ParametroBL.cs" />
     <Compile Include="ProductoBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

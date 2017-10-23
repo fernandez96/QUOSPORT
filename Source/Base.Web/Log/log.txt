@@ -4894,3 +4894,12 @@ Base.DTO.StatusDTO Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngi
 2017-10-12 12:35:41,444 ERROR  - Mensaje: Ya existe la Categoria de producto ejemplzzzzz Trace:    en Base.DataAccess.CategoriaRepository.Add(Categoria entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\CategoriaRepository.cs:línea 105
    en Base.BusinessLogic.CategoriaBL.Add(Categoria entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\CategoriaBL.cs:línea 18
    en Base.Web.Controllers.CategoriaLineaSublineaController.Add(CategoriaDTO categoriaDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\CategoriaLineaSublineaController.cs:línea 114
+2017-10-21 08:14:38,336 ERROR  - Controlador:NotaIngreso  Action:Index  Mensaje:Se encontró un espacio o salto de línea después del carácter "@". Solamente se pueden usar identificadores, palabras clave, comentarios, "(" y "{" válidos al inicio de un bloque de código y estos deben aparecer inmediatamente después de "@" sin espacio intermedio.
+
+2017-10-22 13:31:13,805 ERROR  - Mensaje: Se produjo una excepción en el destino de la invocación. Trace:    en System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   en System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   en System.RuntimeType.CreateInstanceDefaultCtor(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   en System.Activator.CreateInstance[T]()
+   en Base.Common.Generics.Singleton`1.get_Instancia() en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Common\Generics\Singleton.cs:línea 20
+   en Base.BusinessLogic.UsuarioBL.GetByUsername(String username, String pass) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\UsuarioBL.cs:línea 45
+   en Base.Web.Controllers.AccountController.Login_(AccountModel loginDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\AccountController.cs:línea 145

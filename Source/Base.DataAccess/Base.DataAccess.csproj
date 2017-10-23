@@ -64,8 +64,10 @@
     <Compile Include="Interfaces\ICategoriaRepository.cs" />
     <Compile Include="Interfaces\IClienteRepository.cs" />
     <Compile Include="Interfaces\IEnvioEmailRepository.cs" />
+    <Compile Include="Interfaces\IKardexRepository.cs" />
     <Compile Include="Interfaces\ILogRepository.cs" />
     <Compile Include="Interfaces\IModuloRepository.cs" />
+    <Compile Include="Interfaces\INotaIngresoRepository.cs" />
     <Compile Include="Interfaces\IParametroRepository.cs" />
     <Compile Include="Interfaces\IProductoRepository.cs" />
     <Compile Include="Interfaces\IProveedorRepository.cs" />
@@ -73,12 +75,15 @@
     <Compile Include="Interfaces\IRolRepository.cs" />
     <Compile Include="Interfaces\ISeguridadRepository.cs" />
     <Compile Include="Interfaces\IStatusRepository.cs" />
+    <Compile Include="Interfaces\IStockRepository.cs" />
     <Compile Include="Interfaces\ITablaRegistroRepository.cs" />
     <Compile Include="Interfaces\ITipoDocumentoRepository.cs" />
     <Compile Include="Interfaces\IUnidadMedidaRepository.cs" />
     <Compile Include="Interfaces\IUsuarioRepository.cs" />
+    <Compile Include="KardexRepository.cs" />
     <Compile Include="LogRepository.cs" />
     <Compile Include="ModuloRepository.cs" />
+    <Compile Include="NotaIngresoRepository.cs" />
     <Compile Include="ParametroRepository.cs" />
     <Compile Include="ProductoRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -87,6 +92,7 @@
     <Compile Include="RolRepository.cs" />
     <Compile Include="SeguridadRepository.cs" />
     <Compile Include="StatusRepository.cs" />
+    <Compile Include="StockRepository.cs" />
     <Compile Include="TablaRegistroRepository.cs" />
     <Compile Include="TipoDocumentoRepository.cs" />
     <Compile Include="UnidadMedidaRepository.cs" />
