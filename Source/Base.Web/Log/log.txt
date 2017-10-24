@@ -5249,3 +5249,173 @@ Base.BusinessEntity.NotaIngresoDetalle Trace:    en AutoMapper.MappingEngine.Aut
    en AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 78
    en Base.DTO.AutoMapper.MapperHelper.Map[TSource,TDest](TSource source)
    en Base.Web.Controllers.NotaIngresoController.ListarNotaIngresoDetalle(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 66
+2017-10-23 21:10:28,141 ERROR  - Mensaje: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+NotaIngresoDetalle -> NotaIngresoDetalleDTO
+Base.BusinessEntity.NotaIngresoDetalle -> Base.DTO.NotaIngresoDetalleDTO
+
+Destination path:
+IEnumerable`1[0]
+
+Source value:
+Base.BusinessEntity.NotaIngresoDetalle Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.Mappers.EnumerableMapperBase`1.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\EnumerableMapperBase.cs:línea 44
+   en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.MappingEngine.MapCore(Object source, Type sourceType, Type destinationType, MappingOperationOptions options) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 131
+   en AutoMapper.MappingEngine.Map(Object source, Type sourceType, Type destinationType, Action`1 opts) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 120
+   en AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 78
+   en AutoMapper.Mapper.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\Mapper.cs:línea 73
+   en Base.DTO.AutoMapper.MapperHelper.Map[TSource,TDest](TSource source) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DTO\AutoMapper\MapperHelper.cs:línea 9
+   en Base.Web.Controllers.NotaIngresoController.ListarNotaIngresoDetalle(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 66
+2017-10-23 21:11:52,358 ERROR  - Mensaje: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+NotaIngresoDetalle -> NotaIngresoDetalleDTO
+Base.BusinessEntity.NotaIngresoDetalle -> Base.DTO.NotaIngresoDetalleDTO
+
+Destination path:
+IEnumerable`1[0]
+
+Source value:
+Base.BusinessEntity.NotaIngresoDetalle Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.Mappers.EnumerableMapperBase`1.Map(ResolutionContext context, IMappingEngineRunner mapper) en c:\dev\AutoMapper\src\AutoMapper\Mappers\EnumerableMapperBase.cs:línea 44
+   en AutoMapper.MappingEngine.AutoMapper.IMappingEngineRunner.Map(ResolutionContext context) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 250
+   en AutoMapper.MappingEngine.MapCore(Object source, Type sourceType, Type destinationType, MappingOperationOptions options) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 131
+   en AutoMapper.MappingEngine.Map(Object source, Type sourceType, Type destinationType, Action`1 opts) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 120
+   en AutoMapper.MappingEngine.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\MappingEngine.cs:línea 78
+   en AutoMapper.Mapper.Map[TSource,TDestination](TSource source) en c:\dev\AutoMapper\src\AutoMapper\Mapper.cs:línea 73
+   en Base.DTO.AutoMapper.MapperHelper.Map[TSource,TDest](TSource source) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DTO\AutoMapper\MapperHelper.cs:línea 9
+   en Base.Web.Controllers.NotaIngresoController.ListarNotaIngresoDetalle(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 66
+2017-10-23 21:34:50,352 ERROR  - Mensaje: Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 1, current count = 2. Trace:    en Base.DataAccess.NotaIngresoRepository.UpdateNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 289
+   en Base.BusinessLogic.NotaIngresoBL.UpdateNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 17
+   en Base.Web.Controllers.NotaIngresoController.Update(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 145
+2017-10-23 21:39:54,311 ERROR  - Mensaje: Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 1, current count = 2. Trace:    en Base.DataAccess.NotaIngresoRepository.UpdateNI(NotaIngreso entity)
+   en Base.BusinessLogic.NotaIngresoBL.UpdateNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 17
+   en Base.Web.Controllers.NotaIngresoController.Update(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 145
+2017-10-23 21:51:56,671 ERROR  - Mensaje: kardc_tipo_movimiento Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Microsoft.Practices.EnterpriseLibrary.Data.DataReaderWrapper.GetOrdinal(String name)
+   en Base.DataAccess.NotaIngresoRepository.GetAll(NotaIngreso entiy)
+   en Base.BusinessLogic.NotaIngresoBL.GetAll(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 33
+   en Base.Web.Controllers.NotaIngresoController.ListarNotaIngresoDetalle(NotaIngresoDTO notaIngresoDTO)
+2017-10-23 21:52:01,693 ERROR  - Mensaje: kardc_tipo_movimiento Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Microsoft.Practices.EnterpriseLibrary.Data.DataReaderWrapper.GetOrdinal(String name)
+   en Base.DataAccess.NotaIngresoRepository.GetAll(NotaIngreso entiy)
+   en Base.BusinessLogic.NotaIngresoBL.GetAll(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 33
+   en Base.Web.Controllers.NotaIngresoController.ListarNotaIngresoDetalle(NotaIngresoDTO notaIngresoDTO)
+2017-10-23 21:52:17,350 ERROR  - Mensaje: kardc_tipo_movimiento Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Microsoft.Practices.EnterpriseLibrary.Data.DataReaderWrapper.GetOrdinal(String name)
+   en Base.DataAccess.NotaIngresoRepository.GetAll(NotaIngreso entiy)
+   en Base.BusinessLogic.NotaIngresoBL.GetAll(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 33
+   en Base.Web.Controllers.NotaIngresoController.ListarNotaIngresoDetalle(NotaIngresoDTO notaIngresoDTO)
+2017-10-23 21:52:27,602 ERROR  - Mensaje: kardc_tipo_movimiento Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Microsoft.Practices.EnterpriseLibrary.Data.DataReaderWrapper.GetOrdinal(String name)
+   en Base.DataAccess.NotaIngresoRepository.GetAll(NotaIngreso entiy)
+   en Base.BusinessLogic.NotaIngresoBL.GetAll(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 33
+   en Base.Web.Controllers.NotaIngresoController.ListarNotaIngresoDetalle(NotaIngresoDTO notaIngresoDTO)
+2017-10-23 21:53:31,910 ERROR  - Mensaje: kardc_tipo_movimiento Trace:    en System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   en System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   en Microsoft.Practices.EnterpriseLibrary.Data.DataReaderWrapper.GetOrdinal(String name)
+   en Base.DataAccess.NotaIngresoRepository.GetAll(NotaIngreso entiy)
+   en Base.BusinessLogic.NotaIngresoBL.GetAll(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 33
+   en Base.Web.Controllers.NotaIngresoController.ListarNotaIngresoDetalle(NotaIngresoDTO notaIngresoDTO)
+2017-10-23 22:56:39,834 ERROR  - Mensaje: No se puede convertir un objeto DBNull en otros tipos. Trace:    en System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   en System.Convert.ToInt32(Object value)
+   en Base.DataAccess.NotaIngresoRepository.GetCorrelativo(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 455
+   en Base.BusinessLogic.NotaIngresoBL.GetCorrelativo(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 37
+   en Base.Web.Controllers.NotaIngresoController.GetCorrelativo(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 285
+2017-10-23 22:56:46,270 ERROR  - Mensaje: No se puede convertir un objeto DBNull en otros tipos. Trace:    en System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   en System.Convert.ToInt32(Object value)
+   en Base.DataAccess.NotaIngresoRepository.GetCorrelativo(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 455
+   en Base.BusinessLogic.NotaIngresoBL.GetCorrelativo(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 37
+   en Base.Web.Controllers.NotaIngresoController.GetCorrelativo(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 285
+2017-10-23 22:58:09,614 ERROR  - Mensaje: No se puede convertir un objeto DBNull en otros tipos. Trace:    en System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   en System.Convert.ToInt32(Object value)
+   en Base.DataAccess.NotaIngresoRepository.GetCorrelativo(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 455
+   en Base.BusinessLogic.NotaIngresoBL.GetCorrelativo(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 37
+   en Base.Web.Controllers.NotaIngresoController.GetCorrelativo(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 285
+2017-10-23 22:59:54,737 ERROR  - Mensaje: No se puede convertir un objeto DBNull en otros tipos. Trace:    en System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   en System.Convert.ToInt32(Object value)
+   en Base.DataAccess.NotaIngresoRepository.GetCorrelativo(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 455
+   en Base.BusinessLogic.NotaIngresoBL.GetCorrelativo(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 37
+   en Base.Web.Controllers.NotaIngresoController.GetCorrelativo(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 285
+2017-10-23 23:00:06,750 ERROR  - Mensaje: No se puede convertir un objeto DBNull en otros tipos. Trace:    en System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   en System.Convert.ToInt32(Object value)
+   en Base.DataAccess.NotaIngresoRepository.GetCorrelativo(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 455
+   en Base.BusinessLogic.NotaIngresoBL.GetCorrelativo(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 37
+   en Base.Web.Controllers.NotaIngresoController.GetCorrelativo(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 285
+2017-10-23 23:00:17,651 ERROR  - Mensaje: No se puede convertir un objeto DBNull en otros tipos. Trace:    en System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   en System.Convert.ToInt32(Object value)
+   en Base.DataAccess.NotaIngresoRepository.GetCorrelativo(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 455
+   en Base.BusinessLogic.NotaIngresoBL.GetCorrelativo(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 37
+   en Base.Web.Controllers.NotaIngresoController.GetCorrelativo(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 285
+2017-10-23 23:00:34,947 ERROR  - Mensaje: No se puede convertir un objeto DBNull en otros tipos. Trace:    en System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   en System.Convert.ToInt32(Object value)
+   en Base.DataAccess.NotaIngresoRepository.GetCorrelativo(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 455
+   en Base.BusinessLogic.NotaIngresoBL.GetCorrelativo(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 37
+   en Base.Web.Controllers.NotaIngresoController.GetCorrelativo(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 285
+2017-10-23 23:00:44,885 ERROR  - Mensaje: No se puede convertir un objeto DBNull en otros tipos. Trace:    en System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   en System.Convert.ToInt32(Object value)
+   en Base.DataAccess.NotaIngresoRepository.GetCorrelativo(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 455
+   en Base.BusinessLogic.NotaIngresoBL.GetCorrelativo(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 37
+   en Base.Web.Controllers.NotaIngresoController.GetCorrelativo(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 285
+2017-10-23 23:02:00,132 ERROR  - Mensaje: No se puede convertir un objeto DBNull en otros tipos. Trace:    en System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   en System.Convert.ToInt32(Object value)
+   en Base.DataAccess.NotaIngresoRepository.GetCorrelativo(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 455
+   en Base.BusinessLogic.NotaIngresoBL.GetCorrelativo(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 37
+   en Base.Web.Controllers.NotaIngresoController.GetCorrelativo(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 285
+2017-10-23 23:03:59,303 ERROR  - Mensaje: No se puede convertir un objeto DBNull en otros tipos. Trace:    en System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   en System.Convert.ToInt32(Object value)
+   en Base.DataAccess.NotaIngresoRepository.GetCorrelativo(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 455
+   en Base.BusinessLogic.NotaIngresoBL.GetCorrelativo(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 37
+   en Base.Web.Controllers.NotaIngresoController.GetCorrelativo(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 285
+2017-10-23 23:37:43,295 ERROR  - Mensaje: Incorrect syntax near ','. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.NotaIngresoRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 369
+   en Base.BusinessLogic.NotaIngresoBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 25
+   en Base.Web.Controllers.NotaIngresoController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 33
+2017-10-23 23:39:33,980 ERROR  - Mensaje: Incorrect syntax near ','. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.NotaIngresoRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 369
+   en Base.BusinessLogic.NotaIngresoBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 25
+   en Base.Web.Controllers.NotaIngresoController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 33
+2017-10-23 23:55:28,716 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 423
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-23 23:55:53,076 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 423
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-23 23:57:41,067 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 423
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-23 23:58:15,831 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 423
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-23 23:58:38,126 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 423
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30
+2017-10-23 23:59:32,533 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProductoController.FormatDataTable(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 423
+   en Base.Web.Controllers.ProductoController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProductoController.cs:línea 30

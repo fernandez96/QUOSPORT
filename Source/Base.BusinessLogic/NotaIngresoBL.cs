@@ -32,5 +32,9 @@ namespace Base.BusinessLogic
         {
             return NotaIngresoRepository.Instancia.GetAll(entity);
         }
+        public int GetCorrelativo(NotaIngreso entity)
+        {
+            return NotaIngresoRepository.Instancia.GetCorrelativo(entity);
+        }
     }
 }

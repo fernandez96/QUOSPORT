@@ -453,6 +453,7 @@
     <Content Include="Content\js\viewsJs\Producto.js" />
     <Content Include="Content\js\viewsJs\Proveedor.js" />
     <Content Include="Content\js\viewsJs\reporte.js" />
+    <Content Include="Content\js\viewsJs\StockXAlmacen.js" />
     <Content Include="Content\js\viewsJs\TablaRegistro.js" />
     <Content Include="Content\js\viewsJs\TipoDocumento.js" />
     <Content Include="Content\js\viewsJs\tipoProducto.js" />
@@ -495,6 +496,7 @@
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\ReporteController.cs" />
+    <Compile Include="Controllers\StockXAlmacenController.cs" />
     <Compile Include="Controllers\TipoDocumentoController.cs" />
     <Compile Include="Controllers\TipoOpcionesController.cs" />
     <Compile Include="Controllers\UnidadMedidaController.cs" />
@@ -631,6 +633,7 @@
     <Content Include="Views\Cliente\Index.cshtml" />
     <Content Include="Views\Proveedor\Index.cshtml" />
     <Content Include="Views\NotaIngreso\Index.cshtml" />
+    <Content Include="Views\StockXAlmacen\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

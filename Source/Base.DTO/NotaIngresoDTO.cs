@@ -9,6 +9,7 @@ namespace Base.DTO
     {
         public string ningc_numero_nota_ingreso { get; set; }
         public int almac_icod_almacen { get; set; }
+        public string almac_vdescripcion { get; set; }
         public int ningc_iid_motivo { get; set; }
         public string ningc_v_motivo { get; set; }
         public string fecha { get; set; }

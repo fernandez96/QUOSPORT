@@ -131,7 +131,7 @@ namespace Base.DataAccess
             int idND;
             int idStock;
             using (DbConnection conexion = _database.CreateConnection())
-            {
+                    {
                 conexion.Open();
                 using (var transaction= conexion.BeginTransaction(IsolationLevel.Serializable))
                 {
@@ -159,7 +159,7 @@ namespace Base.DataAccess
                         }
                         foreach (var itemdetalle in entity.listaDetalleNI)
                         {
-                            if (itemdetalle.status==update)
+                            if (itemdetalle.status==update && itemdetalle.kardc_tipo_movimiento==0)
                             {
                                 using (var comandoKardex = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_KARDEX_UPDATE")))
                                 {
@@ -196,15 +196,28 @@ namespace Base.DataAccess
                                     _database.AddInParameter(comandoND, "@dninc_vusuario_modificado", DbType.String, entity.UsuarioCreacion);
                                     _database.AddInParameter(comandoND, "@dninc_vpc_modificado", DbType.String, WindowsIdentity.GetCurrent().Name);
                                     _database.AddInParameter(comandoND, "@dninc_ilag_estado", DbType.Int32, entity.Estado);
-                                    _database.AddInParameter(comandoND, "@id", DbType.Int32, entity.Id);
+                                    _database.AddInParameter(comandoND, "@id", DbType.Int32, itemdetalle.Id);
                                     _database.AddOutParameter(comandoND, "@Response", DbType.Int32, 11);
 
                                     _database.ExecuteNonQuery(comandoND, transaction);
                                     idND = Convert.ToInt32(_database.GetParameterValue(comandoND, "@Response"));
                                     if (idND == 0) throw new Exception("Error al modifcar nota de ingreso detalle");
                                 }
+                                using (var ComandoStock = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_STOCK_UPDATE")))
+                                {
+                                    _database.AddInParameter(ComandoStock, "@almac_icod_almacen", DbType.Int32, entity.almac_icod_almacen);
+                                    _database.AddInParameter(ComandoStock, "@prdc_icod_producto", DbType.Int32, itemdetalle.prdc_icod_producto);
+                                    _database.AddInParameter(ComandoStock, "@stocc_stock_producto", DbType.Decimal, itemdetalle.dninc_cantidad);
+                                    _database.AddInParameter(ComandoStock, "@stocc_ilag_estado", DbType.Int32, entity.Estado);
+                                    _database.AddInParameter(ComandoStock, "@tipo_movimiento", DbType.Int32, 1);
+                                    _database.AddOutParameter(ComandoStock, "@Response", DbType.Int32, 11);
+
+                                    _database.ExecuteNonQuery(ComandoStock, transaction);
+                                    idStock = Convert.ToInt32(_database.GetParameterValue(ComandoStock, "@Response"));
+                                    if (idStock == 0) throw new Exception("Error al actualizar stock");
+                                }
                             }
-                            else if (itemdetalle.status==add)
+                            else if (itemdetalle.status==add && itemdetalle.kardc_tipo_movimiento!=0)
                             {
                                 using (var comandoKardex = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_KARDEX_INSERT")))
                                 {
@@ -246,8 +259,21 @@ namespace Base.DataAccess
                                     idND = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
                                     if (idND == 0) throw new Exception("Error al ingresar nota de ingreso detalle");
                                 }
+                                using (var ComandoStock = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_STOCK_UPDATE")))
+                                {
+                                    _database.AddInParameter(ComandoStock, "@almac_icod_almacen", DbType.Int32, entity.almac_icod_almacen);
+                                    _database.AddInParameter(ComandoStock, "@prdc_icod_producto", DbType.Int32, itemdetalle.prdc_icod_producto);
+                                    _database.AddInParameter(ComandoStock, "@stocc_stock_producto", DbType.Decimal, itemdetalle.dninc_cantidad);
+                                    _database.AddInParameter(ComandoStock, "@stocc_ilag_estado", DbType.Int32, entity.Estado);
+                                    _database.AddInParameter(ComandoStock, "@tipo_movimiento", DbType.Int32, 1);
+                                    _database.AddOutParameter(ComandoStock, "@Response", DbType.Int32, 11);
+
+                                    _database.ExecuteNonQuery(ComandoStock, transaction);
+                                    idStock = Convert.ToInt32(_database.GetParameterValue(ComandoStock, "@Response"));
+                                    if (idStock == 0) throw new Exception("Error al actualizar stock");
+                                }
                             }
-                            else if (itemdetalle.status==delete)
+                            else if (itemdetalle.status==delete && itemdetalle.kardc_tipo_movimiento==0)
                             {
                                 using (var comandokardexElimnar= _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_KARDEX_DELETE")))
                                 {
@@ -259,26 +285,27 @@ namespace Base.DataAccess
                                 }
                                 using (var comandonotadetalleEliminar = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_NOTA_INGRESO_DETALLE_DELETE")))
                                 {
-                                    _database.AddInParameter(comandonotadetalleEliminar, "@Id", DbType.Int32, entity.Id);
+                                    _database.AddInParameter(comandonotadetalleEliminar, "@Id", DbType.Int32, itemdetalle.Id);
                                     _database.AddOutParameter(comandonotadetalleEliminar, "@Response", DbType.Int32, 11);
                                     _database.ExecuteNonQuery(comandonotadetalleEliminar, transaction);
                                     idND = Convert.ToInt32(_database.GetParameterValue(comandonotadetalleEliminar, "@Response"));
                                     if (idND == 0) throw new Exception("Error al eliminar Nota ingreso detalle.");
                                 }
-                            }
-                            using (var ComandoStock = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_STOCK_UPDATE")))
-                            {
-                                _database.AddInParameter(ComandoStock, "@almac_icod_almacen", DbType.Int32, entity.almac_icod_almacen);
-                                _database.AddInParameter(ComandoStock, "@prdc_icod_producto", DbType.Int32, itemdetalle.prdc_icod_producto);
-                                _database.AddInParameter(ComandoStock, "@stocc_stock_producto", DbType.Decimal, itemdetalle.dninc_cantidad);
-                                _database.AddInParameter(ComandoStock, "@stocc_ilag_estado", DbType.Int32, entity.Estado);
-                                _database.AddInParameter(ComandoStock, "@tipo_movimiento", DbType.Int32, itemdetalle.kardc_tipo_movimiento);
-                                _database.AddOutParameter(ComandoStock, "@Response", DbType.Int32, 11);
+                                using (var ComandoStock = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_STOCK_UPDATE")))
+                                {
+                                    _database.AddInParameter(ComandoStock, "@almac_icod_almacen", DbType.Int32, entity.almac_icod_almacen);
+                                    _database.AddInParameter(ComandoStock, "@prdc_icod_producto", DbType.Int32, itemdetalle.prdc_icod_producto);
+                                    _database.AddInParameter(ComandoStock, "@stocc_stock_producto", DbType.Decimal, itemdetalle.dninc_cantidad);
+                                    _database.AddInParameter(ComandoStock, "@stocc_ilag_estado", DbType.Int32, entity.Estado);
+                                    _database.AddInParameter(ComandoStock, "@tipo_movimiento", DbType.Int32, 1);
+                                    _database.AddOutParameter(ComandoStock, "@Response", DbType.Int32, 11);
 
-                                _database.ExecuteNonQuery(ComandoStock, transaction);
-                                idStock = Convert.ToInt32(_database.GetParameterValue(ComandoStock, "@Response"));
-                                if (idStock == 0) throw new Exception("Error al actualizar stock");
+                                    _database.ExecuteNonQuery(ComandoStock, transaction);
+                                    idStock = Convert.ToInt32(_database.GetParameterValue(ComandoStock, "@Response"));
+                                    if (idStock == 0) throw new Exception("Error al actualizar stock");
+                                }
                             }
+                         
                         }
 
                         transaction.Commit();
@@ -350,6 +377,7 @@ namespace Base.DataAccess
                             ningc_fecha_nota_ingreso = lector.IsDBNull(lector.GetOrdinal("ningc_fecha_nota_ingreso")) ? default(DateTime) : lector.GetDateTime(lector.GetOrdinal("ningc_fecha_nota_ingreso")),
                             ningc_observaciones = lector.IsDBNull(lector.GetOrdinal("ningc_observaciones")) ? default(string) : lector.GetString(lector.GetOrdinal("ningc_observaciones")),
                             ningc_v_motivo = lector.IsDBNull(lector.GetOrdinal("motivo")) ? default(string) : lector.GetString(lector.GetOrdinal("motivo")),
+                            almac_vdescripcion= lector.IsDBNull(lector.GetOrdinal("almac_vdescripcion")) ? default(string) : lector.GetString(lector.GetOrdinal("almac_vdescripcion")),
                             Estado = lector.IsDBNull(lector.GetOrdinal("ningc_ilag_estado")) ? default(int) : lector.GetInt32(lector.GetOrdinal("ningc_ilag_estado")),
                             Cantidad = lector.IsDBNull(lector.GetOrdinal("Cantidad")) ? default(int) : lector.GetInt32(lector.GetOrdinal("Cantidad"))
                         });
@@ -407,13 +435,28 @@ namespace Base.DataAccess
                             dninc_costo = lector.IsDBNull(lector.GetOrdinal("dnind_ncosto")) ? default(decimal) : lector.GetDecimal(lector.GetOrdinal("dnind_ncosto")),
                             prdc_icod_producto = lector.IsDBNull(lector.GetOrdinal("prdc_icod_producto")) ? default(int) : lector.GetInt32(lector.GetOrdinal("prdc_icod_producto")),
                             prdc_vdescripcion = lector.IsDBNull(lector.GetOrdinal("prdc_vdescripcion")) ? default(string) : lector.GetString(lector.GetOrdinal("prdc_vdescripcion")),
-                            kardc_icod_correlativo = lector.IsDBNull(lector.GetOrdinal("kardc_icod_correlativo")) ? default(int) : lector.GetInt32(lector.GetOrdinal("kardc_icod_correlativo"))
+                            kardc_icod_correlativo = lector.IsDBNull(lector.GetOrdinal("kardc_icod_correlativo")) ? default(int) : lector.GetInt32(lector.GetOrdinal("kardc_icod_correlativo")),
                         });
                     }
                 }
             }
 
             return notaIngresoDetalle;
+        }
+
+        public int GetCorrelativo(NotaIngreso entity)
+        {
+            int Correlativo;
+            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_NOTA_INGRESO_CORRELATIVA")))
+            {
+                _database.AddInParameter(comando, "@id", DbType.Int32, entity.almac_icod_almacen);
+                _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
+
+                _database.ExecuteNonQuery(comando);
+                Correlativo = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
+            }
+
+            return Correlativo;
         }
 
     }

@@ -255,7 +255,6 @@ $(document).ready(function () {
                 });
             }, 'Se eliminará el registro. ¿Está seguro que desea continuar?');
         }
-
     });
 
     $('#btnEstadoCategoria').on('click', function () {

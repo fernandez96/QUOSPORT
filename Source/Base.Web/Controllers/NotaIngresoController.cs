@@ -140,7 +140,7 @@ namespace Base.Web.Controllers
             try
             {
                 var notaIngreso = MapperHelper.Map<NotaIngresoDTO, NotaIngreso>(notaIngresoDTO);
-
+                
                 int resultado = 0;
                 resultado = NotaIngresoBL.Instancia.UpdateNI(notaIngreso);
                 if (resultado > 0)
@@ -275,15 +275,15 @@ namespace Base.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetCorrelativoCab()
+        public JsonResult GetCorrelativo( NotaIngresoDTO notaIngresoDTO)
         {
             var jsonResponse = new JsonResponse { Success = true };
 
             try
             {
-
-                var getcorrelativoDTO = CategoriaBL.Instancia.GetCorrelativaCab();
-                if (getcorrelativoDTO != null)
+                var notatIngreso = MapperHelper.Map<NotaIngresoDTO, NotaIngreso>(notaIngresoDTO);
+                var getcorrelativoDTO = NotaIngresoBL.Instancia.GetCorrelativo(notatIngreso);
+                if (getcorrelativoDTO >0)
                 {
                     jsonResponse.Data = getcorrelativoDTO;
                 }

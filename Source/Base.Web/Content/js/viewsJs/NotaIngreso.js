@@ -49,6 +49,8 @@ $(document).ready(function () {
         VisualizarDataTableNotaIngreso();
         VisualizarDataTableNotaIngresoDetalle();
         VisualizarDataTableProducto();
+        CargarAlmacen();
+        CargarMotivo();
     });
     $('#NotaIngresoDataTable  tbody').on('click', 'tr', function () {
         if ($(this).hasClass('selected')) {
@@ -89,7 +91,7 @@ $(document).ready(function () {
  
     $('#btnAgregarNotaIngreso').on('click', function () {
         LimpiarFormulario();
-        correlativaNotaIngreso();
+        GetCorrelativoCab($("#almacen").val());
         $("#NotaIngresoId").val(0);
         $("#accionTitle").text('Nuevo');
         $("#NuevaNotaIngreso").modal("show");
@@ -116,6 +118,20 @@ $(document).ready(function () {
             });
         }
     });
+    $('#btnEliminarNotaIngreso').on('click', function () {
+        rowNotaIngreso = dataTableNotaIngreso.row('.selected').data();
+        if (typeof rowNotaIngreso === "undefined") {
+            webApp.showMessageDialog("Por favor seleccione un registro.");
+        }
+        else {
+            webApp.showDeleteConfirmDialog(function () {
+                checkSession(function () {
+                    EliminarNataIngreso(rowNotaIngreso.Id);
+                });
+            }, 'Se eliminará el registro. ¿Está seguro que desea continuar?');
+        }
+    });
+
     $("#btnGuardarNotaIngreso").on("click", function () {
         if (NotaIngresoDetalle.filter(function (obj) { if (obj.status != eliminar) { return true } else {return false }}).length<= 0 ) {
             webApp.showMessageDialog("Por favor debe ingresar al menos un producto.");
@@ -185,6 +201,27 @@ $(document).ready(function () {
         }
     });
 
+    $('body').on('change', '#almacen', function () {
+        GetCorrelativoCab(this.value);
+    });
+
+    $("#btnSearchNotaIngreso").on("click", function (e) {
+        if ($('#NotaIngresoSearchForm').valid()) {
+            checkSession(function () {
+                dataTableNotaIngreso.ajax.reload();
+            });
+        }
+        e.preventDefault();
+    });
+
+    $("#btnSearchTablaproducto").on("click", function (e) {
+        if ($('#ProductoSearchForm').valid()) {
+            checkSession(function () {
+                dataTableProducto.ajax.reload();
+            });
+        }
+        e.preventDefault();
+    });
     webApp.validarNumerico(['costo', 'cantidad']);
     webApp.InicializarValidacion(formularioMantenimientoDetalle,
        {       
@@ -237,13 +274,17 @@ $(document).ready(function () {
         remText: '%n caracter%s restantes...',
         limitText: 'permite maximo : %n.'
     });
-   
+    $('#fechasearch').datepicker({
+        autoclose: true,
+        language: 'es',
+        format: 'dd/mm/yyyy'
+    });
     //$("#costo").numeric({ decimal: ".", negative: false, scale: 3 });
     //$("#costo").inputmask('00.00', { regex: "^[0-9]{1,6}(\\.\\d{1,2})?$" });
     //$('#costo').mask('#,##0.00', { reverse: true });
     //$('#cantidad').mask('#,##0.00', { reverse: true });
-    CargarAlmacen();
-    CargarMotivo();
+
+
 });
 function VisualizarDataTableNotaIngreso() {
     dataTableNotaIngreso = $('#NotaIngresoDataTable').DataTable({
@@ -276,6 +317,7 @@ function VisualizarDataTableNotaIngreso() {
         "columns": [
             { "data": "Id" },
             { "data": "ningc_numero_nota_ingreso" },
+            { "data": "almac_vdescripcion" },
             { "data": "fecha" },
             { "data": "ningc_v_motivo" },
             { "data": "ningc_observaciones" },
@@ -294,10 +336,11 @@ function VisualizarDataTableNotaIngreso() {
 
             { "bVisible": false, "aTargets": [0] },
             { "className": "center hidden-120", "aTargets": [1], "width": "10%" },
-            { "className": "center hidden-120", "aTargets": [2], "width": "14%" },
-            { "className": "center hidden-120", "aTargets": [3], "width": "10%" },
-             { "className": "hidden-992", "aTargets": [4], "width": "35%" },
-            { "bSortable": false, "className": "hidden-992", "aTargets": [5], "width": "7%" }
+              { "className": "center hidden-120", "aTargets": [2], "width": "13%" },
+            { "className": "center hidden-120", "aTargets": [3], "width": "14%" },
+            { "className": "center hidden-120", "aTargets": [4], "width": "10%" },
+             { "className": "hidden-992", "aTargets": [5], "width": "30%" },
+            { "bSortable": false, "className": "hidden-992", "aTargets": [6], "width": "7%" }
 
         ],
         "order": [[1, "desc"]],
@@ -372,8 +415,8 @@ function VisualizarDataTableProducto() {
                 request.filter = new Object();
 
                 request.filter = {
-                    //codigoSearch: $("#Codigosearch").val(),
-                    descripcionSearch: $("#Descripcionsearch").val()
+                    //codigoSearch: $("#CodigoDetallesearch").val(),
+                    descripcionSearch: $("#DescripcionDetallesearch").val()
                 }
             },
             dataFilter: function (data) {
@@ -486,9 +529,9 @@ function AddProductoDraw() {
     else {
 
         $.each(NotaIngresoDetalle, function (index, value) {
-            if (value.prdc_icod_producto == rowNotaIngresoDetalle.Id && value.status != eliminar) {
-                value.Costo = costo;
-                value.Cantidad = cantidad;
+            if (value.prdc_icod_producto == rowNotaIngresoDetalle.prdc_icod_producto && value.status != eliminar) {
+                value.dninc_costo = costo;
+                value.dninc_cantidad = cantidad;
                 value.status = editar;
                 editarStatus = true;
             }
@@ -574,9 +617,71 @@ function DeleteProductoDraw() {
 }
 
 function correlativaNotaIngreso() {
-    var correlativo = '000005';
+    var correlativo = '000001';
     $("#nroNI").val(correlativo);
     
+}
+
+
+function GetCorrelativoCab(id) {
+    var modelview = {
+        almac_icod_almacen: id
+    }
+    webApp.Ajax({
+        url: urlMantenimiento + 'GetCorrelativo',
+        parametros: modelview,
+    }, function (response) {
+        if (response.Success) {
+            if (response.Warning) {
+                $.gritter.add({
+                    title: 'Alerta',
+                    text: response.Message,
+                    class_name: 'gritter-warning gritter'
+                });
+            } else {
+                var notaingreso = response.Data + 1;
+          
+                 if (notaingreso < 10) {
+                    $("#nroNI").val('00000' + notaingreso);
+                }
+                 else if (notaingreso >= 10) {
+                    $("#nroNI").val('0000' + notaingreso);
+                }
+                else if (notaingreso >= 100) {
+                    $("#nroNI").val('000'+notaingreso);
+                }
+                else if (notaingreso>=1000) {
+                    $("#nroNI").val('00' + notaingreso);
+                }
+                else if (notaingreso >= 10000) {
+                    $("#nroNI").val('0' + notaingreso);
+                }
+                else if (notaingreso >= 100000) {
+                    $("#nroNI").val(notaingreso);
+                }
+            }
+
+        } else {
+            $.gritter.add({
+                title: 'Error',
+                text: response.Message,
+                class_name: 'gritter-error gritter'
+            });
+        }
+    }, function (response) {
+        $.gritter.add({
+            title: 'Error',
+            text: response,
+            class_name: 'gritter-error gritter'
+        });
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        $.gritter.add({
+            title: 'Error',
+            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
+            class_name: 'gritter-error gritter'
+        });
+    });
+
 }
 
 function CorrelativoProducto() {
@@ -699,6 +804,55 @@ function GetNotaIngresoById(id) {
           
             }
 
+        } else {
+            $.gritter.add({
+                title: 'Error',
+                text: response.Message,
+                class_name: 'gritter-error gritter'
+            });
+        }
+    }, function (response) {
+        $.gritter.add({
+            title: 'Error',
+            text: response,
+            class_name: 'gritter-error gritter'
+        });
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        $.gritter.add({
+            title: 'Error',
+            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
+            class_name: 'gritter-error gritter'
+        });
+    });
+}
+
+function EliminarNataIngreso(id) {
+    var modelView = {
+        Id: id,
+        UsuarioRegistro: $("#usernameLogOn strong").text()
+    };
+
+    webApp.Ajax({
+        url: urlMantenimiento + 'Delete',
+        async: false,
+        parametros: modelView
+    }, function (response) {
+        if (response.Success) {
+            if (response.Warning) {
+                $.gritter.add({
+                    title: 'Alerta',
+                    text: response.Message,
+                    class_name: 'gritter-warning gritter'
+                });
+            } else {
+         
+                dataTableNotaIngreso.ajax.reload();
+                $.gritter.add({
+                    title: response.Title,
+                    text: response.Message,
+                    class_name: 'gritter-success gritter'
+                });
+            }
         } else {
             $.gritter.add({
                 title: 'Error',
@@ -856,9 +1010,20 @@ function AddSearchFilter() {
 function buscar(e) {
     tecla = (document.all) ? e.keyCode : e.which;
     if (tecla == 13) {
-        if ($('#UsuarioSearchForm').valid()) {
+        if ($('#NotaIngresoSearchForm').valid()) {
             checkSession(function () {
-                dataTableUsuario.ajax.reload();
+                dataTableNotaIngreso.ajax.reload();
+            });
+        }
+    }
+}
+
+function buscarProducto(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13) {
+        if ($('#ProductoSearchForm').valid()) {
+            checkSession(function () {
+                dataTableProducto.ajax.reload();
             });
         }
     }
@@ -875,6 +1040,8 @@ function LimpiarFormulario() {
         language: 'es',
         format: 'dd/mm/yyyy'
     }).datepicker('setDate', new Date());
+   
+    
 }
 
 function LimpiarFormularioDetalle() {
