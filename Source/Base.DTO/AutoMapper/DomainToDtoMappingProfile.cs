@@ -41,6 +41,7 @@ namespace Base.DTO.AutoMapper
             Mapper.CreateMap<NotaIngreso, NotaIngresoDTO>()
            .ForMember(e => e.fecha, x => x.MapFrom(p => p.ningc_fecha_nota_ingreso.Equals(default(DateTime)) ? string.Empty : p.ningc_fecha_nota_ingreso.ToShortDateString()));
             Mapper.CreateMap<NotaIngresoDetalle, NotaIngresoDetalleDTO>();
+            Mapper.CreateMap<StockXAlmacen, StockXAlmacenDTO>();
         }
     }
 }

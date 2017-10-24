@@ -1,4 +1,4 @@
-﻿var dataTableNotaIngreso = null;
+﻿var dataTableStockXAlmacen = null;
 var dataTableNotaIngresoDetalle = null;
 var dataTableProducto = null;
 var formularioMantenimiento = "NotaIngresoForm";
@@ -6,11 +6,60 @@ var formularioMantenimientoDetalle = "ProductoDetalleForm";
 var delRowPos = null;
 var delRowID = 0;
 var urlListar = baseUrl + 'NotaIngreso/Listar';
-var urlMantenimiento = baseUrl + 'NotaIngreso/';
+var urlMantenimiento = baseUrl + 'StockXAlmacen1/';
 var urlMantenimientoAlmacen = baseUrl + 'Almacen/';
 var urlListaCargo = baseUrl + 'NotaIngreso/';
 var urlMantenimientoReport = baseUrl + 'Reporte/';
+
+var stockxalmacen = new Array();
 $(document).ready(function () {
+    var stockXAlmacenHub = $.connection.stockXAlmacenHub;
+
+    stockXAlmacenHub.client.listar = function (response) {
+        if (response.Success) {
+
+            if (response.Warning) {
+                $.gritter.add({
+                    title: 'Alerta',
+                    text: response.Message,
+                    class_name: 'gritter-warning gritter'
+                });
+            } else {
+                stockxalmacen.length = 0;
+                dataTableStockXAlmacen.clear().draw();
+                stockxalmacen = response.Data;
+                dataTableStockXAlmacen.rows.add(stockxalmacen).draw();
+            }
+        } else {
+            $.gritter.add({
+                title: 'Error',
+                text: response.Message,
+                class_name: 'gritter-error gritter'
+            });
+        }
+
+    };
+
+    stockXAlmacenHub.client.listarStockXAlmacenData = function () {
+        //var modelview = {
+        //    dataTableModel: {
+        //        filter: {
+        //            almacenSearch:,
+        //            descripcionSearch:,
+        //            FechaInicialSearch:,
+        //            FechaFinalSearch:,
+        //        }
+        //    }
+        //};
+        stockXAlmacenHub.server.listar();
+    };
+
+    $.connection.hub.start().done(function () {
+        stockXAlmacenHub.server.listar();
+    });
+
+
+
     $.extend($.fn.dataTable.defaults, {
         language: { url: baseUrl + 'Content/js/dataTables/Internationalisation/es.txt' },
         responsive: true,
@@ -21,16 +70,18 @@ $(document).ready(function () {
     $.extend($.gritter.options, {
         time: '1000'
     });
-
     checkSession(function () {
-        VisualizarDataTableNotaIngreso();
+        VisualizarDataTableStockXAlmacen();
+        ListarStockXAlmacen();
     });
-    $('#NotaIngresoDataTable  tbody').on('click', 'tr', function () {
+
+ 
+    $('#StockXAlmacenDataTable  tbody').on('click', 'tr', function () {
         if ($(this).hasClass('selected')) {
             $(this).removeClass('selected');
         }
         else {
-            dataTableNotaIngreso.$('tr.selected').removeClass('selected');
+            dataTableStockXAlmacen.$('tr.selected').removeClass('selected');
             $(this).addClass('selected');
         }
     });
@@ -106,68 +157,59 @@ $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
 
   
-    $('#fechasearch').datepicker({
+    $('#fechaFinalsearch,#fechaIniciosearch').datepicker({
         autoclose: true,
         language: 'es',
         format: 'dd/mm/yyyy'
     });
 
+    $('input[name=date-range-picker]').daterangepicker({
+        'applyClass': 'btn-sm btn-success',
+        'cancelClass': 'btn-sm btn-default',
+        language: 'es',
+        locale: {
+            applyLabel: 'Aplicar',
+            cancelLabel: 'Cancelar',
+        }
+    })
+    .prev().on(ace.click_event, function () {
+        $(this).next().focus();
+    });
+
 });
-function VisualizarDataTableNotaIngreso() {
-    dataTableNotaIngreso = $('#NotaIngresoDataTable').DataTable({
+function VisualizarDataTableStockXAlmacen() {
+    dataTableStockXAlmacen = $('#StockXAlmacenDataTable').DataTable({
         "bFilter": false,
         "bProcessing": true,
-        "serverSide": true,
+        "serverSide": false,
         //"scrollY": "350px",              
-        "ajax": {
-            "url": urlListar,
-            "type": "POST",
-            "data": function (request) {
-                request.filter = new Object();
-
-                request.filter = {
-                    numeroSearch: $("#numerosearch").val(),
-                    //DescripcionSearch: $("#Descripcionsearch").val()
-                }
-            },
-            dataFilter: function (data) {
-                if (data.substring(0, 9) == "<!DOCTYPE") {
-                    redireccionarLogin("Sesión Terminada", "Se terminó la sesión");
-                } else {
-                    return data;
-                    //var json = jQuery.parseJSON(data);
-                    //return JSON.stringify(json); // return JSON string
-                }
+        "data":stockxalmacen,
+        "dom": 'fltip',
+        dataFilter: function (data) {
+            if (data.substring(0, 9) == "<!DOCTYPE") {
+                redireccionarLogin("Sesión Terminada", "Se terminó la sesión");
+            } else {
+                return data;
+                //var json = jQuery.parseJSON(data);
+                //return JSON.stringify(json); // return JSON string
             }
         },
         "bAutoWidth": false,
         "columns": [
-            { "data": "Id" },
-            { "data": "ningc_numero_nota_ingreso" },
+            { "data": "prdc_iid_producto" },
             { "data": "almac_vdescripcion" },
-            { "data": "fecha" },
-            { "data": "ningc_v_motivo" },
-            { "data": "ningc_observaciones" },
-            {
-                "data": function (obj) {
-                    if (obj.Estado == 1) {
-                        return '<span class="label label-info label-sm arrowed-in arrowed-in-right">Activo</span>';
-                    }
-                    else if (obj.Estado == 2) {
-                        return '<span class="label label-warning arrowed-in arrowed-in-right">Inactivo</span>';
-                    }
-                }
-            }
+            { "data": "prdc_vdescripcion" },
+            { "data": "umec_vdescripcion" },
+            { "data": "stockactual" },
         ],
         "aoColumnDefs": [
 
             { "bVisible": false, "aTargets": [0] },
             { "className": "center hidden-120", "aTargets": [1], "width": "10%" },
-              { "className": "center hidden-120", "aTargets": [2], "width": "13%" },
-            { "className": "center hidden-120", "aTargets": [3], "width": "14%" },
+            { "className": "hidden-120", "aTargets": [2], "width": "30%" },
+            { "className": "center hidden-992", "aTargets": [3], "width": "10%" },
             { "className": "center hidden-120", "aTargets": [4], "width": "10%" },
-             { "className": "hidden-992", "aTargets": [5], "width": "30%" },
-            { "bSortable": false, "className": "hidden-992", "aTargets": [6], "width": "7%" }
+          
 
         ],
         "order": [[1, "desc"]],
@@ -179,3 +221,4 @@ function VisualizarDataTableNotaIngreso() {
         }
     });
 }
+

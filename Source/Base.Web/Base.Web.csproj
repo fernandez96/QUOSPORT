@@ -502,6 +502,7 @@
     <Compile Include="Controllers\UnidadMedidaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Core\BaseController.cs" />
+    <Compile Include="Core\Hubs\StockXAlmacenHub.cs" />
     <Compile Include="Core\Mensajes.cs" />
     <Compile Include="Core\ReportBaseController.cs" />
     <Compile Include="Core\Title.cs" />
@@ -521,6 +522,7 @@
     <Compile Include="Models\ReporteFilterModel.cs" />
     <Compile Include="Models\ReportePaginationModel.cs" />
     <Compile Include="Models\RolFilterModel.cs" />
+    <Compile Include="Models\StockXAlmacenFilterModel.cs" />
     <Compile Include="Models\TablaRegistroFilterModel.cs" />
     <Compile Include="Models\TipoDocumentoFilterModel.cs" />
     <Compile Include="Models\UnidadMedidaFilterModel.cs" />
@@ -641,9 +643,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\Hubs\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Base.ActiveDirectory\Base.ActiveDirectory.csproj">
       <Project>{6a7dd3f8-254a-4641-9120-c8b946e638d3}</Project>

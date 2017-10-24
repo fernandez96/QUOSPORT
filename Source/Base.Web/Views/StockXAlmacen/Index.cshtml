@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="@Url.Content("~/Content/css/jquery.dataTables.css")" />
     <link rel="stylesheet" href="@Url.Content("~/Content/css/jquery-chosen.css")" />
     <link rel="stylesheet" href="@Url.Content("~/Content/css/datepicker.css")" />
+<link href="~/Content/css/daterangepicker.css" rel="stylesheet" />
+
 }
 <!-- /section:basics/sidebar -->
 <div class="main-content">
@@ -47,12 +49,20 @@
                                         <input type="text" class="form-control" name="numerosearch" id="numerosearch" placeholder="N°. Nota Ingreso" onkeypress="buscar(event)">
                                         <div class="input-group-btn">
                                         </div>
-                                        @*<div class="input-group">*@
-                                        <input type="text" id="fechasearch" autocomplete="off" name="fechasearch" placeholder="DD/MM/YYYY" maxlength="100" class="form-control" />
+                                   
+                                        @*<input type="text" id="fechasearch" autocomplete="off" name="fechasearch" placeholder="DD/MM/YYYY" maxlength="100" class="form-control" />
                                         <span class="input-group-addon" style="border-radius:7px">
                                             <i class="fa fa-calendar bigger-110"></i>
-                                        </span>
-                                        @*</div>*@
+                                        </span>*@
+                                      
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar bigger-110"></i>
+                                            </span>
+
+                                            <input class="form-control" type="text" name="date-range-picker" id="id-date-range-picker-1">
+                                        </div>
+
                                         <div class="input-group-btn">
                                             <button type="button" id="btnSearchNotaIngreso" class="btn btn-primary btn-sm">
                                                 <i class="ace-icon fa fa-search icon-on-right bigger-110 right"></i>Buscar
@@ -83,16 +93,14 @@
                         </div>
                         <div class="dataTables_wrapper form-inline no-footer">
                             <div class="table-responsive">
-                                <table id="NotaIngresoDataTable" class="table table-bordered" cellspacing="0" role="grid" aria-describedby="dynamic-table_info">
+                                <table id="StockXAlmacenDataTable" class="table table-bordered" cellspacing="0" role="grid" aria-describedby="dynamic-table_info">
                                     <thead>
                                         <tr>
                                             <th>Id</th>
-                                            <th class="hidden-120 center">N°. Nota Ingreso</th>
                                             <th class="hidden-120">Almacen</th>
-                                            <th class="hidden-120">Fecha</th>
-                                            <th class="hidden-120">Motivo</th>
-                                            <th class="hidden-992">Observaci&oacute;n</th>
-                                            <th class="hidden-992">Estado</th>
+                                            <th class="hidden-120">Producto</th>
+                                            <th class="hidden-992">U.M</th>
+                                            <th class="hidden-120">Stock</th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -172,12 +180,14 @@
     <script src="@Url.Content("~/Content/js/jquery.blockUI.js")"></script>
     <script src="@Url.Content("~/Content/js/shCore.js")"></script>
     <script src="@Url.Content("~/Content/js/dataTables_editor_min.js")"></script>
+   <script src="@Url.Content("~/Content/js/date-time/moment.js")"></script>
     <script src="@Url.Content("~/Content/js/date-time/daterangepicker.js")"></script>
     <script src="@Url.Content("~/Content/js/date-time/bootstrap-datepicker.js")"></script>
     <script src="@Url.Content("~/Content/js/date-time/locate/bootstrap-datepicker.es.js")"></script>
     <script src="@Url.Content("~/Content/js/JSLINQ.js")"></script>
     <script src="@Url.Content("~/Content/js/jquery-mask.js")"></script>
     <script src="@Url.Content("~/Content/js/numeric.js")"></script>
+
 
 
     <!-- inline scripts related to this page -->

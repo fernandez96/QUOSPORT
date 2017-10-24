@@ -338,9 +338,9 @@ function VisualizarDataTableNotaIngreso() {
             { "className": "center hidden-120", "aTargets": [1], "width": "10%" },
               { "className": "center hidden-120", "aTargets": [2], "width": "13%" },
             { "className": "center hidden-120", "aTargets": [3], "width": "14%" },
-            { "className": "center hidden-120", "aTargets": [4], "width": "10%" },
-             { "className": "hidden-992", "aTargets": [5], "width": "30%" },
-            { "bSortable": false, "className": "hidden-992", "aTargets": [6], "width": "7%" }
+            { "className": "center hidden-992", "aTargets": [4], "width": "10%" },
+             { "className": "hidden-1200", "aTargets": [5], "width": "30%" },
+            { "bSortable": false, "className": "hidden-1200", "aTargets": [6], "width": "7%" }
 
         ],
         "order": [[1, "desc"]],
@@ -744,6 +744,7 @@ function GuardarNotaIngreso() {
                 dataTableNotaIngreso.ajax.reload();
                 $("#NuevaNotaIngreso").modal("hide");
                 LimpiarFormulario();
+                ListarStockXAlmacen();
                 $.gritter.add({
                     title: response.Title,
                     text: response.Message,

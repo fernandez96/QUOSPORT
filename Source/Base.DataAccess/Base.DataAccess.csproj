@@ -76,6 +76,7 @@
     <Compile Include="Interfaces\ISeguridadRepository.cs" />
     <Compile Include="Interfaces\IStatusRepository.cs" />
     <Compile Include="Interfaces\IStockRepository.cs" />
+    <Compile Include="Interfaces\IStockXAlmacenRepository.cs" />
     <Compile Include="Interfaces\ITablaRegistroRepository.cs" />
     <Compile Include="Interfaces\ITipoDocumentoRepository.cs" />
     <Compile Include="Interfaces\IUnidadMedidaRepository.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="SeguridadRepository.cs" />
     <Compile Include="StatusRepository.cs" />
     <Compile Include="StockRepository.cs" />
+    <Compile Include="StockXAlmacenRepository.cs" />
     <Compile Include="TablaRegistroRepository.cs" />
     <Compile Include="TipoDocumentoRepository.cs" />
     <Compile Include="UnidadMedidaRepository.cs" />

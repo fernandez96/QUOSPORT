@@ -63,6 +63,7 @@
     <Compile Include="Interfaces\IRolBL.cs" />
     <Compile Include="Interfaces\ISeguridadBL.cs" />
     <Compile Include="Interfaces\IStatusBL.cs" />
+    <Compile Include="Interfaces\IStockXAlmacenBL.cs" />
     <Compile Include="Interfaces\ITablaRegistroBL.cs" />
     <Compile Include="Interfaces\ITipoDocumentoBL.cs" />
     <Compile Include="Interfaces\IUnidadMedidaBL.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="RolBL.cs" />
     <Compile Include="SeguridadBL.cs" />
     <Compile Include="StatusBL.cs" />
+    <Compile Include="StockXAlmacenBL.cs" />
     <Compile Include="TablaRegistroBL.cs" />
     <Compile Include="TipoDocumentoBL.cs" />
     <Compile Include="UnidadMedidaBL.cs" />

@@ -25,6 +25,7 @@ namespace Base.Web.Core
         public static string CredencialesDominioIncorrectas = "Las credenciales de dominio son incorrectas.";
         public static string AccesoAlSistema = "Acceso al sistema";
         public static string NoEncontraronDatos = "No se encontraron datos.";
+        public static string EncontraronDatos = "Se encontraron datos.";
         public static string CargaYaQuemado = "No se pudo modificar porque ya se ha quemado.";
         public static string CargaFallaEliminar = "No se puede eliminar debido a que no existe dicho registro o ya se ha Quemado esta giftcard.";
         public static string CanjeNoDisponible = "No hay GiftCard disponible para quemar con este tipo de producto.";
@@ -33,6 +34,7 @@ namespace Base.Web.Core
         public static string ValeRelacionado = "No se puede Actualizar debido a que hay registros relacionados a este registro";
         public static string OpenXmlFormats = "data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,";
         public static string cambiostatus = "Se realizo el cambio de estado satisfactoriamente.";
+
         public static string Add = "Add";
         public static string Delete = "Delete";
         public static string Login = "Login";

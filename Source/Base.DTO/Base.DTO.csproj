@@ -73,6 +73,7 @@
     <Compile Include="RolDTO.cs" />
     <Compile Include="StatusDTO.cs" />
     <Compile Include="StockDTO.cs" />
+    <Compile Include="StockXAlmacenDTO.cs" />
     <Compile Include="SubLineaDTO.cs" />
     <Compile Include="TablaRegistroDTO.cs" />
     <Compile Include="TipoDocumentoDTO.cs" />

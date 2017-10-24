@@ -18854,7 +18854,7 @@ input.typeahead.scrollable ~ .tt-dropdown-menu {
   vertical-align: middle;
   background-color: #FFF;
   border: 1px solid #d5d5d5;
-  width: 206px;
+  /*width: 206px;*/
 }
 .tags:hover {
   border-color: #b5b5b5;
@@ -19044,6 +19044,26 @@ input.typeahead.scrollable ~ .tt-dropdown-menu {
   .grid3:last-child,
   .grid4:last-child {
     border-bottom-width: 0;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .hidden-1200 {
+    display: none !important;
+  }
+}
+@media only screen and (max-width: 992px) {
+  .hidden-992 {
+    display: none !important;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .hidden-768 {
+    display: none !important;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .hidden-600 {
+    display: none !important;
   }
 }
 @media only screen and (max-width: 480px) {
