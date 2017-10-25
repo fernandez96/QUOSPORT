@@ -200,7 +200,7 @@ function VisualizarDataTableStockXAlmacen() {
             { "data": "almac_vdescripcion" },
             { "data": "prdc_vdescripcion" },
             { "data": "umec_vdescripcion" },
-            { "data": "stockactual" },
+            { "data": "stockactual", render: $.fn.dataTable.render.number(',', '.', 0, 'dd ')},
         ],
         "aoColumnDefs": [
 

@@ -170,7 +170,7 @@ namespace Base.DataAccess
                                     _database.AddInParameter(comandoKardex, "@kardc_icantidad_prod", DbType.Decimal, itemdetalle.dninc_cantidad);
                                     _database.AddInParameter(comandoKardex, "@tdocc_icod_tipo_doc", DbType.Int32, entity.tdocc_icod_tipo_doc);
                                     _database.AddInParameter(comandoKardex, "@kardc_numero_doc", DbType.String, entity.ningc_numero_doc);
-                                    _database.AddInParameter(comandoKardex, "@kardc_tipo_movimiento", DbType.Int32, itemdetalle.kardc_tipo_movimiento);
+                                    _database.AddInParameter(comandoKardex, "@kardc_tipo_movimiento", DbType.Int32, 1);
                                     _database.AddInParameter(comandoKardex, "@kardc_iid_motivo", DbType.Int32, entity.ningc_iid_motivo);
                                     _database.AddInParameter(comandoKardex, "@kardc_beneficiario", DbType.String, entity.ningc_referencia);
                                     _database.AddInParameter(comandoKardex, "@kardc_observaciones", DbType.String, entity.ningc_observaciones);

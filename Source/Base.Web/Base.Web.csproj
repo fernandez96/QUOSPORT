@@ -392,6 +392,7 @@
     <Content Include="Content\js\date-time\daterangepicker.js" />
     <Content Include="Content\js\date-time\locate\bootstrap-datepicker.es.js" />
     <Content Include="Content\js\date-time\moment.js" />
+    <Content Include="Content\js\daterangepicker.js" />
     <Content Include="Content\js\fuelux\fuelux.spinner.js" />
     <Content Include="Content\js\fuelux\fuelux.tree.js" />
     <Content Include="Content\js\fuelux\fuelux.wizard.js" />

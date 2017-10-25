@@ -894,7 +894,8 @@ function GetNotaIngresoDetalleAll(id) {
             } else {
                 dataTableNotaIngresoDetalle.clear().draw();
                 NotaIngresoDetalle = response.Data;
-                console.log(NotaIngresoDetalle);
+              
+            
                 dataTableNotaIngresoDetalle.rows.add(NotaIngresoDetalle).draw();
 
             }
