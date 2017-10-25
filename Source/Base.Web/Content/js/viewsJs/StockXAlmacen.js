@@ -10,6 +10,7 @@ var urlMantenimiento = baseUrl + 'StockXAlmacen1/';
 var urlMantenimientoAlmacen = baseUrl + 'Almacen/';
 var urlListaCargo = baseUrl + 'NotaIngreso/';
 var urlMantenimientoReport = baseUrl + 'Reporte/';
+var urlMantenimientoAlmacen = baseUrl + 'Almacen/';
 
 var stockxalmacen = new Array();
 $(document).ready(function () {
@@ -157,25 +158,25 @@ $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
 
   
-    $('#fechaFinalsearch,#fechaIniciosearch').datepicker({
+    $('#fechasearch').datepicker({
         autoclose: true,
         language: 'es',
         format: 'dd/mm/yyyy'
     });
 
-    $('input[name=date-range-picker]').daterangepicker({
-        'applyClass': 'btn-sm btn-success',
-        'cancelClass': 'btn-sm btn-default',
-        language: 'es',
-        locale: {
-            applyLabel: 'Aplicar',
-            cancelLabel: 'Cancelar',
-        }
-    })
-    .prev().on(ace.click_event, function () {
-        $(this).next().focus();
-    });
-
+    //$('input[name=date-range-picker]').daterangepicker({
+    //    'applyClass': 'btn-sm btn-success',
+    //    'cancelClass': 'btn-sm btn-default',
+    //    language: 'es',
+    //    locale: {
+    //        applyLabel: 'Aplicar',
+    //        cancelLabel: 'Cancelar',
+    //    }
+    //})
+    //.prev().on(ace.click_event, function () {
+    //    $(this).next().focus();
+    //});
+    CargarAlmacen();
 });
 function VisualizarDataTableStockXAlmacen() {
     dataTableStockXAlmacen = $('#StockXAlmacenDataTable').DataTable({
@@ -222,3 +223,43 @@ function VisualizarDataTableStockXAlmacen() {
     });
 }
 
+function CargarAlmacen() {
+
+    webApp.Ajax({
+        url: urlMantenimientoAlmacen + 'GetAllAlmacen',
+        async: false,
+    }, function (response) {
+        if (response.Success) {
+
+            if (response.Warning) {
+                $.gritter.add({
+                    title: 'Alerta',
+                    text: response.Message,
+                    class_name: 'gritter-warning gritter'
+                });
+            } else {
+                $.each(response.Data, function (index, item) {
+                    $("#almacensearch").append('<option value="' + item.Id + '">' + item.almac_vdescripcion + '</option>');
+                });
+            }
+        } else {
+            $.gritter.add({
+                title: 'Error',
+                text: response.Message,
+                class_name: 'gritter-error gritter'
+            });
+        }
+    }, function (response) {
+        $.gritter.add({
+            title: 'Error',
+            text: response,
+            class_name: 'gritter-error gritter'
+        });
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        $.gritter.add({
+            title: 'Error',
+            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
+            class_name: 'gritter-error gritter'
+        });
+    });
+}
