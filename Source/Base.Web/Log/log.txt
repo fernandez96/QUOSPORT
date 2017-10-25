@@ -5530,3 +5530,17 @@ Base.BusinessEntity.NotaIngresoDetalle Trace:    en AutoMapper.MappingEngine.Aut
    en Base.BusinessLogic.NotaIngresoBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 25
    en Base.Web.Controllers.NotaIngresoController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 33
 >>>>>>> b45116b6f74f5ac6ac6dde19c6c1728c56a404a0
+2017-10-25 16:13:39,131 ERROR  - Mensaje: Could not find stored procedure 'Base.SGE_ALMACEN_GETALL'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.AlmacenRepository.GetAll() en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\AlmacenRepository.cs:línea 164
+   en Base.BusinessLogic.AlmacenBL.GetAll() en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\AlmacenBL.cs:línea 34
+   en Base.Web.Controllers.AlmacenController.GetAllAlmacen() en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\AlmacenController.cs:línea 286

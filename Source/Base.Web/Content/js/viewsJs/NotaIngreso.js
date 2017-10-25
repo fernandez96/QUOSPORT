@@ -378,7 +378,7 @@ function VisualizarDataTableNotaIngresoDetalle() {
             { "data": "prdc_vdescripcion" },
             { "data": "dninc_v_unidad" },
             { "data": "dninc_costo", render: $.fn.dataTable.render.number(',', '.', 0, 'S/ ') },
-            { "data": "dninc_cantidad" }
+            { "data": "dninc_cantidad", render: $.fn.dataTable.render.number(',', '.', 2) }
          
         ],
         "aoColumnDefs": [
@@ -1036,7 +1036,7 @@ function LimpiarFormulario() {
     NotaIngresoDetalle.length = 0;
     dataTableNotaIngresoDetalle.clear().draw();
     $("#almacen").val(1);
-    $("#almacen").val(1);
+    $("#motivo").val(13);
     $('#fecha').datepicker({
         autoclose: true,
         language: 'es',
@@ -1093,7 +1093,7 @@ function CargarAlmacen() {
 
 function CargarMotivo() {
     var modelView = {
-        idtabla: 1
+        idtabla: 4
     };
     webApp.Ajax({
         url: urlMantenimiento + 'GetAll',
