@@ -4,7 +4,8 @@ var delRowID = 0;
 var delRowPos = null;
 var urlListar = baseUrl + 'Acceso/Listar';
 var nombreRol = null;
-var urlListarModulo = baseUrl + 'Acceso/GetTreeData';
+var urlThemesJstree = "~/Content/js/jsTree/default/style.css";
+var urlObtenerEstructuraJerarquia = baseUrl + 'Acceso/ObtenerEstructuraJerarquia';
 $(document).ready(function () {
     $.extend($.fn.dataTable.defaults, {
         language: { url: baseUrl + 'Content/js/dataTables/Internationalisation/es.txt' },
@@ -20,67 +21,178 @@ $(document).ready(function () {
         VisualizarDataTableRol();
     });
 
-        $('#mainTree').jstree({
-            "json_data": {
-                "ajax": {
-                    "url": urlListarModulo,
-                    "type": "POST",
-                    "dataType": "json",
-                    "contentType": "application/json charset=utf-8",
-                    "data": function (n) {
-                        return { id: n.attr ? n.attr("id") : 0 };
-                    }
-                }
-            },
-            "themes": {
-                "theme": "default",
-                "dots": false,
-                "icons": true
-                //"url": '@Url.Content("~/Content/treeView/default/style.css")'
-            },
-            "contextmenu": {
-                "items": {
-                    "create": false,
-                    "rename": false,
-                    "remove": false,
-                    "ccp": false,
-                }
-            },
-            "ui": { "initially_select": ["0"] },
-            "plugins": ["themes", "json_data", "ui", "crrm"]
-        });
 
     
-    //$('#tree1').jstree({
 
-    //    'core': {
-    //        'data': {
-    //            "url": urlListarModulo,
-    //            "type":'POST',
-    //            "data": function (node) {
-    //                return { "id": node.id };
-    //            },
-    //            "success": function (response) {
-    //                data = [];
-    //                var _this = this;
-    //                for (opnum in response) {
-    //                    var op = response[opnum]
-    //                    console.log(op);
-    //                    //node = {
-    //                    //    "data": op.info,
-    //                    //    "metadata": op,
-    //                    //    "state": "closed"
-    //                    //}
-    //                    //data.push(node);
-    //                }
-    //                return data;;
+            $("#divEstructuraMenu").jstree({
+                'core': {
+                    'data': {
+                        'url': urlObtenerEstructuraJerarquia,
+                        "type": "POST",
+                        "data":"",
+                        "dataType": "json",
+                        "contentType": "application/json charset=utf-8"
+                    },
+                    "strings": {
+                        'Loading ...': 'Cargando ...'
+                    },
 
-    //            }
-             
-    //        }
-    //    }
-    //});
-   
+                    "animation": 500,
+                    'check_callback': true,
+                    'themes': {
+                        "theme": "default",
+                        "dots": true,
+                        "icons": true,
+                        "url": urlThemesJstree
+                    }
+                },
+                'force_text': true,
+                'plugins': ["themes", "json_data", "ui", "crrm", "contextmenu", "search", "dnd"],
+                "contextmenu": {
+                    items: function ($node) {
+                        var tree = $("#divEstructuraMenu").jstree(true);
+                        var idMenu = $node.id;
+
+                        $('#divEstructuraMenu').jstree("select_node", '#' + idMenu, true);
+                        if (idMenu != -1) {
+                            return {
+                                Create: {
+                                    label: textoNuevaJerarquia,
+                                    action: function (obj) {
+                                        $node = tree.create_node($node);
+                                        tree.edit($node);
+                                        alert($node);
+                                    }
+                                },
+                                Rename: {
+                                    label: textoRenombrarJerarquia,
+                                    action: function (obj) {
+                                        tree.edit($node);
+                                    }
+                                },
+                                Delete: {
+                                    label: textoEliminarJerarquia,
+                                    action: function (data) {
+                                        dataNodo = {
+                                            instance: $.jstree.reference(data.reference),
+                                            node: $node
+                                        };
+
+                                        var mensajeEliminar = textoConfirmarEliminarJerarquia.replace("{0}", dataNodo.node.text);
+
+                                        $('#mensajeEliminar').text(mensajeEliminar);
+                                        $('#popupEliminar').modal('show');
+                                    }
+                                },
+                                AddUser: {
+                                    label: textoAsignarPersonalJerarquia,
+                                    action: function (data) {
+                                        asignarUsuario($node.id);
+                                    }
+                                }
+                            };
+                        } else {
+                            return {
+                                Create: {
+                                    label: textoNuevaJerarquia,
+                                    action: function (data) {
+                                        $node = tree.create_node($node);
+                                        tree.edit($node);
+                                    }
+                                }
+                            };
+                        }
+                    }
+                }
+            })
+            .on("create_node.jstree", function (e, data) {
+                dataNodo = data;
+                operacionInsertar = true;
+            })
+            .on("rename_node.jstree", function (e, data) {
+                if (operacionInsertar) {
+                    $('#popupEjecutarAccion [id=inputMasterAccion]').val("insertarOrga");
+                    $('#popupEjecutarAccion .modal-body').html(textoConfirmarAgregarJerarquia);
+                    $('#popupEjecutarAccion').modal('show');
+                } else {
+                    $.ajax({
+                        url: urlRenombrarJerarquia,
+                        type: 'POST',
+                        data: {
+                            "name": data.text,
+                            "id": data.node.id,
+                            "idPais": $("#IdPais").val()
+                        },
+                        success: function (response) {
+                            if (Utils.TerminoSesion(response)) {
+                                data.instance.refresh();
+                                if (response.Success) {
+
+                                    $("#Descripcion").val(data.text);
+                                }
+
+                                window.messageInfo(response.Message);
+                            }
+                        },
+                        failure: function (msg) {
+                            $.jstree.rollback(data.rlbk);
+                        },
+                        error: function (xhr, status, error) {
+                            if (Utils.TerminoSesion(xhr)) {
+                                alert(request.responseText);
+                            }
+                        }
+                    });
+                }
+            })
+            .on("loaded.jstree", function (e, data) {
+                $(this).jstree("open_all");
+                setTimeout(function () { ocultarPrimerListado("divEstructuraMenu"); }, 20);
+            })
+            .on("select_node.jstree", function (evt, data) {
+                var idSelect = data.node.id;
+                if ($("#IdJerarquia").val() != idSelect) {
+                    $("#IdJerarquia").val("");
+                    $("#divInformacion").hide();
+                    $("#divCargarResponsables").show();
+                }
+                if (idSelect == -1) {
+                    $("#divCargarResponsables").hide();
+                }
+            })
+            .on("move_node.jstree", function (evt, data) {
+                console.log(evt);
+                console.log(data);
+
+                $.ajax({
+                    url: urlMoverJerarquia,
+                    type: 'POST',
+                    data: {
+                        "jerarquiaId": data.node.id,
+                        "nuevoParentId": data.parent
+                    },
+                    success: function (response) {
+                        if (Utils.TerminoSesion(response)) {
+                            data.instance.refresh();
+                            if (response.Success) {
+                                $("#Descripcion").val(data.text);
+                            }
+
+                            data.instance.refresh();
+                            window.messageInfo(response.Message);
+                        }
+                    },
+                    failure: function (msg) {
+                        $.jstree.rollback(data.rlbk);
+                    },
+                    error: function (xhr, status, error) {
+                        if (Utils.TerminoSesion(xhr)) {
+                            alert(request.responseText);
+                        }
+                    }
+                });
+            });
+        
     // 7 bind to events triggered on the tree
     $('#tree1').on("changed.jstree", function (e, data) {
         alert(data.selected);
@@ -153,8 +265,15 @@ function VisualizarDataTableRol() {
     });
 }
 
+ function ocultarPrimerListado (id) {
+    var r = $("#" + id + " li").length;
+    if (r == 1) {
+        $("#" + id + " li[id=-1] > ins[class='jstree-icon']").hide();
+    }
+};
+
+
 function AsignarRol() {
-    
     $("#idrol").text(nombreRol);
 }
 

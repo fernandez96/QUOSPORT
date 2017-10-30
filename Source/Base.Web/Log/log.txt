@@ -5544,3 +5544,11 @@ Base.BusinessEntity.NotaIngresoDetalle Trace:    en AutoMapper.MappingEngine.Aut
    en Base.DataAccess.AlmacenRepository.GetAll() en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\AlmacenRepository.cs:línea 164
    en Base.BusinessLogic.AlmacenBL.GetAll() en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\AlmacenBL.cs:línea 34
    en Base.Web.Controllers.AlmacenController.GetAllAlmacen() en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\AlmacenController.cs:línea 286
+2017-10-25 16:38:18,578 ERROR  - Mensaje: Could not find stored procedure 'Base.SGE_KARDEX_INSERT'. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 120
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 92
+2017-10-25 16:38:22,242 ERROR  - Mensaje: Could not find stored procedure 'Base.SGE_KARDEX_INSERT'. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 120
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en D:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 92
+2017-10-27 16:40:25,490 ERROR  - Controlador:Acceso  Action:Index  Mensaje:d:\ejemplo_01\QUOSPORT\QUOSPORT\Source\Base.Web\Views\Acceso\Index.cshtml(82): error CS0103: El nombre 'JerarquiaResources' no existe en el contexto actual
+2017-10-30 14:35:15,079 ERROR  - Controlador:Acceso  Action:ObtenerEstructuraJerarquia  Mensaje:Se detectó una referencia circular al serializar un objeto de tipo 'Base.Web.Models.JsTreeModel'.
