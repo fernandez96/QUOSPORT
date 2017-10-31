@@ -118,7 +118,65 @@ namespace Base.Web.Controllers
         //        LogError(ex);
         //    }
         //}
+
+
+        [HttpPost]
+        public JsonResult ObtenerEstructuraJerarquia()
+        {
+            var rootNode = new JsTreeModel();
+            JsTreeModel nodo = new JsTreeModel();
+            try
+            {
+           
+                ModuloDTO moduloPadre = new ModuloDTO();
+                var list = ModeloBL.Instancia.GetAllActives();
+                var moduloDTOList = MapperHelper.Map<IList<Modulo>, IList<ModuloDTO>>(list);
+                List<ModuloModel> modulo = new List<ModuloModel>();
+                foreach (var jerarquiaModel in moduloDTOList)
+                {
+                    rootNode = new JsTreeModel
+                    {
+                    li_attr = new JsTreeAttribute { id = jerarquiaModel.Id.ToString(), rel = "0" },
+                    text = jerarquiaModel.tablc_vdescripcion,
+                    icon = WebUtils.RelativeWebRoot + "Content/js/jsTree/Folder.ico"
+                };
+                    nodo.children.Add(rootNode);
+                }
+                
+
+                //ObtenerHijos(moduloPadre, modulo, rootNode);
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+            }
+
+            return Json(nodo);
+        }
+
+
+        private void ObtenerHijos(ModuloModel moduloModel, IList<ModuloModel> listaJerarquia, JsTreeModel nodo)
+        {
+            List<ModuloModel> jerarquiaHijos = listaJerarquia.Where(x => x.ModuloId == moduloModel.ModuloId).ToList();//.OrderBy(p => p.Posicion).ToList();
+            if (jerarquiaHijos.Count <= 0) return;
+
+            foreach (ModuloModel modulohijos in jerarquiaHijos)
+            {
+                JsTreeModel rootNode = new JsTreeModel
+                {
+                    //state = new JsTreeNodeState {disabled = false, opened = false, selected = false},
+                    li_attr = new JsTreeAttribute { id = modulohijos.ModuloId.ToString(), rel = "0" },
+                    text = modulohijos.Descripcion,
+                    icon = WebUtils.RelativeWebRoot + "Content/js/jsTree/Folder.ico"
+                };
+
+                ObtenerHijos(modulohijos, listaJerarquia, rootNode);
+                nodo.children.Add(rootNode);
+            }
+        }
+
         #region Métodos Privados
+
 
 
         public void FormatDataTable(DataTableModel<RolFilterModel, int> dataTableModel)

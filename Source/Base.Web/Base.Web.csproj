@@ -290,6 +290,11 @@
     <Content Include="Content\css\jquery.multiselect.css" />
     <Content Include="Content\css\jquery.multiselect.filter.css" />
     <Content Include="Content\css\jquery.tagsinput.css" />
+    <Content Include="Content\css\jstree\32px.png" />
+    <Content Include="Content\css\jstree\40px.png" />
+    <Content Include="Content\css\jstree\style.css" />
+    <Content Include="Content\css\jstree\style.min.css" />
+    <Content Include="Content\css\jstree\throbber.gif" />
     <Content Include="Content\css\select.dataTables.min.css" />
     <Content Include="Content\css\select_dataTables_min.css" />
     <Content Include="Content\css\tabContentCustomer.css" />
@@ -428,6 +433,15 @@
     <None Include="Content\js\JSLINQ-vsdoc.js" />
     <Content Include="Content\js\JSLINQ.js" />
     <Content Include="Content\js\jstree.min.js" />
+    <Content Include="Content\js\jsTree\default\32px.png" />
+    <Content Include="Content\js\jsTree\default\40px.png" />
+    <Content Include="Content\js\jsTree\default\style.css" />
+    <Content Include="Content\js\jsTree\default\style.min.css" />
+    <Content Include="Content\js\jsTree\default\throbber.gif" />
+    <Content Include="Content\js\jsTree\Folder.ico" />
+    <Content Include="Content\js\jsTree\form.ico" />
+    <Content Include="Content\js\jsTree\jquery.jstree.js" />
+    <Content Include="Content\js\jsTree\jstree.js" />
     <Content Include="Content\js\languages\stimulsoft\es.xml" />
     <Content Include="Content\js\numeric.js" />
     <Content Include="Content\js\realTime.js" />
@@ -518,6 +532,7 @@
     <Compile Include="Models\FormularioModel.cs" />
     <Compile Include="Models\JsTreeModel.cs" />
     <Compile Include="Models\ModuloFilterModel.cs" />
+    <Compile Include="Models\ModuloModel.cs" />
     <Compile Include="Models\NotaIngresoFilterModel.cs" />
     <Compile Include="Models\ProductoFilterModel.cs" />
     <Compile Include="Models\ReporteFilterModel.cs" />
@@ -537,6 +552,7 @@
     <Compile Include="Utilities\ExportHelper.cs" />
     <Compile Include="Utilities\JsTreeAttribute.cs" />
     <Compile Include="Utilities\JsTreeNodeData.cs" />
+    <Compile Include="Utilities\JsTreeNodeState.cs" />
     <Compile Include="Utilities\WebUtils.cs" />
   </ItemGroup>
   <ItemGroup>
