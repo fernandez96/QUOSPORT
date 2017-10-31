@@ -30,5 +30,15 @@ namespace Base.BusinessLogic
         {
             return ProductoRepository.Instancia.Update(entity);
         }
+
+        public IList<Producto> GetAllPagingStock(PaginationParameter<int> paginationParameters)
+        {
+            return ProductoRepository.Instancia.GetAllPagingStock(paginationParameters);
+        }
+
+        public decimal GetStockProducto(int idproducto)
+        {
+            return ProductoRepository.Instancia.GetStockProducto(idproducto);
+        }
     }
 }

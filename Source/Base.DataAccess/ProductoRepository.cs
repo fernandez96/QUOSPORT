@@ -178,7 +178,51 @@ namespace Base.DataAccess
 
             return id;
         }
+        public IList<Producto> GetAllPagingStock(PaginationParameter<int> paginationParameters)
+        {
+            List<Producto> productos = new List<Producto>();
+            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_PRODUCTO_STOCK_GetAllFilter")))
+            {
+                _database.AddInParameter(comando, "@WhereFilters", DbType.String, string.IsNullOrWhiteSpace(paginationParameters.WhereFilter) ? string.Empty : paginationParameters.WhereFilter);
+                _database.AddInParameter(comando, "@OrderBy", DbType.String, string.IsNullOrWhiteSpace(paginationParameters.OrderBy) ? string.Empty : paginationParameters.OrderBy);
+                _database.AddInParameter(comando, "@Start", DbType.Int32, paginationParameters.Start);
+                _database.AddInParameter(comando, "@Rows", DbType.Int32, paginationParameters.AmountRows);
 
+                using (var lector = _database.ExecuteReader(comando))
+                {
+                    while (lector.Read())
+                    {
+                        productos.Add(new Producto
+                        {
+                            Id = lector.IsDBNull(lector.GetOrdinal("Id")) ? default(int) : lector.GetInt32(lector.GetOrdinal("Id")),
+                            prdc_vcod_producto = lector.IsDBNull(lector.GetOrdinal("prdc_vcod_producto")) ? default(string) : lector.GetString(lector.GetOrdinal("prdc_vcod_producto")),
+                            prdc_vdescripcion = lector.IsDBNull(lector.GetOrdinal("prdc_vdescripcion")) ? default(string) : lector.GetString(lector.GetOrdinal("prdc_vdescripcion")),
+                            umec_v_unidad_medida = lector.IsDBNull(lector.GetOrdinal("umec_vdescripcion")) ? default(string) : lector.GetString(lector.GetOrdinal("umec_vdescripcion")),
+                            prdc_dstock_minimo= lector.IsDBNull(lector.GetOrdinal("stocc_stock_producto")) ? default(decimal) : lector.GetDecimal(lector.GetOrdinal("stocc_stock_producto")),
+                            Cantidad = lector.IsDBNull(lector.GetOrdinal("Cantidad")) ? default(int) : lector.GetInt32(lector.GetOrdinal("Cantidad"))
+                        });
+                    }
+                }
+            }
+
+            return productos;
+        }
+
+        public decimal GetStockProducto(int idproducto)
+        {
+            decimal stock;
+
+            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_EVALUAR_STOCK")))
+            {
+                _database.AddInParameter(comando, "@idProducto", DbType.Int32, idproducto);
+                _database.AddOutParameter(comando, "@Response", DbType.Decimal, 11);
+
+                _database.ExecuteNonQuery(comando);
+                stock = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
+            }
+
+            return stock;
+        }
 
 
         #endregion

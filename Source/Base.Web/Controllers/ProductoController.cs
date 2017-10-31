@@ -56,6 +56,39 @@ namespace Base.Web.Controllers
         }
 
         [HttpPost]
+        public JsonResult ListarProductoStock(DataTableModel<ProductoFilterModel, int> dataTableModel)
+        {
+            try
+            {
+                FormatDataTable(dataTableModel);
+                var jsonResponse = new JsonResponse { Success = false };
+                var productoList = ProductoBL.Instancia.GetAllPagingStock(new PaginationParameter<int>
+                {
+                    AmountRows = dataTableModel.length,
+                    WhereFilter = dataTableModel.whereFilter,
+                    Start = dataTableModel.start,
+                    OrderBy = dataTableModel.orderBy
+                });
+                var productoDTOList = MapperHelper.Map<IEnumerable<Producto>, IEnumerable<ProductoDTO>>(productoList);
+                dataTableModel.data = productoDTOList;
+
+                if (productoDTOList.Count() > 0)
+                {
+                    dataTableModel.recordsTotal = productoList[0].Cantidad;
+                    dataTableModel.recordsFiltered = dataTableModel.recordsTotal;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+
+                ViewBag.MessageError = ex.Message;
+                dataTableModel.data = new List<UsuarioPaginationModel>();
+            }
+            return Json(dataTableModel);
+        }
+
+        [HttpPost]
         public JsonResult Add(ProductoDTO productoDTO)
         {
             var jsonResponse = new JsonResponse { Success = true };
