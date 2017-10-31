@@ -65,6 +65,8 @@
     <Compile Include="ModuloDTO.cs" />
     <Compile Include="NotaIngresoDetalleDTO.cs" />
     <Compile Include="NotaIngresoDTO.cs" />
+    <Compile Include="NotaSalidaDetalleDTO.cs" />
+    <Compile Include="NotaSalidaDTO.cs" />
     <Compile Include="ParametroDTO.cs" />
     <Compile Include="ProductoDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

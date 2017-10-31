@@ -464,6 +464,7 @@
     <Content Include="Content\js\viewsJs\envio.js" />
     <Content Include="Content\js\viewsJs\EnvioEmail.js" />
     <Content Include="Content\js\viewsJs\NotaIngreso.js" />
+    <Content Include="Content\js\viewsJs\NotaSalida.js" />
     <Content Include="Content\js\viewsJs\Parametro.js" />
     <Content Include="Content\js\viewsJs\Producto.js" />
     <Content Include="Content\js\viewsJs\Proveedor.js" />
@@ -507,6 +508,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NotaIngresoController.cs" />
+    <Compile Include="Controllers\NotaSalidaController.cs" />
     <Compile Include="Controllers\ParametroController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
@@ -653,6 +655,7 @@
     <Content Include="Views\Proveedor\Index.cshtml" />
     <Content Include="Views\NotaIngreso\Index.cshtml" />
     <Content Include="Views\StockXAlmacen\Index.cshtml" />
+    <Content Include="Views\NotaSalida\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -54,6 +54,8 @@
     <Compile Include="Modulo.cs" />
     <Compile Include="NotaIngreso.cs" />
     <Compile Include="NotaIngresoDetalle.cs" />
+    <Compile Include="NotaSalida.cs" />
+    <Compile Include="NotaSalidaDetalle.cs" />
     <Compile Include="Parametro.cs" />
     <Compile Include="Producto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

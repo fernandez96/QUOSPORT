@@ -68,6 +68,7 @@
     <Compile Include="Interfaces\ILogRepository.cs" />
     <Compile Include="Interfaces\IModuloRepository.cs" />
     <Compile Include="Interfaces\INotaIngresoRepository.cs" />
+    <Compile Include="Interfaces\INotaSalidaRepositoy.cs" />
     <Compile Include="Interfaces\IParametroRepository.cs" />
     <Compile Include="Interfaces\IProductoRepository.cs" />
     <Compile Include="Interfaces\IProveedorRepository.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="LogRepository.cs" />
     <Compile Include="ModuloRepository.cs" />
     <Compile Include="NotaIngresoRepository.cs" />
+    <Compile Include="NotaSalidaRepositoy.cs" />
     <Compile Include="ParametroRepository.cs" />
     <Compile Include="ProductoRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

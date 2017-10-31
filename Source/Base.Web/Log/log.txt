@@ -5576,3 +5576,9 @@ Base.DTO.KardexDTO Trace:    en AutoMapper.MappingEngine.AutoMapper.IMappingEngi
 2017-10-28 16:42:50,248 ERROR  - Mensaje: Error al convertir el valor del parï¿½metro de String a DateTime. Trace:    en Base.DataAccess.NotaIngresoRepository.UpdateNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:lï¿½nea 316
    en Base.BusinessLogic.NotaIngresoBL.UpdateNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:lï¿½nea 17
    en Base.Web.Controllers.NotaIngresoController.Update(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:lï¿½nea 145
+2017-10-30 21:43:48,363 ERROR  - Mensaje: Error al convertir el valor del parámetro de String a DateTime. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 120
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 92
+2017-10-30 21:44:00,493 ERROR  - Mensaje: Error al convertir el valor del parámetro de String a DateTime. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 120
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 92
