@@ -86,6 +86,7 @@ namespace Base.DTO.AutoMapper
                   .ForMember(p => p.UsuarioCreacion, x => x.MapFrom(p => p.UsuarioRegistro));
 
             Mapper.CreateMap<StatusDTO, Status>();
+            Mapper.CreateMap<KardexDTO, Kardex>();
 
 
         }

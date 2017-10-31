@@ -37,6 +37,7 @@ namespace Base.DataAccess
                             prdc_vdescripcion = lector.IsDBNull(lector.GetOrdinal("prdc_vdescripcion")) ? default(string) : lector.GetString(lector.GetOrdinal("prdc_vdescripcion")),
                             umec_vdescripcion = lector.IsDBNull(lector.GetOrdinal("umec_vdescripcion")) ? default(string) : lector.GetString(lector.GetOrdinal("umec_vdescripcion")),
                             almac_vdescripcion = lector.IsDBNull(lector.GetOrdinal("almac_vdescripcion")) ? default(string) : lector.GetString(lector.GetOrdinal("almac_vdescripcion")),
+                            almac_iid_almacen = lector.IsDBNull(lector.GetOrdinal("almac_iid_almacen")) ? default(int) : lector.GetInt32(lector.GetOrdinal("almac_iid_almacen")),
                             prdc_iid_producto = lector.IsDBNull(lector.GetOrdinal("Id")) ? default(int) : lector.GetInt32(lector.GetOrdinal("Id")),
                             Cantidad = lector.IsDBNull(lector.GetOrdinal("Cantidad")) ? default(int) : lector.GetInt32(lector.GetOrdinal("Cantidad"))
                         });

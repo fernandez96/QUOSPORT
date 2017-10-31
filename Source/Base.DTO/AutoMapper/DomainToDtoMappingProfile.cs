@@ -36,7 +36,9 @@ namespace Base.DTO.AutoMapper
             Mapper.CreateMap<Status, StatusDTO>();
             Mapper.CreateMap<Cliente, ClienteDTO>();
             Mapper.CreateMap<Proveedor, ProveedorDTO>();
-            Mapper.CreateMap<Kardex, KardexDTO>();
+            Mapper.CreateMap<Kardex, KardexDTO>()
+                           .ForMember(e => e.kardc_fecha_movimiento, x => x.MapFrom(p => p.kardc_fecha_movimiento.Equals(default(DateTime)) ? string.Empty : p.kardc_fecha_movimiento.ToShortDateString()));
+
             Mapper.CreateMap<Stock, StockDTO>();
             Mapper.CreateMap<NotaIngreso, NotaIngresoDTO>()
            .ForMember(e => e.fecha, x => x.MapFrom(p => p.ningc_fecha_nota_ingreso.Equals(default(DateTime)) ? string.Empty : p.ningc_fecha_nota_ingreso.ToShortDateString()));

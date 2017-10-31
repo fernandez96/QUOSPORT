@@ -42,7 +42,7 @@
                     <!-- PAGE CONTENT BEGINS -->
                     <!-- PAGE CONTENT BEGINS -->
                     <div class="search-area well no-margin-bottom">
-                        <form id="NotaIngresoSearchForm" role="form">
+                        <form id="stockXAlmacenSearchForm" role="form">
                             <div class="row">
                                 <div class="col-md-10">
                                     <div class="col-md-5">
@@ -64,7 +64,7 @@
                                             </span>
 
                                             <div class="input-group-btn">
-                                                <button type="button" id="btnSearchNotaIngreso" class="btn btn-primary btn-sm">
+                                                <button type="button" id="btnSearchStockXAlmacen" class="btn btn-primary btn-sm">
                                                     <i class="ace-icon fa fa-search icon-on-right bigger-110 right"></i>Buscar
                                                 </button>
                                             </div>
@@ -75,7 +75,7 @@
                                 <div class="clearfix">
                                     <div class="pull-right tableTools-container">
                                         <div class="dt-buttons btn-overlap btn-group">
-                                            <a id="btnVerkardex" data-toggle="tooltip" class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="Nuevo" title="Nuevo">
+                                            <a id="btnVerkardex" data-toggle="tooltip" class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="Nuevo" title="Ver Kardex">
                                                 <span><i class="fa fa-list bigger-110 blue"></i> </span>
                                             </a>
                                          
@@ -96,7 +96,7 @@
                                     @*<div class="col-md-5">*@
                                         @*<div class="input-group">*@
                                             
-                                            <input type="text" id="fechasearch" autocomplete="off" name="fechasearch" placeholder="Descripción de producto" class="form-control" />
+                                            <input type="text" id="descripcionProducto" autocomplete="off" name="descripcionProducto" placeholder="Descripción de producto" class="form-control" />
 
                                         @*</div>*@
                                     @*</div>*@
@@ -115,6 +115,7 @@
                                     <thead>
                                         <tr>
                                             <th>Id</th>
+                                            <th>Id</th>
                                             <th class="hidden-120">Almacen</th>
                                             <th class="hidden-120">Producto</th>
                                             <th class="hidden-992">U.M</th>
@@ -131,12 +132,12 @@
             <!-- FILTER BEGINS-->
             <!-- FILTER ENDS-->
 
-            <div id='Krdex' tabindex='-1' role='dialog' aria-hidden='true' class='modal fade' data-backdrop='static' style='z-index:100000;'>
+            <div id='Kardex' tabindex='-1' role='dialog' aria-hidden='true' class='modal fade' data-backdrop='static' style='z-index:100000;'>
                 <div class='modal-dialog pasos'>
                     <div class='modal-content'>
                         <div class='modal-header'>
                             <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class='modal-title'> <i class="fa fa-sitemap" aria-hidden="true"></i> <span id="accionTitle"></span> Nota de Ingreso <span id="idtable"></span></h4>
+                            <h4 class='modal-title'> <i class="fa fa-sitemap" aria-hidden="true"></i> <span id="accionTitle"></span> Kardex <span id="strproducto"></span></h4>
                         </div>
                         <div class='modal-body'>
                             <div class="row">
@@ -145,19 +146,20 @@
                                     <div class="col-xs-11-97">
                                      
                                         <!-- #section:elements.form -->
-                                        <div class="col-xs-12 col-sm-12 widget-container-col ui-sortable" id="widget-container-col-1">
-                                        </div>
+                                      
 
                                         <div class="table-responsive">
-                                            <table id="NotaIngresoDetalleDataTable" class="table table-bordered dataTable no-footer">
+                                            <table id="KardexDataTable" class="table table-bordered dataTable no-footer">
                                                 <thead>
                                                     <tr>
                                                         <th>Id</th>
-                                                        <th class="hidden-120 center">Item</th>
-                                                        <th class="hidden-120 center">Producto</th>
-                                                        <th class="hidden-992 center">U.M</th>
-                                                        <th class="hidden-992 center">Costo</th>
-                                                        <th class="hidden-120 center">Cantidad</th>
+                                                        <th class="hidden-120 center">Nº Documento</th>
+                                                        <th class="hidden-992 center">Fecha</th>
+                                                        <th class="hidden-992 center">Motivo</th>
+                                                        <th class="hidden-120 center">Ingreso</th>
+                                                        <th class="hidden-120 center">Salida</th>
+                                                        <th class="hidden-120 center">Saldo</th>
+                                                        <th class="hidden-992 center">Observaci&oacute;n</th>
                                                     </tr>
                                                 </thead>
                                             </table>
@@ -169,7 +171,7 @@
                     </div>
                     <div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>
                         <button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-close'></i> Salir</button>
-                        <button class='btn btn-primary btn-sm ' id="btnGuardarNotaIngreso"><i class='fa fa-floppy-o'></i> Guardar</button>
+                        <button class='btn btn-primary btn-sm hidden' id="btnGuardarNotaIngreso"><i class='fa fa-floppy-o'></i> Guardar</button>
                     </div>
                 </div>
             </div>
@@ -197,7 +199,7 @@
     <script src="@Url.Content("~/Content/js/jquery-chosen.js")"></script>
     <script src="@Url.Content("~/Content/js/jquery.blockUI.js")"></script>
     <script src="@Url.Content("~/Content/js/shCore.js")"></script>
-    <script src="@Url.Content("~/Content/js/dataTables_editor_min.js")"></script>
+    @*<script src="@Url.Content("~/Content/js/dataTables_editor_min.js")"></script>*@
    <script src="@Url.Content("~/Content/js/date-time/moment.js")"></script>
     <script src="@Url.Content("~/Content/js/date-time/daterangepicker.js")"></script>
     <script src="@Url.Content("~/Content/js/date-time/bootstrap-datepicker.js")"></script>

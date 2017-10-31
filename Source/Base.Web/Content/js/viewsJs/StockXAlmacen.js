@@ -1,63 +1,54 @@
 ﻿var dataTableStockXAlmacen = null;
-var dataTableNotaIngresoDetalle = null;
+var dataTableKardex = null;
 var dataTableProducto = null;
 var formularioMantenimiento = "NotaIngresoForm";
 var formularioMantenimientoDetalle = "ProductoDetalleForm";
 var delRowPos = null;
 var delRowID = 0;
-var urlListar = baseUrl + 'NotaIngreso/Listar';
-var urlMantenimiento = baseUrl + 'StockXAlmacen1/';
+var urlListar = baseUrl + 'StockXAlmacen/Listar';
+var urlMantenimiento = baseUrl + 'StockXAlmacen/';
 var urlMantenimientoAlmacen = baseUrl + 'Almacen/';
 var urlListaCargo = baseUrl + 'NotaIngreso/';
 var urlMantenimientoReport = baseUrl + 'Reporte/';
 var urlMantenimientoAlmacen = baseUrl + 'Almacen/';
-
+var idProducto = 0;
+var idAlmacen = 0;
 var stockxalmacen = new Array();
 $(document).ready(function () {
-    var stockXAlmacenHub = $.connection.stockXAlmacenHub;
+    //var stockXAlmacenHub = $.connection.stockXAlmacenHub;
 
-    stockXAlmacenHub.client.listar = function (response) {
-        if (response.Success) {
+    //stockXAlmacenHub.client.listar = function (response) {
+    //    if (response.Success) {
 
-            if (response.Warning) {
-                $.gritter.add({
-                    title: 'Alerta',
-                    text: response.Message,
-                    class_name: 'gritter-warning gritter'
-                });
-            } else {
-                stockxalmacen.length = 0;
-                dataTableStockXAlmacen.clear().draw();
-                stockxalmacen = response.Data;
-                dataTableStockXAlmacen.rows.add(stockxalmacen).draw();
-            }
-        } else {
-            $.gritter.add({
-                title: 'Error',
-                text: response.Message,
-                class_name: 'gritter-error gritter'
-            });
-        }
+    //        if (response.Warning) {
+    //            $.gritter.add({
+    //                title: 'Alerta',
+    //                text: response.Message,
+    //                class_name: 'gritter-warning gritter'
+    //            });
+    //        } else {
+    //            stockxalmacen.length = 0;
+    //            dataTableStockXAlmacen.clear().draw();
+    //            stockxalmacen = response.Data;
+    //            dataTableStockXAlmacen.rows.add(stockxalmacen).draw();
+    //        }
+    //    } else {
+    //        $.gritter.add({
+    //            title: 'Error',
+    //            text: response.Message,
+    //            class_name: 'gritter-error gritter'
+    //        });
+    //    }
 
-    };
+    //};
 
-    stockXAlmacenHub.client.listarStockXAlmacenData = function () {
-        //var modelview = {
-        //    dataTableModel: {
-        //        filter: {
-        //            almacenSearch:,
-        //            descripcionSearch:,
-        //            FechaInicialSearch:,
-        //            FechaFinalSearch:,
-        //        }
-        //    }
-        //};
-        stockXAlmacenHub.server.listar();
-    };
+    //stockXAlmacenHub.client.listarStockXAlmacenData = function () {
+    //    stockXAlmacenHub.server.listar();
+    //};
 
-    $.connection.hub.start().done(function () {
-        stockXAlmacenHub.server.listar();
-    });
+    //$.connection.hub.start().done(function () {
+    //    stockXAlmacenHub.server.listar();
+    //});
 
 
 
@@ -73,7 +64,8 @@ $(document).ready(function () {
     });
     checkSession(function () {
         VisualizarDataTableStockXAlmacen();
-        ListarStockXAlmacen();
+        VisualizarDataTableKardex();
+
     });
 
  
@@ -107,13 +99,13 @@ $(document).ready(function () {
     });
 
     $('#btnImprimir').on('click', function () {
-        rowNotaIngreso = dataTableNotaIngreso.row('.selected').data();
+        rowNotaIngreso = dataTableStockXAlmacen.row('.selected').data();
         if (typeof rowNotaIngreso === "undefined") {
             webApp.showMessageDialog("Por favor seleccione un registro.");
         }
         else {
             checkSession(function () {
-                Imprimir(rowNotaIngreso.Id);
+                //Imprimir(rowNotaIngreso.Id);
             });
         }
     });
@@ -122,10 +114,10 @@ $(document).ready(function () {
         GetCorrelativoCab(this.value);
     });
 
-    $("#btnSearchNotaIngreso").on("click", function (e) {
-        if ($('#NotaIngresoSearchForm').valid()) {
+    $("#btnSearchStockXAlmacen").on("click", function (e) {
+        if ($('#stockXAlmacenSearchForm').valid()) {
             checkSession(function () {
-                dataTableNotaIngreso.ajax.reload();
+                dataTableStockXAlmacen.ajax.reload();
             });
         }
         e.preventDefault();
@@ -138,6 +130,22 @@ $(document).ready(function () {
             });
         }
         e.preventDefault();
+    });
+
+    $("#btnVerkardex").on("click", function (e) {
+        rowNotaIngreso = dataTableStockXAlmacen.row('.selected').data();
+        if (typeof rowNotaIngreso === "undefined") {
+            webApp.showMessageDialog("Por favor seleccione un registro.");
+        }
+        else {
+            checkSession(function () {
+                idAlmacen = rowNotaIngreso.almac_iid_almacen;
+                idProducto = rowNotaIngreso.prdc_iid_producto;
+                $("#strproducto").text(' - '+rowNotaIngreso.almac_vdescripcion + ' - ' + rowNotaIngreso.prdc_vdescripcion)
+                dataTableKardex.ajax.reload();
+                $("#Kardex").modal("show");
+            });
+        }
     });
     webApp.validarNumerico(['costo', 'cantidad']);
     webApp.InicializarValidacion(formularioMantenimientoDetalle,
@@ -182,22 +190,34 @@ function VisualizarDataTableStockXAlmacen() {
     dataTableStockXAlmacen = $('#StockXAlmacenDataTable').DataTable({
         "bFilter": false,
         "bProcessing": true,
-        "serverSide": false,
+        "serverSide": true,
         //"scrollY": "350px",              
-        "data":stockxalmacen,
-        "dom": 'fltip',
-        dataFilter: function (data) {
-            if (data.substring(0, 9) == "<!DOCTYPE") {
-                redireccionarLogin("Sesión Terminada", "Se terminó la sesión");
-            } else {
-                return data;
-                //var json = jQuery.parseJSON(data);
-                //return JSON.stringify(json); // return JSON string
+        "ajax": {
+            "url": urlListar,
+            "type": "POST",
+            "data": function (request) {
+                request.filter = new Object();
+                request.filter = {
+                    almacenSearch: $("#almacensearch").val(),
+                    descripcionSearch: $("#descripcionProducto").val(),
+                    FechaInicialSearch: '01/01/2017',
+                    FechaFinalSearch: $("#fechasearch").val()
+                }
+            },
+            dataFilter: function (data) {
+                if (data.substring(0, 9) == "<!DOCTYPE") {
+                    redireccionarLogin("Sesión Terminada", "Se terminó la sesión");
+                } else {
+                    return data;
+                    //var json = jQuery.parseJSON(data);
+                    //return JSON.stringify(json); // return JSON string
+                }
             }
         },
         "bAutoWidth": false,
         "columns": [
             { "data": "prdc_iid_producto" },
+           { "data": "almac_iid_almacen" },
             { "data": "almac_vdescripcion" },
             { "data": "prdc_vdescripcion" },
             { "data": "umec_vdescripcion" },
@@ -209,10 +229,11 @@ function VisualizarDataTableStockXAlmacen() {
         "aoColumnDefs": [
 
             { "bVisible": false, "aTargets": [0] },
-            { "className": "center hidden-120", "aTargets": [1], "width": "10%" },
-            { "className": "hidden-120", "aTargets": [2], "width": "30%" },
-            { "className": "center hidden-992", "aTargets": [3], "width": "10%" },
-            { "className": "center hidden-120", "aTargets": [4], "width": "10%" },
+            { "bVisible": false, "aTargets": [1] },
+            { "className": "center hidden-120", "aTargets": [2], "width": "10%" },
+            { "className": "hidden-120", "aTargets": [3], "width": "30%" },
+            { "className": "center hidden-992", "aTargets": [4], "width": "10%" },
+            { "className": "center hidden-120", "aTargets": [5], "width": "10%" },
           
 
         ],
@@ -226,8 +247,69 @@ function VisualizarDataTableStockXAlmacen() {
     });
 }
 
-function CargarAlmacen() {
+function VisualizarDataTableKardex() {
+    dataTableKardex = $('#KardexDataTable').DataTable({
+        "bFilter": false,
+        "bProcessing": true,
+        "serverSide": true,
+        //"scrollY": "350px",              
+        "ajax": {
+            "url": urlMantenimiento + 'ListarKardex',
+            "type": "POST",
+            "data": function (request) {
+                request.KardexDTO = new Object();
+                request.KardexDTO={
+                    prdc_icod_producto: idProducto,
+                    almac_icod_almacen:idAlmacen
+                }
+            },
+            dataFilter: function (data) {
+                if (data.substring(0, 9) == "<!DOCTYPE") {
+                    redireccionarLogin("Sesión Terminada", "Se terminó la sesión");
+                } else {
+                    return data;
+                    //var json = jQuery.parseJSON(data);
+                    //return JSON.stringify(json); // return JSON string
+                }
+            }
+        },
+        "bAutoWidth": false,
+        "columns": [
+            { "data": "prdc_icod_producto" },
+            { "data": "strDocumento" },
+            { "data": "kardc_fecha_movimiento" },
+            { "data": "strMotivo" },
+            { "data": "dblIngreso", render: $.fn.dataTable.render.number(',', '.', 2) },
+            { "data": "dblSalida", render: $.fn.dataTable.render.number(',', '.', 2) },
+            { "data": "dblSaldo", render: $.fn.dataTable.render.number(',', '.', 2) },
+            { "data": "kardc_observaciones"},
 
+        ],
+
+
+        "aoColumnDefs": [
+
+            { "bVisible": false, "aTargets": [0] },
+            { "className": "center hidden-120", "aTargets": [1], "width": "10%" },
+            { "className": "center hidden-992", "aTargets": [2], "width": "10%" },
+            { "className": "center hidden-992", "aTargets": [3], "width": "10%" },
+            { "className": "center hidden-120", "aTargets": [4], "width": "10%" },
+            { "className": "center hidden-120", "aTargets": [5], "width": "10%" },
+            { "className": "center hidden-120", "aTargets": [6], "width": "10%" },
+            { "className": "center hidden-992", "aTargets": [7], "width": "10%" },
+
+        ],
+        "order": [[1, "desc"]],
+        "initComplete": function (settings, json) {
+            // AddSearchFilter();
+        },
+        "fnDrawCallback": function (oSettings) {
+
+        }
+    });
+}
+
+function CargarAlmacen() {
     webApp.Ajax({
         url: urlMantenimientoAlmacen + 'GetAllAlmacen',
         async: false,

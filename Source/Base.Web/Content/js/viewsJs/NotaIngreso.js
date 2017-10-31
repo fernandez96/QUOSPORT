@@ -744,7 +744,6 @@ function GuardarNotaIngreso() {
                 dataTableNotaIngreso.ajax.reload();
                 $("#NuevaNotaIngreso").modal("hide");
                 LimpiarFormulario();
-                ListarStockXAlmacen();
                 $.gritter.add({
                     title: response.Title,
                     text: response.Message,

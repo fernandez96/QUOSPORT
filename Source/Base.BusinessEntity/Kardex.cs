@@ -16,5 +16,14 @@ namespace Base.BusinessEntity
         public int kardc_iid_motivo { get; set; }
         public string kardc_observaciones { get; set; }
         public int status { get; set; }
+        public string strMotivo { get; set; }
+        public string strAlmacen { get; set; }
+        public string strCodProducto { get; set; }
+        public string strProducto { get; set; }
+        public decimal dblIngreso { get; set; }
+        public decimal dblSalida { get; set; }
+        public decimal dblSaldo { get; set; }
+        public string strDocumento { get; set; }
+
     }
 }

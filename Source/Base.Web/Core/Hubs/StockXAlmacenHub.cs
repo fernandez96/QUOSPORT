@@ -20,7 +20,7 @@ namespace Base.Web.Core.Hubs
             var jsonResponse = new JsonResponse { Success = false };
             try
             {
-                //FormatDataTable(dataTableModel);
+             //  FormatDataTable(dataTableModel);
                 var stockXalmacen = StockXAlmacenBL.Instancia.GetAllPaging(new PaginationParameter<int>
                 {
                     AmountRows = 1000,

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Base.DataAccess.Interfaces
 {
-    public interface IKardexRepository
+    public interface IKardexRepository<T,Q> where T:class
     {
+        IList<T> GetAll(T entity);
     }
 }
