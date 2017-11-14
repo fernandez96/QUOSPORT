@@ -170,9 +170,9 @@ $(document).ready(function () {
         autoclose: true,
         language: 'es',
         format: 'dd/mm/yyyy'
-    });
+    }).datepicker('setDate', new Date());;
 
-    //$('input[name=date-range-picker]').daterangepicker({
+    //$('#fechasearch').daterangepicker({
     //    'applyClass': 'btn-sm btn-success',
     //    'cancelClass': 'btn-sm btn-default',
     //    language: 'es',
@@ -347,4 +347,15 @@ function CargarAlmacen() {
             class_name: 'gritter-error gritter'
         });
     });
+}
+
+function buscar(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13) {
+        if ($('#stockXAlmacenSearchForm').valid()) {
+            checkSession(function () {
+                dataTableStockXAlmacen.ajax.reload();
+            });
+        }
+    }
 }

@@ -34,7 +34,9 @@ namespace Base.Web.Controllers
                 var stockList = StockXAlmacenBL.Instancia.GetAllPaging(new PaginationParameter<int>
                 {
                     AmountRows = dataTableModel.length,
-                    WhereFilter = dataTableModel.whereFilter,
+                    WhereFilterI = dataTableModel.whereFilterI,
+                    WhereFilterS=dataTableModel.whereFilterS,
+                    WhereFilterP=dataTableModel.whereFilterP,
                     Start = dataTableModel.start,
                     OrderBy = dataTableModel.orderBy
                 });
@@ -97,27 +99,33 @@ namespace Base.Web.Controllers
                 var column = dataTableModel.columns[columnIndex].data;
                 dataTableModel.orderBy = (" [" + column + "] " + columnDir + " ");
             }
-            string WhereModel = "WHERE ND.dninc_ilag_estado in(1)";
+            string WhereModelI = "WHERE ing.ningc_ilag_estado in(1)";
+            string WhereModelS = "WHERE nsa.nsalc_ilag_estado in(1)";
+            string WhereModelP="";
+
 
             if (dataTableModel.filter.almacenSearch != null)
             {
-                WhereModel += "  AND A.almac_iid_almacen = " + dataTableModel.filter.almacenSearch + " ";
+                WhereModelI += "  AND ing.almac_icod_almacen = " + dataTableModel.filter.almacenSearch + " ";
+                WhereModelS += "  AND nsa.almac_icod_almacen = " + dataTableModel.filter.almacenSearch + " ";
             }
 
             if (dataTableModel.filter.descripcionSearch != null)
             {
-                WhereModel += "  AND P.prdc_vdescripcion LIKE '%" + dataTableModel.filter.descripcionSearch + "%'";
+                WhereModelP += "  AND prodt.prdc_vdescripcion LIKE '%" + dataTableModel.filter.descripcionSearch + "%'";
             }
 
             if (dataTableModel.filter.FechaInicialSearch != null)
             {
-                WhereModel += " AND N.ningc_fecha_nota_ingreso>= CAST('" + dataTableModel.filter.FechaInicialSearch + "' AS DATETIME) ";
+                WhereModelI += " AND ing.ningc_fecha_nota_ingreso>= CAST('" + dataTableModel.filter.FechaInicialSearch + "' AS DATETIME) ";
             }
             if (dataTableModel.filter.FechaFinalSearch != null)
             {
-                WhereModel += " AND N.ningc_fecha_nota_ingreso<= DATEADD(DAY,1,CAST('" + dataTableModel.filter.FechaFinalSearch + "' AS DATETIME)) ";
+                WhereModelI += " AND ing.ningc_fecha_nota_ingreso<= DATEADD(DAY,1,CAST('" + dataTableModel.filter.FechaFinalSearch + "' AS DATETIME)) ";
             }
-            dataTableModel.whereFilter = WhereModel;
+            dataTableModel.whereFilterI = WhereModelI;
+            dataTableModel.whereFilterS = WhereModelS;
+            dataTableModel.whereFilterP = WhereModelP;
         }
 
 

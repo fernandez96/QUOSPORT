@@ -80,6 +80,7 @@
     <Compile Include="Interfaces\IStockXAlmacenRepository.cs" />
     <Compile Include="Interfaces\ITablaRegistroRepository.cs" />
     <Compile Include="Interfaces\ITipoDocumentoRepository.cs" />
+    <Compile Include="Interfaces\ITransferenciaRepository.cs" />
     <Compile Include="Interfaces\IUnidadMedidaRepository.cs" />
     <Compile Include="Interfaces\IUsuarioRepository.cs" />
     <Compile Include="KardexRepository.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="StockXAlmacenRepository.cs" />
     <Compile Include="TablaRegistroRepository.cs" />
     <Compile Include="TipoDocumentoRepository.cs" />
+    <Compile Include="TransferenciaRepository.cs" />
     <Compile Include="UnidadMedidaRepository.cs" />
     <Compile Include="UsuarioRepository.cs" />
   </ItemGroup>

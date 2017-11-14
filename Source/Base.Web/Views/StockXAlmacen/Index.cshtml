@@ -58,10 +58,8 @@
                                             <span class="input-group-addon" style="border-radius:7px">
                                                 <label>Hasta</label>
                                             </span>
-                                            <input type="text" id="fechasearch" autocomplete="off" name="fechasearch" placeholder="Hasta" class="form-control" />
-                                            <span class="input-group-addon" style="border-radius:7px">
-                                                <i class="fa fa-calendar bigger-110"></i>
-                                            </span>
+                                            <input type="text" id="fechasearch" autocomplete="off" name="fechasearch" placeholder="Seleccione fecha" class="form-control" />
+                                            
 
                                             <div class="input-group-btn">
                                                 <button type="button" id="btnSearchStockXAlmacen" class="btn btn-primary btn-sm">
@@ -96,7 +94,7 @@
                                     @*<div class="col-md-5">*@
                                         @*<div class="input-group">*@
                                             
-                                            <input type="text" id="descripcionProducto" autocomplete="off" name="descripcionProducto" placeholder="Descripción de producto" class="form-control" />
+                                            <input type="text" id="descripcionProducto" autocomplete="off" name="descripcionProducto" onkeypress="buscar(event)" placeholder="Escriba descripción de producto" class="form-control" />
 
                                         @*</div>*@
                                     @*</div>*@
@@ -104,11 +102,10 @@
                             </div>
                         </form>
                     </div>
-                    <br />
                     <div class="col-xs-12">
-                        <div class="table-header">
-                            Resultado "Nota de ingreso"
-                        </div>
+                        <h4 class="row-fluid header smaller lighter blue">
+                            <span class="span5"> Resultados de Stock por Almacen</span>
+                        </h4>
                         <div class="dataTables_wrapper form-inline no-footer">
                             <div class="table-responsive">
                                 <table id="StockXAlmacenDataTable" class="table table-bordered" cellspacing="0" role="grid" aria-describedby="dynamic-table_info">
@@ -147,7 +144,7 @@
                                      
                                         <!-- #section:elements.form -->
                                       
-
+                                        
                                         <div class="table-responsive">
                                             <table id="KardexDataTable" class="table table-bordered dataTable no-footer">
                                                 <thead>

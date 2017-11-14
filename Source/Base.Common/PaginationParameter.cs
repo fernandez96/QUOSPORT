@@ -7,5 +7,11 @@
         public T CurrentPage { get; set; }
         public T AmountRows { get; set; }
         public string WhereFilter { get; set; }
+        public string WhereFilterI { get; set; }
+
+        public string WhereFilterS { get; set; }
+
+        public string WhereFilterP { get; set; }
+
     }
 }

@@ -5,7 +5,7 @@ namespace Base.Web.Models
     public class NotaSalidaFilterModel
     {
         public string numeroSearch { get; set; }
-        public DateTime fechaInicioSearch { get; set; }
-        public DateTime fechaFinSearch { get; set; }
+        public string fechaInicioSearch { get; set; }
+        public string fechaFinSearch { get; set; }
     }
 }

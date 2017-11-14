@@ -369,10 +369,14 @@ namespace Base.Web.Controllers
             {
                 WhereModel += "  AND n.ningc_numero_nota_ingreso = '" + dataTableModel.filter.numeroSearch + "' ";
             }
-            //if (dataTableModel.filter.fechaInicioSearch != null)
-            //{
-            //    WhereModel += "  AND n.ningc_fecha_nota_ingreso LIKE '%" + dataTableModel.filter.fechaInicioSearch + "%'";
-            //}
+            if (dataTableModel.filter.fechaInicioSearch != null)
+            {
+                WhereModel += " AND n.ningc_fecha_nota_ingreso>= CAST('" + dataTableModel.filter.fechaInicioSearch + "' AS DATETIME) ";
+            }
+            if (dataTableModel.filter.fechaFinSearch != null)
+            {
+                WhereModel += " AND n.ningc_fecha_nota_ingreso<= DATEADD(DAY,1,CAST('" + dataTableModel.filter.fechaFinSearch + "' AS DATETIME)) ";
+            }
             dataTableModel.whereFilter = WhereModel;
         }
 

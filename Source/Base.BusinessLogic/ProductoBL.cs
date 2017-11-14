@@ -36,9 +36,9 @@ namespace Base.BusinessLogic
             return ProductoRepository.Instancia.GetAllPagingStock(paginationParameters);
         }
 
-        public decimal GetStockProducto(int idproducto)
+        public decimal GetStockProducto(int idproducto, int idAlmacen)
         {
-            return ProductoRepository.Instancia.GetStockProducto(idproducto);
+            return ProductoRepository.Instancia.GetStockProducto(idproducto, idAlmacen);
         }
     }
 }

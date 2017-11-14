@@ -11,7 +11,7 @@ namespace Base.DataAccess.Interfaces
         T GetById(T entity);
         IList<T> GetAllPaging(PaginationParameter<Q> paginationParameters);
         IList<T> GetAllPagingStock(PaginationParameter<Q> paginationParameters);
-        decimal GetStockProducto(Q idproducto);
+        decimal GetStockProducto(Q idproducto, Q idAlmacen);
 
 
     }

@@ -28,7 +28,7 @@
                     <a href="javascript:void(0)">ALMACEN</a>
                 </li>
                 <li class="active">REGISTRO</li>
-                <li class="active">SALIDAS VARIOS</li>
+                <li class="active">TRANSFERENCIAS</li>
             </ul><!-- /.breadcrumb -->
             <!-- /section:basics/content.searchbox -->
         </div>
@@ -51,8 +51,8 @@
                                         @*<div class="input-group">*@
                                         <input type="text" id="fechasearch" autocomplete="off" name="fechasearch" placeholder="De : dd/mm/yyyy   Hasta : dd/mm/yyyy" maxlength="100" class="form-control" />
                                         @*<span class="input-group-addon" style="border-radius:7px">
-                                            <i class="fa fa-calendar bigger-110"></i>
-                                        </span>*@
+                                                <i class="fa fa-calendar bigger-110"></i>
+                                            </span>*@
                                         @*</div>*@
                                         <div class="input-group-btn">
                                             <button type="button" id="btnSearchNotaIngreso" class="btn btn-primary btn-sm">
@@ -85,7 +85,7 @@
                     <br />
                     <div class="col-xs-12">
                         <h4 class="row-fluid header smaller lighter blue">
-                            <span class="span5"> Resultados de Nota Salida</span>
+                            <span class="span5"> Resultados de Transferencias</span>
                         </h4>
                         <div class="dataTables_wrapper form-inline no-footer">
                             <div class="table-responsive">
@@ -115,7 +115,7 @@
                     <div class='modal-content'>
                         <div class='modal-header'>
                             <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class='modal-title'> <i class="fa fa-sitemap" aria-hidden="true"></i> <span id="accionTitle"></span> Nota de Salida <span id="idtable"></span></h4>
+                            <h4 class='modal-title'> <i class="fa fa-sitemap" aria-hidden="true"></i> <span id="accionTitle"></span> transferencia <span id="idtable"></span></h4>
                         </div>
                         <div class='modal-body'>
                             <div class="row">
@@ -128,7 +128,7 @@
                                         <div class="col-xs-12 col-sm-12 widget-container-col ui-sortable" id="widget-container-col-1">
                                             <div class="widget-box ui-sortable-handle" id="widget-box-1" style="opacity: 1;">
                                                 <div class="widget-header">
-                                                    <h5 class="widget-title">Registre Nota de salida</h5>
+                                                    <h5 class="widget-title">Registre de Transferencia</h5>
 
                                                     <div class="widget-toolbar">
 
@@ -146,19 +146,11 @@
                                                         <form class="form-horizontal" role="form" id="NotaIngresoForm">
                                                             <div class="form-group">
                                                                 <div class="col-xs-12">
-
-                                                                    <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="almacen">Almacen </label>
-                                                                    <div class="col-xs-3">
-                                                                        <div class="clearfix">
-                                                                            <select id="almacen" name="almacen" class="col-xs-12 col-sm-12"></select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="nroNI">Nro. N/I </label>
+                                                                    <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="nroNI">Nro. Transf </label>
 
                                                                     <div class="col-xs-3">
                                                                         <div class="clearfix">
                                                                             <input type="text" id="nroNI" disabled="disabled" autocomplete="off" name="nroNI" placeholder="000000" maxlength="7" class="col-xs-12 col-sm-12" />
-
                                                                         </div>
                                                                     </div>
                                                                     <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="fecha">Fecha </label>
@@ -172,17 +164,23 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-
+                                                                
+                                                                 
+                                                                    <label class="control-label col-xs-2 col-sm-1 no-padding-right" for="almacenSalida">Alm.Salida</label>
+                                                                    <div class="col-xs-3">
+                                                                        <div class="clearfix">
+                                                                            <select id="almacenSalida" name="almacenSalida" class="col-xs-12 col-sm-12"></select>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
 
 
                                                             <div class="form-group">
-                                                                <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="motivo">Motivo </label>
-
-                                                                <div class="col-xs-12 col-sm-9">
+                                                                <label class="control-label col-xs-1 col-sm-1 no-padding-left" for="almacenIngreso">Alm.Ingreso</label>
+                                                                <div class="col-xs-3">
                                                                     <div class="clearfix">
-                                                                        <select id="motivo" name="motivo" class="col-xs-12 col-sm-4"></select>
+                                                                        <select id="almacenIngreso" name="almacenIngreso" class="col-xs-12 col-sm-12"></select>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -203,7 +201,7 @@
                                         </div>
 
                                         <h3 class="row-fluid header smaller lighter blue">
-                                            <span class="span7"> Registro de los productos a la nota de salida</span>
+                                            <span class="span7"> Registro de los productos transferencia</span>
 
                                             <span class="span5">
                                                 <span class="pull-right inline">
@@ -313,7 +311,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                      
+
                                         <input type="hidden" name="NotaIngresoDetalleId" id="NotaIngresoDetalleId" value="0" />
                                     </form>
                                 </div>
@@ -429,7 +427,7 @@
 
 
     <!-- inline scripts related to this page -->
-    <script src="@Url.Content("~/Content/js/viewsJs/NotaSalida.js")"></script>
+    <script src="@Url.Content("~/Content/js/viewsJs/Transferencia.js")"></script>
     <!-- Ajax BlockUi scripts -->
     <script type="text/javascript">
         var pageBlocked = false;

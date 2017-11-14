@@ -208,13 +208,14 @@ namespace Base.DataAccess
             return productos;
         }
 
-        public decimal GetStockProducto(int idproducto)
+        public decimal GetStockProducto(int idproducto, int idAlmacen)
         {
             decimal stock;
 
             using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_EVALUAR_STOCK")))
             {
                 _database.AddInParameter(comando, "@idProducto", DbType.Int32, idproducto);
+                _database.AddInParameter(comando, "@idAlmacen", DbType.Int32, idAlmacen);
                 _database.AddOutParameter(comando, "@Response", DbType.Decimal, 11);
 
                 _database.ExecuteNonQuery(comando);
@@ -223,6 +224,7 @@ namespace Base.DataAccess
 
             return stock;
         }
+
 
 
         #endregion

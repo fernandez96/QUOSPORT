@@ -87,19 +87,7 @@ namespace Base.Web.Controllers
             try
             {
                 int resultado = 0;
-                int respuesta=1;
                 var notaSalida = MapperHelper.Map<NotaSalidaDTO, NotaSalida>(notaSalidaDTO);
-                foreach (var item in notaSalidaDTO.listaDetalleNS)
-                {
-                    if (stockProducto(item.prdc_icod_producto, item.nsald_cantidad) == 0)
-                    {
-                        respuesta = 0;
-                        break;
-                    }
-                }
-
-                if (respuesta > 0)
-                {
                     resultado = NotaSalidaBL.Instancia.AddNS(notaSalida);
                     if (resultado > 0)
                     {
@@ -112,7 +100,7 @@ namespace Base.Web.Controllers
                         jsonResponse.Warning = true;
                         jsonResponse.Message = Mensajes.RegistroFallido;
                     }
-                }
+                
                 
 
                 LogBL.Instancia.Add(new Log
@@ -147,15 +135,15 @@ namespace Base.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult Update(NotaIngresoDTO notaIngresoDTO)
+        public JsonResult Update(NotaSalidaDTO notaSalidaDTO)
         {
             var jsonResponse = new JsonResponse { Success = true };
             try
             {
-                var notaIngreso = MapperHelper.Map<NotaIngresoDTO, NotaIngreso>(notaIngresoDTO);
+                var notaSalida = MapperHelper.Map<NotaSalidaDTO, NotaSalida>(notaSalidaDTO);
 
                 int resultado = 0;
-                resultado = NotaIngresoBL.Instancia.UpdateNI(notaIngreso);
+                resultado = NotaSalidaBL.Instancia.UpdateNS(notaSalida);
                 if (resultado > 0)
                 {
                     jsonResponse.Title = Title.TitleActualizar;
@@ -179,8 +167,8 @@ namespace Base.Web.Controllers
                     Controlador = Mensajes.UsuarioController,
                     Identificador = resultado,
                     Mensaje = jsonResponse.Message,
-                    Usuario = notaIngresoDTO.UsuarioRegistro,
-                    Objeto = JsonConvert.SerializeObject(notaIngresoDTO)
+                    Usuario = notaSalidaDTO.UsuarioRegistro,
+                    Objeto = JsonConvert.SerializeObject(notaSalidaDTO)
                 });
             }
             catch (Exception ex)
@@ -196,8 +184,8 @@ namespace Base.Web.Controllers
                     Controlador = Mensajes.UsuarioController,
                     Identificador = 0,
                     Mensaje = ex.Message,
-                    Usuario = notaIngresoDTO.UsuarioRegistro,
-                    Objeto = JsonConvert.SerializeObject(notaIngresoDTO)
+                    Usuario = notaSalidaDTO.UsuarioRegistro,
+                    Objeto = JsonConvert.SerializeObject(notaSalidaDTO)
                 });
             }
 
@@ -206,13 +194,13 @@ namespace Base.Web.Controllers
 
 
         [HttpPost]
-        public JsonResult Delete(NotaIngresoDTO notaIngresoDTO)
+        public JsonResult Delete(NotaSalidaDTO notaSalidaDTO)
         {
             var jsonResponse = new JsonResponse { Success = true };
             try
             {
-                var notatIngreso = MapperHelper.Map<NotaIngresoDTO, NotaIngreso>(notaIngresoDTO);
-                int resultado = NotaIngresoBL.Instancia.DeleteNI(notatIngreso);
+                var notatSalida = MapperHelper.Map<NotaSalidaDTO, NotaSalida>(notaSalidaDTO);
+                int resultado = NotaSalidaBL.Instancia.DeleteNS(notatSalida);
 
                 if (resultado > 0)
                 {
@@ -232,8 +220,8 @@ namespace Base.Web.Controllers
                     Controlador = Mensajes.UsuarioController,
                     Identificador = resultado,
                     Mensaje = jsonResponse.Message,
-                    Usuario = notaIngresoDTO.UsuarioRegistro,
-                    Objeto = JsonConvert.SerializeObject(notaIngresoDTO)
+                    Usuario = notaSalidaDTO.UsuarioRegistro,
+                    Objeto = JsonConvert.SerializeObject(notaSalidaDTO)
                 });
             }
             catch (Exception ex)
@@ -249,8 +237,8 @@ namespace Base.Web.Controllers
                     Controlador = Mensajes.UsuarioController,
                     Identificador = 0,
                     Mensaje = ex.Message,
-                    Usuario = notaIngresoDTO.UsuarioRegistro,
-                    Objeto = JsonConvert.SerializeObject(notaIngresoDTO)
+                    Usuario = notaSalidaDTO.UsuarioRegistro,
+                    Objeto = JsonConvert.SerializeObject(notaSalidaDTO)
                 });
             }
 
@@ -258,17 +246,17 @@ namespace Base.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetById(NotaIngresoDTO notaIngresoDTO)
+        public JsonResult GetById(NotaSalidaDTO notaIngresoDTO)
         {
             var jsonResponse = new JsonResponse { Success = true };
 
             try
             {
-                var notaingreso = MapperHelper.Map<NotaIngresoDTO, NotaIngreso>(notaIngresoDTO);
-                var notaingresoI = NotaIngresoBL.Instancia.GetById(notaingreso);
-                if (notaingresoI != null)
+                var notaSalida = MapperHelper.Map<NotaSalidaDTO, NotaSalida>(notaIngresoDTO);
+                var notaSalidadDTO = NotaSalidaBL.Instancia.GetById(notaSalida);
+                if (notaSalidadDTO != null)
                 {
-                    notaIngresoDTO = MapperHelper.Map<NotaIngreso, NotaIngresoDTO>(notaingresoI);
+                    notaIngresoDTO = MapperHelper.Map<NotaSalida, NotaSalidaDTO>(notaSalidadDTO);
                     jsonResponse.Data = notaIngresoDTO;
                 }
                 else
@@ -288,14 +276,14 @@ namespace Base.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetCorrelativo(NotaIngresoDTO notaIngresoDTO)
+        public JsonResult GetCorrelativo(NotaSalidaDTO notaSalidaDTO)
         {
             var jsonResponse = new JsonResponse { Success = true };
 
             try
             {
-                var notatIngreso = MapperHelper.Map<NotaIngresoDTO, NotaIngreso>(notaIngresoDTO);
-                var getcorrelativoDTO = NotaIngresoBL.Instancia.GetCorrelativo(notatIngreso);
+                var notaSalida = MapperHelper.Map<NotaSalidaDTO, NotaSalida>(notaSalidaDTO);
+                var getcorrelativoDTO = NotaSalidaBL.Instancia.GetCorrelativo(notaSalida);
                 if (getcorrelativoDTO > 0)
                 {
                     jsonResponse.Data = getcorrelativoDTO;
@@ -317,22 +305,44 @@ namespace Base.Web.Controllers
             return Json(jsonResponse);
         }
 
-        public int stockProducto(int  idproducto, decimal stock)
+        [HttpPost]
+        public JsonResult stockProducto(int  idproducto, int idalmacen)
         {
-            int result;
-            decimal resultStock = ProductoBL.Instancia.GetStockProducto(idproducto);
-                if (stock >= resultStock)
-                {
-                    result = 1;
-                }
-                else
-                {
-                    result = 0;
-                }            
-
-            return result;
+            var jsonResponse = new JsonResponse { Success = true };
+         
+            decimal resultStock = ProductoBL.Instancia.GetStockProducto(idproducto, idalmacen);
+            if (resultStock>0)
+            {
+                jsonResponse.Data = resultStock;
+            }
+            else
+            {
+                jsonResponse.Warning = true;
+                jsonResponse.Message = Mensajes.IntenteloMasTarde;
+            }
+            return Json(jsonResponse);
         }
 
+        [HttpPost]
+        public JsonResult GetAll(int idtabla)
+        {
+            var jsonResponse = new JsonResponse { Success = true };
+
+            try
+            {
+                var estadoList = TablaRegistroBL.Instancia.GetAll(idtabla);
+                var usuarioDTOList = MapperHelper.Map<IEnumerable<TablaRegistro>, IEnumerable<TablaRegistroDTO>>(estadoList);
+                jsonResponse.Data = usuarioDTOList;
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                jsonResponse.Success = false;
+                jsonResponse.Message = Mensajes.IntenteloMasTarde;
+            }
+
+            return Json(jsonResponse);
+        }
         #region Métodos Privados
 
         public void FormatDataTable(DataTableModel<NotaSalidaFilterModel, int> dataTableModel)
@@ -344,17 +354,21 @@ namespace Base.Web.Controllers
                 var column = dataTableModel.columns[columnIndex].data;
                 dataTableModel.orderBy = (" [" + column + "] " + columnDir + " ");
             }
-            string WhereModel = "WHERE n.ningc_ilag_estado in(1)";
+            string WhereModel = "WHERE n.nsalc_ilag_estado in(1)";
 
 
             if (dataTableModel.filter.numeroSearch != null)
             {
-                WhereModel += "  AND n.ningc_numero_nota_ingreso = '" + dataTableModel.filter.numeroSearch + "' ";
+                WhereModel += "  AND n.nsalc_numero_nota_salida = '" + dataTableModel.filter.numeroSearch + "' ";
             }
-            //if (dataTableModel.filter.fechaInicioSearch != null)
-            //{
-            //    WhereModel += "  AND n.ningc_fecha_nota_ingreso LIKE '%" + dataTableModel.filter.fechaInicioSearch + "%'";
-            //}
+            if (dataTableModel.filter.fechaInicioSearch != null)
+            {
+                WhereModel += " AND n.nsalc_fecha_nota_salida>= CAST('" + dataTableModel.filter.fechaInicioSearch + "' AS DATETIME) ";
+            }
+            if (dataTableModel.filter.fechaFinSearch != null)
+            {
+                WhereModel += " AND N.nsalc_fecha_nota_salida<= DATEADD(DAY,1,CAST('" + dataTableModel.filter.fechaFinSearch + "' AS DATETIME)) ";
+            }
             dataTableModel.whereFilter = WhereModel;
         }
 

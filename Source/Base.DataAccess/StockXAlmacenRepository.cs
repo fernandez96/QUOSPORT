@@ -22,7 +22,9 @@ namespace Base.DataAccess
             List<StockXAlmacen> stockXAlmacen = new List<StockXAlmacen>();
             using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_STOCKXALMACEN_GetAllFilter")))
             {
-                _database.AddInParameter(comando, "@WhereFilters", DbType.String, string.IsNullOrWhiteSpace(paginationParameters.WhereFilter) ? string.Empty : paginationParameters.WhereFilter);
+                _database.AddInParameter(comando, "@WhereFiltersI", DbType.String, string.IsNullOrWhiteSpace(paginationParameters.WhereFilterI) ? string.Empty : paginationParameters.WhereFilterI);
+                _database.AddInParameter(comando, "@WhereFiltersS", DbType.String, string.IsNullOrWhiteSpace(paginationParameters.WhereFilterS) ? string.Empty : paginationParameters.WhereFilterS);
+                _database.AddInParameter(comando, "@whereFiltersProd", DbType.String, string.IsNullOrWhiteSpace(paginationParameters.WhereFilterP) ? string.Empty : paginationParameters.WhereFilterP);
                 _database.AddInParameter(comando, "@OrderBy", DbType.String, string.IsNullOrWhiteSpace(paginationParameters.OrderBy) ? string.Empty : paginationParameters.OrderBy);
                 _database.AddInParameter(comando, "@Start", DbType.Int32, paginationParameters.Start);
                 _database.AddInParameter(comando, "@Rows", DbType.Int32, paginationParameters.AmountRows);

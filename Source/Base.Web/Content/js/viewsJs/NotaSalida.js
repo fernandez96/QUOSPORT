@@ -5,12 +5,12 @@ var formularioMantenimiento = "NotaIngresoForm";
 var formularioMantenimientoDetalle = "ProductoDetalleForm";
 var delRowPos = null;
 var delRowID = 0;
-var urlListar = baseUrl + 'NotaIngreso/Listar';
-var urlMantenimiento = baseUrl + 'NotaIngreso/';
+var urlListar = baseUrl + 'NotaSalida/Listar';
+var urlMantenimiento = baseUrl + 'NotaSalida/';
 var urlMantenimientoAlmacen = baseUrl + 'Almacen/';
 var urlListaCargo = baseUrl + 'NotaIngreso/';
 var urlMantenimientoReport = baseUrl + 'Reporte/';
-var urlListarProductos = baseUrl + 'Producto/Listar';
+var urlListarProductoStock = baseUrl + 'Producto/ListarProductoStockGetAll';
 var ActualizacionFallida = "No se pudo realizar la actualización.";
 var ActualizacionSatisfactoria = "Se realizó la actualización satisfactoriamente.";
 var RegistroSatisfactorio = "Se realizó el registro satisfactoriamente.";
@@ -25,6 +25,7 @@ var TitleEliminar = "Eliminación Satisfactoria";
 var tipoMovimiento = 1;
 var TitleAlerta = "Alerta";
 var NotaIngresoDetalle = new Array();
+var ProductoArray = new Array();
 var editor;
 var rowNotaIngreso = null;
 var rowProducto = null;
@@ -32,7 +33,10 @@ var rowNotaIngresoDetalle = null;
 var agregar = 1;
 var editar = 2;
 var eliminar = 3;
-var tipoDocumento = 1;
+var tipoDocumento = 2;
+var stockActual;
+var fechaIncio = null;
+var fecchaFin = null;
 $(document).ready(function () {
     $.extend($.fn.dataTable.defaults, {
         language: { url: baseUrl + 'Content/js/dataTables/Internationalisation/es.txt' },
@@ -82,6 +86,7 @@ $(document).ready(function () {
                 $("#codigoP").val('');
                 $("#unidad").val(rowProducto.umec_v_unidad_medida);
                 $("#descripcionP").val(rowProducto.prdc_vdescripcion);
+                stockActual = rowProducto.prdc_dstock_minimo;
                 $("#cantidad").focus();
                 $("#ProductoModal").modal("hide");
             }, 100);
@@ -92,6 +97,8 @@ $(document).ready(function () {
     $('#btnAgregarNotaIngreso').on('click', function () {
         LimpiarFormulario();
         GetCorrelativoCab($("#almacen").val());
+        CargarProducto($("#almacen").val());
+        
         $("#NotaIngresoId").val(0);
         $("#accionTitle").text('Nuevo');
         $("#NuevaNotaIngreso").modal("show");
@@ -185,7 +192,7 @@ $(document).ready(function () {
     });
 
     $("#productoBuscar").on("click", function () {
-        dataTableProducto.ajax.reload();
+        SelectProductoStock();
         $("#ProductoModal").modal("show");
     });
 
@@ -203,11 +210,15 @@ $(document).ready(function () {
 
     $('body').on('change', '#almacen', function () {
         GetCorrelativoCab(this.value);
+        dataTableProducto.clear().draw();
+        CargarProducto(this.value);
+        console.log(ProductoArray);
     });
 
     $("#btnSearchNotaIngreso").on("click", function (e) {
         if ($('#NotaIngresoSearchForm').valid()) {
             checkSession(function () {
+         
                 dataTableNotaIngreso.ajax.reload();
             });
         }
@@ -217,7 +228,7 @@ $(document).ready(function () {
     $("#btnSearchTablaproducto").on("click", function (e) {
         if ($('#ProductoSearchForm').valid()) {
             checkSession(function () {
-                dataTableProducto.ajax.reload();
+        
             });
         }
         e.preventDefault();
@@ -274,19 +285,41 @@ $(document).ready(function () {
         remText: '%n caracter%s restantes...',
         limitText: 'permite maximo : %n.'
     });
-    $('#fechasearch').datepicker({
-        autoclose: true,
+    //$('#fechasearch').datepicker({
+    //    autoclose: true,
+    //    language: 'es',
+    //    format: 'dd/mm/yyyy'
+    //});
+  
+    $('#fechasearch').daterangepicker({
+        'applyClass': 'btn-sm btn-success',
+        'cancelClass': 'btn-sm btn-default',
         language: 'es',
-        format: 'dd/mm/yyyy'
+        locale: {
+            applyLabel: 'Aplicar',
+            cancelLabel: 'Cancelar',
+        }
+    })
+    .prev().on(ace.click_event, function () {
+        $(this).next().focus();
+    });
+    $('#fechasearch').on('apply.daterangepicker', function (ev, picker) {
+        $(this).val('De : '+ picker.startDate.format('DD/MM/YYYY') + '   Hasta : ' + picker.endDate.format('DD/MM/YYYY'));
+        fechaIncio = picker.startDate.format('DD/MM/YYYY');
+        fecchaFin = picker.endDate.format('DD/MM/YYYY');
+    });
+
+    $('#fechasearch').on('cancel.daterangepicker', function (ev, picker) {
+        $(this).val('');
     });
     //$("#costo").numeric({ decimal: ".", negative: false, scale: 3 });
     //$("#costo").inputmask('00.00', { regex: "^[0-9]{1,6}(\\.\\d{1,2})?$" });
     //$('#costo').mask('#,##0.00', { reverse: true });
     //$('#cantidad').mask('#,##0.00', { reverse: true });
 
-
 });
 function VisualizarDataTableNotaIngreso() {
+ 
     dataTableNotaIngreso = $('#NotaIngresoDataTable').DataTable({
         "bFilter": false,
         "bProcessing": true,
@@ -300,7 +333,8 @@ function VisualizarDataTableNotaIngreso() {
 
                 request.filter = {
                     numeroSearch: $("#numerosearch").val(),
-                    //DescripcionSearch: $("#Descripcionsearch").val()
+                    fechaInicioSearch: fechaIncio,
+                    fechaFinSearch:fecchaFin
                 }
             },
             dataFilter: function (data) {
@@ -316,9 +350,9 @@ function VisualizarDataTableNotaIngreso() {
         "bAutoWidth": false,
         "columns": [
             { "data": "Id" },
-            { "data": "ningc_numero_nota_ingreso" },
+            { "data": "nsalc_numero_nota_salida" },
             { "data": "almac_vdescripcion" },
-            { "data": "fecha" },
+            { "data": function (obj) { return GetFechaSubString(obj.fecha);}},
             { "data": "ningc_v_motivo" },
             { "data": "ningc_observaciones" },
             {
@@ -337,13 +371,13 @@ function VisualizarDataTableNotaIngreso() {
             { "bVisible": false, "aTargets": [0] },
             { "className": "center hidden-120", "aTargets": [1], "width": "10%" },
               { "className": "center hidden-120", "aTargets": [2], "width": "13%" },
-            { "className": "center hidden-120", "aTargets": [3], "width": "14%" },
-            { "className": "center hidden-992", "aTargets": [4], "width": "10%" },
+            { "className": "center hidden-120", "aTargets": [3], "width": "8%" },
+            { "className": "center hidden-992", "aTargets": [4], "width": "16%" },
              { "className": "hidden-1200", "aTargets": [5], "width": "30%" },
             { "bSortable": false, "className": "hidden-1200", "aTargets": [6], "width": "7%" }
 
         ],
-        "order": [[1, "desc"]],
+        "order": [[1, "ASC"]],
         "initComplete": function (settings, json) {
             // AddSearchFilter();
         },
@@ -374,11 +408,10 @@ function VisualizarDataTableNotaIngresoDetalle() {
         "bAutoWidth": false,
         "columns": [
             { "data": "Id" },
-            { "data": "dninc_nro_item" },
+            { "data": "nsald_nro_item" },
             { "data": "prdc_vdescripcion" },
             { "data": "dninc_v_unidad" },
-            { "data": "dninc_costo", render: $.fn.dataTable.render.number(',', '.', 0, 'S/ ') },
-            { "data": "dninc_cantidad", render: $.fn.dataTable.render.number(',', '.', 2) }
+            { "data": "nsald_cantidad", render: $.fn.dataTable.render.number(',', '.', 2) }
 
         ],
         "aoColumnDefs": [
@@ -386,13 +419,12 @@ function VisualizarDataTableNotaIngresoDetalle() {
             { "bVisible": false, "aTargets": [0] },
             { "className": "center hidden-120", "aTargets": [1], "width": "5%" },
             { "className": "hidden-120", "aTargets": [2], "width": "27%" },
-            { "className": "hidden-992", "aTargets": [3], "width": "10%" },
-            { "className": "center hidden-992", "aTargets": [4], "width": "7%" },
-            { "className": "center hidden-120", "aTargets": [5], "width": "7%" },
+            { "className": "hidden-992 center", "aTargets": [3], "width": "10%" },
+            { "className": "center hidden-120", "aTargets": [4], "width": "7%" },
 
 
         ],
-        "order": [[1, "asc"]],
+        "order": [[1, "ASC"]],
         "initComplete": function (settings, json) {
             // AddSearchFilter();
         },
@@ -406,27 +438,16 @@ function VisualizarDataTableProducto() {
     dataTableProducto = $('#ProductoDataTable').DataTable({
         "bFilter": false,
         "bProcessing": true,
-        "serverSide": true,
+        "serverSide": false,
         //"scrollY": "350px",              
-        "ajax": {
-            "url": urlListarProductos,
-            "type": "POST",
-            "data": function (request) {
-                request.filter = new Object();
-
-                request.filter = {
-                    //codigoSearch: $("#CodigoDetallesearch").val(),
-                    descripcionSearch: $("#DescripcionDetallesearch").val()
-                }
-            },
-            dataFilter: function (data) {
-                if (data.substring(0, 9) == "<!DOCTYPE") {
-                    redireccionarLogin("Sesión Terminada", "Se terminó la sesión");
-                } else {
-                    return data;
-                    //var json = jQuery.parseJSON(data);
-                    //return JSON.stringify(json); // return JSON string
-                }
+        "data":ProductoArray,
+        dataFilter: function (data) {
+            if (data.substring(0, 9) == "<!DOCTYPE") {
+                redireccionarLogin("Sesión Terminada", "Se terminó la sesión");
+            } else {
+                return data;
+                //var json = jQuery.parseJSON(data);
+                //return JSON.stringify(json); // return JSON string
             }
         },
         "bAutoWidth": false,
@@ -435,17 +456,7 @@ function VisualizarDataTableProducto() {
             //{ "data": "prdc_vcod_producto" },
             { "data": "prdc_vdescripcion" },
             { "data": "umec_v_unidad_medida" },
-            {
-                "data": function (obj) {
-                    if (obj.Estado == 1) {
-                        return '<span class="label label-info label-sm arrowed-in arrowed-in-right">Activo</span>';
-                    }
-                    else if (obj.Estado == 2) {
-                        return '<span class="label label-warning arrowed-in arrowed-in-right">Inactivo</span>';
-                    }
-
-                }
-            }
+            { "data": "prdc_dstock_minimo", render: $.fn.dataTable.render.number(',', '.', 2) },
         ],
         "aoColumnDefs": [
 
@@ -455,10 +466,9 @@ function VisualizarDataTableProducto() {
             { "className": "hidden-120", "aTargets": [2], "width": "12%" },
             { "className": "hidden-120", "aTargets": [3], "width": "12%" },
 
-            { "bSortable": false, "className": "hidden-480", "aTargets": [3], "width": "7%" }
 
         ],
-        "order": [[1, "desc"]],
+        "order": [[1, "ASC"]],
         "initComplete": function (settings, json) {
             // AddSearchFilter();
         },
@@ -474,7 +484,6 @@ function AddProductoDraw() {
     var unidad = $("#unidad").val();
     var descripcion = $("#descripcionP").val();
     var cantidad = $("#cantidad").val();
-    var costo = $("#costo").val();
     var detalle = null;
     var exito = true;
     var editarStatus = false;
@@ -486,24 +495,34 @@ function AddProductoDraw() {
                 }
             });
             if (exito) {
-                detalle = { "Id": NotaIngresoDetalle.length + 1, "prdc_icod_producto": rowProducto.Id, "kardc_icod_correlativo": NotaIngresoDetalle.length + 1, "dninc_nro_item": CorrelativoProducto(), "prdc_vdescripcion": descripcion, "dninc_v_unidad": unidad, "dninc_costo": costo, "dninc_cantidad": cantidad, "Estado": 1, "status": agregar, "kardc_tipo_movimiento": tipoMovimiento };
-                NotaIngresoDetalle.push(detalle);
-                dataTableNotaIngresoDetalle.clear();
-                dataTableNotaIngresoDetalle.rows.add(NotaIngresoDetalle.filter(function (e) {
-                    if (e.status != eliminar) {
-                        return true
-                    }
-                    else {
-                        return false;
-                    }
+                if (parseInt(stockActual) >= parseInt(cantidad)) {
+                    detalle = { "Id": NotaIngresoDetalle.length + 1, "prdc_icod_producto": rowProducto.Id, "kardc_icod_correlativo": NotaIngresoDetalle.length + 1, "nsald_nro_item": CorrelativoProducto(), "prdc_vdescripcion": descripcion, "dninc_v_unidad": unidad, "nsald_cantidad": cantidad, "Estado": 1, "status": agregar, "kardc_tipo_movimiento": tipoMovimiento };
+                    NotaIngresoDetalle.push(detalle);
+                    dataTableNotaIngresoDetalle.clear();
+                    dataTableNotaIngresoDetalle.rows.add(NotaIngresoDetalle.filter(function (e) {
+                        if (e.status != eliminar) {
+                            return true
+                        }
+                        else {
+                            return false;
+                        }
 
-                })).draw();
-                $.gritter.add({
-                    title: TitleRegistro,
-                    text: RegistroSatisfactorio,
-                    class_name: 'gritter-success gritter'
-                });
-                $("#NuevoDetalleProducto").modal("hide");
+                    })).draw();
+                    $.gritter.add({
+                        title: TitleRegistro,
+                        text: RegistroSatisfactorio,
+                        class_name: 'gritter-success gritter'
+                    });
+                    $.each(ProductoArray, function (index, value) {
+                        if (value.Id===rowProducto.Id) {
+                            value.prdc_dstock_minimo = parseInt(value.prdc_dstock_minimo) - parseInt(cantidad);
+                        }
+                    });
+                    $("#NuevoDetalleProducto").modal("hide");
+                } else {
+                    webApp.showMessageDialog("La cantidad ingresada es mayor al stock del producto "+ descripcion +",se corrimienda que debe ser menor a "+ stockActual +".");
+                }
+                
             }
             else {
                 $.gritter.add({
@@ -514,15 +533,26 @@ function AddProductoDraw() {
             }
         }
         else {
-            detalle = { "Id": 1, "prdc_icod_producto": rowProducto.Id, "kardc_icod_correlativo": 1, "dninc_nro_item": CorrelativoProducto(), "prdc_vdescripcion": descripcion, "dninc_v_unidad": unidad, "dninc_costo": costo, "dninc_cantidad": cantidad, "Estado": 1, "status": agregar, "kardc_tipo_movimiento": tipoMovimiento };
-            NotaIngresoDetalle.push(detalle);
-            dataTableNotaIngresoDetalle.rows.add(NotaIngresoDetalle).draw();
-            $("#NuevoDetalleProducto").modal("hide");
-            $.gritter.add({
-                title: TitleRegistro,
-                text: RegistroSatisfactorio,
-                class_name: 'gritter-success gritter'
-            });
+            if (parseInt(stockActual)>= parseInt(cantidad)) {
+                detalle = { "Id": 1, "prdc_icod_producto": rowProducto.Id, "kardc_icod_correlativo": 1, "nsald_nro_item": CorrelativoProducto(), "prdc_vdescripcion": descripcion, "dninc_v_unidad": unidad, "nsald_cantidad": cantidad, "Estado": 1, "status": agregar, "kardc_tipo_movimiento": tipoMovimiento };
+                NotaIngresoDetalle.push(detalle);
+                dataTableNotaIngresoDetalle.rows.add(NotaIngresoDetalle).draw();
+                $("#NuevoDetalleProducto").modal("hide");
+                $.gritter.add({
+                    title: TitleRegistro,
+                    text: RegistroSatisfactorio,
+                    class_name: 'gritter-success gritter'
+                });
+                $.each(ProductoArray, function (index, value) {
+                    if (value.Id === rowProducto.Id) {
+                        value.prdc_dstock_minimo = parseInt(value.prdc_dstock_minimo) - parseInt(cantidad);
+                    }
+                });
+            }
+            else
+            {
+                webApp.showMessageDialog("La cantidad ingresada es mayor al stock del producto " + descripcion + ", se corrimienda que debe ser menor a " + stockActual + ".");
+            }
 
         }
     }
@@ -530,8 +560,7 @@ function AddProductoDraw() {
 
         $.each(NotaIngresoDetalle, function (index, value) {
             if (value.prdc_icod_producto == rowNotaIngresoDetalle.prdc_icod_producto && value.status != eliminar) {
-                value.dninc_costo = costo;
-                value.dninc_cantidad = cantidad;
+                value.nsald_cantidad = cantidad;
                 value.status = editar;
                 editarStatus = true;
             }
@@ -576,8 +605,7 @@ function GetByProductoDraw() {
     //$("#codigoP").val(rowNotaIngresoDetalle.prdc_icod_producto);
     $("#unidad").val(rowNotaIngresoDetalle.dninc_v_unidad);
     $("#descripcionP").val(rowNotaIngresoDetalle.prdc_vdescripcion);
-    $("#cantidad").val(rowNotaIngresoDetalle.dninc_cantidad);
-    $("#costo").val(rowNotaIngresoDetalle.dninc_costo);
+    $("#cantidad").val(rowNotaIngresoDetalle.nsald_cantidad);
     $("#NuevoDetalleProducto").modal("show");
 }
 
@@ -689,8 +717,8 @@ function CorrelativoProducto() {
     if (NotaIngresoDetalle.length > 0) {
         var jquery = JSLINQ(NotaIngresoDetalle)
                       .Where(function (v) { return v.status != eliminar })
-                      .OrderByDescending(function (o) { return o.dninc_nro_item })
-                      .Select(function (item) { return parseInt(item.dninc_nro_item) });
+                      .OrderByDescending(function (o) { return o.nsald_nro_item })
+                      .Select(function (item) { return parseInt(item.nsald_nro_item) });
         var correlativoValue = parseInt(jquery.items[0] + 1);
         if (correlativoValue < 10) {
             correlativo = '00' + correlativoValue;
@@ -710,66 +738,85 @@ function CorrelativoProducto() {
 
 
 function GuardarNotaIngreso() {
+    var stockActual = 0;
+    var statusStock = false;
     var modelView = {
         Id: $("#NotaIngresoId").val(),
-        ningc_numero_doc: $("#nroNI").val(),
+        nsalc_numero_nota_salida: $("#nroNI").val(),
         tdocc_icod_tipo_doc: tipoDocumento,
-        ningc_fecha_nota_ingreso: $("#fecha").val(),
-        ningc_iid_motivo: $("#motivo").val(),
+        nsalc_fecha_nota_salida_: $("#fecha").val(),
+        nsalc_iid_motivo: $("#motivo").val(),
         almac_icod_almacen: $("#almacen").val(),
-        ningc_numero_nota_ingreso: $("#nroNI").val(),
         Estado: agregar,
-        listaDetalleNI: NotaIngresoDetalle,
-        ningc_observaciones: $("#observacion").val(),
-        ningc_referencia: "",
+        listaDetalleNS: NotaIngresoDetalle,
+        nsalc_observaciones: $("#observacion").val(),
+        nsalc_referencia: "",
         UsuarioRegistro: $("#usernameLogOn strong").text()
     };
-    if (modelView.Id == 0)
-        action = 'Add';
-    else
-        action = 'Update';
+    //Evaluacion de stock de producto por #sinllorar
+    $.each(modelView.listaDetalleNS, function (index, value) {
+        var stockFunction = StockProducto(value.prdc_icod_producto, modelView.almac_icod_almacen);
+        stockFunction.success(function (data) {
+            stockActual = data.Data;
+        });
+        //evalua stock del producto
+   
+        if ( parseInt(value.dninc_cantidad)> parseInt(stockActual)) {
+            statusStock=true;
+        }
+    });
+    if (!statusStock) {
+        if (modelView.Id == 0)
+            action = 'Add';
+        else
+            action = 'Update';
 
-    webApp.Ajax({
-        url: urlMantenimiento + action,
-        parametros: modelView
-    }, function (response) {
-        if (response.Success) {
-            if (response.Warning) {
+        webApp.Ajax({
+            url: urlMantenimiento + action,
+            parametros: modelView
+        }, function (response) {
+            if (response.Success) {
+                if (response.Warning) {
+                    $.gritter.add({
+                        title: response.Title,
+                        text: response.Message,
+                        class_name: 'gritter-warning gritter'
+                    });
+                } else {
+                    dataTableNotaIngreso.ajax.reload();
+                    $("#NuevaNotaIngreso").modal("hide");
+                    LimpiarFormulario();
+                    $.gritter.add({
+                        title: response.Title,
+                        text: response.Message,
+                        class_name: 'gritter-success gritter'
+                    });
+                }
+            } else {
                 $.gritter.add({
-                    title: response.Title,
+                    title: 'Error',
                     text: response.Message,
                     class_name: 'gritter-warning gritter'
                 });
-            } else {
-                dataTableNotaIngreso.ajax.reload();
-                $("#NuevaNotaIngreso").modal("hide");
-                LimpiarFormulario();
-                $.gritter.add({
-                    title: response.Title,
-                    text: response.Message,
-                    class_name: 'gritter-success gritter'
-                });
             }
-        } else {
+        }, function (response) {
             $.gritter.add({
                 title: 'Error',
-                text: response.Message,
-                class_name: 'gritter-warning gritter'
+                text: response,
+                class_name: 'gritter-error gritter'
             });
-        }
-    }, function (response) {
-        $.gritter.add({
-            title: 'Error',
-            text: response,
-            class_name: 'gritter-error gritter'
+        }, function (XMLHttpRequest, textStatus, errorThrown) {
+            $.gritter.add({
+                title: 'Error',
+                text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
+                class_name: 'gritter-error gritter'
+            });
         });
-    }, function (XMLHttpRequest, textStatus, errorThrown) {
-        $.gritter.add({
-            title: 'Error',
-            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
-            class_name: 'gritter-error gritter'
-        });
-    });
+
+    } else {
+        webApp.showMessageDialog("La cantidad ingresada es mayor al stock del producto " + descripcion + ",se corrimienda que debe ser menor a " + stockActual + ".");
+
+    }
 
 
 }
@@ -795,12 +842,18 @@ function GetNotaIngresoById(id) {
                 var notaingreso = response.Data;
                 $("#NotaIngresoId").val(notaingreso.Id);
                 $("#almacen").val(notaingreso.almac_icod_almacen);
-                $("#nroNI").val(notaingreso.ningc_numero_nota_ingreso);
+                $("#nroNI").val(notaingreso.nsalc_numero_nota_salida);
                 $("#fecha").val(notaingreso.fecha);
-                $("#motivo").val(notaingreso.ningc_iid_motivo);
-                $("#observacion").val(notaingreso.ningc_observaciones);
+                $("#motivo").val(notaingreso.nsalc_iid_motivo);
+                $("#observacion").val(notaingreso.nsalc_observaciones);
                 $("#NuevaNotaIngreso").modal("show");
                 $("#accionTitle").text('Editar');
+                $('#fecha').datepicker({
+                    autoclose: true,
+                    language: 'es',
+                    format: 'dd/mm/yyyy'
+                }).datepicker('setDate', new Date());
+
 
             }
 
@@ -880,7 +933,7 @@ function GetNotaIngresoDetalleAll(id) {
         Id: id
     };
     webApp.Ajax({
-        url: urlMantenimiento + 'ListarNotaIngresoDetalle',
+        url: urlMantenimiento + 'ListarNotaSalidaDetalle',
         parametros: modelView
     }, function (response) {
         if (response.Success) {
@@ -985,6 +1038,48 @@ function CargarEstado() {
     });
 }
 
+function CargarProducto(id) {
+    var modelView = {
+        idAlamcen:id
+    }
+    webApp.Ajax({
+        url: urlListarProductoStock,
+        parametros:modelView
+    }, function (response) {
+        if (response.Success) {
+
+            if (response.Warning) {
+                $.gritter.add({
+                    title: 'Alerta',
+                    text: response.Message,
+                    class_name: 'gritter-warning gritter'
+                });
+            } else {
+                dataTableProducto.clear();
+                ProductoArray = response.Data;
+            }
+        } else {
+            $.gritter.add({
+                title: 'Error',
+                text: response.Message,
+                class_name: 'gritter-error gritter'
+            });
+        }
+    }, function (response) {
+        $.gritter.add({
+            title: 'Error',
+            text: response,
+            class_name: 'gritter-error gritter'
+        });
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        $.gritter.add({
+            title: 'Error',
+            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
+            class_name: 'gritter-error gritter'
+        });
+    });
+}
+
 function Imprimir(id) {
     webApp.Ajax({
         url: urlMantenimientoReport + 'StimulsoftControl',
@@ -1035,7 +1130,7 @@ function LimpiarFormulario() {
     NotaIngresoDetalle.length = 0;
     dataTableNotaIngresoDetalle.clear().draw();
     $("#almacen").val(1);
-    $("#motivo").val(13);
+    $("#motivo").val(17);
     $('#fecha').datepicker({
         autoclose: true,
         language: 'es',
@@ -1092,7 +1187,7 @@ function CargarAlmacen() {
 
 function CargarMotivo() {
     var modelView = {
-        idtabla: 4
+        idtabla: 5
     };
     webApp.Ajax({
         url: urlMantenimiento + 'GetAll',
@@ -1100,7 +1195,6 @@ function CargarMotivo() {
         async: false,
     }, function (response) {
         if (response.Success) {
-
             if (response.Warning) {
                 $.gritter.add({
                     title: 'Alerta',
@@ -1132,4 +1226,44 @@ function CargarMotivo() {
             class_name: 'gritter-error gritter'
         });
     });
+}
+
+function SelectProductoStock() {
+    if (ProductoArray!=null) {
+        dataTableProducto.clear().draw();
+        dataTableProducto.rows.add(ProductoArray.filter(function (obj) {
+            if (parseInt(obj.prdc_dstock_minimo) > 0)
+                return true;
+            else
+                return false;
+        })).draw();
+    }
+
+}
+
+var StockProducto = function (id,idalamcen) {
+    var stock = 0;
+    var modelView = {
+        idproducto: id,
+        idalmacen:idalamcen
+    };
+    return $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: urlMantenimiento + 'stockProducto',
+        data:modelView,
+        success: function (data) {
+            return data.Data;
+        }
+    });  
+}
+
+function GetFechaSubString(fecha) {
+    var respuesta = "";
+    if (fecha != null && fecha.trim() != "")
+
+        var sTmp = String(fecha);
+    arrfch = sTmp.split('/');
+    respuesta = arrfch[1] + '/' + arrfch[0] + '/' + arrfch[2];
+    return respuesta;
 }

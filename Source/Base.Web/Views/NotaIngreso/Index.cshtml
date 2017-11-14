@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="@Url.Content("~/Content/css/jquery.dataTables.css")" />
     <link rel="stylesheet" href="@Url.Content("~/Content/css/jquery-chosen.css")" />
     <link rel="stylesheet" href="@Url.Content("~/Content/css/datepicker.css")" />
+  <link rel="stylesheet" href="@Url.Content("~/Content/css/daterangepicker.css")" />
 }
 <!-- /section:basics/sidebar -->
 <div class="main-content">
@@ -47,10 +48,8 @@
                                         <div class="input-group-btn">
                                         </div>
                                         @*<div class="input-group">*@
-                                            <input type="text" id="fechasearch" autocomplete="off" name="fechasearch" placeholder="DD/MM/YYYY" maxlength="100" class="form-control" />
-                                            <span class="input-group-addon" style="border-radius:7px">
-                                                <i class="fa fa-calendar bigger-110"></i>
-                                            </span>
+                                            <input type="text" id="fechasearch" autocomplete="off" name="fechasearch" placeholder="De : dd/mm/yyyy   Hasta : dd/mm/yyyy" maxlength="100" class="form-control" />
+                                          
                                         @*</div>*@
                                         <div class="input-group-btn">
                                             <button type="button" id="btnSearchNotaIngreso" class="btn btn-primary btn-sm" >
@@ -71,7 +70,7 @@
                                             <a id="btnEliminarNotaIngreso" data-toggle="tooltip" class="dt-button buttons-csv buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Eliminar">
                                                 <span><i class="fa fa-trash-o bigger-110 orange"> </i></span>
                                             </a>
-                                            <a id="btnImprimir" data-toggle="tooltip" class="dt-button buttons-print btn btn-white btn-primary btn-bold hidden" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Imprimir">
+                                            <a id="btnImprimir" data-toggle="tooltip" class="dt-button buttons-print btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Imprimir">
                                                 <span><i class="fa fa-print bigger-110 grey"></i> </span>
                                             </a>
                                         </div>
@@ -82,9 +81,9 @@
                     </div>
                     <br />
                     <div class="col-xs-12">
-                        <div class="table-header">
-                            Resultado "Nota de ingreso"
-                        </div>
+                        <h4 class="row-fluid header smaller lighter blue">
+                            <span class="span5"> Resultados de Nota Ingreso</span>
+                        </h4>
                         <div class="dataTables_wrapper form-inline no-footer">
                             <div class="table-responsive">
                                 <table id="NotaIngresoDataTable" class="table table-bordered" cellspacing="0" role="grid" aria-describedby="dynamic-table_info">
@@ -428,6 +427,7 @@
    <script src="@Url.Content("~/Content/js/jquery-chosen.js")"></script>
     <script src="@Url.Content("~/Content/js/jquery.blockUI.js")"></script>
     <script src="@Url.Content("~/Content/js/shCore.js")"></script>
+  <script src="@Url.Content("~/Content/js/date-time/moment.js")"></script>
 <script src="@Url.Content("~/Content/js/date-time/daterangepicker.js")"></script>
    <script src="@Url.Content("~/Content/js/date-time/bootstrap-datepicker.js")"></script>
    <script src="@Url.Content("~/Content/js/date-time/locate/bootstrap-datepicker.es.js")"></script>

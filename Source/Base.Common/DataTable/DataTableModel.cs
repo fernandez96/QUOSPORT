@@ -15,5 +15,8 @@ namespace Base.Common.DataTable
         public Q recordsTotal { get; set; }
         public Q start { get; set; }
         public string whereFilter { get; set; }
+        public string whereFilterI { get; set; }
+        public string whereFilterS { get; set; }
+        public string whereFilterP { get; set; }
     }
 }

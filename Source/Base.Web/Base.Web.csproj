@@ -473,6 +473,7 @@
     <Content Include="Content\js\viewsJs\TablaRegistro.js" />
     <Content Include="Content\js\viewsJs\TipoDocumento.js" />
     <Content Include="Content\js\viewsJs\tipoProducto.js" />
+    <Content Include="Content\js\viewsJs\Transferencia.js" />
     <Content Include="Content\js\viewsJs\UnidadMedida.js" />
     <Content Include="Content\js\viewsJs\usuario.js" />
     <Content Include="Content\js\viewsJs\vale.js" />
@@ -516,6 +517,7 @@
     <Compile Include="Controllers\StockXAlmacenController.cs" />
     <Compile Include="Controllers\TipoDocumentoController.cs" />
     <Compile Include="Controllers\TipoOpcionesController.cs" />
+    <Compile Include="Controllers\TransferenciaController.cs" />
     <Compile Include="Controllers\UnidadMedidaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Core\BaseController.cs" />
@@ -657,6 +659,7 @@
     <Content Include="Views\NotaIngreso\Index.cshtml" />
     <Content Include="Views\StockXAlmacen\Index.cshtml" />
     <Content Include="Views\NotaSalida\Index.cshtml" />
+    <Content Include="Views\Transferencia\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
