@@ -10,7 +10,7 @@ var urlMantenimiento = baseUrl + 'NotaSalida/';
 var urlMantenimientoAlmacen = baseUrl + 'Almacen/';
 var urlListaCargo = baseUrl + 'NotaIngreso/';
 var urlMantenimientoReport = baseUrl + 'Reporte/';
-var urlListarProductoStock = baseUrl + 'Producto/ListarProductoStockGetAll';
+var urlListarProductoStock = baseUrl + 'Producto/ListarProductoStockTransferencia';
 var ActualizacionFallida = "No se pudo realizar la actualización.";
 var ActualizacionSatisfactoria = "Se realizó la actualización satisfactoriamente.";
 var RegistroSatisfactorio = "Se realizó el registro satisfactoriamente.";
@@ -95,8 +95,8 @@ $(document).ready(function () {
 
     $('#btnAgregarNotaIngreso').on('click', function () {
         LimpiarFormulario();
-        GetCorrelativoCab($("#almacen").val());
-        CargarProducto($("#almacen").val());
+        //GetCorrelativoCab($("#almacen").val());
+        CargarProducto();
 
         $("#NotaIngresoId").val(0);
         $("#accionTitle").text('Nuevo');
@@ -210,7 +210,6 @@ $(document).ready(function () {
     $('body').on('change', '#almacen', function () {
         GetCorrelativoCab(this.value);
         dataTableProducto.clear().draw();
-        CargarProducto(this.value);
         console.log(ProductoArray);
     });
 
@@ -1018,16 +1017,12 @@ function CargarEstado() {
     });
 }
 
-function CargarProducto(id) {
-    var modelView = {
-        idAlamcen: id
-    }
+function CargarProducto() {
     webApp.Ajax({
         url: urlListarProductoStock,
-        parametros: modelView
+        async: false,
     }, function (response) {
         if (response.Success) {
-
             if (response.Warning) {
                 $.gritter.add({
                     title: 'Alerta',

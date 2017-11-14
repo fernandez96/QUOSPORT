@@ -8,5 +8,6 @@ namespace Base.BusinessLogic
 {
     public class TransferenciaBL
     {
+
     }
 }

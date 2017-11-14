@@ -719,3 +719,166 @@ Nombre del parámetro: parameters
 Nombre del parámetro: parameters
 2017-11-12 15:21:48,357 ERROR  - Controlador:Producto  Action:ListarProductoStockGetAll  Mensaje:El diccionario de parámetros contiene una entrada NULL para el parámetro 'idAlamcen' del tipo que no acepta valores NULL 'System.Int32' del método 'System.Web.Mvc.JsonResult ListarProductoStockGetAll(Int32)' en 'Base.Web.Controllers.ProductoController'. Un parámetro opcional debe ser un tipo de referencia, un tipo que acepte valores NULL o debe declararse como parámetro opcional.
 Nombre del parámetro: parameters
+2017-11-13 21:23:28,528 ERROR  - Mensaje: There is insufficient system memory in resource pool 'internal' to run this query.
+Error grave en el comando actual. Los resultados, si los hay, se deben descartar. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.SeguridadRepository.GetFormulario() en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\SeguridadRepository.cs:línea 24
+   en Base.BusinessLogic.SeguridadBL.GetFormulario() en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\SeguridadBL.cs:línea 13
+   en Base.Web.Controllers.AccountController.GenerarTickectAutenticacion(UsuarioLoginDTO u) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\AccountController.cs:línea 192
+   en Base.Web.Controllers.AccountController.Login_(AccountModel loginDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\AccountController.cs:línea 150
+2017-11-13 21:23:43,589 ERROR  - Mensaje: There is insufficient system memory in resource pool 'internal' to run this query.
+Error grave en el comando actual. Los resultados, si los hay, se deben descartar. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.SeguridadRepository.GetFormulario() en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\SeguridadRepository.cs:línea 24
+   en Base.BusinessLogic.SeguridadBL.GetFormulario() en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\SeguridadBL.cs:línea 13
+   en Base.Web.Controllers.AccountController.GenerarTickectAutenticacion(UsuarioLoginDTO u) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\AccountController.cs:línea 192
+   en Base.Web.Controllers.AccountController.Login_(AccountModel loginDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\AccountController.cs:línea 150
+2017-11-13 21:46:52,598 ERROR  - Mensaje: El índice estaba fuera del intervalo. Debe ser un valor no negativo e inferior al tamaño de la colección.
+Nombre del parámetro: index Trace:    en System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   en System.Collections.Generic.List`1.get_Item(Int32 index)
+   en Base.Web.Controllers.NotaSalidaController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaSalidaController.cs:línea 42
+2017-11-13 21:46:54,044 ERROR  - Controlador:Producto  Action:ListarProductoStockGetAll  Mensaje:El diccionario de parámetros contiene una entrada NULL para el parámetro 'idAlamcen' del tipo que no acepta valores NULL 'System.Int32' del método 'System.Web.Mvc.JsonResult ListarProductoStockGetAll(Int32)' en 'Base.Web.Controllers.ProductoController'. Un parámetro opcional debe ser un tipo de referencia, un tipo que acepte valores NULL o debe declararse como parámetro opcional.
+Nombre del parámetro: parameters
+2017-11-13 21:53:13,686 ERROR  - Mensaje: El índice estaba fuera del intervalo. Debe ser un valor no negativo e inferior al tamaño de la colección.
+Nombre del parámetro: index Trace:    en System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   en System.Collections.Generic.List`1.get_Item(Int32 index)
+   en Base.Web.Controllers.NotaSalidaController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaSalidaController.cs:línea 42
+2017-11-13 21:53:15,511 ERROR  - Controlador:Producto  Action:ListarProductoStockGetAll  Mensaje:El diccionario de parámetros contiene una entrada NULL para el parámetro 'idAlamcen' del tipo que no acepta valores NULL 'System.Int32' del método 'System.Web.Mvc.JsonResult ListarProductoStockGetAll(Int32)' en 'Base.Web.Controllers.ProductoController'. Un parámetro opcional debe ser un tipo de referencia, un tipo que acepte valores NULL o debe declararse como parámetro opcional.
+Nombre del parámetro: parameters
+2017-11-13 21:54:03,143 ERROR  - Mensaje: El índice estaba fuera del intervalo. Debe ser un valor no negativo e inferior al tamaño de la colección.
+Nombre del parámetro: index Trace:    en System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   en System.Collections.Generic.List`1.get_Item(Int32 index)
+   en Base.Web.Controllers.NotaSalidaController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaSalidaController.cs:línea 42
+2017-11-13 21:54:05,062 ERROR  - Controlador:Producto  Action:ListarProductoStockGetAll  Mensaje:El diccionario de parámetros contiene una entrada NULL para el parámetro 'idAlamcen' del tipo que no acepta valores NULL 'System.Int32' del método 'System.Web.Mvc.JsonResult ListarProductoStockGetAll(Int32)' en 'Base.Web.Controllers.ProductoController'. Un parámetro opcional debe ser un tipo de referencia, un tipo que acepte valores NULL o debe declararse como parámetro opcional.
+Nombre del parámetro: parameters
+2017-11-13 21:54:15,109 ERROR  - Mensaje: El índice estaba fuera del intervalo. Debe ser un valor no negativo e inferior al tamaño de la colección.
+Nombre del parámetro: index Trace:    en System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   en System.Collections.Generic.List`1.get_Item(Int32 index)
+   en Base.Web.Controllers.NotaSalidaController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaSalidaController.cs:línea 42
+2017-11-13 21:54:18,489 ERROR  - Controlador:Producto  Action:ListarProductoStockGetAll  Mensaje:El diccionario de parámetros contiene una entrada NULL para el parámetro 'idAlamcen' del tipo que no acepta valores NULL 'System.Int32' del método 'System.Web.Mvc.JsonResult ListarProductoStockGetAll(Int32)' en 'Base.Web.Controllers.ProductoController'. Un parámetro opcional debe ser un tipo de referencia, un tipo que acepte valores NULL o debe declararse como parámetro opcional.
+Nombre del parámetro: parameters
+2017-11-13 21:54:51,626 ERROR  - Mensaje: El índice estaba fuera del intervalo. Debe ser un valor no negativo e inferior al tamaño de la colección.
+Nombre del parámetro: index Trace:    en System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   en System.Collections.Generic.List`1.get_Item(Int32 index)
+   en Base.Web.Controllers.NotaSalidaController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaSalidaController.cs:línea 42
+2017-11-13 21:54:57,860 ERROR  - Mensaje: El índice estaba fuera del intervalo. Debe ser un valor no negativo e inferior al tamaño de la colección.
+Nombre del parámetro: index Trace:    en System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   en System.Collections.Generic.List`1.get_Item(Int32 index)
+   en Base.Web.Controllers.NotaSalidaController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaSalidaController.cs:línea 42
+2017-11-13 21:55:00,076 ERROR  - Controlador:Producto  Action:ListarProductoStockGetAll  Mensaje:El diccionario de parámetros contiene una entrada NULL para el parámetro 'idAlamcen' del tipo que no acepta valores NULL 'System.Int32' del método 'System.Web.Mvc.JsonResult ListarProductoStockGetAll(Int32)' en 'Base.Web.Controllers.ProductoController'. Un parámetro opcional debe ser un tipo de referencia, un tipo que acepte valores NULL o debe declararse como parámetro opcional.
+Nombre del parámetro: parameters
+2017-11-13 21:56:15,791 ERROR  - Mensaje: Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 1, current count = 0. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 120
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 92
+2017-11-13 21:56:27,071 ERROR  - Mensaje: Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 1, current count = 0. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 120
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 92
+2017-11-13 21:56:57,208 ERROR  - Mensaje: Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 1, current count = 0. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 120
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 92
+2017-11-13 21:57:18,516 ERROR  - Mensaje: Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 1, current count = 0. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 120
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 92
+2017-11-13 21:58:41,815 ERROR  - Mensaje: Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 1, current count = 0. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 120
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 92
+2017-11-13 21:59:13,472 ERROR  - Mensaje: Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 1, current count = 0. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 120
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 92
+2017-11-13 22:03:45,868 ERROR  - Mensaje: Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 1, current count = 0. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 120
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 92
+2017-11-13 22:04:16,067 ERROR  - Mensaje: Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 1, current count = 0. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 120
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 92
+2017-11-13 22:13:33,790 ERROR  - Mensaje: Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 1, current count = 0. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\NotaIngresoRepository.cs:línea 121
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 92
+2017-11-13 22:15:13,395 ERROR  - Mensaje: No se puede reconocer la cadena como valor DateTime válido. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity)
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 92
+2017-11-13 22:15:43,699 ERROR  - Mensaje: No se puede reconocer la cadena como valor DateTime válido. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity)
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 92
+2017-11-13 22:16:54,160 ERROR  - Mensaje: No se puede reconocer la cadena como valor DateTime válido. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity)
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 92
+2017-11-13 22:20:27,451 ERROR  - Mensaje: No se puede reconocer la cadena como valor DateTime válido. Trace:    en Base.DataAccess.NotaIngresoRepository.AddNI(NotaIngreso entity)
+   en Base.BusinessLogic.NotaIngresoBL.AddNI(NotaIngreso entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\NotaIngresoBL.cs:línea 13
+   en Base.Web.Controllers.NotaIngresoController.Add(NotaIngresoDTO notaIngresoDTO) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaIngresoController.cs:línea 92
+2017-11-13 22:24:42,158 ERROR  - Mensaje: El índice estaba fuera del intervalo. Debe ser un valor no negativo e inferior al tamaño de la colección.
+Nombre del parámetro: index Trace:    en System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   en System.Collections.Generic.List`1.get_Item(Int32 index)
+   en Base.Web.Controllers.NotaSalidaController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaSalidaController.cs:línea 42
+2017-11-13 22:24:43,384 ERROR  - Controlador:Producto  Action:ListarProductoStockGetAll  Mensaje:El diccionario de parámetros contiene una entrada NULL para el parámetro 'idAlamcen' del tipo que no acepta valores NULL 'System.Int32' del método 'System.Web.Mvc.JsonResult ListarProductoStockGetAll(Int32)' en 'Base.Web.Controllers.ProductoController'. Un parámetro opcional debe ser un tipo de referencia, un tipo que acepte valores NULL o debe declararse como parámetro opcional.
+Nombre del parámetro: parameters
+2017-11-13 22:28:00,482 ERROR  - Mensaje: El índice estaba fuera del intervalo. Debe ser un valor no negativo e inferior al tamaño de la colección.
+Nombre del parámetro: index Trace:    en System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   en System.Collections.Generic.List`1.get_Item(Int32 index)
+   en Base.Web.Controllers.NotaSalidaController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaSalidaController.cs:línea 42
+2017-11-13 22:28:50,277 ERROR  - Mensaje: El índice estaba fuera del intervalo. Debe ser un valor no negativo e inferior al tamaño de la colección.
+Nombre del parámetro: index Trace:    en System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   en System.Collections.Generic.List`1.get_Item(Int32 index)
+   en Base.Web.Controllers.NotaSalidaController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaSalidaController.cs:línea 42
+2017-11-13 22:34:45,315 ERROR  - Mensaje: El índice estaba fuera del intervalo. Debe ser un valor no negativo e inferior al tamaño de la colección.
+Nombre del parámetro: index Trace:    en System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   en System.Collections.Generic.List`1.get_Item(Int32 index)
+   en Base.Web.Controllers.NotaSalidaController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaSalidaController.cs:línea 42
+2017-11-13 22:35:55,327 ERROR  - Mensaje: El índice estaba fuera del intervalo. Debe ser un valor no negativo e inferior al tamaño de la colección.
+Nombre del parámetro: index Trace:    en System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   en System.Collections.Generic.List`1.get_Item(Int32 index)
+   en Base.Web.Controllers.NotaSalidaController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaSalidaController.cs:línea 42
+2017-11-13 22:39:07,725 ERROR  - Mensaje: El índice estaba fuera del intervalo. Debe ser un valor no negativo e inferior al tamaño de la colección.
+Nombre del parámetro: index Trace:    en System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   en System.Collections.Generic.List`1.get_Item(Int32 index)
+   en Base.Web.Controllers.NotaSalidaController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaSalidaController.cs:línea 42
+2017-11-13 22:59:53,816 ERROR  - Mensaje: El índice estaba fuera del intervalo. Debe ser un valor no negativo e inferior al tamaño de la colección.
+Nombre del parámetro: index Trace:    en System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   en System.Collections.Generic.List`1.get_Item(Int32 index)
+   en Base.Web.Controllers.NotaSalidaController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\NotaSalidaController.cs:línea 42
+2017-11-13 23:00:25,707 ERROR  - Mensaje: The conversion of a varchar data type to a datetime data type resulted in an out-of-range value. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   en System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   en System.Data.SqlClient.SqlDataReader.Read()
+   en Microsoft.Practices.EnterpriseLibrary.Data.DataReaderWrapper.Read()
+   en Base.DataAccess.StockXAlmacenRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\StockXAlmacenRepository.cs:línea 34
+   en Base.BusinessLogic.StockXAlmacenBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\StockXAlmacenBL.cs:línea 13
+   en Base.Web.Controllers.StockXAlmacenController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\StockXAlmacenController.cs:línea 34
+2017-11-13 23:01:00,863 ERROR  - Mensaje: The conversion of a varchar data type to a datetime data type resulted in an out-of-range value. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   en System.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   en System.Data.SqlClient.SqlDataReader.Read()
+   en Microsoft.Practices.EnterpriseLibrary.Data.DataReaderWrapper.Read()
+   en Base.DataAccess.StockXAlmacenRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\StockXAlmacenRepository.cs:línea 34
+   en Base.BusinessLogic.StockXAlmacenBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\StockXAlmacenBL.cs:línea 13
+   en Base.Web.Controllers.StockXAlmacenController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\StockXAlmacenController.cs:línea 34

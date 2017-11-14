@@ -68,6 +68,8 @@
     <Compile Include="SubLinea.cs" />
     <Compile Include="TablaRegistro.cs" />
     <Compile Include="TipoDocumento.cs" />
+    <Compile Include="Transferencia.cs" />
+    <Compile Include="TransferenciaDetalle.cs" />
     <Compile Include="UnidadMedida.cs" />
     <Compile Include="Usuario.cs" />
   </ItemGroup>

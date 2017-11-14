@@ -119,6 +119,37 @@ namespace Base.Web.Controllers
             }
             return Json(jsonResponse);
         }
+        [HttpPost]
+        public JsonResult ListarProductoStockTransferencia()
+        {
+            var jsonResponse = new JsonResponse { Success = true };
+            try
+            {
+                var productoList = ProductoBL.Instancia.GetAllPagingStock(new PaginationParameter<int>
+                {
+                    AmountRows = 10,
+                    WhereFilter = "WHERE  P.prdc_bflag_estado IN(1) and S.stocc_stock_producto > 0",
+                    Start = 0,
+                    OrderBy = ""
+                });
+                var productoDTOList = MapperHelper.Map<IEnumerable<Producto>, IEnumerable<ProductoDTO>>(productoList);
+
+                if (productoDTOList.Count() > 0)
+                {
+                    jsonResponse.Data = productoDTOList;
+                    jsonResponse.Message = "datos encontrados";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+
+                ViewBag.MessageError = ex.Message;
+                jsonResponse.Data = new List<UsuarioPaginationModel>();
+            }
+            return Json(jsonResponse);
+        }
+
 
         [HttpPost]
         public JsonResult Add(ProductoDTO productoDTO)
