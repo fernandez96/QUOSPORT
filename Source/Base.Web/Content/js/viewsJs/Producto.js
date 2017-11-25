@@ -24,6 +24,12 @@ $(document).ready(function () {
 
     checkSession(function () {
         VisualizarDataTableProducto();
+        CargarMedidas();
+        CargarClasificaciones();
+        CargarCategoria();
+        CargarLinea();
+        CargarSubLineas();
+        CargarEstado();
     });
 
     $('#ProductoDataTable  tbody').on('click', 'tr', function () {
@@ -124,25 +130,36 @@ $(document).ready(function () {
         }
         e.preventDefault();
     });
+    //Carga categoria
     $('body').on('change', '#Categoria', function () {
         var id = $(this).val().split(',')[0]
         $("#Linea").empty();
-        $.each(Linea, function (index, item) {
-            if (item.ctgcc_iid_categoria === parseInt(id)) {
-                $("#Linea").append('<option value="' + item.Id + ',' + item.linc_vcod_linea + '">' + item.linc_vdescripcion + '</option>');
+        Linea.filter(function (obj) {
+            if (obj.ctgcc_iid_categoria==parseInt(id)) {
+                $("#Linea").append('<option value="' + obj.Id + ',' + obj.linc_vcod_linea + '">' + obj.linc_vdescripcion + '</option>');
+                return true;
+            }
+            else {
+                return false;
             }
         });
+        CargaSubLineaItem();
     });
     $('body').on('change', '#Linea', function () {
         var id = $(this).val().split(',')[0];
         $("#SubLinea").empty();
-        $.each(SubLinea, function (index, item) {
-            if (item.idLinea === parseInt(id)) {
-                $("#SubLinea").append('<option value="' + item.Id + ',' + item.lind_vcod_sublinea + '">' + item.lind_vdescripcion + '</option>');
+        SubLinea.filter(function (obj) {
+            if (obj.idLinea==parseInt(id)) {
+                $("#SubLinea").append('<option value="' + obj.Id + ',' + obj.lind_vcod_sublinea + '">' + obj.lind_vdescripcion + '</option>');
+                return true;
+            }
+            else{
+                return false;
             }
         });
     });
  
+
   
     $("#serie,#UPC,#EAN").mask("9999-9999999");
     webApp.validarLetrasEspacio(['descripcion','color']);
@@ -185,12 +202,7 @@ $(document).ready(function () {
             }
         });
 
-    CargarMedidas();
-    CargarClasificaciones();
-    CargarCategoria();
-    CargarLinea();
-    CargarSubLineas();
-    CargarEstado();
+    
     $('[data-toggle="tooltip"]').tooltip();
  
 
@@ -293,7 +305,8 @@ function GetProductoById() {
             } else {
                 LimpiarFormulario();
                 var producto = response.Data;
-       
+                //CargaLineaItem();
+               
                 Categoria.filter(function(obj){
                     if (obj.Id===producto.ctgc_iid_categoria) {
                         $("#Categoria").val(producto.ctgc_iid_categoria + ',' + obj.ctgcc_vcod_categoria);
@@ -304,27 +317,19 @@ function GetProductoById() {
                     }
                 });
 
-                Linea.filter(function (obj) {
-                    if (obj.ctgcc_iid_categoria === producto.ctgc_iid_categoria && obj.Id === producto.linc_iid_linea) {
-                        $("#Linea").append('<option value="' + producto.linc_iid_linea + ',' + obj.linc_vcod_linea + '">' + obj.linc_vdescripcion + '</option>');
-                        $("#Linea").val(producto.linc_iid_linea + ',' + obj.linc_vcod_linea);
-                        return true;
-                    }
-                    else {
-                        return false;
-                    }
-                });
+                Linea.filter(function(obj){ if(obj.Id==producto.lind_iid_linea){$("#Linea").val(producto.lind_iid_linea + ',' + obj.lind_vcod_sublinea);return true;
+                } else { return false }
+                })
 
-                SubLinea.filter(function (obj) {
-                    if (obj.idLinea === producto.linc_iid_linea && obj.Id === producto.lind_iid_sublinea) {
-                        $("#SubLinea").append('<option value="' + producto.lind_iid_sublinea + ',' + obj.lind_vcod_sublinea + '">' + obj.lind_vdescripcion + '</option>');
-                        $("#SubLinea").val(producto.lind_iid_sublinea + ',' + obj.lind_vcod_sublinea);
-                        return true;
-                    }
-                    else {
-                        return false;
-                    }
-                });
+                //CargaSubLineaItem();
+            
+                SubLinea.filter(function(obj){if (obj.Id==obj.lind_iid_sublinea) {  $("#SubLinea").val(producto.lind_iid_sublinea + ',' + obj.lind_vcod_sublinea);return true;
+                }else{return false}})
+                //$("#Linea").val(producto.lind_iid_linea + ',' + obj.lind_vcod_sublinea);
+
+                //$("#SubLinea").val(producto.lind_iid_sublinea + ',' + obj.lind_vcod_sublinea);
+            
+           
                 $("#correlativo").val(producto.prdc_vcod_producto.toString().substring(3,producto.prdc_vcod_producto.length));
                 $("#descripcion").val(producto.prdc_vdescripcion);
                 $("#clasificacion").val(producto.tablc_iid_iclasif_prod);
@@ -509,6 +514,7 @@ function CargarCategoria() {
                         $("#Categoria").append('<option value="' + item.Id + ',' + item.ctgcc_vcod_categoria + '">' + item.ctgcc_vdescripcion + '</option>');
                     });
                     Categoria = response.Data;
+                 
                 }
             }
         } else {
@@ -817,4 +823,32 @@ function LimpiarFormulario() {
     $("#descripcion").focus();
     $("#Estado").val(1);
 
+}
+
+function CargaLineaItem() {
+    var idCategoria = $("#Categoria").val().split(",")[0];
+    $("#Linea").empty();
+    Linea.filter(function (obj) {
+        if (obj.ctgcc_iid_categoria == parseInt(idCategoria)) {
+            $("#Linea").append('<option value="' + obj.Id + ',' + obj.lind_vcod_sublinea + '">' + obj.lind_vdescripcion + '</option>');
+            return true;
+        }
+        else {
+            return false;
+        }
+    });
+}
+
+function CargaSubLineaItem() {
+    var idLinea = $("#Linea").val().split(",")[0];
+    $("#SubLinea").empty();
+    SubLinea.filter(function (obj) {
+        if (obj.idLinea == parseInt(idLinea)) {
+            $("#SubLinea").append('<option value="' + obj.Id + ',' + obj.lind_vcod_sublinea + '">' + obj.lind_vdescripcion + '</option>');
+            return true;
+        }
+        else {
+            return false;
+        }
+    });
 }
