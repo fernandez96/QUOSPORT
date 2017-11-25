@@ -37,7 +37,7 @@ namespace Base.Web.Controllers
                 });
                 var categoriaDTOList = MapperHelper.Map<IEnumerable<NotaSalida>, IEnumerable<NotaSalidaDTO>>(NotaSalidaList);
                 dataTableModel.data = categoriaDTOList;
-                if (categoriaDTOList!= null)
+                if (categoriaDTOList != null)
                 {
                     dataTableModel.recordsTotal = NotaSalidaList[0].Cantidad;
                     dataTableModel.recordsFiltered = dataTableModel.recordsTotal;
@@ -88,20 +88,20 @@ namespace Base.Web.Controllers
             {
                 int resultado = 0;
                 var notaSalida = MapperHelper.Map<NotaSalidaDTO, NotaSalida>(notaSalidaDTO);
-                    resultado = NotaSalidaBL.Instancia.AddNS(notaSalida);
-                    if (resultado > 0)
-                    {
-                        jsonResponse.Title = Title.TitleRegistro;
-                        jsonResponse.Message = Mensajes.RegistroSatisfactorio;
-                    }
-                    else
-                    {
-                        jsonResponse.Title = Title.TitleAlerta;
-                        jsonResponse.Warning = true;
-                        jsonResponse.Message = Mensajes.RegistroFallido;
-                    }
-                
-                
+                resultado = NotaSalidaBL.Instancia.AddNS(notaSalida);
+                if (resultado > 0)
+                {
+                    jsonResponse.Title = Title.TitleRegistro;
+                    jsonResponse.Message = Mensajes.RegistroSatisfactorio;
+                }
+                else
+                {
+                    jsonResponse.Title = Title.TitleAlerta;
+                    jsonResponse.Warning = true;
+                    jsonResponse.Message = Mensajes.RegistroFallido;
+                }
+
+
 
                 LogBL.Instancia.Add(new Log
                 {
@@ -306,12 +306,12 @@ namespace Base.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult stockProducto(int  idproducto, int idalmacen)
+        public JsonResult stockProducto(int idproducto, int idalmacen)
         {
             var jsonResponse = new JsonResponse { Success = true };
-         
+
             decimal resultStock = ProductoBL.Instancia.GetStockProducto(idproducto, idalmacen);
-            if (resultStock>0)
+            if (resultStock > 0)
             {
                 jsonResponse.Data = resultStock;
             }

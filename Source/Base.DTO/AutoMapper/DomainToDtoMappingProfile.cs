@@ -12,10 +12,10 @@ namespace Base.DTO.AutoMapper
         }
         protected override void Configure()
         {
-            
+
             Mapper.CreateMap<Usuario, UsuarioLoginDTO>()
                .ForMember(d => d.RolNombre, x => x.MapFrom(p => p.Rol.Nombre));
-          
+
             Mapper.CreateMap<Usuario, UsuarioDTO>()
                 .ForMember(d => d.RolNombre, x => x.MapFrom(p => p.Rol.Nombre));
             Mapper.CreateMap<Rol, RolDTO>();
@@ -50,6 +50,10 @@ namespace Base.DTO.AutoMapper
 
             Mapper.CreateMap<NotaSalidaDetalle, NotaSalidaDetalleDTO>();
 
+            Mapper.CreateMap<Transferencia, TransferenciaDTO>()
+                 .ForMember(e => e.fecha, x => x.MapFrom(p => p.trfc_sfecha_transf.Equals(default(DateTime)) ? string.Empty : p.trfc_sfecha_transf.ToShortDateString()));
+
+            Mapper.CreateMap<TransferenciaDetalle, TransferenciaDetalleDTO>();
         }
     }
 }

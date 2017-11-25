@@ -1130,7 +1130,7 @@ function LimpiarFormulario() {
     NotaIngresoDetalle.length = 0;
     dataTableNotaIngresoDetalle.clear().draw();
     $("#almacen").val(1);
-    $("#motivo").val(17);
+    $("#motivo").val(10);
     $('#fecha').datepicker({
         autoclose: true,
         language: 'es',

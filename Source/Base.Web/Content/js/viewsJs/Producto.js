@@ -136,7 +136,7 @@ $(document).ready(function () {
         $("#Linea").empty();
         Linea.filter(function (obj) {
             if (obj.ctgcc_iid_categoria==parseInt(id)) {
-                $("#Linea").append('<option value="' + obj.Id + ',' + obj.linc_vcod_linea + '">' + obj.linc_vdescripcion + '</option>');
+                $("#Linea").append('<option value="' + obj.Id + '">' + obj.linc_vdescripcion + '</option>');
                 return true;
             }
             else {
@@ -150,7 +150,7 @@ $(document).ready(function () {
         $("#SubLinea").empty();
         SubLinea.filter(function (obj) {
             if (obj.idLinea==parseInt(id)) {
-                $("#SubLinea").append('<option value="' + obj.Id + ',' + obj.lind_vcod_sublinea + '">' + obj.lind_vdescripcion + '</option>');
+                $("#SubLinea").append('<option value="' + obj.Id + '">' + obj.lind_vdescripcion + '</option>');
                 return true;
             }
             else{
@@ -309,25 +309,45 @@ function GetProductoById() {
                
                 Categoria.filter(function(obj){
                     if (obj.Id===producto.ctgc_iid_categoria) {
-                        $("#Categoria").val(producto.ctgc_iid_categoria + ',' + obj.ctgcc_vcod_categoria);
+                        $("#Categoria").val(producto.ctgc_iid_categoria);
                         return true;
                     }
                     else {
                         return false;
                     }
                 });
+          
 
-                Linea.filter(function(obj){ if(obj.Id==producto.lind_iid_linea){$("#Linea").val(producto.lind_iid_linea + ',' + obj.lind_vcod_sublinea);return true;
-                } else { return false }
-                })
-
-                //CargaSubLineaItem();
+                var idC = $("#Categoria").val();
+                Linea.filter(function (obj) {
+                    if (obj.ctgcc_iid_categoria ==idC) {
+                        $("#Linea").append('<option value="' + obj.Id + '">' + obj.linc_vdescripcion + '</option>');
+                  
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                });
+                
             
-                SubLinea.filter(function(obj){if (obj.Id==obj.lind_iid_sublinea) {  $("#SubLinea").val(producto.lind_iid_sublinea + ',' + obj.lind_vcod_sublinea);return true;
-                }else{return false}})
-                //$("#Linea").val(producto.lind_iid_linea + ',' + obj.lind_vcod_sublinea);
+                var idL = $("#Linea").val();
+                SubLinea.filter(function (obj) {
+                    if (obj.idLinea == idL) {
+                        $("#SubLinea").append('<option value="' + obj.Id + '">' + obj.lind_vdescripcion + '</option>');
+                    
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                });
+                
+                $("#Linea").val(producto.linc_iid_linea);
+                $("#SubLinea").val(producto.lind_iid_sublinea);
+     
 
-                //$("#SubLinea").val(producto.lind_iid_sublinea + ',' + obj.lind_vcod_sublinea);
+               
             
            
                 $("#correlativo").val(producto.prdc_vcod_producto.toString().substring(3,producto.prdc_vcod_producto.length));
@@ -425,13 +445,13 @@ function EliminarProducto() {
 }
 
 function GuardarProducto() {
-
+   
     var modelView = {
         Id: $("#ProductoId").val(),
-        ctgc_iid_categoria: $("#Categoria").val().split(',')[0],
-        linc_iid_linea: $("#Linea").val().split(',')[0],
-        lind_iid_sublinea: $("#SubLinea").val().split(',')[0],
-        prdc_vcod_producto: $("#Categoria").val().split(',')[1] + '-' + $("#Linea").val().split(',')[1] + '-' + $("#SubLinea").val().split(',')[1],
+        ctgc_iid_categoria: $("#Categoria").val(),
+        linc_iid_linea: $("#Linea").val(),
+        lind_iid_sublinea: $("#SubLinea").val(),
+        prdc_vcod_producto: $("#Categoria").val() +'-' + $("#Linea").val() + '-' + $("#SubLinea").val(),
         prdc_vdescripcion: $("#descripcion").val(),
         tablc_iid_iclasif_prod: $("#clasificacion").val(),
         prdc_dstock_minimo: $("#stock").val(),
@@ -511,7 +531,7 @@ function CargarCategoria() {
             } else {
                 if (response.Data !==null) {
                     $.each(response.Data, function (index, item) {
-                        $("#Categoria").append('<option value="' + item.Id + ',' + item.ctgcc_vcod_categoria + '">' + item.ctgcc_vdescripcion + '</option>');
+                        $("#Categoria").append('<option value="' + item.Id + '">' + item.ctgcc_vdescripcion + '</option>');
                     });
                     Categoria = response.Data;
                  
@@ -817,20 +837,20 @@ function AddSearchFilter() {
 
 function LimpiarFormulario() {
     webApp.clearForm(formularioMantenimiento);
-    $("#clasificacion").val(8);
+    $("#clasificacion").val(14);
     $("#textDescripcion").val('');
-    $("#unidad").val(1);
+    $("#unidad").val(2);
     $("#descripcion").focus();
     $("#Estado").val(1);
 
 }
 
 function CargaLineaItem() {
-    var idCategoria = $("#Categoria").val().split(",")[0];
+    var idCategoria = $("#Categoria");
     $("#Linea").empty();
     Linea.filter(function (obj) {
         if (obj.ctgcc_iid_categoria == parseInt(idCategoria)) {
-            $("#Linea").append('<option value="' + obj.Id + ',' + obj.lind_vcod_sublinea + '">' + obj.lind_vdescripcion + '</option>');
+            $("#Linea").append('<option value="' + obj.Id + '">' + obj.lind_vdescripcion + '</option>');
             return true;
         }
         else {
@@ -840,11 +860,11 @@ function CargaLineaItem() {
 }
 
 function CargaSubLineaItem() {
-    var idLinea = $("#Linea").val().split(",")[0];
+    var idLinea = $("#Linea").val();
     $("#SubLinea").empty();
     SubLinea.filter(function (obj) {
         if (obj.idLinea == parseInt(idLinea)) {
-            $("#SubLinea").append('<option value="' + obj.Id + ',' + obj.lind_vcod_sublinea + '">' + obj.lind_vdescripcion + '</option>');
+            $("#SubLinea").append('<option value="' + obj.Id + '">' + obj.lind_vdescripcion + '</option>');
             return true;
         }
         else {

@@ -487,7 +487,9 @@
     <None Include="Properties\PublishProfiles\webside.pubxml" />
     <Content Include="Scripts\jquery.signalR-2.2.2.js" />
     <Content Include="Scripts\jquery.signalR-2.2.2.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\TipoDocumento\Index.cshtml" />
@@ -546,6 +548,7 @@
     <Compile Include="Models\StockXAlmacenFilterModel.cs" />
     <Compile Include="Models\TablaRegistroFilterModel.cs" />
     <Compile Include="Models\TipoDocumentoFilterModel.cs" />
+    <Compile Include="Models\TransferenciaFilterModel.cs" />
     <Compile Include="Models\UnidadMedidaFilterModel.cs" />
     <Compile Include="Models\UsuarioFilterModel.cs" />
     <Compile Include="Models\UsuarioModel.cs" />

@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using System.Globalization;
 
 using Base.Web.Core.Hubs;
 namespace Base.Web.Controllers
@@ -117,11 +118,11 @@ namespace Base.Web.Controllers
 
             if (dataTableModel.filter.FechaInicialSearch != null)
             {
-                WhereModelI += " AND ing.ningc_fecha_nota_ingreso>= CAST('" + dataTableModel.filter.FechaInicialSearch + "' AS DATETIME) ";
+                WhereModelI += " AND ing.ningc_fecha_nota_ingreso>= CAST('" + DateTime.ParseExact(dataTableModel.filter.FechaInicialSearch,"dd/mm/yyyy", CultureInfo.InvariantCulture).ToString("yyyy/mm/dd") + "' AS DATETIME) ";
             }
             if (dataTableModel.filter.FechaFinalSearch != null)
             {
-                WhereModelI += " AND ing.ningc_fecha_nota_ingreso<= DATEADD(DAY,1,CAST('" + dataTableModel.filter.FechaFinalSearch + "' AS DATETIME)) ";
+                WhereModelI += " AND ing.ningc_fecha_nota_ingreso<= DATEADD(DAY,1,CAST('" + DateTime.ParseExact(dataTableModel.filter.FechaFinalSearch,"dd/mm/yyyy",CultureInfo.InvariantCulture).ToString("yyyy/mm/dd") + "' AS DATETIME)) ";
             }
             dataTableModel.whereFilterI = WhereModelI;
             dataTableModel.whereFilterS = WhereModelS;

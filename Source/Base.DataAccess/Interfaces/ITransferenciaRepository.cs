@@ -11,6 +11,6 @@ namespace Base.DataAccess.Interfaces
         T GetById(T entity);
         IList<T> GetAllPaging(PaginationParameter<Q> paginationParameters);
         IList<D> GetAll(T entity);
-        Q GetCorrelativo(T entity);
+        Q GetCorrelativo();
     }
 }

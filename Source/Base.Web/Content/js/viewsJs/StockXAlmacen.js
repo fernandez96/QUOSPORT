@@ -15,42 +15,7 @@ var idProducto = 0;
 var idAlmacen = 0;
 var stockxalmacen = new Array();
 $(document).ready(function () {
-    //var stockXAlmacenHub = $.connection.stockXAlmacenHub;
-
-    //stockXAlmacenHub.client.listar = function (response) {
-    //    if (response.Success) {
-
-    //        if (response.Warning) {
-    //            $.gritter.add({
-    //                title: 'Alerta',
-    //                text: response.Message,
-    //                class_name: 'gritter-warning gritter'
-    //            });
-    //        } else {
-    //            stockxalmacen.length = 0;
-    //            dataTableStockXAlmacen.clear().draw();
-    //            stockxalmacen = response.Data;
-    //            dataTableStockXAlmacen.rows.add(stockxalmacen).draw();
-    //        }
-    //    } else {
-    //        $.gritter.add({
-    //            title: 'Error',
-    //            text: response.Message,
-    //            class_name: 'gritter-error gritter'
-    //        });
-    //    }
-
-    //};
-
-    //stockXAlmacenHub.client.listarStockXAlmacenData = function () {
-    //    stockXAlmacenHub.server.listar();
-    //};
-
-    //$.connection.hub.start().done(function () {
-    //    stockXAlmacenHub.server.listar();
-    //});
-
-
+  
 
     $.extend($.fn.dataTable.defaults, {
         language: { url: baseUrl + 'Content/js/dataTables/Internationalisation/es.txt' },
@@ -200,7 +165,7 @@ function VisualizarDataTableStockXAlmacen() {
                 request.filter = {
                     almacenSearch: $("#almacensearch").val(),
                     descripcionSearch: $("#descripcionProducto").val(),
-                    FechaInicialSearch: '01/01/2017',
+                    FechaInicialSearch: '01/11/2017',
                     FechaFinalSearch: $("#fechasearch").val()
                 }
             },
