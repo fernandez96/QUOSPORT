@@ -9,6 +9,7 @@ using Base.Web.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Web.Mvc;
 
 namespace Base.Web.Controllers
@@ -88,6 +89,7 @@ namespace Base.Web.Controllers
             {
                 int resultado = 0;
                 var notaSalida = MapperHelper.Map<NotaSalidaDTO, NotaSalida>(notaSalidaDTO);
+                DateTime.ParseExact(notaSalida.nsalc_fecha_nota_salida_, "dd/mm/yyyy", CultureInfo.InvariantCulture).ToString(appSettings.FormatoFecha);
                 resultado = NotaSalidaBL.Instancia.AddNS(notaSalida);
                 if (resultado > 0)
                 {
@@ -141,7 +143,7 @@ namespace Base.Web.Controllers
             try
             {
                 var notaSalida = MapperHelper.Map<NotaSalidaDTO, NotaSalida>(notaSalidaDTO);
-
+                DateTime.ParseExact(notaSalida.nsalc_fecha_nota_salida_, "dd/mm/yyyy", CultureInfo.InvariantCulture).ToString(appSettings.FormatoFecha);
                 int resultado = 0;
                 resultado = NotaSalidaBL.Instancia.UpdateNS(notaSalida);
                 if (resultado > 0)
@@ -343,6 +345,7 @@ namespace Base.Web.Controllers
 
             return Json(jsonResponse);
         }
+
         #region Métodos Privados
 
         public void FormatDataTable(DataTableModel<NotaSalidaFilterModel, int> dataTableModel)

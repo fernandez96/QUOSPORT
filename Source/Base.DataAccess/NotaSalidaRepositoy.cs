@@ -41,7 +41,7 @@ namespace Base.DataAccess
                             _database.AddInParameter(comando, "@nsalc_numero_nota_salida", DbType.String,  entity.nsalc_numero_nota_salida);
                             _database.AddInParameter(comando, "@almac_icod_almacen", DbType.Int32, entity.almac_icod_almacen);
                             _database.AddInParameter(comando, "@nsalc_iid_motivo", DbType.Int32, entity.nsalc_iid_motivo);
-                            _database.AddInParameter(comando, "@nsalc_fecha_nota_salida", DbType.String, DateTime.ParseExact(entity.nsalc_fecha_nota_salida_,"dd/mm/yyyy",CultureInfo.InvariantCulture).ToString("yyyy/mm/dd"));
+                            _database.AddInParameter(comando, "@nsalc_fecha_nota_salida", DbType.String, entity.nsalc_fecha_nota_salida_);
                             _database.AddInParameter(comando, "@tdocc_icod_tipo_doc", DbType.Int32, entity.tdocc_icod_tipo_doc);
                             _database.AddInParameter(comando, "@nsalc_referencia", DbType.String, entity.nsalc_referencia);
                             _database.AddInParameter(comando, "@nsalc_observaciones", DbType.String, entity.nsalc_observaciones);
@@ -60,7 +60,7 @@ namespace Base.DataAccess
                         {
                             using (var comandoKardex = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_KARDEX_INSERT")))
                             {
-                                _database.AddInParameter(comandoKardex, "@kardc_fecha_movimiento", DbType.String, DateTime.ParseExact(entity.nsalc_fecha_nota_salida_, "dd/mm/yyyy", CultureInfo.InvariantCulture).ToString("yyyy/mm/dd"));
+                                _database.AddInParameter(comandoKardex, "@kardc_fecha_movimiento", DbType.String, entity.nsalc_fecha_nota_salida_);
                                 _database.AddInParameter(comandoKardex, "@ningc_icod_nota_ingreso", DbType.Int32, id);
                                 _database.AddInParameter(comandoKardex, "@almac_icod_almacen", DbType.Int32, entity.almac_icod_almacen);
                                 _database.AddInParameter(comandoKardex, "@prdc_icod_producto", DbType.Int32, itemdetalle.prdc_icod_producto);
@@ -142,7 +142,7 @@ namespace Base.DataAccess
                             _database.AddInParameter(comando, "@nsalc_numero_nota_salida", DbType.String, entity.nsalc_numero_nota_salida);
                             _database.AddInParameter(comando, "@almac_icod_almacen", DbType.String, entity.almac_icod_almacen);
                             _database.AddInParameter(comando, "@nsalc_iid_motivo", DbType.String, entity.nsalc_iid_motivo);
-                            _database.AddInParameter(comando, "@nsalc_fecha_nota_salida", DbType.String, DateTime.ParseExact(entity.nsalc_fecha_nota_salida_, "dd/mm/yyyy", CultureInfo.InvariantCulture).ToString("yyyy/mm/dd"));
+                            _database.AddInParameter(comando, "@nsalc_fecha_nota_salida", DbType.String, entity.nsalc_fecha_nota_salida_);
                             _database.AddInParameter(comando, "@tdocc_icod_tipo_doc", DbType.Int32, entity.tdocc_icod_tipo_doc);
                             _database.AddInParameter(comando, "@nsalc_referencia", DbType.String, entity.nsalc_referencia);
                             _database.AddInParameter(comando, "@nsalc_observaciones", DbType.String, entity.nsalc_observaciones);
@@ -162,7 +162,7 @@ namespace Base.DataAccess
                             {
                                 using (var comandoKardex = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_KARDEX_UPDATE")))
                                 {
-                                    _database.AddInParameter(comandoKardex, "@kardc_fecha_movimiento", DbType.String, DateTime.ParseExact(entity.nsalc_fecha_nota_salida_, "dd/mm/yyyy", CultureInfo.InvariantCulture).ToString("yyyy/mm/dd"));
+                                    _database.AddInParameter(comandoKardex, "@kardc_fecha_movimiento", DbType.String, entity.nsalc_fecha_nota_salida_);
                                     _database.AddInParameter(comandoKardex, "@ningc_icod_nota_ingreso", DbType.Int32, id);
                                     _database.AddInParameter(comandoKardex, "@almac_icod_almacen", DbType.Int32, entity.almac_icod_almacen);
                                     _database.AddInParameter(comandoKardex, "@prdc_icod_producto", DbType.Int32, itemdetalle.prdc_icod_producto);
@@ -219,7 +219,7 @@ namespace Base.DataAccess
                             {
                                 using (var comandoKardex = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_KARDEX_INSERT")))
                                 {
-                                    _database.AddInParameter(comandoKardex, "@kardc_fecha_movimiento", DbType.String, DateTime.ParseExact(entity.nsalc_fecha_nota_salida_, "dd/mm/yyyy", CultureInfo.InvariantCulture).ToString("yyyy/mm/dd"));
+                                    _database.AddInParameter(comandoKardex, "@kardc_fecha_movimiento", DbType.String, entity.nsalc_fecha_nota_salida_);
                                     _database.AddInParameter(comandoKardex, "@ningc_icod_nota_ingreso", DbType.Int32, id);
                                     _database.AddInParameter(comandoKardex, "@almac_icod_almacen", DbType.Int32, entity.almac_icod_almacen);
                                     _database.AddInParameter(comandoKardex, "@prdc_icod_producto", DbType.Int32, itemdetalle.prdc_icod_producto);

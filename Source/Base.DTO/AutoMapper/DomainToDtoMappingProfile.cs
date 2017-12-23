@@ -54,6 +54,7 @@ namespace Base.DTO.AutoMapper
                  .ForMember(e => e.fecha, x => x.MapFrom(p => p.trfc_sfecha_transf.Equals(default(DateTime)) ? string.Empty : p.trfc_sfecha_transf.ToShortDateString()));
 
             Mapper.CreateMap<TransferenciaDetalle, TransferenciaDetalleDTO>();
+            Mapper.CreateMap<Transportista, TransportistaDTO>();
         }
     }
 }

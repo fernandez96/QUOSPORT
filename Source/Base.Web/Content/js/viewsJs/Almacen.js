@@ -22,7 +22,7 @@ $(document).ready(function () {
     });
 
     checkSession(function () {
-       VisualizarDataTableAlmacen();
+        VisualizarDataTableAlmacen();
     });
 
     $('#Almacen tbody').on('click', 'tr', function () {
@@ -50,16 +50,15 @@ $(document).ready(function () {
             webApp.showMessageDialog("Por favor seleccione un registro.");
         }
         else {
-            if (rowAlmacen.Estado===estadoInactivo) {
+            if (rowAlmacen.Estado === estadoInactivo) {
                 webApp.showMessageDialog('El Almacen ' + '<b>' + rowAlmacen.almac_vdescripcion + '</b>' + ' se encuentra  ' + '<span class="label label-warning arrowed-in arrowed-in-right">Inactivo</span>' + '.Si desea hacer un modificación le recomendamoos cambiarle de estado a dicho Almacen.');
             }
-            else
-            {
+            else {
                 checkSession(function () {
                     GetAlmacenById();
                 });
             }
-          
+
         }
 
     });
@@ -104,7 +103,7 @@ $(document).ready(function () {
         }
 
     });
-  
+
 
     $("#btnSearchAlmacen").on("click", function (e) {
         if ($('#AlmacenSearchForm').valid()) {
@@ -122,8 +121,8 @@ $(document).ready(function () {
             ////webApp.showConfirmDialog(function () {
             checkSession(function () {
                 GuardarAlmacen();
-                
-             
+
+
             });
             //});
         }
@@ -149,7 +148,7 @@ $(document).ready(function () {
             ubicacion: {
                 required: true
             },
-            telefono:{
+            telefono: {
                 strippedminlength: {
                     param: 6
                 },
@@ -157,7 +156,7 @@ $(document).ready(function () {
             correo: {
                 email: true
             }
-          
+
         },
         {
             codigo: {
@@ -175,13 +174,13 @@ $(document).ready(function () {
             ubicacion: {
                 required: "Por favor ingrese Ubicación."
             },
-            telefono:{
+            telefono: {
                 strippedminlength: "Por favor ingrese al menos 6 caracteres."
             },
             correo: {
                 email: "Por favor ingrese Correo válido"
             }
-          
+
         });
     CargarTipo();
     CargarEstado();
@@ -376,9 +375,9 @@ function GuardarAlmacen() {
         almac_vtelefono: $("#telefono").val(),
         almac_vcorreo: $("#correo").val(),
         almac_itipo: $("#Tipo").val(),
-        Estado:$("#Estado").val(),
+        Estado: $("#Estado").val(),
         UsuarioRegistro: $("#usernameLogOn strong").text()
-   
+
     };
 
     if (modelView.Id == 0)

@@ -69,6 +69,7 @@
     <Compile Include="Interfaces\ITablaRegistroBL.cs" />
     <Compile Include="Interfaces\ITipoDocumentoBL.cs" />
     <Compile Include="Interfaces\ITransferenciaBL.cs" />
+    <Compile Include="Interfaces\ITransportistaBL.cs" />
     <Compile Include="Interfaces\IUnidadMedidaBL.cs" />
     <Compile Include="Interfaces\IUsuarioBL.cs" />
     <Compile Include="KardexBL.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="TablaRegistroBL.cs" />
     <Compile Include="TipoDocumentoBL.cs" />
     <Compile Include="TransferenciaBL.cs" />
+    <Compile Include="TransportistaBL.cs" />
     <Compile Include="UnidadMedidaBL.cs" />
     <Compile Include="UsuarioBL.cs" />
   </ItemGroup>

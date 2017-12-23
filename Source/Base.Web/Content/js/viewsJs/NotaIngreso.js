@@ -22,7 +22,7 @@ var IntenteloMasTarde = "Hubo un error, inténtelo más tarde.";
 var TitleRegistro = "Registro Satisfactorio";
 var TitleActualizar = "Actualización Satisfactoria";
 var TitleEliminar = "Eliminación Satisfactoria";
-var tipoMovimiento=1;
+var tipoMovimiento = 1;
 var TitleAlerta = "Alerta";
 var NotaIngresoDetalle = new Array();
 var editor;
@@ -69,7 +69,7 @@ $(document).ready(function () {
         }
         else {
             dataTableNotaIngresoDetalle.$('tr.selected').removeClass('selected');
-            $(this).addClass('selected');        
+            $(this).addClass('selected');
         }
     });
     $('#ProductoDataTable  tbody').on('click', 'tr', function () {
@@ -86,11 +86,11 @@ $(document).ready(function () {
                 $("#descripcionP").val(rowProducto.prdc_vdescripcion);
                 $("#cantidad").focus();
                 $("#ProductoModal").modal("hide");
-            },100);
+            }, 100);
         }
     });
 
- 
+
     $('#btnAgregarNotaIngreso').on('click', function () {
         LimpiarFormulario();
         GetCorrelativoCab($("#almacen").val());
@@ -99,7 +99,7 @@ $(document).ready(function () {
         $("#NuevaNotaIngreso").modal("show");
     });
     //agregar detalle
-												
+
     $("#btnAgregarNotaIngresoDetalle").on("click", function () {
         LimpiarFormularioDetalle();
         $("#NotaIngresoDetalleId").val(0);
@@ -135,20 +135,20 @@ $(document).ready(function () {
     });
 
     $("#btnGuardarNotaIngreso").on("click", function () {
-        if (NotaIngresoDetalle.filter(function (obj) { if (obj.status != eliminar) { return true } else {return false }}).length<= 0 ) {
+        if (NotaIngresoDetalle.filter(function (obj) { if (obj.status != eliminar) { return true } else { return false } }).length <= 0) {
             webApp.showMessageDialog("Por favor debe ingresar al menos un producto.");
         }
         else {
             if ($('#' + formularioMantenimiento).valid()) {
                 checkSession(function () {
-                   GuardarNotaIngreso();
+                    GuardarNotaIngreso();
                 });
             }
         }
     });
 
     $("#btnGuardarProducto").on("click", function () {
-        if ($("#unidad,#descripcionP").val()=="") {
+        if ($("#unidad,#descripcionP").val() == "") {
             webApp.showMessageDialog("Por favor seleccione un Producto.");
         }
         else {
@@ -177,7 +177,7 @@ $(document).ready(function () {
         if (typeof rowNotaIngresoDetalle === "undefined") {
             webApp.showMessageDialog("Por favor seleccione un registro.");
         }
-        else{
+        else {
             webApp.showDeleteConfirmDialog(function () {
                 checkSession(function () {
                     DeleteProductoDraw();
@@ -190,7 +190,7 @@ $(document).ready(function () {
         dataTableProducto.ajax.reload();
         $("#ProductoModal").modal("show");
     });
-  
+
     $('#btnImprimir').on('click', function () {
         rowNotaIngreso = dataTableNotaIngreso.row('.selected').data();
         if (typeof rowNotaIngreso === "undefined") {
@@ -226,7 +226,7 @@ $(document).ready(function () {
     });
     webApp.validarNumerico(['costo', 'cantidad']);
     webApp.InicializarValidacion(formularioMantenimientoDetalle,
-       {       
+       {
            cantidad: {
                required: true,
            },
@@ -248,10 +248,10 @@ $(document).ready(function () {
               required: true,
           },
           fecha: {
-              required:true
+              required: true
           },
           motivo: {
-              required:true
+              required: true
           }
       },
       {
@@ -271,7 +271,7 @@ $(document).ready(function () {
       );
 
     $('[data-toggle="tooltip"]').tooltip();
-    
+
     $('#observacion').inputlimiter({
         remText: '%n caracter%s restantes...',
         limitText: 'permite maximo : %n.'
@@ -342,7 +342,7 @@ function VisualizarDataTableNotaIngreso() {
             { "data": "Id" },
             { "data": "ningc_numero_nota_ingreso" },
             { "data": "almac_vdescripcion" },
-            { "data": function(obj){return GetFechaSubString(obj.fecha); }},
+            { "data": function (obj) { return GetFechaSubString(obj.fecha); } },
             { "data": "ningc_v_motivo" },
             { "data": "ningc_observaciones" },
             {
@@ -394,16 +394,16 @@ function VisualizarDataTableNotaIngresoDetalle() {
                 //return JSON.stringify(json); // return JSON string
             }
         },
-     
+
         "bAutoWidth": false,
         "columns": [
-            { "data": "Id"},
+            { "data": "Id" },
             { "data": "dninc_nro_item" },
             { "data": "prdc_vdescripcion" },
             { "data": "dninc_v_unidad" },
             { "data": "dninc_costo", render: $.fn.dataTable.render.number(',', '.', 0, 'S/ ') },
             { "data": "dninc_cantidad", render: $.fn.dataTable.render.number(',', '.', 2) }
-         
+
         ],
         "aoColumnDefs": [
 
@@ -413,7 +413,7 @@ function VisualizarDataTableNotaIngresoDetalle() {
             { "className": "hidden-992", "aTargets": [3], "width": "10%" },
             { "className": "center hidden-992", "aTargets": [4], "width": "7%" },
             { "className": "center hidden-120", "aTargets": [5], "width": "7%" },
-       
+
 
         ],
         "order": [[1, "asc"]],
@@ -478,7 +478,7 @@ function VisualizarDataTableProducto() {
             { "className": "hidden-120", "aTargets": [1], "width": "20%" },
             { "className": "hidden-120", "aTargets": [2], "width": "12%" },
             { "className": "hidden-120", "aTargets": [3], "width": "12%" },
-       
+
             { "bSortable": false, "className": "hidden-480", "aTargets": [3], "width": "7%" }
 
         ],
@@ -510,7 +510,7 @@ function AddProductoDraw() {
                 }
             });
             if (exito) {
-                detalle = { "Id": NotaIngresoDetalle.length + 1, "prdc_icod_producto": rowProducto.Id, "kardc_icod_correlativo": NotaIngresoDetalle.length + 1, "dninc_nro_item": CorrelativoProducto(), "prdc_vdescripcion": descripcion, "dninc_v_unidad": unidad, "dninc_costo": costo, "dninc_cantidad": cantidad, "Estado": 1, "status": agregar,"kardc_tipo_movimiento": tipoMovimiento };
+                detalle = { "Id": NotaIngresoDetalle.length + 1, "prdc_icod_producto": rowProducto.Id, "kardc_icod_correlativo": NotaIngresoDetalle.length + 1, "dninc_nro_item": CorrelativoProducto(), "prdc_vdescripcion": descripcion, "dninc_v_unidad": unidad, "dninc_costo": costo, "dninc_cantidad": cantidad, "Estado": 1, "status": agregar, "kardc_tipo_movimiento": tipoMovimiento };
                 NotaIngresoDetalle.push(detalle);
                 dataTableNotaIngresoDetalle.clear();
                 dataTableNotaIngresoDetalle.rows.add(NotaIngresoDetalle.filter(function (e) {
@@ -538,7 +538,7 @@ function AddProductoDraw() {
             }
         }
         else {
-            detalle = { "Id": 1, "prdc_icod_producto": rowProducto.Id, "kardc_icod_correlativo": 1, "dninc_nro_item": CorrelativoProducto(), "prdc_vdescripcion": descripcion, "dninc_v_unidad": unidad, "dninc_costo": costo, "dninc_cantidad": cantidad, "Estado": 1, "status": agregar,"kardc_tipo_movimiento":tipoMovimiento };
+            detalle = { "Id": 1, "prdc_icod_producto": rowProducto.Id, "kardc_icod_correlativo": 1, "dninc_nro_item": CorrelativoProducto(), "prdc_vdescripcion": descripcion, "dninc_v_unidad": unidad, "dninc_costo": costo, "dninc_cantidad": cantidad, "Estado": 1, "status": agregar, "kardc_tipo_movimiento": tipoMovimiento };
             NotaIngresoDetalle.push(detalle);
             dataTableNotaIngresoDetalle.rows.add(NotaIngresoDetalle).draw();
             $("#NuevoDetalleProducto").modal("hide");
@@ -547,7 +547,7 @@ function AddProductoDraw() {
                 text: RegistroSatisfactorio,
                 class_name: 'gritter-success gritter'
             });
-        
+
         }
     }
     else {
@@ -565,15 +565,15 @@ function AddProductoDraw() {
             dataTableNotaIngresoDetalle.clear().draw();
 
             dataTableNotaIngresoDetalle.rows.add(NotaIngresoDetalle.filter(function (obj) {
-                if (obj.status!=eliminar) {
+                if (obj.status != eliminar) {
                     return true;
                 }
                 else {
                     return false;
                 }
             })).draw();
-       
-         
+
+
             $.gritter.add({
                 title: TitleActualizar,
                 text: ActualizacionSatisfactoria,
@@ -612,7 +612,7 @@ function DeleteProductoDraw() {
         if (value.Id == rowNotaIngresoDetalle.Id && value.status != eliminar) {
             value.status = eliminar;
             statusEliminacion = true;
-        } 
+        }
 
     });
     if (statusEliminacion) {
@@ -643,7 +643,7 @@ function DeleteProductoDraw() {
 function correlativaNotaIngreso() {
     var correlativo = '000001';
     $("#nroNI").val(correlativo);
-    
+
 }
 
 
@@ -664,17 +664,17 @@ function GetCorrelativoCab(id) {
                 });
             } else {
                 var notaingreso = response.Data + 1;
-          
-                 if (notaingreso < 10) {
+
+                if (notaingreso < 10) {
                     $("#nroNI").val('00000' + notaingreso);
                 }
-                 else if (notaingreso >= 10) {
+                else if (notaingreso >= 10) {
                     $("#nroNI").val('0000' + notaingreso);
                 }
                 else if (notaingreso >= 100) {
-                    $("#nroNI").val('000'+notaingreso);
+                    $("#nroNI").val('000' + notaingreso);
                 }
-                else if (notaingreso>=1000) {
+                else if (notaingreso >= 1000) {
                     $("#nroNI").val('00' + notaingreso);
                 }
                 else if (notaingreso >= 10000) {
@@ -710,9 +710,9 @@ function GetCorrelativoCab(id) {
 
 function CorrelativoProducto() {
     var correlativo = "";
-    if (NotaIngresoDetalle.length>0) {
+    if (NotaIngresoDetalle.length > 0) {
         var jquery = JSLINQ(NotaIngresoDetalle)
-                      .Where(function (v) { return v.status!=eliminar})
+                      .Where(function (v) { return v.status != eliminar })
                       .OrderByDescending(function (o) { return o.dninc_nro_item })
                       .Select(function (item) { return parseInt(item.dninc_nro_item) });
         var correlativoValue = parseInt(jquery.items[0] + 1);
@@ -720,10 +720,10 @@ function CorrelativoProducto() {
             correlativo = '00' + correlativoValue;
         }
         if (correlativoValue >= 10) {
-            correlativo='0' + correlativoValue;
+            correlativo = '0' + correlativoValue;
         }
         if (correlativoValue >= 100) {
-            correlativo=correlativoValue;
+            correlativo = correlativoValue;
         }
     }
     else {
@@ -740,12 +740,12 @@ function GuardarNotaIngreso() {
         tdocc_icod_tipo_doc: tipoDocumento,
         ningc_fecha_nota_ingreso_: $("#fecha").val(),
         ningc_iid_motivo: $("#motivo").val(),
-        almac_icod_almacen:$("#almacen").val(),
+        almac_icod_almacen: $("#almacen").val(),
         ningc_numero_nota_ingreso: $("#nroNI").val(),
-        Estado:agregar,
+        Estado: agregar,
         listaDetalleNI: NotaIngresoDetalle,
         ningc_observaciones: $("#observacion").val(),
-        ningc_referencia:"",
+        ningc_referencia: "",
         UsuarioRegistro: $("#usernameLogOn strong").text()
     };
     if (modelView.Id == 0)
@@ -873,7 +873,7 @@ function EliminarNataIngreso(id) {
                     class_name: 'gritter-warning gritter'
                 });
             } else {
-         
+
                 dataTableNotaIngreso.ajax.reload();
                 $.gritter.add({
                     title: response.Title,
@@ -921,8 +921,8 @@ function GetNotaIngresoDetalleAll(id) {
             } else {
                 dataTableNotaIngresoDetalle.clear().draw();
                 NotaIngresoDetalle = response.Data;
-              
-            
+
+
                 dataTableNotaIngresoDetalle.rows.add(NotaIngresoDetalle).draw();
 
             }
@@ -1069,8 +1069,8 @@ function LimpiarFormulario() {
         language: 'es',
         format: 'dd/mm/yyyy'
     }).datepicker('setDate', new Date());
-   
-    
+
+
 }
 
 function LimpiarFormularioDetalle() {
@@ -1167,7 +1167,7 @@ function GetFechaSubString(fecha) {
     if (fecha != null && fecha.trim() != "")
 
         var sTmp = String(fecha);
-       arrfch = sTmp.split('/');
-      respuesta = arrfch[1] + '/' + arrfch[0] + '/' + arrfch[2];
+    arrfch = sTmp.split('/');
+    respuesta = arrfch[1] + '/' + arrfch[0] + '/' + arrfch[2];
     return respuesta;
 }

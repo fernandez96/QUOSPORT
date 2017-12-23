@@ -9,6 +9,7 @@ using Base.Web.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Web.Mvc;
 
 namespace Base.Web.Controllers
@@ -88,6 +89,8 @@ namespace Base.Web.Controllers
             {
                 int resultado = 0;
                 var transferencia = MapperHelper.Map<TransferenciaDTO, Transferencia>(transferenciaDTO);
+                DateTime.ParseExact(transferencia.trfc_sfecha_transf_, "dd/mm/yyyy", CultureInfo.InvariantCulture).ToString(appSettings.FormatoFecha);
+
                 resultado = TransferenciaBL.Instancia.Add(transferencia);
                 if (resultado > 0)
                 {
@@ -141,6 +144,7 @@ namespace Base.Web.Controllers
             try
             {
                 var transferencia = MapperHelper.Map<TransferenciaDTO, Transferencia>(transferenciaDTO);
+                DateTime.ParseExact(transferencia.trfc_sfecha_transf_, "dd/mm/yyyy", CultureInfo.InvariantCulture).ToString(appSettings.FormatoFecha);
 
                 int resultado = 0;
                 resultado = TransferenciaBL.Instancia.Update(transferencia);

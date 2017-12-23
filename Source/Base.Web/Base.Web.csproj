@@ -333,6 +333,7 @@
     <Content Include="Content\images\images_Tree\trash.png" />
     <Content Include="Content\images\loading.gif" />
     <Content Include="Content\images\Login.png" />
+    <Content Include="Content\images\Logo-QS.png" />
     <Content Include="Content\images\Logo.jpg" />
     <Content Include="Content\images\sort_asc.png" />
     <Content Include="Content\images\sort_asc_disabled.png" />
@@ -461,6 +462,7 @@
     <Content Include="Content\js\viewsJs\Cliente.js" />
     <Content Include="Content\js\viewsJs\configuracion.js" />
     <Content Include="Content\js\viewsJs\Curso.js" />
+    <Content Include="Content\js\viewsJs\DocumentoCompra.js" />
     <Content Include="Content\js\viewsJs\envio.js" />
     <Content Include="Content\js\viewsJs\EnvioEmail.js" />
     <Content Include="Content\js\viewsJs\NotaIngreso.js" />
@@ -474,6 +476,7 @@
     <Content Include="Content\js\viewsJs\TipoDocumento.js" />
     <Content Include="Content\js\viewsJs\tipoProducto.js" />
     <Content Include="Content\js\viewsJs\Transferencia.js" />
+    <Content Include="Content\js\viewsJs\Transportista.js" />
     <Content Include="Content\js\viewsJs\UnidadMedida.js" />
     <Content Include="Content\js\viewsJs\usuario.js" />
     <Content Include="Content\js\viewsJs\vale.js" />
@@ -508,6 +511,7 @@
     <Compile Include="Controllers\AlmacenController.cs" />
     <Compile Include="Controllers\CategoriaLineaSublineaController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\DocumentoCompraController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NotaIngresoController.cs" />
@@ -520,8 +524,10 @@
     <Compile Include="Controllers\TipoDocumentoController.cs" />
     <Compile Include="Controllers\TipoOpcionesController.cs" />
     <Compile Include="Controllers\TransferenciaController.cs" />
+    <Compile Include="Controllers\TransportistaController.cs" />
     <Compile Include="Controllers\UnidadMedidaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Core\appSettings.cs" />
     <Compile Include="Core\BaseController.cs" />
     <Compile Include="Core\Hubs\StockXAlmacenHub.cs" />
     <Compile Include="Core\Mensajes.cs" />
@@ -549,6 +555,7 @@
     <Compile Include="Models\TablaRegistroFilterModel.cs" />
     <Compile Include="Models\TipoDocumentoFilterModel.cs" />
     <Compile Include="Models\TransferenciaFilterModel.cs" />
+    <Compile Include="Models\TransportistaFilterModel.cs" />
     <Compile Include="Models\UnidadMedidaFilterModel.cs" />
     <Compile Include="Models\UsuarioFilterModel.cs" />
     <Compile Include="Models\UsuarioModel.cs" />
@@ -663,6 +670,8 @@
     <Content Include="Views\StockXAlmacen\Index.cshtml" />
     <Content Include="Views\NotaSalida\Index.cshtml" />
     <Content Include="Views\Transferencia\Index.cshtml" />
+    <Content Include="Views\DocumentoCompra\Index.cshtml" />
+    <Content Include="Views\Transportista\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

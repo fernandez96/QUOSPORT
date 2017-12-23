@@ -58,6 +58,7 @@
     <Compile Include="ClienteDTO.cs" />
     <Compile Include="Core\EntityAuditableDTO.cs" />
     <Compile Include="Core\EntityBaseDTO.cs" />
+    <Compile Include="DocumentoCompraDTO.cs" />
     <Compile Include="EnvioEmailDTO.cs" />
     <Compile Include="KardexDTO.cs" />
     <Compile Include="LineaDTO.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="TipoDocumentoDTO.cs" />
     <Compile Include="TransferenciaDetalleDTO.cs" />
     <Compile Include="TransferenciaDTO.cs" />
+    <Compile Include="TransportistaDTO.cs" />
     <Compile Include="UnidadMedidaDTO.cs" />
     <Compile Include="UsuarioDTO.cs" />
     <Compile Include="UsuarioLoginDTO.cs" />

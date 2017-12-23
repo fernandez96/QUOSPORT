@@ -1,0 +1,538 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles{
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/jquery.dataTables.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/jquery-chosen.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/datepicker.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/daterangepicker.css")" />
+}
+<!-- /section:basics/sidebar -->
+<div class="main-content">
+    <div class="main-content-inner">
+        <!-- #section:basics/content.breadcrumbs -->
+        <link href="~/Content/css/custom.css" rel="stylesheet" />
+        <div class="breadcrumbs" id="breadcrumbs">
+            <script type="text/javascript">
+                try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+            </script>
+            <ul class="breadcrumb">
+                <li>
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <a href="@Url.Action("Index", "Home")">INICIO</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">COMPRAS</a>
+                </li>
+                <li class="active">REGISTRO</li>
+                <li class="active">DOCUMENTO COMPRAS</li>
+            </ul><!-- /.breadcrumb -->
+            <!-- /section:basics/content.searchbox -->
+        </div>
+        <!-- /section:basics/content.breadcrumbs -->
+        <div class="page-content">
+            <!-- #section:settings.box -->
+            <!-- /section:settings.box -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- PAGE CONTENT BEGINS -->
+                    <!-- PAGE CONTENT BEGINS -->
+                    <div class="search-area well no-margin-bottom">
+                        <form id="NotaIngresoSearchForm" role="form">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="numerosearch" id="numerosearch" placeholder="N°. Nota Ingreso" onkeypress="buscar(event)">
+                                        <div class="input-group-btn">
+                                        </div>
+                                        @*<div class="input-group">*@
+                                        <input type="text" id="fechasearch" autocomplete="off" name="fechasearch" placeholder="De : dd/mm/yyyy   Hasta : dd/mm/yyyy" maxlength="100" class="form-control" />
+
+                                        @*</div>*@
+                                        <div class="input-group-btn">
+                                            <button type="button" id="btnSearchNotaIngreso" class="btn btn-primary btn-sm">
+                                                <i class="ace-icon fa fa-search icon-on-right bigger-110 right"></i>Buscar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix">
+                                    <div class="pull-right tableTools-container">
+                                        <div class="dt-buttons btn-overlap btn-group">
+                                            <a id="btnAgregarNotaIngreso" data-toggle="tooltip" class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="Nuevo" title="Nuevo">
+                                                <span><i class="fa fa-plus-circle bigger-110 blue"></i> </span>
+                                            </a>
+                                            <a id="btnEditarNotaIngreso" data-toggle="tooltip" class="dt-button buttons-copy buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Editar">
+                                                <span><i class="fa fa-pencil bigger-110 pink"></i> </span>
+                                            </a>
+                                            <a id="btnEliminarNotaIngreso" data-toggle="tooltip" class="dt-button buttons-csv buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Eliminar">
+                                                <span><i class="fa fa-trash-o bigger-110 orange"> </i></span>
+                                            </a>
+                                            <a id="btnImprimir" data-toggle="tooltip" class="dt-button buttons-print btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Imprimir">
+                                                <span><i class="fa fa-print bigger-110 grey"></i> </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <br />
+                    <div class="col-xs-12">
+                        <h4 class="row-fluid header smaller lighter blue">
+                            <span class="span5"> Resultados de documento de compras</span>
+                        </h4>
+                        <div class="dataTables_wrapper form-inline no-footer">
+                            <div class="table-responsive">
+                                <table id="NotaIngresoDataTable" class="table table-bordered" cellspacing="0" role="grid" aria-describedby="dynamic-table_info">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th class="hidden-120 center">N°. Nota Ingreso</th>
+                                            <th class="hidden-120">Almacen</th>
+                                            <th class="hidden-120">Fecha</th>
+                                            <th class="hidden-992">Motivo</th>
+                                            <th class="hidden-1200">Observaci&oacute;n</th>
+                                            <th class="hidden-1200">Estado</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- PAGE CONTENT ENDS -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+            <!-- FILTER BEGINS-->
+            <!-- FILTER ENDS-->
+            <div id='NuevaNotaIngreso' tabindex='-1' role='dialog' aria-hidden='true' class='modal fade' data-backdrop='static' style='z-index:100000;'>
+                <div class='modal-dialog pasos'>
+                    <div class='modal-content'>
+                        <div class='modal-header'>
+                            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class='modal-title'> <i class="fa fa-sitemap" aria-hidden="true"></i> <span id="accionTitle"></span> documento de compra <span id="idtable"></span></h4>
+                        </div>
+                        <div class='modal-body'>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <!-- PAGE CONTENT BEGINS -->
+                                    <div class="col-xs-11-97">
+                                        <!-- PAGE CONTENT BEGINS -->
+                                        <!-- PAGE CONTENT BEGINS -->
+                                        <!-- #section:elements.form -->
+                                        <div class="col-xs-12 col-sm-12 widget-container-col ui-sortable" id="widget-container-col-1">
+                                            <div class="widget-box ui-sortable-handle" id="widget-box-1" style="opacity: 1;">
+                                                <div class="widget-header">
+                                                    <h5 class="widget-title">Registre documento compra</h5>
+
+                                                    <div class="widget-toolbar">
+
+                                                        <a href="#" data-action="fullscreen" class="orange2">
+                                                            <i class="ace-icon fa fa-expand"></i>
+                                                        </a>
+                                                        <a href="#" data-action="collapse">
+                                                            <i class="ace-icon fa fa-chevron-up"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                                <div class="widget-body" style="display: block;">
+                                                    <div class="widget-main">
+                                                        <form class="form-horizontal" role="form" id="NotaIngresoForm">
+                                                            <div class="form-group">
+                                                                <div class="col-xs-12">
+
+                                                                    <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="almacen">Tipo.Doc </label>
+                                                                    <div class="col-xs-3">
+                                                                        <div class="clearfix">
+                                                                            <select id="tipoDocumento" name="tipoDocumento" class="col-xs-12 col-sm-12"></select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="nroDoc">Nº.Doc </label>
+
+                                                                    <div class="col-xs-3">
+                                                                        <div class="clearfix">
+                                                                            <input type="text" id="nroDoc" disabled="disabled" autocomplete="off" name="nroDoc" placeholder="000000" maxlength="7" class="col-xs-12 col-sm-12" />
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="fecha">Fecha </label>
+                                                                    <div class="col-xs-3">
+                                                                        <div class="clearfix">
+                                                                            <div class="input-group">
+                                                                                <input type="text" id="fecha" autocomplete="off" name="fecha" placeholder="Numero serie" maxlength="100" class="col-xs-12 col-sm-12" />
+                                                                                <span class="input-group-addon" style="border-radius:7px">
+                                                                                    <i class="fa fa-calendar bigger-110"></i>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <div class="col-xs-12">
+
+                                                                    <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="proveedor">Proveedor </label>
+                                                                    <div class="col-xs-6">
+                                                                        <div class="clearfix">
+                                                                            <input type="text" disabled="disabled" id="proveedor" autocomplete="off" name="proveedor" placeholder="Proveedor" maxlength="3" class="col-xs-9 col-sm-9" />
+                                                                            <span class="input-group-btn">
+                                                                                <button type="button" class="btn btn-default btn-sm" id="productoBuscar_" style="border-radius:7px;">
+                                                                                    <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
+                                                                                    Buscar
+                                                                                </button>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                    
+                                                                    <label class="control-label col-xs-1 col-sm-1 no-padding-left" for="tipopago">T.Pago </label>
+
+                                                                    <div class="col-xs-3">
+                                                                        <div class="clearfix">
+                                                                            <select id="tipopago" name="proveedor" class="col-xs-12 col-sm-12"></select>
+
+                                                                        </div>
+                                                                    </div>
+                                                                
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <div class="col-xs-12">
+
+                                                                    <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="almacen">Almacen </label>
+                                                                    <div class="col-xs-3">
+                                                                        <div class="clearfix">
+                                                                            <select id="almacen" name="almacen" class="col-xs-12 col-sm-12"></select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="tipomoneda">Moneda </label>
+
+                                                                    <div class="col-xs-3">
+                                                                        <div class="clearfix">
+                                                                            <select id="tipomoneda" name="tipomoneda" class="col-xs-12 col-sm-12"></select>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="igv">% IGV </label>
+                                                                    <div class="col-xs-3">
+                                                                        <div class="clearfix">
+                                                                            <input type="text" id="igv" disabled="disabled" autocomplete="off" name="igv"  class="col-xs-12 col-sm-12" />
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="situacion">Situación </label>
+
+                                                                <div class="col-xs-12 col-sm-9">
+                                                                    <div class="clearfix">
+                                                                        <select id="situacion" name="situacion" class="col-xs-12 col-sm-4"></select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group">
+
+                                                                <div class="col-xs-12 col-sm-12">
+                                                                    <div class="clearfix">
+                                                                        <textarea name="observacion" id="observacion" placeholder="Escriba aqui su observación" class="col-xs-12 col-sm-12"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <input type="hidden" name="NotaIngresoId" id="NotaIngresoId" value="0" />
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <h3 class="row-fluid header smaller lighter blue">
+                                            <span class="span7"> Registro de los productos de documento de compra</span>
+
+                                            <span class="span5">
+                                                <span class="pull-right inline">
+                                                    <span class="btn-toolbar inline middle no-margin">
+
+                                                        <span class="btn-group no-margin">
+                                                            <a id="btnAgregarNotaIngresoDetalle" data-toggle="tooltip" class="buttons-colvis btn btn-sm btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Nuevo">
+                                                                <span><i class="fa fa-plus-circle bigger-110 blue"></i> </span>
+                                                            </a>
+                                                        </span>
+                                                        <span class="btn-group no-margin">
+                                                            <a id="btnEditarTablaDetalle" data-toggle="tooltip" class="buttons-colvis btn btn-sm btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Editar">
+                                                                <span><i class="fa fa-pencil bigger-110 pink"> </i> </span>
+                                                            </a>
+                                                        </span>
+                                                        <span class="btn-group no-margin">
+                                                            <a id="btnEliminarTablaDetalle" data-toggle="tooltip" class="buttons-colvis btn btn-sm btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Eliminar">
+                                                                <span><i class="fa fa-trash-o bigger-110 orange"></i></span>
+                                                            </a>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </h3>
+                                        <div class="table-responsive">
+                                            <table id="NotaIngresoDetalleDataTable" class="table table-bordered dataTable no-footer">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Id</th>
+                                                        <th class="hidden-120 center">Item</th>
+                                                        <th class="hidden-120 center">Producto</th>
+                                                        <th class="hidden-992 center">U.M</th>
+                                                        <th class="hidden-120 center">Cantidad</th>
+                                                        <th class="hidden-992 center">P.Unitario</th>
+                                                        <th class="hidden-992 center">P.Total</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>
+                        <button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-close'></i> Salir</button>
+                        <button class='btn btn-primary btn-sm ' id="btnGuardarNotaIngreso"><i class='fa fa-floppy-o'></i> Guardar</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id='NuevoDetalleProducto' tabindex='-1' role='dialog' aria-hidden='true' class='modal fade' data-backdrop='static' style='z-index:100000;'>
+                <div class='modal-dialog'>
+                    <div class='modal-content'>
+                        <div class='modal-header'>
+                            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class='modal-title'><i class="fa fa-sitemap" aria-hidden="true"></i> <span id='accionTitleProducto'></span> producto </h4>
+                        </div>
+                        <div class='modal-body'>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <!-- PAGE CONTENT BEGINS -->
+                                    <form class="form-horizontal" role="form" id="ProductoDetalleForm">
+                                        <div class="form-group"></div>
+                                        <!-- #section:elements.form -->
+
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="descripcionP">Producto </label>
+
+                                            <div class="col-xs-12 col-sm-9">
+                                                <div class="clearfix">
+                                                    <input type="text" disabled="disabled" id="descripcionP" autocomplete="off" name="descripcionP" placeholder="Codigo" maxlength="3" class="col-xs-9 col-sm-9" />
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-default btn-sm" id="productoBuscar" style="border-radius:7px;">
+                                                            <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
+                                                            Buscar
+                                                        </button>
+                                                    </span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="unidad">U.Medida </label>
+
+                                            <div class="col-xs-12 col-sm-9">
+                                                <div class="clearfix">
+                                                    <input type="text" disabled="disabled" id="unidad" autocomplete="off" name="unidad" placeholder="Unidad" maxlength="100" class="col-xs-12 col-sm-12" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*<div class="form-group">
+                                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="descripcionP">Descripci&oacute;n </label>
+
+                                                <div class="col-xs-12 col-sm-9">
+                                                    <div class="clearfix">
+                                                        <input type="text" disabled="disabled" id="descripcionP" autocomplete="off" name="descripcionP" placeholder="Descripción" maxlength="100" class="col-xs-12 col-sm-12" />
+                                                    </div>
+                                                </div>
+                                            </div>*@
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="cantidada">Cantidad </label>
+
+                                            <div class="col-xs-12 col-sm-9">
+                                                <div class="clearfix">
+                                                    <input type="text" id="cantidad" autocomplete="off" name="cantidad" placeholder="0.00" maxlength="100" class="col-xs-12 col-sm-12" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="costo">P.Unitario S/ </label>
+
+                                            <div class="col-xs-12 col-sm-9">
+                                                <div class="clearfix">
+                                                    <input type="text" id="costo" autocomplete="off" name="costo" placeholder="0.00" maxlength="10" class="col-xs-12 col-sm-12" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <input type="hidden" name="NotaIngresoDetalleId" id="NotaIngresoDetalleId" value="0" />
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>
+                            <button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-remove'></i> Cancelar</button>
+                            <button class='btn btn-primary btn-sm' id="btnGuardarProducto"><i class='fa fa-floppy-o'></i> Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id='ProductoModal' tabindex='-1' role='dialog' aria-hidden='true' class='modal fade' data-backdrop='static' style='z-index:100000;'>
+                <div class='modal-dialog pasos'>
+                    <div class='modal-content'>
+                        <div class='modal-header'>
+                            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class='modal-title'> <i class="fa fa-sitemap" aria-hidden="true"></i> <span id="accionTitleDetalle"></span>Productos<span id="idtable"></span></h4>
+                        </div>
+                        <div class='modal-body'>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <!-- PAGE CONTENT BEGINS -->
+                                    <br />
+                                    <div class="col-xs-11-97">
+
+                                        <div class="search-area well no-margin-bottom" style="margin-left:10px;">
+                                            <form id="ProductoSearchForm" role="form">
+                                                <div class="row">
+                                                    <div class="col-md-7">
+                                                        <div class="input-group">
+
+                                                            @*<input type="text" class="form-control" name="CodigoDetallesearch" id="CodigoDetallesearch" placeholder="Codigo" onkeypress="buscarDetalle(event)">*@
+                                                            <div class="input-group-btn">
+
+                                                            </div>
+                                                            <input type="text" class="form-control" name="DescripcionDetallesearch" id="DescripcionDetallesearch" placeholder="Descripción" onkeypress="buscarProducto(event)">
+                                                            <div class="input-group-btn">
+                                                                <button type="button" id="btnSearchTablaproducto" class="btn btn-primary btn-sm">
+                                                                    <i class="ace-icon fa fa-search icon-on-right bigger-110 right"></i>Buscar
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!-- PAGE CONTENT BEGINS -->
+                                        <br />
+
+                                        <div class="table-header" style="margin-left:10px;">
+                                            Resultado detalle de tabla -  <span id="nombreTabla"></span>
+                                        </div>
+                                        <div class="dataTables_wrapper form-inline no-footer" style="margin-left:10px;">
+                                            <div class="table-responsive">
+                                                <table id="ProductoDataTable" class="table table-bordered dataTable no-footer" cellspacing="0" role="grid" aria-describedby="dynamic-table_info">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Id</th>
+                                                            @*<th class="hidden-120 center">Codigo</th>*@
+                                                            <th class="hidden-120">Nombre</th>
+                                                            <th class="hidden-992">Medida</th>
+                                                            <th class="hidden-480">Estado</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>
+                            <button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-close'></i> Salir</button>
+                            <button class='btn btn-primary btn-sm hidden' id="btnGuardarTipodocumento"><i class='fa fa-floppy-o'></i> Guardar</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div><!-- /.page-content -->
+
+
+
+</div><!-- /.main-content -->
+ 
+
+@section scripts{
+    <!-- page specific plugin scripts -->
+    <script src="@Url.Content("~/Content/js/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.dataTables.fnReloadAjax.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.inputlimiter.1.3.1.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.validate.js")"></script>
+    <script src="@Url.Content("~/Content/js/additional-methods.js")"></script>
+    <script src="@Url.Content("~/Content/js/fuelux/fuelux.wizard.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.gritter.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery-chosen.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.blockUI.js")"></script>
+    <script src="@Url.Content("~/Content/js/shCore.js")"></script>
+    <script src="@Url.Content("~/Content/js/date-time/moment.js")"></script>
+    <script src="@Url.Content("~/Content/js/date-time/daterangepicker.js")"></script>
+    <script src="@Url.Content("~/Content/js/date-time/bootstrap-datepicker.js")"></script>
+    <script src="@Url.Content("~/Content/js/date-time/locate/bootstrap-datepicker.es.js")"></script>
+    <script src="@Url.Content("~/Content/js/JSLINQ.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery-mask.js")"></script>
+    <script src="@Url.Content("~/Content/js/numeric.js")"></script>
+
+
+    <!-- inline scripts related to this page -->
+    <script src="@Url.Content("~/Content/js/viewsJs/DocumentoCompra.js")"></script>
+    <!-- Ajax BlockUi scripts -->
+    <script type="text/javascript">
+        var pageBlocked = false;
+        var handlerActivo = false;
+        $(document).ready(function () {
+            $.blockUI.defaults.baseZ = 100000;
+            $.blockUI.defaults.overlayCSS.opacity = 0.4;
+            $.blockUI.defaults.css.backgroundColor = "transparent";
+            $.blockUI.defaults.css.border = '0px none';
+            $.blockUI.defaults.fadeIn = 100,
+            $.blockUI.defaults.fadeOut = 100,
+
+            $(document).ajaxSend(function () {
+                if (!pageBlocked) {
+                    $.blockUI({
+                        message: "Espere un momento por favor",
+                        css: {
+                            border: 'none',
+                            padding: '15px',
+                            backgroundColor: '#000',
+                            '-webkit-border-radius': '10px',
+                            '-moz-border-radius': '10px',
+                            opacity: 1,
+                            color: '#fff'
+                        },
+                        onBlock: function () {
+                            pageBlocked = true;
+                        }
+                    });
+                }
+            }).ajaxStop(function () {
+                jQuery.unblockUI();
+                pageBlocked = false;
+            });
+
+        });
+    </script>
+
+}
+
+

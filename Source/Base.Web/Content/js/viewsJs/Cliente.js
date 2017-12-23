@@ -18,7 +18,7 @@ $(document).ready(function () {
     });
 
     checkSession(function () {
-       // VisualizarDataTableUsuario();
+        // VisualizarDataTableUsuario();
     });
 
     $('#UsuarioDataTable  tbody').on('click', 'tr', function () {
@@ -76,7 +76,7 @@ $(document).ready(function () {
 
     $("#natural").on('click', function () {
         $("#juridico").prop("checked", false);
-        var valor = $('input:radio[id=natural]:checked').val();       
+        var valor = $('input:radio[id=natural]:checked').val();
         FormularioJuridico(true);
         FormularioNatural(false);
     });
@@ -183,12 +183,12 @@ $(document).ready(function () {
     //CargarEstado();
     $('[data-toggle="tooltip"]').tooltip();
     $('#fecha').datepicker({
-       format: "dd/mm/yyyy",
-    autoclose: true,
-    todayHighlight: true,
-    language: 'es',
-    //startView: "months",
-    //minViewMode: "months"
+        format: "dd/mm/yyyy",
+        autoclose: true,
+        todayHighlight: true,
+        language: 'es',
+        //startView: "months",
+        //minViewMode: "months"
     });
 });
 
@@ -584,7 +584,7 @@ function LimpiarFormulario() {
     $("#RolId").val(1);
     $("#Estado").val(1);
     $("#Username").focus();
-    
+
 }
 function FormularioNatural(valor) {
     $("#Nombre").prop("disabled", valor);

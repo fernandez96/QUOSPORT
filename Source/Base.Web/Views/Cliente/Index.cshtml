@@ -7,7 +7,7 @@
 
 @section styles{
     <link rel="stylesheet" href="@Url.Content("~/Content/css/jquery.dataTables.css")" />
-<link rel="stylesheet" href="@Url.Content("~/Content/css/datepicker.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/datepicker.css")" />
 }
 
 <!-- /section:basics/sidebar -->
@@ -133,26 +133,26 @@
 
                                         <!-- PAGE CONTENT BEGINS -->
                                         <div class="page-header">
-                                            <h4>
+                                            <h5>
                                                 Cliente
                                                 <small>
                                                     <i class="ace-icon fa fa-angle-double-right"></i>
                                                     Registra los datos generales
                                                 </small>
 
-                                            </h4>
+                                            </h5>
 
                                         </div>
 
                                         <div class="col-xs-12">
                                             <form class="form-horizontal" role="form" id="ProductoForm">
-                                             
+
                                                 <div class="form-group">
                                                     <div class="col-xs-12">
                                                         <div class="col-xs-2">
                                                             <div class="radio">
                                                                 <label>
-                                                                    <input id="natural"name="natural" checked="checked" value="1" type="radio" class="ace input-lg">
+                                                                    <input id="natural" name="natural" checked="checked" value="1" type="radio" class="ace input-lg">
                                                                     <span class="lbl">Natural</span>
                                                                 </label>
                                                             </div>
@@ -160,13 +160,13 @@
                                                         <div class="col-xs-2">
                                                             <div class="radio">
                                                                 <label>
-                                                                    <input id="juridico" value="2"  name="juridico" type="radio" class="ace input-lg">
+                                                                    <input id="juridico" value="2" name="juridico" type="radio" class="ace input-lg">
                                                                     <span class="lbl">Juridico</span>
                                                                 </label>
                                                             </div>
-                                                            </div>
                                                         </div>
-                                                          
+                                                    </div>
+
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-xs-12">
@@ -186,15 +186,15 @@
                                                         <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="fecha">Documento</label>
                                                         <div class="col-xs-3">
                                                             <div class="clearfix">
-                                                                <input type="text" id="Documento"  autocomplete="off" name="Documento" placeholder="Documento" maxlength="11" class="col-xs-12 col-sm-12" />
-                                                                
-                                                              
+                                                                <input type="text" id="Documento" autocomplete="off" name="Documento" placeholder="Documento" maxlength="11" class="col-xs-12 col-sm-12" />
+
+
                                                             </div>
                                                         </div>
-                                                  
+
                                                     </div>
                                                 </div>
-                                                <div class="form-group">                                                   
+                                                <div class="form-group">
                                                     <div class="col-xs-12">
                                                         <label class="control-label col-xs-1 col-sm-1 no-padding-left" for="descripcion">Nombre</label>
                                                         <div class="col-xs-5">
@@ -268,7 +268,7 @@
                                                                 <input type="text" id="Direccion" autocomplete="off" name="Direccion" placeholder="Dirección" maxlength="100" class="col-xs-1 col-sm-12" />
                                                             </div>
                                                         </div>
-                    
+
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -291,26 +291,26 @@
                                                         <label class="control-label col-xs-3 col-sm-1 no-padding-left" for="Fecha">Fecha </label>
                                                         <div class="col-xs-3">
                                                             <div class="clearfix">
-                                                              <div class="col-xs-8 col-sm-11">
-                                                                <div class="input-group">
-                                                                    <input class="form-control date-picker" id="fecha" type="text" data-date-format="dd-mm-yyyy">
-                                                                    <span class="input-group-addon">
-                                                                        <i class="fa fa-calendar bigger-110"></i>
-                                                                    </span>
+                                                                <div class="col-xs-8 col-sm-11">
+                                                                    <div class="input-group">
+                                                                        <input class="form-control date-picker" id="fecha" type="text" data-date-format="dd-mm-yyyy">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-calendar bigger-110"></i>
+                                                                        </span>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                        <label class="control-label col-xs-12 col-sm-1 no-padding-left" for="color">Correo </label>
-                                                        <div class="col-xs-12 col-sm-10">
-                                                            <div class="clearfix">
-                                                                <input type="text" id="Correo" autocomplete="off" name="Correo" placeholder="Correo" maxlength="100" class="col-xs-12 col-sm-12" />
+                                                    <label class="control-label col-xs-12 col-sm-1 no-padding-left" for="color">Correo </label>
+                                                    <div class="col-xs-12 col-sm-10">
+                                                        <div class="clearfix">
+                                                            <input type="text" id="Correo" autocomplete="off" name="Correo" placeholder="Correo" maxlength="100" class="col-xs-12 col-sm-12" />
 
-                                                            </div>
-                                                        </div>                                                                                   
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="control-label col-xs-12 col-sm-1 no-padding-left" for="color">Representante </label>
@@ -334,7 +334,7 @@
 
                                                     </div>
                                                 </div>
-          
+
                                                 <input type="hidden" name="ClienteId" id="ClienteId" value="0" />
                                                 <div class="form-group"></div>
                                                 <!-- #section:elements.form -->

@@ -81,6 +81,7 @@
     <Compile Include="Interfaces\ITablaRegistroRepository.cs" />
     <Compile Include="Interfaces\ITipoDocumentoRepository.cs" />
     <Compile Include="Interfaces\ITransferenciaRepository.cs" />
+    <Compile Include="Interfaces\ITransportistaRepository.cs" />
     <Compile Include="Interfaces\IUnidadMedidaRepository.cs" />
     <Compile Include="Interfaces\IUsuarioRepository.cs" />
     <Compile Include="KardexRepository.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="TablaRegistroRepository.cs" />
     <Compile Include="TipoDocumentoRepository.cs" />
     <Compile Include="TransferenciaRepository.cs" />
+    <Compile Include="TransportistaRepository.cs" />
     <Compile Include="UnidadMedidaRepository.cs" />
     <Compile Include="UsuarioRepository.cs" />
   </ItemGroup>

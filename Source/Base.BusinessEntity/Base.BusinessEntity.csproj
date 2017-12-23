@@ -46,6 +46,8 @@
     <Compile Include="Cliente.cs" />
     <Compile Include="Core\EntityAuditable.cs" />
     <Compile Include="Core\EntityBase.cs" />
+    <Compile Include="DocumentoCompra.cs" />
+    <Compile Include="DocumentoCompraDetalle.cs" />
     <Compile Include="EnvioEmail.cs" />
     <Compile Include="Formulario.cs" />
     <Compile Include="Kardex.cs" />
@@ -70,6 +72,7 @@
     <Compile Include="TipoDocumento.cs" />
     <Compile Include="Transferencia.cs" />
     <Compile Include="TransferenciaDetalle.cs" />
+    <Compile Include="Transportista.cs" />
     <Compile Include="UnidadMedida.cs" />
     <Compile Include="Usuario.cs" />
   </ItemGroup>

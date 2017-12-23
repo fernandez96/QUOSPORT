@@ -7,6 +7,7 @@
 
 @section styles{
     <link rel="stylesheet" href="@Url.Content("~/Content/css/jquery.dataTables.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/datepicker.css")" />
 
 }
 
@@ -26,10 +27,10 @@
                 </li>
 
                 <li>
-                    <a href="javascript:void(0)">COMPRAS</a>
+                    <a href="javascript:void(0)">VENTAS</a>
                 </li>
                 <li class="active">REGISTRO</li>
-                <li class="active">PROVEEDORES</li>
+                <li class="active">PROEEDORES</li>
             </ul><!-- /.breadcrumb -->
             <!-- /section:basics/content.searchbox -->
         </div>
@@ -49,13 +50,13 @@
 
                                     <div class="input-group">
 
-                                        <input type="text" id="UsuarioSearch" name="UsuarioSearch" placeholder="Usuario" maxlength="100" class="form-control" onkeypress="buscar(event)" />
+                                        <input type="text" id="CodigoSearch" name="CodigoSearch" placeholder="Cliente" maxlength="100" class="form-control" onkeypress="buscar(event)" />
                                         <div class="input-group-btn">
 
                                         </div>
-                                        <select id="RolIdSearch" name="RolIdSearch" class="form-control"></select>
+                                        <select id="TipoSearch" name="TipoSearch" class="form-control"></select>
                                         <div class="input-group-btn">
-                                            <button type="button" id="btnSearchUsuario" class="btn btn-primary btn-sm">
+                                            <button type="button" id="btnSearchCliente" class="btn btn-primary btn-sm">
                                                 <i class="ace-icon fa fa-search icon-on-right bigger-110 right"></i>Buscar
                                             </button>
                                         </div>
@@ -66,15 +67,21 @@
                                 <div class="clearfix">
                                     <div class="pull-right tableTools-container">
                                         <div class="dt-buttons btn-overlap btn-group">
-                                            <a id="btnAgregarUsuario" data-toggle="tooltip" class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Nuevo">
+                                            <a id="btnAgregarCliente" data-toggle="tooltip" class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Nuevo">
                                                 <span><i class="fa fa-plus-circle bigger-110 blue"></i> </span>
                                             </a>
 
-                                            <a id="editarUsuario" data-toggle="tooltip" class="dt-button buttons-copy buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Editar">
+                                            <a id="btnEditarCliente" data-toggle="tooltip" class="dt-button buttons-copy buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Editar">
                                                 <span><i class="fa fa-pencil bigger-110 pink"> </i> </span>
                                             </a>
-                                            <a id="eliminarUsuario" data-toggle="tooltip" class="dt-button buttons-csv buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Eliminar">
-                                                <span><i class="fa fa-trash-o bigger-110 orange"></i></span>
+                                            <a id="btnEliminarCliente" data-toggle="tooltip" class="dt-button buttons-csv buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Eliminar">
+                                                <span><i class="fa fa-trash-o bigger-110 red"></i></span>
+                                            </a>
+                                            <a id="btnEstadoCliente" data-toggle="tooltip" class="dt-button buttons-csv buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Cambiar estado">
+                                                <span><i class="fa fa-link bigger-110 orange"></i></span>
+                                            </a>
+                                            <a id="btnImprimirCliente" data-toggle="tooltip" class="dt-button buttons-csv buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Cambiar estado">
+                                                <span><i class="fa fa-print bigger-110 blue"></i></span>
                                             </a>
                                         </div>
                                     </div>
@@ -86,7 +93,7 @@
                     <br />
                     <div class="col-xs-12">
                         <h4 class="row-fluid header smaller lighter blue">
-                            <span class="span5"> Resultados de Proveedores</span>
+                            <span class="span5"> Resultados de Clientes</span>
                         </h4>
                         <div class="dataTables_wrapper form-inline no-footer">
                             <div class="table-responsive">
@@ -94,11 +101,11 @@
                                     <thead>
                                         <tr>
                                             <th class="hidden">Id</th>
-                                            <th class="hidden-120">Usuario</th>
+                                            <th class="hidden-120">Codigo</th>
                                             <th class="hidden-120">Nombre</th>
-                                            <th class="hidden-992">Apellido</th>
+                                            <th class="hidden-992">Apellidos</th>
                                             <th class="hidden-768">Correo</th>
-                                            <th class="hidden-600">Rol</th>
+                                            <th class="hidden-600">Tipo</th>
                                             <th class="hidden-480">Estado</th>
                                         </tr>
                                     </thead>
@@ -110,120 +117,234 @@
                     <!-- PAGE CONTENT ENDS -->
                 </div><!-- /.col -->
             </div><!-- /.row -->
-
-
-            <div id='NuevoUsuario' tabindex='-1' role='dialog' aria-hidden='true' class='modal fade' data-backdrop='static' style='z-index:100000;'>
-                <div class='modal-dialog'>
+            <div id='NuevoCliente' tabindex='-1' role='dialog' aria-hidden='true' class='modal fade' data-backdrop='static' style='z-index:100000;'>
+                <div class='modal-dialog pasos'>
                     <div class='modal-content'>
                         <div class='modal-header'>
                             <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class='modal-title'><i class="fa fa-sitemap" aria-hidden="true"></i> <span id='accionTitle'></span> Usuario</h4>
+                            <h4 class='modal-title'><i class="fa fa-sitemap" aria-hidden="true"></i> <span id="accionTitle"></span> proveedor <span id="idtable"></span></h4>
                         </div>
                         <div class='modal-body'>
                             <div class="row">
                                 <div class="col-xs-12">
                                     <!-- PAGE CONTENT BEGINS -->
-                                    <form class="form-horizontal" role="form" id="UsuarioForm">
-                                        <div class="form-group"></div>
-                                        <!-- #section:elements.form -->
+                                    <div class="col-xs-11-97">
+                                        <!-- PAGE CONTENT BEGINS -->
+                                        <div class="page-header">
+                                            <h5>
+                                                Proveedor
+                                                <small>
+                                                    <i class="ace-icon fa fa-angle-double-right"></i>
+                                                      Registra los datos generales
+                                                </small>
+                                            </h5>
+                                        </div>
 
-                                        <div class="form-group">
-                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="Usuario">Usuario </label>
+                                        <div class="col-xs-12">
+                                            <form class="form-horizontal" role="form" id="ProductoForm">
+                                                <div class="form-group">
+                                                    <div class="col-xs-12">
+                                                        <div class="col-xs-2">
+                                                            <div class="radio">
+                                                                <label>
+                                                                    <input id="natural" name="natural" checked="checked" value="1" type="radio" class="ace input-lg">
+                                                                    <span class="lbl">Natural</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-2">
+                                                            <div class="radio">
+                                                                <label>
+                                                                    <input id="juridico" value="2" name="juridico" type="radio" class="ace input-lg">
+                                                                    <span class="lbl">Juridico</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-                                            <div class="col-xs-12 col-sm-9">
-                                                <div class="clearfix">
-                                                    <input type="text" id="Username" autocomplete="off" name="Username" placeholder="Usuario" maxlength="100" class="col-xs-12 col-sm-12" />
                                                 </div>
-                                            </div>
-                                        </div>
+                                                <div class="form-group">
+                                                    <div class="col-xs-12">
+                                                        <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="Codigo">Codigo </label>
 
-                                        <div class="form-group">
-                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="Nombre">Nombre </label>
+                                                        <div class="col-xs-3">
+                                                            <div class="clearfix">
+                                                                <input type="text" id="Codigo" disabled="disabled" autocomplete="off" name="Codigo" placeholder="codigo" maxlength="100" class="col-xs-12 col-sm-12" />
+                                                            </div>
+                                                        </div>
+                                                        <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="TDpcumento">T.Documento </label>
+                                                        <div class="col-xs-3">
+                                                            <div class="clearfix">
+                                                                <select id="TDpcumento" name="TDpcumento" class="col-xs-12 col-sm-12"></select>
+                                                            </div>
+                                                        </div>
+                                                        <label class="control-label col-xs-2 col-sm-1 no-padding-left" for="fecha">Documento</label>
+                                                        <div class="col-xs-3">
+                                                            <div class="clearfix">
+                                                                <input type="text" id="Documento" autocomplete="off" name="Documento" placeholder="Documento" maxlength="11" class="col-xs-12 col-sm-12" />
 
-                                            <div class="col-xs-12 col-sm-9">
-                                                <div class="clearfix">
-                                                    <input type="text" id="Nombre" autocomplete="off" name="Nombre" placeholder="Nombre" maxlength="100" class="col-xs-12 col-sm-12" />
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="Apellido">Apellido </label>
-
-                                            <div class="col-xs-12 col-sm-9">
-                                                <div class="clearfix">
-                                                    <input type="text" id="Apellido" autocomplete="off" name="Apellido" placeholder="Apellido" maxlength="100" class="col-xs-12 col-sm-12" />
+                                                <div class="form-group">
+                                                    <div class="col-xs-12">
+                                                        <label class="control-label col-xs-1 col-sm-1 no-padding-left" for="descripcion">Nombre</label>
+                                                        <div class="col-xs-5">
+                                                            <div class="clearfix">
+                                                                <input type="text" id="Nombre" autocomplete="off" name="Nombre" placeholder="Nombre" maxlength="100" class="col-xs-12 col-sm-12" />
+                                                            </div>
+                                                        </div>
+                                                        <label class="control-label col-xs-1 col-sm-1 no-padding-left" for="Paterno">A.Paterno</label>
+                                                        <div class="col-xs-5">
+                                                            <div class="clearfix">
+                                                                <input type="text" id="Paterno" autocomplete="off" name="Paterno" placeholder="Apellido Parterno" maxlength="100" class="col-xs-12 col-sm-12" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="Contrasena">Constraseña </label>
-                                            <div class="col-xs-12 col-sm-9">
-                                                <span class="input-icon_ input-icon-right_">
-                                                    <input type="password" id="Contrasena" autocomplete="off" name="Contrasena" placeholder="Contraseña" maxlength="100" class="col-xs-12 col-sm-12" />
-                                                    <i class="ace-icon fa fa-eye bigger-110" id="mostarPass" style="cursor:pointer"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="Contrasena">Confirma constraseña </label>
-                                            <div class="col-xs-12 col-sm-9">
-                                                <span class="input-icon_ input-icon-right_">
-                                                    <input type="password" id="ContrasenaConf" autocomplete="off" name="ContrasenaConf" placeholder="Confirma contraseña" maxlength="100" class="col-xs-12 col-sm-12" />
-                                                    <i class="ace-icon fa fa-eye bigger-110" id="mostarPassConf" style="cursor:pointer"></i>
-                                                </span>
-                                            </div>
-                                        </div><div class="form-group">
-                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="Correo">Correo </label>
-
-                                            <div class="col-xs-12 col-sm-9">
-                                                <div class="clearfix">
-                                                    <input type="text" id="Correo" autocomplete="off" name="Correo" placeholder="Correo" maxlength="100" class="col-xs-12 col-sm-12" />
+                                                <div class="form-group">
+                                                    <div class="col-xs-12">
+                                                        <label class="control-label col-xs-1 col-sm-1 no-padding-left" for="Materno">A.Materno</label>
+                                                        <div class="col-xs-5">
+                                                            <div class="clearfix">
+                                                                <input type="text" id="Materno" autocomplete="off" name="Materno" placeholder="Apellido Materno" maxlength="100" class="col-xs-12 col-sm-12" />
+                                                            </div>
+                                                        </div>
+                                                       <!--giro-->
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="CargoId">Cargo </label>
+                                                <div class="form-group">
+                                                    <label class="control-label col-xs-1 col-sm-1 no-padding-right" for="RSocial">Razon social</label>
 
-                                            <div class="col-xs-12 col-sm-9">
-                                                <div class="clearfix">
-                                                    <select id="CargoId" name="CargoId" class="col-xs-12 col-sm-12"></select>
+                                                    <div class="col-xs-11">
+                                                        <div class="clearfix">
+                                                            <input type="text" id="RSocial" autocomplete="off" name="RSocial" placeholder="Razon social" maxlength="300" class="col-xs-12 col-sm-12" />
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-xs-1 col-sm-1 no-padding-right" for="NombreComercial">Nombre Comercial</label>
 
-                                        <div class="form-group">
-                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="RolId">Rol </label>
-
-                                            <div class="col-xs-12 col-sm-9">
-                                                <div class="clearfix">
-                                                    <select id="RolId" name="RolId" class="col-xs-12 col-sm-12"></select>
+                                                    <div class="col-xs-11">
+                                                        <div class="clearfix">
+                                                            <input type="text" id="NombreComercial" autocomplete="off" name="NombreComercial" placeholder="Nombre comercial" maxlength="300" class="col-xs-12 col-sm-12" />
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
+                                                <div class="form-group">
+                                                    <div class="col-xs-12">
+                                  
+                                                        <label class="col-xs-2 col-sm-1 no-padding-left" for="RUC">RUC</label>
+                                                        <div class="col-xs-5">
+                                                            <div class="clearfix">
+                                                                <input type="text" id="RUC" autocomplete="off" name="RUC" placeholder="RUC" maxlength="11" class="col-xs-12 col-sm-12" />
+                                                            </div>
+                                                        </div>
+                                                        <label class="control-label col-xs-1 col-sm-1 no-padding-left" for="FAX">FAX </label>
+                                                        <div class="col-xs-5">
+                                                            <div class="clearfix">
+                                                                <input type="text" id="FAX" autocomplete="off" name="FAX" placeholder="FAX" maxlength="12" class="col-xs-12 col-sm-12" />
 
-                                        <div class="form-group">
-                                            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="Estado">Estado </label>
-
-                                            <div class="col-xs-12 col-sm-9">
-                                                <div class="clearfix">
-                                                    <select id="Estado" name="Estado" class="col-xs-12 col-sm-12"></select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <input type="hidden" name="UsuarioId" id="UsuarioId" value="0" />
+                                                <div class="form-group">
+                                                    <div class="col-xs-12">
+                                                        <label class="control-label col-xs-1 col-sm-1 no-padding-left" for="material">Direcci&oacute;n </label>
+                                                        <div class="col-xs-11">
+                                                            <div class="clearfix">
+                                                                <input type="text" id="Direccion" autocomplete="off" name="Direccion" placeholder="Dirección" maxlength="100" class="col-xs-1 col-sm-12" />
+                                                            </div>
+                                                        </div>
 
-                                    </form>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-xs-12">
+                                                        <label class="control-label col-xs-1 col-sm-1 no-padding-left" for="descripcion">Telefono </label>
+
+                                                        <div class="col-xs-3">
+                                                            <div class="clearfix">
+                                                                <input type="text" id="Telefono" autocomplete="off" name="Telefono" placeholder="Telefono" maxlength="100" class="col-xs-12 col-sm-12" />
+
+                                                            </div>
+                                                        </div>
+                                                        <label class="control-label col-xs-1 col-sm-1 no-padding-left" for="descripcion">Celular </label>
+                                                        <div class="col-xs-3">
+                                                            <div class="clearfix">
+                                                                <input type="text" id="Celular" autocomplete="off" name="Celular" placeholder="Celular" maxlength="100" class="col-xs-12 col-sm-12" />
+
+                                                            </div>
+                                                        </div>
+                                                        <label class="control-label col-xs-1 col-sm-1 no-padding-left" for="Fecha">Fecha </label>
+                                                        <div class="col-xs-3">
+                                                            <div class="clearfix">
+                                                                <div class="col-xs-8 col-sm-11">
+                                                                    <div class="input-group">
+                                                                        <input class="form-control date-picker" id="fecha" type="text" data-date-format="dd-mm-yyyy">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-calendar bigger-110"></i>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-xs-12 col-sm-1 no-padding-left" for="color">Correo </label>
+                                                    <div class="col-xs-12 col-sm-10">
+                                                        <div class="clearfix">
+                                                            <input type="text" id="Correo" autocomplete="off" name="Correo" placeholder="Correo" maxlength="100" class="col-xs-12 col-sm-12" />
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-xs-12 col-sm-1 no-padding-left" for="color">Representante </label>
+                                                    <div class="col-xs-12 col-sm-10">
+                                                        <div class="clearfix">
+                                                            <input type="text" id="Representante" autocomplete="off" name="Representante" placeholder="Representante" maxlength="100" class="col-xs-12 col-sm-12" />
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                  
+                                                        <label class="control-label col-xs-12 col-sm-1 no-padding-left" for="Estado">Estado </label>
+
+                                                        <div class="col-xs-5">
+                                                            <div class="clearfix">
+                                                                <select id="Estado" name="Estado" class="col-xs-8 col-sm-8"></select>
+                                                                <span class="help-button" data-rel="popover" data-trigger="hover" data-placement="left" data-content="More details." title="" data-original-title="Popover on hover">?</span>
+                                                            </div>
+                                                        </div>
+                                                    
+                                                </div>
+
+                                                <input type="hidden" name="ClienteId" id="ClienteId" value="0" />
+                                                <div class="form-group"></div>
+                                                <!-- #section:elements.form -->
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>
-                            <button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-remove'></i> Cancelar</button>
-                            <button class='btn btn-primary btn-sm' id="btnGuardarUsuario"><i class='fa fa-floppy-o'></i> Guardar</button>
+                            <button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-close'></i> Salir</button>
+                            <button class='btn btn-primary btn-sm' id="btnGuardarProducto"><i class='fa fa-floppy-o'></i> Guardar</button>
+
                         </div>
                     </div>
                 </div>
             </div>
+
+
         </div><!-- /.page-content -->
     </div>
 </div><!-- /.main-content -->
@@ -237,6 +358,8 @@
     <script src="@Url.Content("~/Content/js/additional-methods.js")"></script>
     <script src="@Url.Content("~/Content/js/jquery.gritter.js")"></script>
     <script src="@Url.Content("~/Content/js/jquery.blockUI.js")"></script>
+    <script src="@Url.Content("~/Content/js/date-time/bootstrap-datepicker.js")"></script>
+    <script src="@Url.Content("~/Content/js/date-time/locate/bootstrap-datepicker.es.js")"></script>
 
     <!-- inline scripts related to this page -->
     <script src="@Url.Content("~/Content/js/viewsJs/Proveedor.js")"></script>

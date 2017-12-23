@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using System.Globalization;
 
 namespace Base.Web.Controllers
 {
@@ -89,6 +90,7 @@ namespace Base.Web.Controllers
             {
                 int resultado = 0;
                 var notatIngreso = MapperHelper.Map<NotaIngresoDTO, NotaIngreso>(notaIngresoDTO);
+                DateTime.ParseExact(notatIngreso.ningc_fecha_nota_ingreso_, "dd/mm/yyyy", CultureInfo.InvariantCulture).ToString(appSettings.FormatoFecha);
                 resultado = NotaIngresoBL.Instancia.AddNI(notatIngreso);
                 if (resultado > 0)
                 {
@@ -142,6 +144,7 @@ namespace Base.Web.Controllers
                 var notaIngreso = MapperHelper.Map<NotaIngresoDTO, NotaIngreso>(notaIngresoDTO);
                 
                 int resultado = 0;
+                DateTime.ParseExact(notaIngreso.ningc_fecha_nota_ingreso_, "dd/mm/yyyy", CultureInfo.InvariantCulture).ToString(appSettings.FormatoFecha);
                 resultado = NotaIngresoBL.Instancia.UpdateNI(notaIngreso);
                 if (resultado > 0)
                 {
