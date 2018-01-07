@@ -25,5 +25,10 @@
         public static string setStatusCategoria = "SET ctgcc_iflag_estado=";
         public static string WhereCategoria = "WHERE ctgcc_iid_categoria=";
         #endregion
+        #region Transportista
+        public static string TablaTransportista = "Base.SGE_TRANSPORTISTA";
+        public static string setStatusTransportista = "SET tranc_flag_estado=";
+        public static string WhereTransportista = "WHERE tranc_icod_transportista=";
+        #endregion Almacen
     }
 }

@@ -5,12 +5,13 @@ namespace Base.BusinessEntity
 {
     public class Proveedor: EntityAuditable<int>
     {
-        public string proc_icod_proveedor { get; set; }
+    
         public string proc_vcod_proveedor { get; set; }
-        public int proc_situacion { get; set; }
         public int proc_tipo_persona { get; set; }
         public DateTime proc_sfecha { get; set; }
         public string proc_tipo_doc { get; set; }
+        public string proc_documento { get; set; }
+        public string proc_vnombrecompleto { get; set; }
         public string proc_vcomercial { get; set; }
         public string proc_vnombre { get; set; }
         public string proc_vpaterno { get; set; }
@@ -21,6 +22,6 @@ namespace Base.BusinessEntity
         public string proc_vfax { get; set; }
         public string proc_vcorreo { get; set; }
         public string proc_vrepresentante { get; set; }
-  
+
     }
 }

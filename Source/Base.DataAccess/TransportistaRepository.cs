@@ -23,20 +23,20 @@ namespace Base.DataAccess
         {
             int id;
 
-            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "")))
+            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_TRANSPORTISTA_INSERT")))
             {
-                _database.AddInParameter(comando, "", DbType.String, entity.tranc_cod_transportista);
-                _database.AddInParameter(comando, "", DbType.String, entity.tranc_vnombre_transportista);
-                _database.AddInParameter(comando, "", DbType.String, entity.tranc_vdireccion);
-                _database.AddInParameter(comando, "", DbType.String, entity.tranc_vnumero_telefono);
-                _database.AddInParameter(comando, "", DbType.String, entity.tranc_vnum_marca_placa);
-                _database.AddInParameter(comando, "", DbType.String, entity.tranc_vnum_certif_inscrip);
-                _database.AddInParameter(comando, "", DbType.Int32, entity.tranc_vnum_licencia_conducir);
-                _database.AddInParameter(comando, "", DbType.Int32, entity.tranc_ruc);
-                _database.AddInParameter(comando, "", DbType.Int32, entity.Estado);
-                _database.AddInParameter(comando, "", DbType.String, entity.UsuarioCreacion);
-                _database.AddInParameter(comando, "", DbType.String, WindowsIdentity.GetCurrent().Name);
-                _database.AddOutParameter(comando, "", DbType.Int32, 11);
+                _database.AddInParameter(comando, "@tranc_vid_transportista", DbType.String, entity.tranc_vid_transportista);
+                _database.AddInParameter(comando, "@tranc_vnombre_transportista", DbType.String, entity.tranc_vnombre_transportista);
+                _database.AddInParameter(comando, "@tranc_vdireccion", DbType.String, entity.tranc_vdireccion);
+                _database.AddInParameter(comando, "@tranc_vnumero_telefono", DbType.String, entity.tranc_vnumero_telefono);
+                _database.AddInParameter(comando, "@tranc_vnum_marca_placa", DbType.String, entity.tranc_vnum_marca_placa);
+                _database.AddInParameter(comando, "@tranc_vnum_certif_inscrip", DbType.String, entity.tranc_vnum_certif_inscrip);
+                _database.AddInParameter(comando, "@tranc_vnum_licencia_conducir", DbType.String, entity.tranc_vnum_licencia_conducir);
+                _database.AddInParameter(comando, "@tranc_vruc", DbType.String, entity.tranc_ruc);
+                _database.AddInParameter(comando, "@tranc_flag_estado", DbType.Int32, entity.Estado);
+                _database.AddInParameter(comando, "@tranc_vusuario_crea", DbType.String, entity.UsuarioCreacion);
+                _database.AddInParameter(comando, "@tranc_vpc_crea", DbType.String, WindowsIdentity.GetCurrent().Name);
+                _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
 
                 _database.ExecuteNonQuery(comando);
                 id = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
@@ -48,7 +48,7 @@ namespace Base.DataAccess
         {
             int idResult;
 
-            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "")))
+            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_TRANSPORTISTA_DELETE")))
             {
                 _database.AddInParameter(comando, "@Id", DbType.Int32, entity.Id);
                 _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
@@ -61,7 +61,7 @@ namespace Base.DataAccess
         public IList<Transportista> GetAllPaging(PaginationParameter<int> paginationParameters)
         {
             List<Transportista> usuarios = new List<Transportista>();
-            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "UsuarioGetAllFilter")))
+            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_TRANSPORTISTA_GetAllFilter")))
             {
                 _database.AddInParameter(comando, "@WhereFilters", DbType.String, string.IsNullOrWhiteSpace(paginationParameters.WhereFilter) ? string.Empty : paginationParameters.WhereFilter);
                 _database.AddInParameter(comando, "@OrderBy", DbType.String, string.IsNullOrWhiteSpace(paginationParameters.OrderBy) ? string.Empty : paginationParameters.OrderBy);
@@ -75,15 +75,15 @@ namespace Base.DataAccess
                         usuarios.Add(new Transportista
                         {
                             Id = lector.IsDBNull(lector.GetOrdinal("Id")) ? default(int) : lector.GetInt32(lector.GetOrdinal("Id")),
-                            tranc_cod_transportista = lector.IsDBNull(lector.GetOrdinal("Username")) ? default(string) : lector.GetString(lector.GetOrdinal("Username")),
-                            tranc_vnombre_transportista = lector.IsDBNull(lector.GetOrdinal("Nombre")) ? default(string) : lector.GetString(lector.GetOrdinal("Nombre")),
-                            tranc_vdireccion = lector.IsDBNull(lector.GetOrdinal("Apellido")) ? default(string) : lector.GetString(lector.GetOrdinal("Apellido")),
-                            tranc_vnumero_telefono = lector.IsDBNull(lector.GetOrdinal("Correo")) ? default(string) : lector.GetString(lector.GetOrdinal("Correo")),
-                            tranc_vnum_marca_placa = lector.IsDBNull(lector.GetOrdinal("RolId")) ? default(string) : lector.GetString(lector.GetOrdinal("RolId")),
-                            tranc_vnum_licencia_conducir = lector.IsDBNull(lector.GetOrdinal("RolId")) ? default(string) : lector.GetString(lector.GetOrdinal("RolId")),
-                            tranc_ruc = lector.IsDBNull(lector.GetOrdinal("RolId")) ? default(string) : lector.GetString(lector.GetOrdinal("RolId")),
-
-                            Estado = lector.IsDBNull(lector.GetOrdinal("Estado")) ? default(int) : lector.GetInt32(lector.GetOrdinal("Estado")),
+                            tranc_vid_transportista = lector.IsDBNull(lector.GetOrdinal("tranc_vid_transportista")) ? default(string) : lector.GetString(lector.GetOrdinal("tranc_vid_transportista")),
+                            tranc_vnombre_transportista = lector.IsDBNull(lector.GetOrdinal("tranc_vnombre_transportista")) ? default(string) : lector.GetString(lector.GetOrdinal("tranc_vnombre_transportista")),
+                            tranc_vdireccion = lector.IsDBNull(lector.GetOrdinal("tranc_vdireccion")) ? default(string) : lector.GetString(lector.GetOrdinal("tranc_vdireccion")),
+                            tranc_vnumero_telefono = lector.IsDBNull(lector.GetOrdinal("tranc_vnumero_telefono")) ? default(string) : lector.GetString(lector.GetOrdinal("tranc_vnumero_telefono")),
+                            tranc_vnum_marca_placa = lector.IsDBNull(lector.GetOrdinal("tranc_vnum_marca_placa")) ? default(string) : lector.GetString(lector.GetOrdinal("tranc_vnum_marca_placa")),
+                            tranc_vnum_certif_inscrip= lector.IsDBNull(lector.GetOrdinal("tranc_vnum_certif_inscrip")) ? default(string) : lector.GetString(lector.GetOrdinal("tranc_vnum_certif_inscrip")),
+                            tranc_vnum_licencia_conducir = lector.IsDBNull(lector.GetOrdinal("tranc_vnum_licencia_conducir")) ? default(string) : lector.GetString(lector.GetOrdinal("tranc_vnum_licencia_conducir")),
+                            tranc_ruc = lector.IsDBNull(lector.GetOrdinal("tranc_vruc")) ? default(string) : lector.GetString(lector.GetOrdinal("tranc_vruc")),
+                            Estado = lector.IsDBNull(lector.GetOrdinal("tranc_flag_estado")) ? default(int) : lector.GetInt32(lector.GetOrdinal("tranc_flag_estado")),
                             Cantidad = lector.IsDBNull(lector.GetOrdinal("Cantidad")) ? default(int) : lector.GetInt32(lector.GetOrdinal("Cantidad"))
                         });
                     }
@@ -95,7 +95,7 @@ namespace Base.DataAccess
         public Transportista GetById(Transportista entity)
         {
             Transportista transportita = null;
-            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "UsuarioGetById")))
+            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_TRANSPORTISTA_GetById")))
             {
                 _database.AddInParameter(comando, "@Id", DbType.Int32, entity.Id);
 
@@ -106,15 +106,15 @@ namespace Base.DataAccess
                         transportita = new Transportista
                         {
                             Id = lector.IsDBNull(lector.GetOrdinal("Id")) ? default(int) : lector.GetInt32(lector.GetOrdinal("Id")),
-                            tranc_vnombre_transportista = lector.IsDBNull(lector.GetOrdinal("Username")) ? default(string) : lector.GetString(lector.GetOrdinal("Username")),
-                            tranc_vdireccion = lector.IsDBNull(lector.GetOrdinal("Password")) ? default(string) : lector.GetString(lector.GetOrdinal("Password")),
-                            tranc_vnumero_telefono = lector.IsDBNull(lector.GetOrdinal("ConfirmarPassword")) ? default(string) : lector.GetString(lector.GetOrdinal("ConfirmarPassword")),
-                            tranc_ruc = lector.IsDBNull(lector.GetOrdinal("Apellido")) ? default(string) : lector.GetString(lector.GetOrdinal("Apellido")),
-                            tranc_vnum_marca_placa = lector.IsDBNull(lector.GetOrdinal("Correo")) ? default(string) : lector.GetString(lector.GetOrdinal("Correo")),
-                            tranc_vnum_licencia_conducir = lector.IsDBNull(lector.GetOrdinal("CargoId")) ? default(string) : lector.GetString(lector.GetOrdinal("CargoId")),
-                            tranc_cod_transportista = lector.IsDBNull(lector.GetOrdinal("RolId")) ? default(string) : lector.GetString(lector.GetOrdinal("RolId")),
-                            Estado = lector.IsDBNull(lector.GetOrdinal("Estado")) ? default(int) : lector.GetInt32(lector.GetOrdinal("Estado")),
-                            tranc_vnum_certif_inscrip = lector.IsDBNull(lector.GetOrdinal("Estado")) ? default(string) : lector.GetString(lector.GetOrdinal("Estado")),
+                            tranc_vid_transportista = lector.IsDBNull(lector.GetOrdinal("tranc_vid_transportista")) ? default(string) : lector.GetString(lector.GetOrdinal("tranc_vid_transportista")),
+                            tranc_vnombre_transportista = lector.IsDBNull(lector.GetOrdinal("tranc_vnombre_transportista")) ? default(string) : lector.GetString(lector.GetOrdinal("tranc_vnombre_transportista")),
+                            tranc_vdireccion = lector.IsDBNull(lector.GetOrdinal("tranc_vdireccion")) ? default(string) : lector.GetString(lector.GetOrdinal("tranc_vdireccion")),
+                            tranc_vnumero_telefono = lector.IsDBNull(lector.GetOrdinal("tranc_vnumero_telefono")) ? default(string) : lector.GetString(lector.GetOrdinal("tranc_vnumero_telefono")),
+                            tranc_ruc = lector.IsDBNull(lector.GetOrdinal("tranc_vruc")) ? default(string) : lector.GetString(lector.GetOrdinal("tranc_vruc")),
+                            tranc_vnum_marca_placa = lector.IsDBNull(lector.GetOrdinal("tranc_vnum_marca_placa")) ? default(string) : lector.GetString(lector.GetOrdinal("tranc_vnum_marca_placa")),
+                            tranc_vnum_licencia_conducir = lector.IsDBNull(lector.GetOrdinal("tranc_vnum_licencia_conducir")) ? default(string) : lector.GetString(lector.GetOrdinal("tranc_vnum_licencia_conducir")),
+                            Estado = lector.IsDBNull(lector.GetOrdinal("tranc_flag_estado")) ? default(int) : lector.GetInt32(lector.GetOrdinal("tranc_flag_estado")),
+                            tranc_vnum_certif_inscrip = lector.IsDBNull(lector.GetOrdinal("tranc_vnum_certif_inscrip")) ? default(string) : lector.GetString(lector.GetOrdinal("tranc_vnum_certif_inscrip")),
 
                         };
                     }
@@ -127,21 +127,21 @@ namespace Base.DataAccess
         {
             int id;
 
-            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "")))
+            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_TRANSPORTISTA_UPDATE")))
             {
-                _database.AddInParameter(comando, "", DbType.String, entity.tranc_cod_transportista);
-                _database.AddInParameter(comando, "", DbType.String, entity.tranc_vnombre_transportista);
-                _database.AddInParameter(comando, "", DbType.String, entity.tranc_vdireccion);
-                _database.AddInParameter(comando, "", DbType.String, entity.tranc_vnumero_telefono);
-                _database.AddInParameter(comando, "", DbType.String, entity.tranc_vnum_marca_placa);
-                _database.AddInParameter(comando, "", DbType.String, entity.tranc_vnum_certif_inscrip);
-                _database.AddInParameter(comando, "", DbType.Int32, entity.tranc_vnum_licencia_conducir);
-                _database.AddInParameter(comando, "", DbType.Int32, entity.tranc_ruc);
-                _database.AddInParameter(comando, "", DbType.Int32, entity.Estado);
-                _database.AddInParameter(comando, "", DbType.String, entity.UsuarioCreacion);
-                _database.AddInParameter(comando, "", DbType.String, WindowsIdentity.GetCurrent().Name);
-                _database.AddInParameter(comando, "", DbType.String, entity.Id);
-                _database.AddOutParameter(comando, "", DbType.Int32, 11);
+                _database.AddInParameter(comando, "@tranc_vid_transportista", DbType.String, entity.tranc_vid_transportista);
+                _database.AddInParameter(comando, "@tranc_vnombre_transportista", DbType.String, entity.tranc_vnombre_transportista);
+                _database.AddInParameter(comando, "@tranc_vdireccion", DbType.String, entity.tranc_vdireccion);
+                _database.AddInParameter(comando, "@tranc_vnumero_telefono", DbType.String, entity.tranc_vnumero_telefono);
+                _database.AddInParameter(comando, "@tranc_vnum_marca_placa", DbType.String, entity.tranc_vnum_marca_placa);
+                _database.AddInParameter(comando, "@tranc_vnum_certif_inscrip", DbType.String, entity.tranc_vnum_certif_inscrip);
+                _database.AddInParameter(comando, "@tranc_vnum_licencia_conducir", DbType.String, entity.tranc_vnum_licencia_conducir);
+                _database.AddInParameter(comando, "@tranc_vruc", DbType.String, entity.tranc_ruc);
+                _database.AddInParameter(comando, "@tranc_flag_estado", DbType.Int32, entity.Estado);
+                _database.AddInParameter(comando, "@tranc_vusuario_modifica", DbType.String, entity.UsuarioModificacion);
+                _database.AddInParameter(comando, "@tranc_vpc_modifica", DbType.String, WindowsIdentity.GetCurrent().Name);
+                _database.AddInParameter(comando, "@id", DbType.Int32, entity.Id);
+                _database.AddOutParameter(comando, "@Response", DbType.Int32, 11);
 
                 _database.ExecuteNonQuery(comando);
                 id = Convert.ToInt32(_database.GetParameterValue(comando, "@Response"));
@@ -151,10 +151,16 @@ namespace Base.DataAccess
         }
         public int GetCorrelativo()
         {
-            int correlativo;
-            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "")))
+            int correlativo=0;
+            using (var comando = _database.GetStoredProcCommand(string.Format("{0}{1}", ConectionStringRepository.EsquemaName, "SGE_GetCORRELATIBA_TRANSPORTISTA")))
             {
-                correlativo = 0;
+                using (var lector = _database.ExecuteReader(comando))
+                {
+                    if (lector.Read())
+                    {
+                        correlativo = lector.IsDBNull(lector.GetOrdinal("Correlativo")) ? default(int) : lector.GetInt32(lector.GetOrdinal("Correlativo")); 
+                    }                
+                }
             }
             return correlativo;
         }

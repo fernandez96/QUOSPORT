@@ -2,8 +2,8 @@
 var formularioMantenimiento = "TransportitaForm";
 var delRowPos = null;
 var delRowID = 0;
-var urlListar = baseUrl + 'Almacen/Listar';
-var urlMantenimiento = baseUrl + 'Almacen/';
+var urlListar = baseUrl + 'Transportista/Listar';
+var urlMantenimiento = baseUrl + 'Transportista/';
 var rowAlmacen = null;
 var urlcargarEstado = baseUrl + 'Transportista/GetAllEstado';
 var estadoActivo = 1;
@@ -41,6 +41,7 @@ $(document).ready(function () {
         $("#accionTitle").text('Nuevo');
         $("#NuevoTransportita ").modal("show");
         $("#codigo").prop("disabled", false);
+        GetCorrelativoCab();
     });
 
     $('#btnEditarAlmacen').on('click', function () {
@@ -57,9 +58,7 @@ $(document).ready(function () {
                     GetAlmacenById();
                 });
             }
-
         }
-
     });
 
     $('#btnEliminarAlmacen').on('click', function () {
@@ -90,14 +89,14 @@ $(document).ready(function () {
                         CambiarStatus(rowAlmacen.Id, estadoActivo);
                     });
 
-                }, 'El estado del almacen ' + '<b>' + rowAlmacen.almac_vdescripcion + '</b>' + '  es ' + '<span class="label label-warning arrowed-in arrowed-in-right">Inactivo</span>' + ', por lo tanto pasara a estado activo' + '</n>' + ' ¿Desea continuar?');
+                }, 'El estado del almacen ' + '<b>' + rowAlmacen.tranc_vnombre_transportista + '</b>' + '  es ' + '<span class="label label-warning arrowed-in arrowed-in-right">Inactivo</span>' + ', por lo tanto pasara a estado activo' + '</n>' + ' ¿Desea continuar?');
             } else if (rowAlmacen.Estado == estadoActivo) {
                 webApp.showConfirmResumeDialog(function () {
                     checkSession(function () {
                         CambiarStatus(rowAlmacen.Id, estadoInactivo);
                     });
 
-                }, 'El estado del almacen ' + '<b>' + rowAlmacen.almac_vdescripcion + '</b>' + '  es ' + '<span class="label label-info label-sm arrowed-in arrowed-in-right">Activo</span>' + ', por lo tanto pasara a estado Inactivo,' + '</n>' + ' ¿Desea continuar?');
+                }, 'El estado del almacen ' + '<b>' + rowAlmacen.tranc_vnombre_transportista + '</b>' + '  es ' + '<span class="label label-info label-sm arrowed-in arrowed-in-right">Activo</span>' + ', por lo tanto pasara a estado Inactivo,' + '</n>' + ' ¿Desea continuar?');
             }
         }
 
@@ -114,18 +113,11 @@ $(document).ready(function () {
     });
 
     $("#btnGuardarAlmacen").on("click", function (e) {
-
         if ($('#' + formularioMantenimiento).valid()) {
-
-            ////webApp.showConfirmDialog(function () {
             checkSession(function () {
                 GuardarAlmacen();
-
-
             });
-            //});
         }
-
         e.preventDefault();
     });
 
@@ -145,10 +137,16 @@ $(document).ready(function () {
                 required: true
             },
             telefono: {
-                required: true
+               // required: true,
+                strippedminlength: {
+                    param: 6
+                },
             },
             vehMarPlac: {
-                required: true
+                required: true,
+                strippedminlength: {
+                    param: 6
+                },
             },
             CertIncripcion: {
                 required: true
@@ -157,7 +155,11 @@ $(document).ready(function () {
                 required: true
             },
             ruc_: {
-                required: true
+                required: true,
+                strippedminlength: {
+                    param: 11
+                },
+
             }
 
         },
@@ -175,10 +177,13 @@ $(document).ready(function () {
 
             },
             telefono: {
-                required: "Por favor ingrese Telefono."
+                strippedminlength: "Por favor ingrese al menos 6 caracteres."
+               // required: "Por favor ingrese Telefono."
+               
             },
             vehMarPlac: {
-                required: "Por favor ingrese Vehiculo/Marca/Placa"
+                required: "Por favor ingrese Vehiculo/Marca/Placa",
+                strippedminlength: "Por favor ingrese al menos 6 caracteres."
             },
             CertIncripcion: {
                 required: "Por favor ingrese Certificación de Inscripción"
@@ -187,12 +192,14 @@ $(document).ready(function () {
                 required: "Por favor ingrese Licencia"
             },
             ruc_: {
-                required: "Por favor ingrese RUC"
+                required: "Por favor ingrese RUC",
+                strippedminlength: "Por favor ingrese al menos 11 caracteres."
             },
 
         });
     CargarEstado();
     $('[data-toggle="tooltip"]').tooltip();
+    GetCorrelativoCab();
 });
 
 function VisualizarDataTableTransprotita() {
@@ -225,7 +232,7 @@ function VisualizarDataTableTransprotita() {
         "bAutoWidth": false,
         "columns": [
             { "data": "Id" },
-            { "data": "tranc_cod_transportista" },
+            { "data": "tranc_vid_transportista" },
             { "data": "tranc_vnombre_transportista" },
             { "data": "tranc_vdireccion" },
             { "data": "tranc_vnumero_telefono" },
@@ -286,7 +293,7 @@ function GetAlmacenById() {
             } else {
                 LimpiarFormulario();
                 var transportista = response.Data;
-                $("#codigo").val(transportista.tranc_cod_transportista);
+                $("#codigo").val(transportista.tranc_vid_transportista);
                 $("#razonSocial").val(transportista.tranc_vnombre_transportista);
                 $("#direccion").val(transportista.tranc_vdireccion);
                 $("#telefono").val(transportista.tranc_vnumero_telefono);
@@ -299,7 +306,7 @@ function GetAlmacenById() {
                 $("#accionTitle").text('Editar');
                 $("#NuevoTransportita").modal("show");
                 $("#codigo").prop("disabled", true);
-          
+
             }
 
         } else {
@@ -376,17 +383,17 @@ function EliminarAlmacen() {
 }
 
 function GuardarAlmacen() {
-   
+
     var modelView = {
         Id: $("#TransportitaId").val(),
-        tranc_cod_transportista: $("#codigo").val(),
+        tranc_vid_transportista: $("#codigo").val(),
         tranc_vnombre_transportista: $("#razonSocial").val(),
         tranc_vnumero_telefono: $("#telefono").val(),
         tranc_vdireccion: $("#direccion").val(),
         tranc_vnum_marca_placa: $("#vehMarPlac").val(),
         tranc_vnum_certif_inscrip: $("#CertIncripcion").val(),
         tranc_ruc: $("#ruc_").val(),
-        tranc_ruc: $("#licencia").val(),
+        tranc_vnum_licencia_conducir: $("#licencia").val(),
         Estado: $("#Estado").val(),
         UsuarioRegistro: $("#usernameLogOn strong").text()
     };
@@ -532,6 +539,54 @@ function CambiarStatus(Id, estado) {
     });
 }
 
+function GetCorrelativoCab() {
+   
+    webApp.Ajax({
+        url: urlMantenimiento + 'GetCorrelativoCab'
+    }, function (response) {
+        if (response.Success) {
+            if (response.Warning) {
+                $.gritter.add({
+                    title: 'Alerta',
+                    text: response.Message,
+                    class_name: 'gritter-warning gritter'
+                });
+            } else {
+                var notaingreso = response.Data + 1;
+
+                if (notaingreso < 10) {
+                    $("#codigo").val('00' + notaingreso);
+                }
+                else if (notaingreso >= 100) {
+                    $("#codigo").val('0' + notaingreso);
+                }
+                else if (notaingreso >= 1000) {
+                    $("#codigo").val(notaingreso);
+                }
+            }
+
+        } else {
+            $.gritter.add({
+                title: 'Error',
+                text: response.Message,
+                class_name: 'gritter-error gritter'
+            });
+        }
+    }, function (response) {
+        $.gritter.add({
+            title: 'Error',
+            text: response,
+            class_name: 'gritter-error gritter'
+        });
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        $.gritter.add({
+            title: 'Error',
+            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
+            class_name: 'gritter-error gritter'
+        });
+    });
+
+}
 
 function buscar(e) {
     tecla = (document.all) ? e.keyCode : e.which;

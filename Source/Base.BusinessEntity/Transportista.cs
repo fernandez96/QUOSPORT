@@ -5,7 +5,7 @@ namespace Base.BusinessEntity
     public  class Transportista: EntityAuditable<int>
     {
 
-        public string tranc_cod_transportista { get; set; }
+        public string tranc_vid_transportista { get; set; }
         public string tranc_vnombre_transportista { get; set; }
         public string tranc_vdireccion  { get; set; }
         public string tranc_vnumero_telefono { get; set; }

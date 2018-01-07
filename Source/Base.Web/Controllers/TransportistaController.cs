@@ -263,6 +263,71 @@ namespace Base.Web.Controllers
             return Json(jsonResponse);
         }
 
+        [HttpPost]
+        public JsonResult GetCorrelativoCab()
+        {
+            var jsonResponse = new JsonResponse { Success = true };
+
+            try
+            {
+
+                var getcorrelativoDTO = TransportistaBL.Instancia.GetCorrelativo();
+                if (getcorrelativoDTO !=0)
+                {
+                    jsonResponse.Data = getcorrelativoDTO;
+                }
+                else
+                {
+                    jsonResponse.Success = true;
+                    jsonResponse.Data = getcorrelativoDTO;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                jsonResponse.Success = false;
+                jsonResponse.Message = Mensajes.IntenteloMasTarde;
+            }
+
+            return Json(jsonResponse);
+        }
+
+        [HttpPost]
+        public JsonResult UpdateStatus(StatusDTO statusDTO)
+        {
+            var jsonResponse = new JsonResponse { Success = true };
+            try
+            {
+                var status_ = MapperHelper.Map<StatusDTO, Status>(statusDTO);
+                status_.tabla = status.TablaTransportista;
+                status_.setStatus = status.setStatusTransportista + status_.Estado;
+                status_.where = status.WhereTransportista + status_.Id;
+                int resultado = StatusBL.Instancia.status(status_);
+
+                if (resultado > 0)
+                {
+                    jsonResponse.Title = Title.TitleActualizar;
+                    jsonResponse.Message = Mensajes.cambiostatus;
+                }
+                else
+                {
+                    jsonResponse.Title = Title.TitleAlerta;
+                    jsonResponse.Warning = true;
+                    jsonResponse.Message = Mensajes.IntenteloMasTarde;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                jsonResponse.Success = false;
+                jsonResponse.Title = Title.TitleAlerta;
+                jsonResponse.Message = Mensajes.IntenteloMasTarde;
+            }
+
+            return Json(jsonResponse);
+        }
+
         #region Métodos Privados
 
         public void FormatDataTable(DataTableModel<TransportistaFilterModel, int> dataTableModel)
@@ -275,13 +340,13 @@ namespace Base.Web.Controllers
                 dataTableModel.orderBy = (" [" + column + "] " + columnDir + " ");
             }
 
-            dataTableModel.whereFilter = "WHERE U.Estado IN (1)";
+            dataTableModel.whereFilter = "WHERE tranc_flag_estado IN (1,2)";
 
             if (!string.IsNullOrWhiteSpace(dataTableModel.filter.RazonSocialSearch))
-                dataTableModel.whereFilter += (" AND RolId = " + dataTableModel.filter.CodigoSearch);
+                dataTableModel.whereFilter += (" AND tranc_vid_transportista = " + dataTableModel.filter.CodigoSearch);
 
             if (!string.IsNullOrWhiteSpace(dataTableModel.filter.RazonSocialSearch))
-                dataTableModel.whereFilter += (" AND U.Username LIKE '%" + dataTableModel.filter.RazonSocialSearch + "%'");
+                dataTableModel.whereFilter += (" AND tranc_vnombre_transportista LIKE '%" + dataTableModel.filter.RazonSocialSearch + "%'");
         }
     }
     #endregion
