@@ -87,5 +87,22 @@ namespace Base.Common
             }
             return int.Parse(timeOutCache);
         }
+
+        public static int CommandTimeOutBD()
+        {
+            var commandTimeOutBD = ConfigurationManager.AppSettings.Get("CommandTimeOutBD");
+
+            if (string.IsNullOrEmpty(commandTimeOutBD))
+            {
+                return 300;
+            }
+            return int.Parse(commandTimeOutBD);
+        }
+
+        public static string MensajeTimeOut()
+        {
+            var mensajeTimeOut = ConfigurationManager.AppSettings.Get("MensajeTimeOut");
+            return mensajeTimeOut;
+        }
     }
 }
