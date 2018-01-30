@@ -39,6 +39,14 @@ namespace Base.DataAccess.Core
             }
         }
 
+        public static int CodeErrorTimeOut
+        {
+            get
+            {
+                return -2146232060;
+            }
+        }
+
         #endregion
     }
 }
