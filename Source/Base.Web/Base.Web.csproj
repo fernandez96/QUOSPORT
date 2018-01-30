@@ -548,6 +548,7 @@
     <Compile Include="Models\NotaIngresoFilterModel.cs" />
     <Compile Include="Models\NotaSalidaFilterModel.cs" />
     <Compile Include="Models\ProductoFilterModel.cs" />
+    <Compile Include="Models\ProveedorFilterModel.cs" />
     <Compile Include="Models\ReporteFilterModel.cs" />
     <Compile Include="Models\ReportePaginationModel.cs" />
     <Compile Include="Models\RolFilterModel.cs" />

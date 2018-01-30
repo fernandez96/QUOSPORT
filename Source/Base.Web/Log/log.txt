@@ -1560,3 +1560,590 @@ Nombre del parámetro: index Trace:    en System.ThrowHelper.ThrowArgumentOutOfRa
    en Base.DataAccess.TransportistaRepository.Update(Transportista entity)
    en Base.BusinessLogic.TransportistaBL.Update(Transportista entity) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\TransportistaBL.cs:línea 34
    en Base.Web.Controllers.TransportistaController.Update(TransportistaDTO transportistaDTO)
+2018-01-13 10:49:49,985 ERROR  - Mensaje: Invalid column name 'almac_iid_almace'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.TransferenciaRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\TransferenciaRepository.cs:línea 518
+   en Base.BusinessLogic.TransferenciaBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\TransferenciaBL.cs:línea 24
+   en Base.Web.Controllers.TransferenciaController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\TransferenciaController.cs:línea 32
+2018-01-13 17:04:24,766 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProveedorController.FormatDataTable(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 318
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 28
+2018-01-13 17:04:52,531 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProveedorController.FormatDataTable(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 318
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 28
+2018-01-13 17:04:53,243 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProveedorController.FormatDataTable(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 318
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 28
+2018-01-13 17:04:53,951 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProveedorController.FormatDataTable(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 318
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 28
+2018-01-13 17:10:40,827 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProveedorController.FormatDataTable(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 318
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 28
+2018-01-13 17:11:27,940 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProveedorController.FormatDataTable(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 318
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 28
+2018-01-13 17:14:09,770 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProveedorController.FormatDataTable(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 318
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 28
+2018-01-13 17:14:44,415 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProveedorController.FormatDataTable(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 318
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 28
+2018-01-13 17:14:47,800 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProveedorController.FormatDataTable(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 318
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 28
+2018-01-13 17:16:02,125 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProveedorController.FormatDataTable(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 318
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 28
+2018-01-13 17:18:40,259 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProveedorController.FormatDataTable(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 318
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 28
+2018-01-13 17:18:47,813 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProveedorController.FormatDataTable(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 318
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 28
+2018-01-13 17:20:28,876 ERROR  - Mensaje: Referencia a objeto no establecida como instancia de un objeto. Trace:    en Base.Web.Controllers.ProveedorController.FormatDataTable(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 318
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 28
+2018-01-13 17:21:08,148 ERROR  - Mensaje: Invalid column name 'function'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 17:22:02,825 ERROR  - Mensaje: Invalid column name 'function'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 17:22:58,268 ERROR  - Mensaje: Invalid column name 'function'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 17:24:30,558 ERROR  - Mensaje: Invalid column name 'function'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 17:25:49,002 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 17:26:24,695 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 17:31:21,551 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 17:35:40,524 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 17:38:02,213 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 17:40:00,744 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 17:40:13,008 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 17:40:24,920 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 17:41:26,595 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 17:57:25,979 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 17:57:46,761 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 18:33:37,372 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 18:34:08,311 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 18:34:38,783 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 18:44:18,488 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 18:45:02,819 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 18:46:12,466 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 18:48:13,780 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 18:49:33,530 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 18:50:48,608 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 18:51:11,897 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 18:51:59,590 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 18:52:30,304 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 18:53:31,124 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 18:54:21,782 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 18:55:06,594 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 18:56:49,532 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30
+2018-01-13 18:58:19,883 ERROR  - Mensaje: Invalid column name 'proc_vcod_proveedor'. Trace:    en System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   en System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   en System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   en System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   en System.Data.SqlClient.SqlDataReader.get_MetaData()
+   en System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   en System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   en System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   en System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   en Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteReader(DbCommand command)
+   en Base.DataAccess.ProveedorRepository.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.DataAccess\ProveedorRepository.cs:línea 132
+   en Base.BusinessLogic.ProveedorBL.GetAllPaging(PaginationParameter`1 paginationParameters) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.BusinessLogic\ProveedorBL.cs:línea 35
+   en Base.Web.Controllers.ProveedorController.Listar(DataTableModel`2 dataTableModel) en E:\Proyectos\QUOSPORT\QUOSPORT\Source\Base.Web\Controllers\ProveedorController.cs:línea 30

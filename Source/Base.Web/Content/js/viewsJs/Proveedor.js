@@ -1,5 +1,5 @@
-﻿var dataTableCliente = null;
-var formularioMantenimiento = "ClienteForm";
+﻿var dataTableProveedor = null;
+var formularioMantenimiento = "proveedorForm";
 var delRowPos = null;
 var delRowID = 0;
 var urlListar = baseUrl + 'Proveedor/Listar';
@@ -18,26 +18,28 @@ $(document).ready(function () {
     });
 
     checkSession(function () {
-        // VisualizarDataTableUsuario();
+         VisualizarDataTableProveedor();
     });
 
-    $('#UsuarioDataTable  tbody').on('click', 'tr', function () {
+    $('#proveedorDataTable  tbody').on('click', 'tr', function () {
         if ($(this).hasClass('selected')) {
             $(this).removeClass('selected');
         }
         else {
-            dataTableUsuario.$('tr.selected').removeClass('selected');
+            dataTableProveedor.$('tr.selected').removeClass('selected');
             $(this).addClass('selected');
         }
     });
 
     $('#btnAgregarCliente').on('click', function () {
+     
         if ($("#natural").is(":checked")) {
             $("#juridico").prop("checked", false);
             var valor = $('input:radio[id=natural]:checked').val();
             FormularioJuridico(true);
             FormularioNatural(false);
         }
+  
         LimpiarFormulario();
 
         $("#UsuarioId").val(0);
@@ -47,7 +49,7 @@ $(document).ready(function () {
     });
 
     $('#editarUsuario').on('click', function () {
-        rowUsuario = dataTableUsuario.row('.selected').data();
+        rowUsuario = dataTableProveedor.row('.selected').data();
         if (typeof rowUsuario === "undefined") {
             webApp.showMessageDialog("Por favor seleccione un registro.");
         }
@@ -60,7 +62,7 @@ $(document).ready(function () {
     });
 
     $('#eliminarUsuario').on('click', function () {
-        rowUsuario = dataTableUsuario.row('.selected').data();
+        rowUsuario = dataTableProveedor.row('.selected').data();
         if (typeof rowUsuario === "undefined") {
             webApp.showMessageDialog("Por favor seleccione un registro.");
         }
@@ -99,82 +101,43 @@ $(document).ready(function () {
         e.preventDefault();
     });
 
-    $("#btnGuardarUsuario").on("click", function (e) {
-
-        if ($('#' + formularioMantenimiento).valid()) {
-            checkSession(function () {
-                GuardarUsuario();
-            });
+    $("#btnGuardarProveedor").on("click", function (e) {
+   
+        if ($("#natural").prop("checked")) {
+            ValidateNatural();
+            if ($('#' + formularioMantenimiento).valid()) {
+                checkSession(function () {
+                    GuardarUsuario();
+                });
+            }
         }
+        else if ($("#juridico").prop("checked")) {
+
+        }
+
+    
 
         e.preventDefault();
     });
 
-    webApp.validarLetrasEspacio(['Nombre', 'Apellido']);
+    //evento de verificacion de seleccion de radio(tipo persona )
+    //click persona natural
+    //if ($("#natural").prop("checked")) {
+    //    alert("1");
+    //}
+    //if ($("#juridico").prop("checked")) {
+    //    alert("2");
+    //}
+    //$("#natural").on("click", function () {
+     
+    //});
+
+
+    webApp.validarLetrasEspacio(['Nombre', 'Paterno', 'Materno']);
+    webApp.validarNumerico(['Telefono', 'Celular', 'RUC']);
     $('#Correo').validCampoFranz(' @abcdefghijklmnÃ±opqrstuvwxyz_1234567890.');
 
-    webApp.InicializarValidacion(formularioMantenimiento,
-        {
-            Username: {
-                required: true
-
-            },
-            Contrasena: {
-                required: true
-            },
-            ContrasenaConf: {
-                required: true
-            },
-            Nombre: {
-                required: true,
-                noPasteAllowLetterAndSpace: true,
-                firstCharacterBeLetter: true
-            },
-            Apellido: {
-                required: true,
-                noPasteAllowLetterAndSpace: true,
-                firstCharacterBeLetter: true
-            },
-            CargoId: {
-                required: true
-            },
-            RolId: {
-                required: true
-            },
-            Correo: {
-                email: true
-            }
-        },
-        {
-            Username: {
-                required: "Por favor ingrese Usuario.",
-
-            },
-            Contrasena: {
-                required: "Por favor ingrese Contraseña.",
-
-            },
-            ContrasenaConf: {
-                required: "Por favor confirme Contraseña.",
-
-            },
-            Nombre: {
-                required: "Por favor ingrese Nombre."
-            },
-            Apellido: {
-                required: "Por favor ingrese Apellido."
-            },
-
-            CargoId: {
-                required: "Por favor seleccione Cargo."
-            },
-            RolId: {
-                required: "Por favor seleccione Rol."
-            },
-            Correo: {
-                email: "Por favor ingrese Correo válido."
-            }
-        });
+   
     //CargarCargo();
     //CargarRol();
     //CargarEstado();
@@ -189,8 +152,116 @@ $(document).ready(function () {
     });
 });
 
-function VisualizarDataTableUsuario() {
-    dataTableCliente = $('#UsuarioDataTable').DataTable({
+//validad persona natural
+function ValidateNatural() {
+    webApp.InicializarValidacion(formularioMantenimiento,
+          {
+              Codigo: {
+                  required: true
+
+              },
+              TDpcumento: {
+                  required: true
+              },
+              Documento: {
+                  required: true
+              },
+              Nombre: {
+                  required: true,
+                  noPasteAllowLetterAndSpace: true,
+                  firstCharacterBeLetter: true
+              },
+              Paterno: {
+                  required: true,
+                  noPasteAllowLetterAndSpace: true,
+                  firstCharacterBeLetter: true
+              },
+              Materno: {
+                  required: true
+              },
+              FAX: {
+                  required: true
+              },
+              inpDireccion: {
+                  required: true
+              },
+              Telefono: {
+                  strippedminlength: {
+                      param: 6
+                  },
+              },
+              Celular: {
+                  strippedminlength: {
+                      param:9
+                  }
+              },
+              fecha: {
+                  required: true
+              },
+              Correo: {
+                  email:true
+              },
+              Representante: {
+                  required: true
+              },
+              Estado: {
+                  required:true
+              }
+          },
+          {
+              Codigo: {
+                  required: "Por favor ingrese Codigo.",
+
+              },
+              TDpcumento: {
+                  required: "Por favor seleccione un tipo documento.",
+
+              },
+              Documento: {
+                  required: "Por favor ingrese Documento.",
+
+              },
+              Nombre: {
+                  required: "Por favor ingrese Nombre."
+              },
+              Paterno: {
+                  required: "Por favor ingrese Apellido Paterno"
+              },
+
+              Materno: {
+                  required: "Por favor Ingrese Apellido Materno."
+              },
+              FAX: {
+                  required: "Por favor Ingrese FAX."
+              },
+              inpDireccion: {
+                  required: "Por favor ingrese Direccion."
+              },
+              Telefono: {
+                  strippedminlength: "Por favor ingrese al menos 6 caracteres."
+              },
+              Celular:{
+                  strippedminlength:"Por favor ingrese 9 digitos."
+              },
+              fecha: {
+                  required:"Por favor ingrese Fecha."
+              },
+              Correo: {
+                  email:"Por favor ingrese correo valido."
+              },
+              Representante: {
+                  required:"Por favor ingrese Representante."
+              },
+              Estado: {
+                  required:"Por favor seleccione estado."
+              }
+             
+          });
+}
+
+
+function VisualizarDataTableProveedor() {
+    dataTableProveedor = $('#proveedorDataTable').DataTable({
         "bFilter": false,
         "bProcessing": true,
         "serverSide": true,
@@ -200,10 +271,9 @@ function VisualizarDataTableUsuario() {
             "type": "POST",
             "data": function (request) {
                 request.filter = new Object();
-
                 request.filter = {
-                    UsernameSearch: $("#UsuarioSearch").val(),
-                    RolIdSearch: $("#RolIdSearch").val()
+                    CodigoSearch: $("#CodigoSearch").val(),
+                    DescripcionSearch: $("#descripcionSearch").val()
                 }
             },
             dataFilter: function (data) {
@@ -219,11 +289,18 @@ function VisualizarDataTableUsuario() {
         "bAutoWidth": false,
         "columns": [
             { "data": "Id" },
-            { "data": "Username" },
-            { "data": "Nombre" },
-            { "data": "Apellido" },
-            { "data": "Correo" },
-            { "data": "RolNombre" },
+            { "data": "proc_vcod_proveedor" },
+            {
+                "data": function (obj) {
+                    if (obj.proc_tipo_persona == "1")
+                        return "Persona Natural";
+                    else
+                        return "Persona Juridica";
+                }
+            },
+      
+            { "data": "proc_vnombrecompleto" },
+            { "data": "proc_vruc" },
             {
                 "data": function (obj) {
                     if (obj.Estado == "1")
@@ -577,11 +654,7 @@ function buscar(e) {
 
 function LimpiarFormulario() {
     webApp.clearForm(formularioMantenimiento);
-    $("#CargoId").val(1);
-    $("#RolId").val(1);
-    $("#Estado").val(1);
-    $("#Username").focus();
-
+    $("#natural").prop("checked", true);
 }
 function FormularioNatural(valor) {
     $("#Nombre").prop("disabled", valor);

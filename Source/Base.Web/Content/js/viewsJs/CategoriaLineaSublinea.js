@@ -47,7 +47,7 @@ $(document).ready(function () {
 
     $.extend($.fn.dataTable.defaults, {
         language: { url: baseUrl + 'Content/js/dataTables/Internationalisation/es.txt' },
-   
+
     });
 
     var $validation = true;
@@ -61,14 +61,14 @@ $(document).ready(function () {
 	        if (info.direction == "next") {
 	            if (!$('#frmCategoriaProducto').valid()) {
 	                e.preventDefault();
-	            
-	            } else {	             
-	                    var wizard = $('#modal-wizard-container').data('fu.wizard')
-	                    wizard.currentStep = 1;
-	                    wizard.setState();
-	                    $("#frmCategoriaProducto .form-group").removeClass('has-error');
-	                    $("#frmCategoriaProducto .help-block").remove();
-	                    $("#Lcategoria").text($("#descripcionCP").val());
+
+	            } else {
+	                var wizard = $('#modal-wizard-container').data('fu.wizard')
+	                wizard.currentStep = 1;
+	                wizard.setState();
+	                $("#frmCategoriaProducto .form-group").removeClass('has-error');
+	                $("#frmCategoriaProducto .help-block").remove();
+	                $("#Lcategoria").text($("#descripcionCP").val());
 	            }
 	        }
 
@@ -96,11 +96,11 @@ $(document).ready(function () {
 	                }
 	            }
 	            else {
-	                if (categoriaProductoLinea<=0) {
+	                if (categoriaProductoLinea <= 0) {
 	                    webApp.showMessageDialog("Por favor debe ingresar al menos una Linea.");
 	                    e.preventDefault();
-	                   
-                    }
+
+	                }
 	            }
 	        }
 	        if (info.direction == "previous") {
@@ -114,7 +114,7 @@ $(document).ready(function () {
 	                wizard.currentStep = 4;
 	                wizard.setState();
 	                e.preventDefault();
-	               // getResumen();
+	                // getResumen();
 	            }
 	            else {
 	                if (categoriaProductoSubLinea.length <= 0) {
@@ -133,7 +133,7 @@ $(document).ready(function () {
 	    //            wizard.currentStep = 3;
 	    //            wizard.setState();
 	    //            e.preventDefault();
-	            
+
 	    //    }
 	    //}
 	})
@@ -144,29 +144,28 @@ $(document).ready(function () {
 	        lineasErrores.length = 0;
 	        $.each(categoriaProductoLinea, function (index, value) {
 	            categoriaProductoSubLinea.filter(function (obj) {
-	                if (obj.idLinea===value.Id) {
-                        return true
+	                if (obj.idLinea === value.Id) {
+	                    return true
 	                }
-	                else
-	                {
+	                else {
 	                    lineasErrores.push(value.linc_vdescripcion);
-                        return false;
+	                    return false;
 	                }
 	            });
 	        });
-	       
+
 	        //if (lineasErrores.length==0) {
-	            webApp.showConfirmResumeDialog(function () {
-	                checkSession(function () {
-	                    GuardarCategoria();
-	                });
-	            }, 'Esta seguro de realizar la operación.');
+	        webApp.showConfirmResumeDialog(function () {
+	            checkSession(function () {
+	                GuardarCategoria();
+	            });
+	        }, 'Esta seguro de realizar la operación.');
 	        //} else {
 	        //    webApp.showMessageDialog("Por favor debe registrar una sub-linea de la linea(s) : " + '<span>' + lineasErrores.toString() + '</span>' + ".");
 	        //    lineasErrores.toString('');
 	        //}
 
-	       
+
 	    } else {
 	        webApp.showMessageDialog("Debe ingresar los datos correctamente");
 	    }
@@ -227,7 +226,7 @@ $(document).ready(function () {
             webApp.showMessageDialog("Por favor seleccione un registro.");
         }
         else {
-            if (rowCategoria.Estado===estadoInactivo) {
+            if (rowCategoria.Estado === estadoInactivo) {
                 webApp.showMessageDialog('La categoria ' + '<b>' + rowCategoria.ctgcc_vdescripcion + '</b>' + ' se encuentra  ' + '<span class="label label-warning arrowed-in arrowed-in-right">Inactivo</span>' + '.Si desea hacer una modificación le recomendamos cambiarle de estado a dicha categoria.');
             }
             else {
@@ -238,7 +237,7 @@ $(document).ready(function () {
                     $("#NuevoTipoCategoriaLinea").modal("show");
                 });
             }
-           
+
         }
 
     });
@@ -289,13 +288,13 @@ $(document).ready(function () {
         }
         else {
             checkSession(function () {
-           
-                    GetCategoriaById();
-                    GetAllLinea(rowCategoria.Id);
-                    GetAllSubLinea(rowCategoria.Id);
-                    getResumen();
-                    $("#DetalleCategoriaProducto").modal("show");
-                });
+
+                GetCategoriaById();
+                GetAllLinea(rowCategoria.Id);
+                GetAllSubLinea(rowCategoria.Id);
+                getResumen();
+                $("#DetalleCategoriaProducto").modal("show");
+            });
 
 
         }
@@ -315,7 +314,7 @@ $(document).ready(function () {
     $('#btnEditarCategoriaLinea').on('click', function () {
         DrawEditLinea();
     });
- 
+
     $('#btnEliminarCategoriaLinea').on('click', function () {
         rowLinea = dataTableLinea.row('.selected').data();
         var sublinea = 0;
@@ -332,17 +331,17 @@ $(document).ready(function () {
                     return false;
                 }
             });
-   
-                webApp.showDeleteConfirmDialog(function () {
-                    checkSession(function () {
-                        DrawEliminarLinea(rowLinea.Id);
-                    });
-                }, 'Se eliminará el registro Linea, ademas las Sub-lineas que contenga ¿Está seguro que desea continuar?');
+
+            webApp.showDeleteConfirmDialog(function () {
+                checkSession(function () {
+                    DrawEliminarLinea(rowLinea.Id);
+                });
+            }, 'Se eliminará el registro Linea, ademas las Sub-lineas que contenga ¿Está seguro que desea continuar?');
         }
     });
 
     $("#btnGuardarLinea").on("click", function (e) {
-        if ($('#' + formularioMantenimientoLinea).valid()) { 
+        if ($('#' + formularioMantenimientoLinea).valid()) {
             checkSession(function () {
                 DrawAddLinea();
             });
@@ -350,8 +349,8 @@ $(document).ready(function () {
         e.preventDefault();
     });
 
-  
-   
+
+
 
     //#endregion acciones de Categoria Linea
 
@@ -395,8 +394,8 @@ $(document).ready(function () {
     });
     //#endregion acciones de Categoria SubLinea
     $("#btnCancelar").on("click", function () {
-            $("#NuevoTipoCategoriaLinea").modal('hide');
-            rest();
+        $("#NuevoTipoCategoriaLinea").modal('hide');
+        rest();
     });
     $('#resumen').ace_scroll({
         size: 450,
@@ -421,7 +420,7 @@ $(document).ready(function () {
                     //        }
                     //    })).draw();
                     //}
-                    dataTableLinea.columns(2).search(regExSearch, true, false,true).draw()
+                    dataTableLinea.columns(2).search(regExSearch, true, false, true).draw()
                 });
             }
         }
@@ -436,7 +435,7 @@ $(document).ready(function () {
             descripcionL: {
                 required: true,
             },
-            
+
         },
         {
             codigoL: {
@@ -445,11 +444,11 @@ $(document).ready(function () {
             descripcionL: {
                 required: "Por favor ingrese Descripción",
             },
-           
+
         }
 
         );
-  
+
     webApp.InicializarValidacion(formularioMantenimientoSubLinea,
         {
             codigoLS: {
@@ -484,7 +483,7 @@ $(document).ready(function () {
                required: "Por favor ingrese Descripción"
            }
        });
- 
+
     $('[data-toggle="tooltip"]').tooltip();
 });
 
@@ -527,10 +526,10 @@ function VisualizarDataTableCategoria() {
             { "data": "ctgcc_vdescripcion" },
             {
                 "data": function (obj) {
-                    if (obj.Estado == estadoActivo){
+                    if (obj.Estado == estadoActivo) {
                         return '<span class="label label-info label-sm arrowed-in arrowed-in-right">Activo</span>';
-                    }      
-                    else if(obj.Estado==estadoInactivo){
+                    }
+                    else if (obj.Estado == estadoInactivo) {
                         return '<span class="label label-warning arrowed-in arrowed-in-right">Inactivo</span>';
                     }
                 }
@@ -570,7 +569,7 @@ function VisualizarDataTableLinea() {
 
         "data": categoriaProductoLinea,
         //"scrollY": "350px",  
-         dataFilter: function (data) {
+        dataFilter: function (data) {
             if (data.substring(0, 9) == "<!DOCTYPE") {
                 redireccionarLogin("Sesión Terminada", "Se terminó la sesión");
             } else {
@@ -671,21 +670,19 @@ function DrawAddLinea() {
     var categoriaLinea = null;
     var exito = true;
     var exitoedit = true;
-    if (Id==0) {
+    if (Id == 0) {
         if (categoriaProductoLinea.length > 0) {
             $.each(categoriaProductoLinea, function (index, value) {
-               
-                if ((codigoL === value.linc_vcod_linea || descripcionL === value.linc_vdescripcion) && value.status!=eliminar) {
+                if ((codigoL === value.linc_vcod_linea || descripcionL === value.linc_vdescripcion) && value.status != eliminar) {
                     $.gritter.add({
                         title: TitleAlerta,
                         text: YaExisteRegistro,
                         class_name: 'gritter-warning gritter',
-                        
+
                     });
                     exito = false;
                     debugger;
-                }               
-
+                }
             });
             if (exito) {
                 debugger;
@@ -695,12 +692,12 @@ function DrawAddLinea() {
                     title: TitleRegistro,
                     text: RegistroSatisfactorio,
                     class_name: 'gritter-success gritter',
-               
+
                 });
                 categoriaProductoLinea.push(categoriaLinea);
                 dataTableLinea.clear();
                 dataTableLinea.rows.add(categoriaProductoLinea.filter(function (obj) {
-                    if (obj.status!=eliminar) {
+                    if (obj.status != eliminar) {
                         return true;
                     }
                     else {
@@ -711,7 +708,7 @@ function DrawAddLinea() {
         }
         else {
             categoriaLinea = { "Id": 1, "linc_vcod_linea": codigoL, "linc_vdescripcion": descripcionL, "Estado": Estado, 'status': agregar };
-      
+
             $("#NuevoCategoriaLinea").modal("hide");
             $.gritter.add({
                 title: TitleRegistro,
@@ -721,7 +718,7 @@ function DrawAddLinea() {
             categoriaProductoLinea.push(categoriaLinea);
             dataTableLinea.clear();
             dataTableLinea.rows.add(categoriaProductoLinea.filter(function (obj) {
-                if (obj.status!=eliminar) {
+                if (obj.status != eliminar) {
                     return true;
                 }
                 else {
@@ -729,11 +726,11 @@ function DrawAddLinea() {
                 }
             })).draw();
         }
- 
+
     }
     else {
         $.each(categoriaProductoLinea, function (index, value) {
-            if (value.linc_vdescripcion == descripcionL && value.status!=eliminar) {
+            if (value.linc_vdescripcion == descripcionL && value.status != eliminar) {
                 if (value.Id != parseInt(Id)) {
                     $.gritter.add({
                         title: TitleAlerta,
@@ -759,7 +756,7 @@ function DrawAddLinea() {
         if (exitoedit) {
             dataTableLinea.clear();
             dataTableLinea.rows.add(categoriaProductoLinea.filter(function (obj) {
-                if (obj.status!=eliminar) {
+                if (obj.status != eliminar) {
                     return true;
                 }
                 else {
@@ -775,8 +772,8 @@ function DrawAddLinea() {
 
             $("#NuevoCategoriaLinea").modal("hide");
         }
-  
-  
+
+
     }
     console.log(categoriaProductoLinea);
 }
@@ -793,7 +790,7 @@ function DrawEditLinea() {
         $("#descripcionL").val(rowLinea.linc_vdescripcion);
         $("#codigoL").prop("disabled", true);
         $("#LineaId").val(rowLinea.Id);
-       
+
     }
 }
 
@@ -801,7 +798,7 @@ function DrawEliminarLinea(id) {
 
     var idEliminacion = -1;
     var countSubLinea = JSLINQ(categoriaProductoSubLinea)
-                         .Where(function (x) { return x.status != eliminar && x.idLinea==id });                 
+                         .Where(function (x) { return x.status != eliminar && x.idLinea == id });
     $.each(categoriaProductoLinea, function (index, value) {
         if (countSubLinea.items.length > 0) {
             $.each(categoriaProductoSubLinea, function (index, value_) {
@@ -817,31 +814,31 @@ function DrawEliminarLinea(id) {
                 idEliminacion = index;
             }
         }
-      
+
     });
-        if (idEliminacion > -1) {
-            dataTableLinea.clear().draw();
-            dataTableLinea.rows.add(categoriaProductoLinea.filter(function (obj) {
-                if (obj.status != eliminar) {
-                    return true;
-                }
-                else {
-                    return false;
-                }
-            })).draw();
-            $.gritter.add({
-                title: TitleEliminar,
-                text: EliminacionSatisfactoria,
-                class_name: 'gritter-success gritter'
-            });
-        }
-        else {
-            $.gritter.add({
-                title: TitleAlerta,
-                text: IntenteloMasTarde,
-                class_name: 'gritter-warning gritter'
-            });
-        }
+    if (idEliminacion > -1) {
+        dataTableLinea.clear().draw();
+        dataTableLinea.rows.add(categoriaProductoLinea.filter(function (obj) {
+            if (obj.status != eliminar) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        })).draw();
+        $.gritter.add({
+            title: TitleEliminar,
+            text: EliminacionSatisfactoria,
+            class_name: 'gritter-success gritter'
+        });
+    }
+    else {
+        $.gritter.add({
+            title: TitleAlerta,
+            text: IntenteloMasTarde,
+            class_name: 'gritter-warning gritter'
+        });
+    }
 }
 // #endregion operaciones linea
 
@@ -858,8 +855,8 @@ function DrawAddSubLinea() {
     if (Id == 0) {
         if (categoriaProductoSubLinea.length > 0) {
             $.each(categoriaProductoSubLinea, function (index, value) {
-                if (value.idLinea===idLinea) {
-                    if ((codigoLS === value.lind_vcod_sublinea || descripcionLS === value.lind_vdescripcion) && value.status!=eliminar) {
+                if (value.idLinea === idLinea) {
+                    if ((codigoLS === value.lind_vcod_sublinea || descripcionLS === value.lind_vdescripcion) && value.status != eliminar) {
                         $.gritter.add({
                             title: TitleAlerta,
                             text: YaExisteRegistro,
@@ -867,12 +864,11 @@ function DrawAddSubLinea() {
                         });
                         exito = false;
                     }
-                    idLineaExiste=value.idLinea;
+                    idLineaExiste = value.idLinea;
                 }
-               
             });
             if (exito) {
-                categoriaSubLinea = { "Id": categoriaProductoSubLinea.length + 1,"idLinea":idLinea, "lind_vcod_sublinea": codigoLS, "lind_vdescripcion": descripcionLS, "Estado": Estado, 'status': agregar };
+                categoriaSubLinea = { "Id": categoriaProductoSubLinea.length + 1, "idLinea": idLinea, "lind_vcod_sublinea": codigoLS, "lind_vdescripcion": descripcionLS, "Estado": Estado, 'status': agregar };
                 $("#NuevoCategoriaSubLinea").modal("hide");
                 $.gritter.add({
                     title: TitleRegistro,
@@ -882,9 +878,8 @@ function DrawAddSubLinea() {
                 });
                 categoriaProductoSubLinea.push(categoriaSubLinea);
                 dataTableSubLinea.clear();
-                dataTableSubLinea.rows.add(categoriaProductoSubLinea.filter(function (obj)
-                {
-                    if (obj.idLinea === idLinea && obj.status!=eliminar) {
+                dataTableSubLinea.rows.add(categoriaProductoSubLinea.filter(function (obj) {
+                    if (obj.idLinea === idLinea && obj.status != eliminar) {
                         return true;
                     } else {
                         return false;
@@ -893,7 +888,7 @@ function DrawAddSubLinea() {
             }
         }
         else {
-            categoriaSubLinea = { "Id": 1,"idLinea":idLinea, "lind_vcod_sublinea": codigoLS, "lind_vdescripcion": descripcionLS, "Estado": Estado, 'status': agregar };
+            categoriaSubLinea = { "Id": 1, "idLinea": idLinea, "lind_vcod_sublinea": codigoLS, "lind_vdescripcion": descripcionLS, "Estado": Estado, 'status': agregar };
 
             $("#NuevoCategoriaSubLinea").modal("hide");
             $.gritter.add({
@@ -904,7 +899,7 @@ function DrawAddSubLinea() {
             categoriaProductoSubLinea.push(categoriaSubLinea);
             dataTableSubLinea.clear();
             dataTableSubLinea.rows.add(categoriaProductoSubLinea.filter(function (obj) {
-                if (obj.status!=eliminar) {
+                if (obj.status != eliminar) {
                     return true;
                 }
                 else {
@@ -915,7 +910,7 @@ function DrawAddSubLinea() {
     }
     else {
         $.each(categoriaProductoSubLinea, function (index, value) {
-            if (value.lind_vdescripcion == descripcionLS && value.status!=eliminar) {
+            if (value.lind_vdescripcion == descripcionLS && value.status != eliminar) {
                 if (value.Id != parseInt(Id)) {
                     $.gritter.add({
                         title: TitleAlerta,
@@ -926,7 +921,7 @@ function DrawAddSubLinea() {
                 }
             }
             else {
-                if (value.Id == parseInt(Id) && value.idLinea===idLinea) {
+                if (value.Id == parseInt(Id) && value.idLinea === idLinea) {
                     if (value.lind_vdescripcion == descripcionLS) {
                         value.lind_vdescripcion = descripcionLS;
                         value.status = actualizar;
@@ -942,7 +937,7 @@ function DrawAddSubLinea() {
         if (exitoedit) {
             dataTableSubLinea.clear();
             dataTableSubLinea.rows.add(categoriaProductoSubLinea.filter(function (obj) {
-                if (obj.idLinea === idLinea && obj.status!=eliminar) {
+                if (obj.idLinea === idLinea && obj.status != eliminar) {
                     return true;
                 } else {
                     return false;
@@ -987,10 +982,10 @@ function DrawEliminarSubLinea(id) {
         }
     });
     if (idEliminacion > -1) {
-      //  categoriaProductoSubLinea.splice(idEliminacion, 1);
+        //  categoriaProductoSubLinea.splice(idEliminacion, 1);
         dataTableSubLinea.clear().draw();
         dataTableSubLinea.rows.add(categoriaProductoSubLinea.filter(function (obj) {
-            if (obj.idLinea === rowLinea.Id && obj.status!=eliminar) {
+            if (obj.idLinea === rowLinea.Id && obj.status != eliminar) {
                 return true;
             } else {
                 return false;
@@ -1020,7 +1015,7 @@ function getResumen() {
     $("#resumen").removeClass("ace-scroll");
     ////$('#scroll').css({'max-height': '400px' });
     $.each(categoriaProductoLinea, function (index, value) {
-        if (value.status!=eliminar) {
+        if (value.status != eliminar) {
             contentLinea = '<li id="li' + value.Id + '">'
                     + '<i class="ace-icon fa fa-caret-right blue"></i>Linea : '
                     + '<b class="black"><span id="categoriaProductoLineaRsm">' + value.linc_vdescripcion + '</span></b>'
@@ -1031,7 +1026,7 @@ function getResumen() {
 
     $.each(categoriaProductoSubLinea, function (index, value) {
         if ($("#li" + value.idLinea).length) {
-            if (value.status!=eliminar) {
+            if (value.status != eliminar) {
                 contedetalle = '<li style="margin-left:30px;margin-top:1px; ">'
                               + '<ul class="list-unstyled">'
                                           + '<li>'
@@ -1042,7 +1037,7 @@ function getResumen() {
                           + '</li>';
                 $("#li" + value.idLinea).append(contedetalle);
             }
-          }
+        }
     });
 
     $("#categoria").html('<i class="ace-icon fa fa-unlink orange"></i>' + 'Categoria Producto :' + rowCategoria.ctgcc_vdescripcion);
@@ -1055,15 +1050,15 @@ function cargarDatatableSubLinea(id) {
     var SubLinea = null;
 
     $.each(categoriaProductoSubLinea, function (index, value) {
-        if (value.idLinea === id && value.status!=eliminar) {
+        if (value.idLinea === id && value.status != eliminar) {
             SubLinea = { "Id": value.Id, "idLinea": value.idLinea, "lind_vcod_sublinea": value.lind_vcod_sublinea, "lind_vdescripcion": value.lind_vdescripcion, "Estado": value.Estado, 'status': value.status };
-           dataSubLinea.push(SubLinea);
+            dataSubLinea.push(SubLinea);
         }
     });
     if (dataSubLinea.length > 0) {
         dataTableSubLinea.clear();
         dataTableSubLinea.rows.add(dataSubLinea).draw();
-     
+
     } else {
         dataTableSubLinea.clear().draw();
     }
@@ -1086,14 +1081,14 @@ function GetCategoriaById() {
                     class_name: 'gritter-warning gritter'
                 });
             } else {
-               
+
                 LimpiarFormularioCategoria();
                 var categoria = response.Data;
                 $("#codigoCP").val(categoria.ctgcc_vcod_categoria);
                 $("#descripcionCP").val(categoria.ctgcc_vdescripcion);
                 $("#IdCategoria").val(categoria.Id);
                 $("#codigoCP").prop("disabled", true);
-             
+
             }
 
         } else {
@@ -1120,7 +1115,7 @@ function GetCategoriaById() {
 
 function GetAllLinea(id) {
     var modelView = {
-        Id:id
+        Id: id
     };
     webApp.Ajax({
         url: urlListarLinea,
@@ -1135,12 +1130,12 @@ function GetAllLinea(id) {
                     class_name: 'gritter-warning gritter'
                 });
             } else {
-                if (response.Data!=null) {
+                if (response.Data != null) {
                     dataTableLinea.clear().draw();
                     categoriaProductoLinea = response.Data;
                     dataTableLinea.rows.add(categoriaProductoLinea).draw();
-                }           
-            
+                }
+
             }
         } else {
             $.gritter.add({
@@ -1181,7 +1176,7 @@ function GetAllSubLinea(id) {
                     class_name: 'gritter-warning gritter'
                 });
             } else {
-                if (response.Data!=null) {
+                if (response.Data != null) {
                     categoriaProductoSubLinea = response.Data;
                 }
             }
@@ -1208,62 +1203,62 @@ function GetAllSubLinea(id) {
 }
 
 function GuardarCategoria() {
-        var modelView = {
-            Id: $("#IdCategoria").val(),
-            ctgcc_vcod_categoria: $("#codigoCP").val(),
-            ctgcc_vdescripcion: $("#descripcionCP").val(),
-            detalleLinea: categoriaProductoLinea,
-            detalleSubLinea: categoriaProductoSubLinea,
-            UsuarioRegistro: $("#usernameLogOn strong").text()
-        };
-        if (modelView.Id == 0)
-            action = 'Add';
-        else
-            action = 'Update';
+    var modelView = {
+        Id: $("#IdCategoria").val(),
+        ctgcc_vcod_categoria: $("#codigoCP").val(),
+        ctgcc_vdescripcion: $("#descripcionCP").val(),
+        detalleLinea: categoriaProductoLinea,
+        detalleSubLinea: categoriaProductoSubLinea,
+        UsuarioRegistro: $("#usernameLogOn strong").text()
+    };
+    if (modelView.Id == 0)
+        action = 'Add';
+    else
+        action = 'Update';
 
-        webApp.Ajax({
-            url: urlMantenimiento + action,
-            parametros: modelView
-        }, function (response) {
-            if (response.Success) {
-                if (response.Warning) {
-                    $.gritter.add({
-                        title: response.Title,
-                        text: response.Message,
-                        class_name: 'gritter-warning gritter'
-                    });
-                } else {
-                    dataTableCategoria.ajax.reload();
-                    $("#NuevoTipoCategoriaLinea").modal("hide");
-                    LimpiarPasarela();
-                    $.gritter.add({
-                        title: response.Title,
-                        text: response.Message,
-                        class_name: 'gritter-success gritter'
-                    });
-                }
-            } else {
+    webApp.Ajax({
+        url: urlMantenimiento + action,
+        parametros: modelView
+    }, function (response) {
+        if (response.Success) {
+            if (response.Warning) {
                 $.gritter.add({
-                    title: 'Error',
+                    title: response.Title,
                     text: response.Message,
                     class_name: 'gritter-warning gritter'
                 });
+            } else {
+                dataTableCategoria.ajax.reload();
+                $("#NuevoTipoCategoriaLinea").modal("hide");
+                LimpiarPasarela();
+                $.gritter.add({
+                    title: response.Title,
+                    text: response.Message,
+                    class_name: 'gritter-success gritter'
+                });
             }
-        }, function (response) {
+        } else {
             $.gritter.add({
                 title: 'Error',
-                text: response,
-                class_name: 'gritter-error gritter'
+                text: response.Message,
+                class_name: 'gritter-warning gritter'
             });
-        }, function (XMLHttpRequest, textStatus, errorThrown) {
-            $.gritter.add({
-                title: 'Error',
-                text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
-                class_name: 'gritter-error gritter'
-            });
+        }
+    }, function (response) {
+        $.gritter.add({
+            title: 'Error',
+            text: response,
+            class_name: 'gritter-error gritter'
         });
- 
- 
+    }, function (XMLHttpRequest, textStatus, errorThrown) {
+        $.gritter.add({
+            title: 'Error',
+            text: "Status: " + textStatus + "<br/>Error: " + errorThrown,
+            class_name: 'gritter-error gritter'
+        });
+    });
+
+
 }
 
 function EliminarCategoria() {
@@ -1333,7 +1328,7 @@ function buscarLinea(e) {
         if ($('#CategoriaLineaSearchForm').valid()) {
             checkSession(function () {
                 dataTableLinea.columns(2).search($("#CodigoLineasearch").val()).draw();
-             
+
             });
         }
     }
@@ -1487,17 +1482,17 @@ function GetCorrelativoCab() {
 function GenerarCorrelativaLinea() {
     var countLinea = JSLINQ(categoriaProductoLinea)
                        .Where(function (x) { return x.status != eliminar });
-  
+
     if (countLinea.items.length > 0) {
         var jquery = JSLINQ(countLinea.items)
                      .OrderByDescending(function (o) { return o.linc_vcod_linea })
-                      .Select(function (item) { return parseInt(item.linc_vcod_linea)});
-        var correlativo = parseInt(jquery.items[0] +1);
-        if (correlativo < 10 ) {
-            $("#codigoL").val('00'+correlativo);
+                      .Select(function (item) { return parseInt(item.linc_vcod_linea) });
+        var correlativo = parseInt(jquery.items[0] + 1);
+        if (correlativo < 10) {
+            $("#codigoL").val('00' + correlativo);
         }
         if (correlativo >= 10) {
-            $("#codigoL").val('0' +correlativo);
+            $("#codigoL").val('0' + correlativo);
         }
         if (correlativo >= 100) {
             $("#codigoL").val(correlativo);
@@ -1512,7 +1507,7 @@ function GenerarCorrelativaLinea() {
 
 function GenerarCorrelativaSubLinea(id) {
     var countSubLinea = JSLINQ(categoriaProductoSubLinea)
-                         .Where(function (x) { return x.status != eliminar && x.idLinea==id });
+                         .Where(function (x) { return x.status != eliminar && x.idLinea == id });
 
     if (countSubLinea.items.length > 0) {
         var jquery = JSLINQ(countSubLinea.items)

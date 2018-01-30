@@ -54,7 +54,7 @@
                                         <div class="input-group-btn">
 
                                         </div>
-                                        <select id="TipoSearch" name="TipoSearch" class="form-control"></select>
+                                        <input type="text" id="descripcionSearch" name="descripcionSearch" placeholder="Descripción" maxlength="100" class="form-control" onkeypress="buscar(event)" />
                                         <div class="input-group-btn">
                                             <button type="button" id="btnSearchCliente" class="btn btn-primary btn-sm">
                                                 <i class="ace-icon fa fa-search icon-on-right bigger-110 right"></i>Buscar
@@ -97,15 +97,15 @@
                         </h4>
                         <div class="dataTables_wrapper form-inline no-footer">
                             <div class="table-responsive">
-                                <table id="UsuarioDataTable" class="table table-bordered dataTable no-footer">
+                                <table id="proveedorDataTable" class="table table-bordered dataTable no-footer">
                                     <thead>
                                         <tr>
                                             <th class="hidden">Id</th>
                                             <th class="hidden-120">Codigo</th>
+                                            <th class="hidden-600">Tipo Persona</th>
                                             <th class="hidden-120">Nombre</th>
-                                            <th class="hidden-992">Apellidos</th>
-                                            <th class="hidden-768">Correo</th>
-                                            <th class="hidden-600">Tipo</th>
+                                            <th class="hidden-992">Razon Social</th>
+                                            <th class="hidden-768">Ruc</th>                                          
                                             <th class="hidden-480">Estado</th>
                                         </tr>
                                     </thead>
@@ -133,7 +133,7 @@
                                       
 
                                         <div class="col-xs-12">
-                                            <form class="form-horizontal" role="form" id="ProductoForm">
+                                            <form class="form-horizontal" role="form" id="proveedorForm">
                                                 <div class="form-group">
                                                     <div class="col-xs-12">
                                                         <div class="col-xs-2">
@@ -246,10 +246,10 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-xs-12">
-                                                        <label class="control-label col-xs-1 col-sm-1 no-padding-left" for="material">Direcci&oacute;n </label>
+                                                        <label class="control-label col-xs-1 col-sm-1 no-padding-left" for="inpDireccion">Direcci&oacute;n </label>
                                                         <div class="col-xs-11">
                                                             <div class="clearfix">
-                                                                <input type="text" id="Direccion" autocomplete="off" name="Direccion" placeholder="Dirección" maxlength="100" class="col-xs-1 col-sm-12" />
+                                                                <input type="text" id="inpDireccion" autocomplete="off" name="inpDireccion" placeholder="Dirección" maxlength="100" class="col-xs-12 col-sm-12" />
                                                             </div>
                                                         </div>
 
@@ -261,18 +261,18 @@
 
                                                         <div class="col-xs-3">
                                                             <div class="clearfix">
-                                                                <input type="text" id="Telefono" autocomplete="off" name="Telefono" placeholder="Telefono" maxlength="100" class="col-xs-12 col-sm-12" />
+                                                                <input type="text" id="Telefono" autocomplete="off" name="Telefono" placeholder="Telefono" maxlength="6" class="col-xs-12 col-sm-12" />
 
                                                             </div>
                                                         </div>
                                                         <label class="control-label col-xs-1 col-sm-1 no-padding-left" for="descripcion">Celular </label>
                                                         <div class="col-xs-3">
                                                             <div class="clearfix">
-                                                                <input type="text" id="Celular" autocomplete="off" name="Celular" placeholder="Celular" maxlength="100" class="col-xs-12 col-sm-12" />
+                                                                <input type="text" id="Celular" autocomplete="off" name="Celular" placeholder="Celular" maxlength="9" class="col-xs-12 col-sm-12" />
 
                                                             </div>
                                                         </div>
-                                                        <label class="control-label col-xs-1 col-sm-1 no-padding-left" for="Fecha">Fecha </label>
+                                                        <label class="control-label col-xs-1 col-sm-1 no-padding-left" for="fecha">Fecha </label>
                                                         <div class="col-xs-3">
                                                             <div class="clearfix">
                                                                 <div class="col-xs-8 col-sm-11">
@@ -315,9 +315,7 @@
                                                                 <span class="help-button" data-rel="popover" data-trigger="hover" data-placement="left" data-content="More details." title="" data-original-title="Popover on hover">?</span>
                                                             </div>
                                                         </div>
-                                                    
                                                 </div>
-
                                                 <input type="hidden" name="ClienteId" id="ClienteId" value="0" />
                                                 <div class="form-group"></div>
                                                 <!-- #section:elements.form -->
@@ -329,7 +327,7 @@
                         </div>
                         <div class='modal-footer' style='margin-top: 0px; margin-bottom: 0px;'>
                             <button class='btn btn-danger btn-sm' data-dismiss='modal'><i class='fa fa-close'></i> Salir</button>
-                            <button class='btn btn-primary btn-sm' id="btnGuardarProducto"><i class='fa fa-floppy-o'></i> Guardar</button>
+                            <button class='btn btn-primary btn-sm' id="btnGuardarProveedor"><i class='fa fa-floppy-o'></i> Guardar</button>
 
                         </div>
                     </div>
